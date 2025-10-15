@@ -1,0 +1,84 @@
+name: Test Video Generation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'content.json'
+      - 'youtube_automation.py'
+      - 'test_single_video.py'
+
+jobs:
+  test-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg imagemagick fonts-dejavu-core fonts-dejavu-extra
+        
+    - name: Install Python dependencies
+      run: |
+        pip install --upgrade pip
+        pip install moviepy==1.0.3 requests==2.31.0 Pillow==10.0.0 numpy==1.24.3
+        
+    - name: Generate test video
+      env:
+        ELEVENLABS_KEY_1: ${{ secrets.ELEVENLABS_KEY_1 }}
+        ELEVENLABS_KEY_2: ${{ secrets.ELEVENLABS_KEY_2 }}
+        ELEVENLABS_KEY_3: ${{ secrets.ELEVENLABS_KEY_3 }}
+      run: |
+        python test_single_video.py
+        
+    - name: Upload test video as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-video-output
+        path: |
+          output/TEST_*.mp4
+          output/TEST_*.json
+          output/test_audio.mp3
+        retention-days: 7
+        
+    - name: Video generation summary
+      run: |
+        echo "## 📊 Video Generation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -f output/TEST_day_1_python.mp4 ]; then
+          echo "✅ Test video generated successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Video Details:**" >> $GITHUB_STEP_SUMMARY
+          ls -lh output/TEST_*.mp4 >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 **Download the video from the Artifacts section above**" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Video generation failed!" >> $GITHUB_STEP_SUMMARY
+        fi
+```
+
+5. **Click "Commit new file"**
+
+---
+
+## ✅ After Creating the Workflow File, Your Repo Should Look Like:
+```
+ai_tutor/
+├── .github/
+│   └── workflows/
+│       └── test_video.yml     ← NEW!
+├── .gitignore
+├── LICENSE
+├── content.json
+├── requirements.txt
+├── test_single_video.py
+└── youtube_automation.py
