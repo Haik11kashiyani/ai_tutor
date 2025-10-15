@@ -64,21 +64,3 @@ jobs:
         else
           echo "❌ Video generation failed!" >> $GITHUB_STEP_SUMMARY
         fi
-```
-
-5. **Click "Commit new file"**
-
----
-
-## ✅ After Creating the Workflow File, Your Repo Should Look Like:
-```
-ai_tutor/
-├── .github/
-│   └── workflows/
-│       └── test_video.yml     ← NEW!
-├── .gitignore
-├── LICENSE
-├── content.json
-├── requirements.txt
-├── test_single_video.py
-└── youtube_automation.py
