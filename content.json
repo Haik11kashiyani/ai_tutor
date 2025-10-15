@@ -4,19 +4,181 @@
       "day": 1,
       "title": "Print Hello World",
       "code": "print('Hello, World!')",
-      "explanation": ""
+      "explanation": "Every programmer’s journey starts with printing 'Hello World'. The print function simply displays whatever text or value you put inside the parentheses. Think of it as Python’s way of talking back to you. Run this code, and you’ve just written your first Python program — congrats!"
     },
     {
       "day": 2,
-      "title": "Variables",
+      "title": "Variables and Data Types",
       "code": "name = 'Python'\nage = 25\nprint(name, age)",
-      "explanation": ""
+      "explanation": "Variables are like boxes where you store information. Here, 'name' holds text and 'age' holds a number. Python automatically understands what kind of data each variable stores — that’s called a data type. When we print them together, it shows how easy it is to combine text and numbers."
     },
     {
       "day": 3,
       "title": "User Input",
       "code": "name = input('Enter name: ')\nprint('Hello', name)",
-      "explanation": ""
+      "explanation": "Now let’s make your code interactive! The input() function lets users type something into the console. Whatever they enter is stored as a string in the variable 'name'. Then we greet them using print — simple, but powerful for building user-friendly programs."
+    },
+    {
+      "day": 4,
+      "title": "If-Else Statement",
+      "code": "age = 18\nif age >= 18:\n    print('Adult')\nelse:\n    print('Minor')",
+      "explanation": "The if-else statement helps your code make decisions. Here, if the age is 18 or above, it prints 'Adult'; otherwise, it prints 'Minor'. This is Python’s way of handling logic — you set a condition, and the program reacts accordingly. That’s real intelligence in code!"
+    },
+    {
+      "day": 5,
+      "title": "For Loop",
+      "code": "for i in range(5):\n    print(i)",
+      "explanation": "A for loop repeats a block of code multiple times. The range(5) function gives numbers from 0 to 4, and the loop prints each one. Loops are perfect for repeating tasks — whether it’s counting, processing data, or running through a list of items."
+    },
+    {
+      "day": 6,
+      "title": "While Loop",
+      "code": "count = 0\nwhile count < 5:\n    print(count)\n    count += 1",
+      "explanation": "A while loop keeps running as long as the condition is true. Here, it prints numbers from 0 to 4, and we increase 'count' by 1 each time. Be careful — if you forget to update your variable, the loop could run forever! Always make sure your condition can become false."
+    },
+    {
+      "day": 7,
+      "title": "Lists",
+      "code": "fruits = ['apple', 'banana']\nprint(fruits[0])",
+      "explanation": "Lists let you store multiple items in one place. Here, we made a list of fruits and printed the first one using index 0. Lists are super flexible — you can add, remove, or change elements easily. They’re one of Python’s most useful data types!"
+    },
+    {
+      "day": 8,
+      "title": "List Methods",
+      "code": "nums = [1, 2, 3]\nnums.append(4)\nprint(nums)",
+      "explanation": "Lists come with built-in methods that make life easier. The append() method adds a new item to the end of the list. Run this code, and you’ll see 4 added to the existing list. These small tools help you manage data effortlessly in Python."
+    },
+    {
+      "day": 9,
+      "title": "Dictionaries",
+      "code": "person = {'name': 'John', 'age': 30}\nprint(person['name'])",
+      "explanation": "Dictionaries store data in key-value pairs — just like a contact card! Here, 'name' and 'age' are keys, and their values are 'John' and 30. You can access any value using its key. Dictionaries are perfect for organized, readable data."
+    },
+    {
+      "day": 10,
+      "title": "Functions",
+      "code": "def greet(name):\n    return f'Hello {name}'\nprint(greet('Python'))",
+      "explanation": "Functions are reusable blocks of code that perform specific tasks. The 'def' keyword defines a function, and 'return' sends a result back. When we call greet('Python'), it prints a personalized message. Functions make your code cleaner and easier to manage."
+    },
+    {
+      "day": 11,
+      "title": "Function with Multiple Parameters",
+      "code": "def add(a, b):\n    return a + b\nresult = add(5, 3)\nprint(result)",
+      "explanation": "You can pass multiple inputs to a function using parameters. Here, 'add' takes two numbers and returns their sum. When we call add(5, 3), it returns 8. This is how Python lets you build flexible, reusable pieces of logic."
+    },
+    {
+      "day": 12,
+      "title": "List Comprehension",
+      "code": "squares = [x**2 for x in range(5)]\nprint(squares)",
+      "explanation": "List comprehensions are a cool shortcut for creating lists. Instead of writing loops, you can generate a list in one line. Here, we’re squaring numbers from 0 to 4 — neat, readable, and efficient Python style!"
+    },
+    {
+      "day": 13,
+      "title": "String Methods",
+      "code": "text = 'python'\nprint(text.upper())\nprint(text.capitalize())",
+      "explanation": "Strings come with handy built-in methods. upper() converts the text to uppercase, while capitalize() makes only the first letter uppercase. These methods are super useful when formatting user input or displaying clean text."
+    },
+    {
+      "day": 14,
+      "title": "String Slicing",
+      "code": "word = 'Python'\nprint(word[0:3])\nprint(word[-1])",
+      "explanation": "String slicing helps you grab parts of text easily. word[0:3] gets the first three letters, and word[-1] grabs the last one. Slicing is all about indexes — it’s like picking exact pieces from your data."
+    },
+    {
+      "day": 15,
+      "title": "Try-Except",
+      "code": "try:\n    x = 10 / 0\nexcept:\n    print('Error occurred')",
+      "explanation": "Errors happen — but Python lets you handle them gracefully using try-except. The code inside 'try' runs first, and if something goes wrong, the 'except' block catches it. This keeps your program from crashing and makes it more professional."
+    },
+    {
+      "day": 16,
+      "title": "File Reading",
+      "code": "with open('file.txt', 'r') as f:\n    content = f.read()\n    print(content)",
+      "explanation": "Reading files is easy in Python. The open() function lets you access a file, and 'r' stands for read mode. Using 'with' ensures the file closes automatically when done. You can now open and read data stored outside your code!"
+    },
+    {
+      "day": 17,
+      "title": "File Writing",
+      "code": "with open('file.txt', 'w') as f:\n    f.write('Hello Python')",
+      "explanation": "Writing files works just like reading. The 'w' mode stands for write — it creates or replaces the file content. After running this code, check 'file.txt'; you’ll see your message saved there. That’s how you make Python store information permanently!"
+    },
+    {
+      "day": 18,
+      "title": "Lambda Functions",
+      "code": "square = lambda x: x**2\nprint(square(5))",
+      "explanation": "Lambdas are mini one-line functions. Instead of defining a full function with 'def', you can use 'lambda' for quick operations. Here, it takes x and returns x squared. Perfect for short, simple tasks."
+    },
+    {
+      "day": 19,
+      "title": "Map Function",
+      "code": "nums = [1, 2, 3, 4]\nsquared = list(map(lambda x: x**2, nums))\nprint(squared)",
+      "explanation": "The map() function applies a function to every element in a list. Here, we use a lambda to square each number. It’s a clean, functional style of writing loops — powerful for data transformation!"
+    },
+    {
+      "day": 20,
+      "title": "Filter Function",
+      "code": "nums = [1, 2, 3, 4, 5, 6]\neven = list(filter(lambda x: x%2==0, nums))\nprint(even)",
+      "explanation": "Filter helps you pick elements that meet a condition. Here, the lambda checks which numbers are even. Only those values pass through. It’s an elegant way to clean or filter your data using logic!"
+    },
+    {
+      "day": 21,
+      "title": "Classes and Objects",
+      "code": "class Dog:\n    def bark(self):\n        print('Woof!')\ndog = Dog()\ndog.bark()",
+      "explanation": "Classes are like blueprints for objects. Here, we created a Dog class with a bark method. When we make a Dog object and call bark(), it prints 'Woof!'. This is the foundation of Object-Oriented Programming in Python."
+    },
+    {
+      "day": 22,
+      "title": "Class Constructor",
+      "code": "class Person:\n    def __init__(self, name):\n        self.name = name\np = Person('John')\nprint(p.name)",
+      "explanation": "Constructors let you set up objects when they’re created. The __init__ method runs automatically and stores data in 'self'. When we create a Person, their name gets saved instantly. That’s how objects carry their own information."
+    },
+    {
+      "day": 23,
+      "title": "Inheritance",
+      "code": "class Animal:\n    def speak(self):\n        pass\nclass Dog(Animal):\n    def speak(self):\n        print('Woof')",
+      "explanation": "Inheritance allows one class to reuse another class’s features. The Dog class inherits from Animal and adds its own speak behavior. This keeps your code organized and avoids repeating the same logic — a big win in larger projects!"
+    },
+    {
+      "day": 24,
+      "title": "Modules Import",
+      "code": "import math\nprint(math.sqrt(16))\nprint(math.pi)",
+      "explanation": "Python modules are pre-built code libraries you can reuse. By importing math, you get access to tons of mathematical tools. sqrt() gives the square root, and pi gives the famous constant. No need to reinvent the wheel!"
+    },
+    {
+      "day": 25,
+      "title": "Random Module",
+      "code": "import random\nprint(random.randint(1, 10))\nprint(random.choice(['a', 'b', 'c']))",
+      "explanation": "The random module helps your programs generate unpredictability. randint() picks a random number between 1 and 10, and choice() picks a random item from a list. Perfect for games, simulations, or just adding fun!"
+    },
+    {
+      "day": 26,
+      "title": "DateTime Module",
+      "code": "from datetime import datetime\nnow = datetime.now()\nprint(now.strftime('%Y-%m-%d'))",
+      "explanation": "The datetime module deals with dates and time. datetime.now() gives the current moment, and strftime() formats it nicely. You can use this for timestamps, logs, or scheduling — anything that needs date tracking."
+    },
+    {
+      "day": 27,
+      "title": "Set Operations",
+      "code": "set1 = {1, 2, 3}\nset2 = {3, 4, 5}\nprint(set1.union(set2))",
+      "explanation": "Sets are collections of unique items. They automatically remove duplicates and allow quick mathematical operations like union, intersection, and difference. Here, union() combines both sets into one, keeping only unique elements."
+    },
+    {
+      "day": 28,
+      "title": "Tuple Unpacking",
+      "code": "coords = (10, 20)\nx, y = coords\nprint(f'x={x}, y={y}')",
+      "explanation": "Tuples are fixed collections, and unpacking lets you assign their values directly to variables. Here, x becomes 10 and y becomes 20 in one clean line. It’s fast, readable, and often used when functions return multiple values."
+    },
+    {
+      "day": 29,
+      "title": "Enumerate Function",
+      "code": "fruits = ['apple', 'banana']\nfor i, fruit in enumerate(fruits):\n    print(i, fruit)",
+      "explanation": "Enumerate adds a counter to your loops automatically. Instead of managing indexes yourself, Python pairs each item with its position. Super handy when you need both the index and the value while looping!"
+    },
+    {
+      "day": 30,
+      "title": "Zip Function",
+      "code": "names = ['John', 'Jane']\nages = [25, 30]\nfor name, age in zip(names, ages):\n    print(name, age)",
+      "explanation": "The zip() function combines multiple lists element by element. Here, each name pairs with an age. It’s perfect when you have related data in separate lists and want to process them together. Clean, Pythonic, and powerful!"
     }
   ]
 }
