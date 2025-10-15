@@ -1,0 +1,22 @@
+{
+  "days": [
+    {
+      "day": 1,
+      "title": "Print Hello World",
+      "code": "print('Hello, World!')",
+      "explanation": ""
+    },
+    {
+      "day": 2,
+      "title": "Variables",
+      "code": "name = 'Python'\nage = 25\nprint(name, age)",
+      "explanation": ""
+    },
+    {
+      "day": 3,
+      "title": "User Input",
+      "code": "name = input('Enter name: ')\nprint('Hello', name)",
+      "explanation": ""
+    }
+  ]
+}
