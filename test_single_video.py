@@ -2,7 +2,6 @@
 Test script to generate a single video for testing
 Run this first to check video quality before full automation
 """
-
 import json
 import os
 from youtube_automation import YouTubeAutomation
@@ -52,7 +51,7 @@ def test_single_video():
     print(f"\n🎙️  Generating voiceover...")
     
     if os.getenv('ELEVENLABS_KEY_1'):
-        audio_success = automation.text_to_speech_elevenlabs(script, audio_path)
+        audio_success = automation.text_to_speech_elevenlabs(script, str(audio_path))  # FIXED: Added str()
         if not audio_success:
             print("❌ Failed to generate audio. Creating silent video...")
             # Create silent audio (5 seconds)
