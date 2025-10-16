@@ -181,10 +181,10 @@ class YouTubeAutomation:
         # Create code image
         code_img = self.create_code_image(day_data['code'], day_data['day'], scheme)
         code_img_path = self.output_folder / f"temp_code_{day_data['day']}.png"
-        code_img.save(code_img_path)
+        code_img.save(str(code_img_path))  # FIXED: Added str()
         
         # Load audio to get duration
-        audio = AudioFileClip(audio_path)
+        audio = AudioFileClip(str(audio_path))  # FIXED: Added str()
         duration = audio.duration
         
         # Code image with zoom animation
@@ -280,7 +280,7 @@ Subscribe and turn on notifications! 🔔"""
             
             # Generate audio
             audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
-            audio_success = self.text_to_speech_elevenlabs(script, audio_path)
+            audio_success = self.text_to_speech_elevenlabs(script, str(audio_path))  # FIXED: Added str()
             
             if not audio_success:
                 print(f"⚠️  Creating silent audio as fallback...")
