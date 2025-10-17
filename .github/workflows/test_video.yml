@@ -27,6 +27,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ffmpeg imagemagick fonts-dejavu-core fonts-dejavu-extra
         
+    - name: Fix ImageMagick security policy
+      run: |
+        sudo sed -i 's/rights="none" pattern="@\*"/rights="read|write" pattern="@*"/' /etc/ImageMagick-6/policy.xml
+        sudo sed -i 's/rights="none" pattern="TEXT"/rights="read|write" pattern="TEXT"/' /etc/ImageMagick-6/policy.xml
+        sudo sed -i 's/rights="none" pattern="LABEL"/rights="read|write" pattern="LABEL"/' /etc/ImageMagick-6/policy.xml
+        
     - name: Install Python dependencies
       run: |
         pip install --upgrade pip
@@ -34,10 +40,11 @@ jobs:
         pip install Pillow==9.0.0
         pip install moviepy==1.0.3 requests==2.31.0 numpy==1.24.3 imageio==2.31.1 imageio-ffmpeg==0.4.9
         
-    - name: Verify Pillow version
+    - name: Verify setup
       run: |
         python -c "import PIL; print(f'Pillow version: {PIL.__version__}')"
         python -c "from PIL import Image; print(f'ANTIALIAS available: {hasattr(Image, \"ANTIALIAS\")}')"
+        convert -version
         
     - name: Generate test video
       env:
