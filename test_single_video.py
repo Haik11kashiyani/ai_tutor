@@ -37,7 +37,7 @@ def test_single_video():
     # Select color scheme
     import random
     scheme = random.choice(automation.color_schemes)
-    print(f"\nColor Scheme: {scheme['bg']} / {scheme['accent']}")
+    print(f"\nColor Scheme: {scheme['bg1']} → {scheme['bg2']} / {scheme['accent']}")
     
     # Generate script
     script = automation.generate_script(test_content)
@@ -51,7 +51,7 @@ def test_single_video():
     print(f"\n🎙️  Generating voiceover...")
     
     if os.getenv('ELEVENLABS_KEY_1'):
-        audio_success = automation.text_to_speech_elevenlabs(script, str(audio_path))  # FIXED: Added str()
+        audio_success = automation.text_to_speech_elevenlabs(script, str(audio_path))
         if not audio_success:
             print("❌ Failed to generate audio. Creating silent video...")
             # Create silent audio (5 seconds)
