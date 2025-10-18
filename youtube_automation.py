@@ -185,6 +185,10 @@ class YouTubeAutomation:
         # Create code image
         code_img = self.create_code_image(day_data['code'], day_data['day'], scheme)
         code_img_path = self.output_folder / f"temp_code_{day_data['day']}.png"
+        
+        # Save as RGB to avoid channel issues
+        if code_img.mode != 'RGB':
+            code_img = code_img.convert('RGB')
         code_img.save(str(code_img_path))
         
         # Code image with proper sizing
@@ -195,47 +199,34 @@ class YouTubeAutomation:
                     .fadein(0.5)
                     .fadeout(0.5))
         
-        # Animated title with proper text wrapping
+        # Animated title - simplified without stroke to avoid issues
         title_text = f"Day {day_data['day']}: {day_data['title']}"
-        try:
-            title = (TextClip(title_text, fontsize=60, color=scheme['text'], 
-                             font='DejaVu-Sans-Bold', stroke_color=scheme['accent'], 
-                             stroke_width=2, size=(self.width-100, None), method='caption')
-                    .set_position(('center', 100))
-                    .set_duration(duration)
-                    .fadein(0.5))
-        except Exception as e:
-            print(f"Warning: Could not create title with effects: {e}")
-            title = (TextClip(title_text, fontsize=60, color=scheme['text'], 
-                             font='DejaVu-Sans-Bold', size=(self.width-100, None), method='caption')
-                    .set_position(('center', 100))
-                    .set_duration(duration)
-                    .fadein(0.5))
+        title = (TextClip(title_text, fontsize=55, color=scheme['text'], 
+                         font='DejaVu-Sans-Bold', 
+                         size=(self.width-120, None), method='caption')
+                .set_position(('center', 120))
+                .set_duration(duration)
+                .fadein(0.5))
         
-        # Call-to-action overlay
+        # Call-to-action overlay - simplified
         cta_text = f"👍 LIKE & FOLLOW for Day {day_data['day'] + 1}"
-        try:
-            cta = (TextClip(cta_text, fontsize=45, color=scheme['text'],
-                           font='DejaVu-Sans-Bold', bg_color=scheme['accent'],
-                           size=(self.width-100, None), method='caption')
-                  .set_position(('center', self.height-200))
-                  .set_start(max(0, duration-3))
-                  .set_duration(min(3, duration))
-                  .fadein(0.5))
-        except Exception as e:
-            print(f"Warning: Could not create CTA: {e}")
-            cta = None
+        cta_duration = min(3, duration)
+        cta_start = max(0, duration - cta_duration)
         
-        # Compose video
-        if cta:
-            video = CompositeVideoClip([bg_clip, code_clip, title, cta], size=(self.width, self.height))
-        else:
-            video = CompositeVideoClip([bg_clip, code_clip, title], size=(self.width, self.height))
+        cta = (TextClip(cta_text, fontsize=40, color='white',
+                       font='DejaVu-Sans-Bold', bg_color=scheme['accent'],
+                       size=(self.width-120, None), method='caption')
+              .set_position(('center', self.height-250))
+              .set_start(cta_start)
+              .set_duration(cta_duration)
+              .fadein(0.3))
         
+        # Compose video with explicit size
+        clips = [bg_clip, code_clip, title, cta]
+        video = CompositeVideoClip(clips, size=(self.width, self.height))
         video = video.set_audio(audio)
         
         return video
-
     def generate_youtube_metadata(self, day_data):
         """Generate SEO-optimized YouTube metadata"""
         title = f"Day {day_data['day']}: {day_data['title']} | Python Tutorial #shorts #viral #programming"
