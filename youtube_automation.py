@@ -9,7 +9,7 @@ from moviepy.editor import (
 )
 from moviepy.video.fx import fadein, fadeout
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 
 class YouTubeAutomation:
@@ -31,12 +31,14 @@ class YouTubeAutomation:
         self.height = 1920  # 9:16 for shorts
         self.fps = 30
         
-        # Trending colors and styles
+        # Trending colors - MORE VIBRANT!
         self.color_schemes = [
-            {"bg": "#0F172A", "accent": "#3B82F6", "text": "#F1F5F9", "code_bg": "#1E293B"},
-            {"bg": "#1A1A2E", "accent": "#16213E", "text": "#EAEAEA", "code_bg": "#0F3460"},
-            {"bg": "#000000", "accent": "#FFD700", "text": "#FFFFFF", "code_bg": "#1C1C1C"},
-            {"bg": "#2D1B69", "accent": "#F65A83", "text": "#FFFFFF", "code_bg": "#1E1548"},
+            {"bg1": "#667eea", "bg2": "#764ba2", "accent": "#f093fb", "text": "#ffffff", "code_bg": "#2d1b4e", "shadow": "#4a148c"},
+            {"bg1": "#f093fb", "bg2": "#f5576c", "accent": "#ffd89b", "text": "#ffffff", "code_bg": "#5e2129", "shadow": "#c2185b"},
+            {"bg1": "#4facfe", "bg2": "#00f2fe", "accent": "#43e97b", "text": "#ffffff", "code_bg": "#1a3a52", "shadow": "#0277bd"},
+            {"bg1": "#fa709a", "bg2": "#fee140", "accent": "#30cfd0", "text": "#ffffff", "code_bg": "#5e2a0c", "shadow": "#d84315"},
+            {"bg1": "#30cfd0", "bg2": "#330867", "accent": "#a8edea", "text": "#ffffff", "code_bg": "#1a1033", "shadow": "#1a237e"},
+            {"bg1": "#ff6a00", "bg2": "#ee0979", "accent": "#ffd89b", "text": "#ffffff", "code_bg": "#4d0e2f", "shadow": "#b71c1c"},
         ]
 
     def load_content(self, json_path="content.json"):
@@ -141,40 +143,132 @@ class YouTubeAutomation:
         print("All API keys exhausted or unavailable!")
         return False
 
-    def create_code_image(self, code, day, scheme):
-        """Create professional code snippet image"""
-        img = Image.new('RGB', (900, 600), scheme['code_bg'])
+    def hex_to_rgb(self, hex_color):
+        """Convert hex color to RGB tuple"""
+        hex_color = hex_color.lstrip('#')
+        return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+
+    def create_gradient_background(self, width, height, color1, color2):
+        """Create a beautiful gradient background"""
+        img = Image.new('RGB', (width, height))
         draw = ImageDraw.Draw(img)
         
+        r1, g1, b1 = self.hex_to_rgb(color1)
+        r2, g2, b2 = self.hex_to_rgb(color2)
+        
+        for y in range(height):
+            ratio = y / height
+            r = int(r1 + (r2 - r1) * ratio)
+            g = int(g1 + (g2 - g1) * ratio)
+            b = int(b1 + (b2 - b1) * ratio)
+            draw.line([(0, y), (width, y)], fill=(r, g, b))
+        
+        return img
+
+    def add_glow_effect(self, img, glow_color, blur_radius=15):
+        """Add a glow effect around content"""
+        # Create a copy for the glow
+        glow = img.copy()
+        # Apply blur
+        glow = glow.filter(ImageFilter.GaussianBlur(blur_radius))
+        # Blend with original
+        return Image.blend(glow, img, 0.7)
+
+    def create_code_image(self, code, day, scheme):
+        """Create STUNNING code snippet with glassmorphism effect"""
+        # Larger canvas for glow effects
+        img = Image.new('RGB', (950, 700), self.hex_to_rgb(scheme['code_bg']))
+        
+        # Add subtle pattern/texture
+        draw = ImageDraw.Draw(img)
+        
+        # Draw decorative dots pattern
+        for i in range(0, 950, 40):
+            for j in range(0, 700, 40):
+                if random.random() > 0.7:
+                    draw.ellipse([i, j, i+3, j+3], fill=self.hex_to_rgb(scheme['accent']) + (50,))
+        
+        # Create glassmorphism card
+        card_margin = 25
+        card = Image.new('RGBA', (900, 650), self.hex_to_rgb(scheme['code_bg']) + (220,))
+        card_draw = ImageDraw.Draw(card)
+        
+        # Add border glow
+        border_color = self.hex_to_rgb(scheme['accent'])
+        for i in range(5):
+            card_draw.rounded_rectangle(
+                [i, i, 900-i, 650-i], 
+                radius=25, 
+                outline=border_color + (50 - i*10,),
+                width=2
+            )
+        
         try:
-            font_code = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
-            font_day = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
+            font_code = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 42)
+            font_day = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 60)
         except:
             font_code = ImageFont.load_default()
             font_day = ImageFont.load_default()
         
-        # Day badge
-        draw.rounded_rectangle([30, 30, 200, 100], radius=15, fill=scheme['accent'])
-        draw.text((115, 65), f"DAY {day}", fill=scheme['text'], font=font_day, anchor="mm")
+        # Day badge with shadow and glow
+        badge_x, badge_y = 40, 40
+        badge_w, badge_h = 180, 90
         
-        # Code with syntax-like highlighting
+        # Shadow
+        shadow_offset = 8
+        card_draw.rounded_rectangle(
+            [badge_x+shadow_offset, badge_y+shadow_offset, 
+             badge_x+badge_w+shadow_offset, badge_y+badge_h+shadow_offset],
+            radius=20, fill=self.hex_to_rgb(scheme['shadow']) + (100,)
+        )
+        
+        # Badge background with gradient effect
+        card_draw.rounded_rectangle(
+            [badge_x, badge_y, badge_x+badge_w, badge_y+badge_h], 
+            radius=20, fill=self.hex_to_rgb(scheme['accent'])
+        )
+        
+        # Badge text with subtle shadow
+        day_text = f"DAY {day}"
+        bbox = card_draw.textbbox((0, 0), day_text, font=font_day)
+        text_w = bbox[2] - bbox[0]
+        text_x = badge_x + (badge_w - text_w) // 2
+        text_y = badge_y + 20
+        
+        # Text shadow
+        card_draw.text((text_x+3, text_y+3), day_text, fill=(0, 0, 0, 120), font=font_day)
+        # Main text
+        card_draw.text((text_x, text_y), day_text, fill='#ffffff', font=font_day)
+        
+        # Code with enhanced syntax highlighting
         y_offset = 180
         for line in code.split('\n'):
-            # Simple syntax coloring
-            if 'print' in line or 'def' in line or 'class' in line:
-                color = '#F472B6'  # Pink for keywords
+            if not line.strip():
+                y_offset += 60
+                continue
+                
+            # Better syntax coloring
+            if any(kw in line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'from', 'return']):
+                color = '#ff6b9d'  # Hot pink for keywords
             elif '"' in line or "'" in line:
-                color = '#34D399'  # Green for strings
+                color = '#4ade80'  # Bright green for strings
+            elif any(c.isdigit() for c in line):
+                color = '#fbbf24'  # Yellow for numbers
             else:
-                color = scheme['text']
+                color = '#e0e7ff'  # Light purple-white for others
             
-            draw.text((50, y_offset), line, fill=color, font=font_code)
-            y_offset += 60
+            # Add code line with slight shadow
+            card_draw.text((62, y_offset+2), line, fill=(0, 0, 0, 80), font=font_code)
+            card_draw.text((60, y_offset), line, fill=color, font=font_code)
+            y_offset += 62
+        
+        # Paste card onto image
+        img.paste(card, (card_margin, card_margin), card)
         
         return img
 
     def create_video(self, day_data, audio_path, scheme):
-        """Create engaging video with animations"""
+        """Create STUNNING video with modern design"""
         from PIL import ImageDraw, ImageFont
         import numpy as np
         
@@ -182,28 +276,45 @@ class YouTubeAutomation:
         audio = AudioFileClip(str(audio_path))
         duration = audio.duration
         
-        # Create a single large image with everything
-        final_img = Image.new('RGB', (self.width, self.height), scheme['bg'])
+        # Create gradient background
+        final_img = self.create_gradient_background(self.width, self.height, scheme['bg1'], scheme['bg2'])
         draw = ImageDraw.Draw(final_img)
+        
+        # Add decorative elements (floating particles)
+        for _ in range(30):
+            x = random.randint(0, self.width)
+            y = random.randint(0, self.height)
+            size = random.randint(2, 6)
+            opacity = random.randint(30, 80)
+            color = self.hex_to_rgb(scheme['accent']) + (opacity,)
+            draw.ellipse([x, y, x+size, y+size], fill=color)
         
         # Load fonts
         try:
-            title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
-            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
+            title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
+            subtitle_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 45)
+            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 48)
         except:
             title_font = ImageFont.load_default()
+            subtitle_font = ImageFont.load_default()
             cta_font = ImageFont.load_default()
         
-        # Draw title
+        # Create title card with glassmorphism
+        title_bg = Image.new('RGBA', (self.width-80, 200), (255, 255, 255, 30))
+        title_draw = ImageDraw.Draw(title_bg)
+        title_draw.rounded_rectangle([0, 0, self.width-80, 200], radius=30, 
+                                     fill=self.hex_to_rgb(scheme['accent']) + (60,))
+        
+        # Draw title text with word wrap
         title_text = f"Day {day_data['day']}: {day_data['title']}"
-        # Word wrap for title
         words = title_text.split()
         lines = []
         current_line = []
+        
         for word in words:
             test_line = ' '.join(current_line + [word])
-            bbox = draw.textbbox((0, 0), test_line, font=title_font)
-            if bbox[2] - bbox[0] < self.width - 120:
+            bbox = title_draw.textbbox((0, 0), test_line, font=title_font)
+            if bbox[2] - bbox[0] < self.width - 180:
                 current_line.append(word)
             else:
                 if current_line:
@@ -212,59 +323,90 @@ class YouTubeAutomation:
         if current_line:
             lines.append(' '.join(current_line))
         
-        # Draw title lines
-        y_pos = 100
+        # Draw title on card
+        y_pos = 40
         for line in lines:
-            bbox = draw.textbbox((0, 0), line, font=title_font)
+            bbox = title_draw.textbbox((0, 0), line, font=title_font)
             text_width = bbox[2] - bbox[0]
-            x_pos = (self.width - text_width) // 2
-            draw.text((x_pos, y_pos), line, fill=scheme['text'], font=title_font)
-            y_pos += 70
+            x_pos = ((self.width-80) - text_width) // 2
+            # Shadow
+            title_draw.text((x_pos+4, y_pos+4), line, fill=(0, 0, 0, 150), font=title_font)
+            # Main text
+            title_draw.text((x_pos, y_pos), line, fill='#ffffff', font=title_font)
+            y_pos += 75
         
-        # Create and paste code image
+        # Paste title card
+        final_img.paste(title_bg, (40, 80), title_bg)
+        
+        # Create and paste code image with glow
         code_img = self.create_code_image(day_data['code'], day_data['day'], scheme)
         if code_img.mode != 'RGB':
             code_img = code_img.convert('RGB')
         
-        # Resize code image
-        code_width = int(self.width * 0.85)
+        # Resize and position code
+        code_width = int(self.width * 0.92)
         aspect = code_img.height / code_img.width
         code_height = int(code_width * aspect)
         code_img_resized = code_img.resize((code_width, code_height))
         
-        # Paste code in center
         code_x = (self.width - code_width) // 2
-        code_y = (self.height - code_height) // 2
+        code_y = 350
         final_img.paste(code_img_resized, (code_x, code_y))
         
-        # Draw CTA box at bottom
-        cta_text = f"👍 LIKE & FOLLOW for Day {day_data['day'] + 1}"
-        cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
-        cta_width = cta_bbox[2] - cta_bbox[0] + 40
-        cta_height = cta_bbox[3] - cta_bbox[1] + 30
-        cta_x = (self.width - cta_width) // 2
-        cta_y = self.height - 250
+        # Create CTA with modern design
+        cta_text = f"👍 LIKE & FOLLOW 🚀"
+        cta_subtext = f"Day {day_data['day'] + 1} Coming Soon!"
         
-        # Draw CTA background
-        draw.rectangle([cta_x, cta_y, cta_x + cta_width, cta_y + cta_height], 
-                      fill=scheme['accent'])
+        # CTA background with gradient
+        cta_height = 180
+        cta_y = self.height - cta_height - 50
+        cta_bg = Image.new('RGBA', (self.width-60, cta_height), (255, 255, 255, 0))
+        cta_draw = ImageDraw.Draw(cta_bg)
+        
+        # Draw CTA box with shadow
+        shadow_offset = 6
+        cta_draw.rounded_rectangle([shadow_offset, shadow_offset, self.width-60, cta_height], 
+                                   radius=40, fill=(0, 0, 0, 80))
+        cta_draw.rounded_rectangle([0, 0, self.width-60, cta_height], 
+                                   radius=40, fill=self.hex_to_rgb(scheme['accent']))
+        
+        # Add pulsing border effect
+        for i in range(3):
+            cta_draw.rounded_rectangle([i*3, i*3, (self.width-60)-i*3, cta_height-i*3], 
+                                       radius=40, outline='#ffffff', width=3)
         
         # Draw CTA text
-        text_x = cta_x + 20
-        text_y = cta_y + 15
-        draw.text((text_x, text_y), cta_text, fill='white', font=cta_font)
+        bbox = cta_draw.textbbox((0, 0), cta_text, font=cta_font)
+        text_width = bbox[2] - bbox[0]
+        text_x = ((self.width-60) - text_width) // 2
+        
+        # Shadow
+        cta_draw.text((text_x+4, 35+4), cta_text, fill=(0, 0, 0, 150), font=cta_font)
+        # Main text
+        cta_draw.text((text_x, 35), cta_text, fill='#ffffff', font=cta_font)
+        
+        # Subtitle
+        bbox2 = cta_draw.textbbox((0, 0), cta_subtext, font=subtitle_font)
+        text_width2 = bbox2[2] - bbox2[0]
+        text_x2 = ((self.width-60) - text_width2) // 2
+        cta_draw.text((text_x2+3, 105+3), cta_subtext, fill=(0, 0, 0, 120), font=subtitle_font)
+        cta_draw.text((text_x2, 105), cta_subtext, fill='#ffffff', font=subtitle_font)
+        
+        # Paste CTA
+        final_img.paste(cta_bg, (30, cta_y), cta_bg)
         
         # Save the image
         img_path = self.output_folder / f"temp_full_{day_data['day']}.png"
         final_img.save(str(img_path))
         
-        # Create video from single image
+        # Create video from image
         img_clip = ImageClip(str(img_path)).set_duration(duration).fadein(0.5).fadeout(0.5)
         
         # Add audio
         video = img_clip.set_audio(audio)
         
         return video
+
     def generate_youtube_metadata(self, day_data):
         """Generate SEO-optimized YouTube metadata"""
         title = f"Day {day_data['day']}: {day_data['title']} | Python Tutorial #shorts #viral #programming"
@@ -317,7 +459,7 @@ Subscribe and turn on notifications! 🔔"""
             print(f"{'='*50}")
             
             scheme = random.choice(self.color_schemes)
-            script = automation.generate_script(day_data)
+            script = self.generate_script(day_data)
             print(f"📝 Script generated: {len(script)} characters")
             
             audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
@@ -350,8 +492,8 @@ Subscribe and turn on notifications! 🔔"""
             
             print(f"📄 Metadata saved: {metadata_path}")
             
-            if (self.output_folder / f"temp_code_{day_data['day']}.png").exists():
-                (self.output_folder / f"temp_code_{day_data['day']}.png").unlink()
+            if (self.output_folder / f"temp_full_{day_data['day']}.png").exists():
+                (self.output_folder / f"temp_full_{day_data['day']}.png").unlink()
             
             time.sleep(2)
 
