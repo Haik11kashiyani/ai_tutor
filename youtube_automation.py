@@ -173,7 +173,7 @@ class YouTubeAutomation:
         
         return img
 
-  def create_video(self, day_data, audio_path, scheme):
+    def create_video(self, day_data, audio_path, scheme):
         """Create engaging video with animations"""
         # Load audio to get duration first
         audio = AudioFileClip(str(audio_path))
@@ -190,7 +190,7 @@ class YouTubeAutomation:
         # Code image with proper sizing
         code_clip = (ImageClip(str(code_img_path))
                     .set_duration(duration)
-                    .resize(width=int(self.width * 0.85))  # 85% of screen width
+                    .resize(width=int(self.width * 0.85))
                     .set_position('center')
                     .fadein(0.5)
                     .fadeout(0.5))
@@ -206,7 +206,6 @@ class YouTubeAutomation:
                     .fadein(0.5))
         except Exception as e:
             print(f"Warning: Could not create title with effects: {e}")
-            # Fallback without stroke
             title = (TextClip(title_text, fontsize=60, color=scheme['text'], 
                              font='DejaVu-Sans-Bold', size=(self.width-100, None), method='caption')
                     .set_position(('center', 100))
@@ -272,10 +271,10 @@ Subscribe and turn on notifications! 🔔"""
         ]
         
         return {
-            "title": title[:100],  # YouTube title limit
+            "title": title[:100],
             "description": description,
             "tags": tags,
-            "category": "27",  # Education
+            "category": "27",
             "privacyStatus": "public"
         }
 
@@ -288,28 +287,21 @@ Subscribe and turn on notifications! 🔔"""
             print(f"Processing Day {day_data['day']}: {day_data['title']}")
             print(f"{'='*50}")
             
-            # Select random color scheme
             scheme = random.choice(self.color_schemes)
-            
-            # Generate script
-            script = self.generate_script(day_data)
+            script = automation.generate_script(day_data)
             print(f"📝 Script generated: {len(script)} characters")
             
-            # Generate audio
             audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
-            audio_success = self.text_to_speech_elevenlabs(script, str(audio_path))  # FIXED: Added str()
+            audio_success = self.text_to_speech_elevenlabs(script, str(audio_path))
             
             if not audio_success:
                 print(f"⚠️  Creating silent audio as fallback...")
-                # Create 5-second silent audio
                 silent = AudioClip(lambda t: 0, duration=5, fps=44100)
                 silent.write_audiofile(str(audio_path))
             
-            # Create video
             print("🎬 Creating video...")
             video = self.create_video(day_data, audio_path, scheme)
             
-            # Save video
             video_path = self.output_folder / f"day_{day_data['day']}_{language}.mp4"
             video.write_videofile(
                 str(video_path),
@@ -322,7 +314,6 @@ Subscribe and turn on notifications! 🔔"""
             
             print(f"✅ Video saved: {video_path}")
             
-            # Generate metadata
             metadata = self.generate_youtube_metadata(day_data)
             metadata_path = self.output_folder / f"day_{day_data['day']}_metadata.json"
             with open(metadata_path, 'w') as f:
@@ -330,17 +321,13 @@ Subscribe and turn on notifications! 🔔"""
             
             print(f"📄 Metadata saved: {metadata_path}")
             
-            # Cleanup temp files
             if (self.output_folder / f"temp_code_{day_data['day']}.png").exists():
                 (self.output_folder / f"temp_code_{day_data['day']}.png").unlink()
             
-            time.sleep(2)  # Brief pause between generations
+            time.sleep(2)
 
 if __name__ == "__main__":
-    # Create automation instance
     automation = YouTubeAutomation()
-    
-    # Generate all videos
     automation.create_all_videos("content.json", language="python")
     
     print("\n" + "="*50)
