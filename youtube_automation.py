@@ -173,49 +173,66 @@ class YouTubeAutomation:
         
         return img
 
-    def create_video(self, day_data, audio_path, scheme):
+  def create_video(self, day_data, audio_path, scheme):
         """Create engaging video with animations"""
+        # Load audio to get duration first
+        audio = AudioFileClip(str(audio_path))
+        duration = audio.duration
+        
         # Background with gradient effect
-        bg_clip = ColorClip(size=(self.width, self.height), color=scheme['bg'], duration=None)
+        bg_clip = ColorClip(size=(self.width, self.height), color=scheme['bg'], duration=duration)
         
         # Create code image
         code_img = self.create_code_image(day_data['code'], day_data['day'], scheme)
         code_img_path = self.output_folder / f"temp_code_{day_data['day']}.png"
-        code_img.save(str(code_img_path))  # FIXED: Added str()
+        code_img.save(str(code_img_path))
         
-        # Load audio to get duration
-        audio = AudioFileClip(str(audio_path))  # FIXED: Added str()
-        duration = audio.duration
-        
-        # Code image with zoom animation
+        # Code image with proper sizing
         code_clip = (ImageClip(str(code_img_path))
-                    .set_position('center')
                     .set_duration(duration)
-                    .resize(height=600)
+                    .resize(width=int(self.width * 0.85))  # 85% of screen width
+                    .set_position('center')
                     .fadein(0.5)
                     .fadeout(0.5))
         
-        # Animated title
+        # Animated title with proper text wrapping
         title_text = f"Day {day_data['day']}: {day_data['title']}"
-        title = (TextClip(title_text, fontsize=70, color=scheme['text'], 
-                         font='DejaVu-Sans-Bold', stroke_color=scheme['accent'], 
-                         stroke_width=3, method='caption', size=(self.width-100, None))
-                .set_position(('center', 100))
-                .set_duration(duration)
-                .fadein(0.5))
+        try:
+            title = (TextClip(title_text, fontsize=60, color=scheme['text'], 
+                             font='DejaVu-Sans-Bold', stroke_color=scheme['accent'], 
+                             stroke_width=2, size=(self.width-100, None), method='caption')
+                    .set_position(('center', 100))
+                    .set_duration(duration)
+                    .fadein(0.5))
+        except Exception as e:
+            print(f"Warning: Could not create title with effects: {e}")
+            # Fallback without stroke
+            title = (TextClip(title_text, fontsize=60, color=scheme['text'], 
+                             font='DejaVu-Sans-Bold', size=(self.width-100, None), method='caption')
+                    .set_position(('center', 100))
+                    .set_duration(duration)
+                    .fadein(0.5))
         
         # Call-to-action overlay
-        cta_text = "👍 LIKE & FOLLOW for Day " + str(day_data['day'] + 1)
-        cta = (TextClip(cta_text, fontsize=50, color=scheme['text'],
-                       font='DejaVu-Sans-Bold', bg_color=scheme['accent'],
-                       method='caption', size=(self.width-100, None))
-              .set_position(('center', self.height-200))
-              .set_start(duration-3)
-              .set_duration(3)
-              .fadein(0.5))
+        cta_text = f"👍 LIKE & FOLLOW for Day {day_data['day'] + 1}"
+        try:
+            cta = (TextClip(cta_text, fontsize=45, color=scheme['text'],
+                           font='DejaVu-Sans-Bold', bg_color=scheme['accent'],
+                           size=(self.width-100, None), method='caption')
+                  .set_position(('center', self.height-200))
+                  .set_start(max(0, duration-3))
+                  .set_duration(min(3, duration))
+                  .fadein(0.5))
+        except Exception as e:
+            print(f"Warning: Could not create CTA: {e}")
+            cta = None
         
         # Compose video
-        video = CompositeVideoClip([bg_clip.set_duration(duration), code_clip, title, cta])
+        if cta:
+            video = CompositeVideoClip([bg_clip, code_clip, title, cta], size=(self.width, self.height))
+        else:
+            video = CompositeVideoClip([bg_clip, code_clip, title], size=(self.width, self.height))
+        
         video = video.set_audio(audio)
         
         return video
