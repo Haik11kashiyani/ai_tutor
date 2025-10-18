@@ -175,56 +175,94 @@ class YouTubeAutomation:
 
     def create_video(self, day_data, audio_path, scheme):
         """Create engaging video with animations"""
+        from PIL import ImageDraw, ImageFont
+        import numpy as np
+        
         # Load audio to get duration first
         audio = AudioFileClip(str(audio_path))
         duration = audio.duration
         
-        # Background with gradient effect
-        bg_clip = ColorClip(size=(self.width, self.height), color=scheme['bg'], duration=duration)
+        # Create a single large image with everything
+        final_img = Image.new('RGB', (self.width, self.height), scheme['bg'])
+        draw = ImageDraw.Draw(final_img)
         
-        # Create code image
+        # Load fonts
+        try:
+            title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
+            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
+        except:
+            title_font = ImageFont.load_default()
+            cta_font = ImageFont.load_default()
+        
+        # Draw title
+        title_text = f"Day {day_data['day']}: {day_data['title']}"
+        # Word wrap for title
+        words = title_text.split()
+        lines = []
+        current_line = []
+        for word in words:
+            test_line = ' '.join(current_line + [word])
+            bbox = draw.textbbox((0, 0), test_line, font=title_font)
+            if bbox[2] - bbox[0] < self.width - 120:
+                current_line.append(word)
+            else:
+                if current_line:
+                    lines.append(' '.join(current_line))
+                current_line = [word]
+        if current_line:
+            lines.append(' '.join(current_line))
+        
+        # Draw title lines
+        y_pos = 100
+        for line in lines:
+            bbox = draw.textbbox((0, 0), line, font=title_font)
+            text_width = bbox[2] - bbox[0]
+            x_pos = (self.width - text_width) // 2
+            draw.text((x_pos, y_pos), line, fill=scheme['text'], font=title_font)
+            y_pos += 70
+        
+        # Create and paste code image
         code_img = self.create_code_image(day_data['code'], day_data['day'], scheme)
-        code_img_path = self.output_folder / f"temp_code_{day_data['day']}.png"
-        
-        # Save as RGB to avoid channel issues
         if code_img.mode != 'RGB':
             code_img = code_img.convert('RGB')
-        code_img.save(str(code_img_path))
         
-        # Code image with proper sizing
-        code_clip = (ImageClip(str(code_img_path))
-                    .set_duration(duration)
-                    .resize(width=int(self.width * 0.85))
-                    .set_position('center')
-                    .fadein(0.5)
-                    .fadeout(0.5))
+        # Resize code image
+        code_width = int(self.width * 0.85)
+        aspect = code_img.height / code_img.width
+        code_height = int(code_width * aspect)
+        code_img_resized = code_img.resize((code_width, code_height))
         
-        # Animated title - simplified without stroke to avoid issues
-        title_text = f"Day {day_data['day']}: {day_data['title']}"
-        title = (TextClip(title_text, fontsize=55, color=scheme['text'], 
-                         font='DejaVu-Sans-Bold', 
-                         size=(self.width-120, None), method='caption')
-                .set_position(('center', 120))
-                .set_duration(duration)
-                .fadein(0.5))
+        # Paste code in center
+        code_x = (self.width - code_width) // 2
+        code_y = (self.height - code_height) // 2
+        final_img.paste(code_img_resized, (code_x, code_y))
         
-        # Call-to-action overlay - simplified
+        # Draw CTA box at bottom
         cta_text = f"👍 LIKE & FOLLOW for Day {day_data['day'] + 1}"
-        cta_duration = min(3, duration)
-        cta_start = max(0, duration - cta_duration)
+        cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
+        cta_width = cta_bbox[2] - cta_bbox[0] + 40
+        cta_height = cta_bbox[3] - cta_bbox[1] + 30
+        cta_x = (self.width - cta_width) // 2
+        cta_y = self.height - 250
         
-        cta = (TextClip(cta_text, fontsize=40, color='white',
-                       font='DejaVu-Sans-Bold', bg_color=scheme['accent'],
-                       size=(self.width-120, None), method='caption')
-              .set_position(('center', self.height-250))
-              .set_start(cta_start)
-              .set_duration(cta_duration)
-              .fadein(0.3))
+        # Draw CTA background
+        draw.rectangle([cta_x, cta_y, cta_x + cta_width, cta_y + cta_height], 
+                      fill=scheme['accent'])
         
-        # Compose video with explicit size
-        clips = [bg_clip, code_clip, title, cta]
-        video = CompositeVideoClip(clips, size=(self.width, self.height))
-        video = video.set_audio(audio)
+        # Draw CTA text
+        text_x = cta_x + 20
+        text_y = cta_y + 15
+        draw.text((text_x, text_y), cta_text, fill='white', font=cta_font)
+        
+        # Save the image
+        img_path = self.output_folder / f"temp_full_{day_data['day']}.png"
+        final_img.save(str(img_path))
+        
+        # Create video from single image
+        img_clip = ImageClip(str(img_path)).set_duration(duration).fadein(0.5).fadeout(0.5)
+        
+        # Add audio
+        video = img_clip.set_audio(audio)
         
         return video
     def generate_youtube_metadata(self, day_data):
