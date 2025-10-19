@@ -265,27 +265,41 @@ class YouTubeAutomation:
         code_card = self.create_glassmorphism_card(int(self.width * 0.92), card_height, scheme)
         code_draw = ImageDraw.Draw(code_card)
         
-        # Day badge with correct color
-        badge_w, badge_h = 170, 85
+        # Day badge with animated border - BIGGER SIZE
+        badge_w, badge_h = 220, 95
         badge_x, badge_y = 35, 30
         badge_rgb = self.hex_to_rgb(scheme['badge'])
         
-        # Glow
-        for offset in range(10, 0, -2):
-            alpha = int(120 - offset * 12)
+        # Animated pulsing glow (changes based on frame timing)
+        pulse = abs(np.sin(code_progress[0] if code_progress else 0) * 0.3) + 0.7
+        for offset in range(15, 0, -2):
+            alpha = int(150 * pulse - offset * 10)
             code_draw.rounded_rectangle(
                 [badge_x-offset, badge_y-offset, badge_x+badge_w+offset, badge_y+badge_h+offset],
-                radius=22, fill=badge_rgb + (alpha,)
+                radius=25, fill=badge_rgb + (alpha,)
             )
         
+        # Main badge
         code_draw.rounded_rectangle([badge_x, badge_y, badge_x+badge_w, badge_y+badge_h], 
-                                    radius=22, fill=badge_rgb)
+                                    radius=25, fill=badge_rgb)
         
+        # Animated border
+        border_offset = int(3 * pulse)
+        code_draw.rounded_rectangle(
+            [badge_x+border_offset, badge_y+border_offset, 
+             badge_x+badge_w-border_offset, badge_y+badge_h-border_offset],
+            radius=25, outline=(255, 255, 255, 200), width=3
+        )
+        
+        # Day text - WHITE color
         day_text = f"DAY {day}"
         bbox = code_draw.textbbox((0, 0), day_text, font=day_font)
         text_w = bbox[2] - bbox[0]
         text_x = badge_x + (badge_w - text_w) // 2
-        code_draw.text((text_x, badge_y + 18), day_text, fill='#000000', font=day_font)
+        # Glow effect on text
+        for offset in [(2,2), (-2,2), (2,-2), (-2,-2)]:
+            code_draw.text((text_x+offset[0], badge_y+18+offset[1]), day_text, fill=(255, 255, 255, 100), font=day_font)
+        code_draw.text((text_x, badge_y + 18), day_text, fill='#ffffff', font=day_font)
         
         # Typing animation for code
         y_offset = 150
@@ -392,12 +406,13 @@ class YouTubeAutomation:
         
         frames = []
         
-        # Calculate typing speed
+        # Calculate typing speed - SLOWER
         total_chars = sum(len(line) for line in code_lines)
-        chars_per_frame = max(1, total_chars // code_frames) if code_frames > 0 else 1
+        # Slow down: 1 character every 2 frames instead of multiple chars per frame
+        chars_per_frame = 0.5 if code_frames > 0 else 1
         
         current_line = 0
-        current_char = 0
+        current_char = 0.0  # Changed to float for slower typing
         code_progress = []
         
         # Generate frames
@@ -407,14 +422,14 @@ class YouTubeAutomation:
                 if current_line < len(code_lines):
                     line = code_lines[current_line]
                     
-                    if current_char <= len(line):
+                    if int(current_char) <= len(line):
                         if current_line >= len(code_progress):
                             code_progress.append('')
-                        code_progress[current_line] = line[:current_char]
-                        current_char += chars_per_frame
+                        code_progress[current_line] = line[:int(current_char)]
+                        current_char += chars_per_frame  # Slower increment
                     else:
                         current_line += 1
-                        current_char = 0
+                        current_char = 0.0
                 
                 frame = self.create_video_frame(
                     scheme, day_data['day'], day_data['title'], 
