@@ -3,14 +3,12 @@ import os
 import requests
 import time
 from pathlib import Path
-from moviepy.editor import (
-    VideoClip, CompositeVideoClip, 
-    ColorClip, ImageClip, AudioFileClip, AudioClip, concatenate_videoclips
-)
+from moviepy.editor import VideoClip, AudioFileClip, AudioClip
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
-import urllib.request
+import subprocess
+import sys
 
 class YouTubeAutomation:
     def __init__(self):
@@ -28,13 +26,13 @@ class YouTubeAutomation:
         self.height = 1920
         self.fps = 30
         
-        # Ultra-modern color schemes
+        # Modern color schemes with better accent colors
         self.color_schemes = [
-            {"name": "matrix", "bg1": "#001f0f", "bg2": "#003820", "accent": "#00ff41", "text": "#ffffff", "glass": (0, 255, 65, 30)},
-            {"name": "cyber", "bg1": "#0a0e27", "bg2": "#1a1f4f", "accent": "#00d9ff", "text": "#ffffff", "glass": (0, 217, 255, 30)},
-            {"name": "neon", "bg1": "#1a0033", "bg2": "#330066", "accent": "#ff00ff", "text": "#ffffff", "glass": (255, 0, 255, 30)},
-            {"name": "sunset", "bg1": "#1a0a00", "bg2": "#4d1f00", "accent": "#ff6600", "text": "#ffffff", "glass": (255, 102, 0, 30)},
-            {"name": "ice", "bg1": "#001a33", "bg2": "#003366", "accent": "#00ffff", "text": "#ffffff", "glass": (0, 255, 255, 30)},
+            {"name": "matrix", "bg1": "#001a0f", "bg2": "#003d20", "accent": "#00ff41", "text": "#ffffff", "badge": "#00ff41"},
+            {"name": "cyber", "bg1": "#0a0e27", "bg2": "#1a1f4f", "accent": "#00d9ff", "text": "#ffffff", "badge": "#7b2ff7"},
+            {"name": "neon", "bg1": "#1a0033", "bg2": "#330066", "accent": "#ff00ff", "text": "#ffffff", "badge": "#ff0080"},
+            {"name": "sunset", "bg1": "#1a0a00", "bg2": "#4d1f00", "accent": "#ff6600", "text": "#ffffff", "badge": "#ff3300"},
+            {"name": "ice", "bg1": "#001a33", "bg2": "#003366", "accent": "#00ffff", "text": "#ffffff", "badge": "#0099ff"},
         ]
 
     def load_content(self, json_path="content.json"):
@@ -103,7 +101,7 @@ class YouTubeAutomation:
                 if response.status_code == 200:
                     with open(output_path, 'wb') as f:
                         f.write(response.content)
-                    print(f"✓ Audio generated with API key {self.current_key_index + 1}")
+                    print(f"✓ Audio generated")
                     return True
                 elif response.status_code == 401:
                     self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
@@ -118,284 +116,123 @@ class YouTubeAutomation:
         hex_color = hex_color.lstrip('#')
         return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-    def create_matrix_rain(self, width, height, scheme, frame_count=90):
-        """Create Matrix-style falling code animation"""
-        frames = []
-        num_cols = 40
-        col_width = width // num_cols
-        
-        # Initialize columns with random positions
-        cols = [random.randint(-height, 0) for _ in range(num_cols)]
-        
-        accent_rgb = self.hex_to_rgb(scheme['accent'])
-        
-        for frame in range(frame_count):
-            img = Image.new('RGB', (width, height), self.hex_to_rgb(scheme['bg1']))
-            draw = ImageDraw.Draw(img)
+    def execute_python_code(self, code):
+        """Execute Python code and capture output"""
+        try:
+            # Create a temporary file
+            temp_file = self.output_folder / "temp_exec.py"
+            with open(temp_file, 'w') as f:
+                f.write(code)
             
-            # Update and draw each column
-            for i, y_pos in enumerate(cols):
-                x = i * col_width + col_width // 2
-                
-                # Draw trail
-                for j in range(20):
-                    y = y_pos - j * 30
-                    if 0 <= y < height:
-                        opacity = max(0, 255 - j * 12)
-                        size = max(2, 8 - j // 3)
-                        color = tuple([int(c * opacity / 255) for c in accent_rgb])
-                        draw.ellipse([x-size, y-size, x+size, y+size], fill=color)
-                
-                # Move column down
-                cols[i] += random.randint(15, 30)
-                if cols[i] > height:
-                    cols[i] = -random.randint(100, 300)
+            # Execute and capture output
+            result = subprocess.run(
+                [sys.executable, str(temp_file)],
+                capture_output=True,
+                text=True,
+                timeout=2
+            )
             
-            frames.append(np.array(img))
-        
-        return frames
+            # Cleanup
+            temp_file.unlink()
+            
+            # Return output
+            output = result.stdout.strip()
+            if output:
+                return output[:100]  # Limit length
+            return None
+            
+        except Exception as e:
+            return None
 
-    def create_circuit_board(self, width, height, scheme, frame_count=90):
-        """Create animated circuit board background"""
-        frames = []
-        accent_rgb = self.hex_to_rgb(scheme['accent'])
+    def create_gradient_bg(self, width, height, color1, color2):
+        """Create smooth gradient background"""
+        img = Image.new('RGB', (width, height))
+        draw = ImageDraw.Draw(img)
         
-        # Generate circuit paths
-        num_paths = 30
-        paths = []
-        for _ in range(num_paths):
-            points = []
-            x, y = random.randint(0, width), random.randint(0, height)
-            for _ in range(random.randint(3, 8)):
-                points.append((x, y))
-                x += random.choice([-1, 0, 1]) * random.randint(50, 200)
-                y += random.choice([-1, 0, 1]) * random.randint(50, 200)
-                x = max(0, min(width, x))
-                y = max(0, min(height, y))
-            paths.append(points)
+        r1, g1, b1 = self.hex_to_rgb(color1)
+        r2, g2, b2 = self.hex_to_rgb(color2)
         
-        for frame in range(frame_count):
-            img = Image.new('RGB', (width, height), self.hex_to_rgb(scheme['bg1']))
-            draw = ImageDraw.Draw(img)
-            
-            # Draw grid
-            grid_spacing = 80
-            for x in range(0, width, grid_spacing):
-                for y in range(0, height, grid_spacing):
-                    opacity = int(20 + 10 * np.sin(frame * 0.1 + x * 0.01))
-                    draw.rectangle([x, y, x+2, y+2], fill=accent_rgb + (opacity,))
-            
-            # Draw paths with animation
-            for path in paths:
-                for i in range(len(path) - 1):
-                    progress = (frame + i * 5) % frame_count / frame_count
-                    opacity = int(150 * abs(np.sin(progress * np.pi)))
-                    color = tuple([int(c * opacity / 255) for c in accent_rgb])
-                    draw.line([path[i], path[i+1]], fill=color, width=3)
-            
-            # Add glowing nodes
-            pulse = abs(np.sin(frame * 0.15))
-            for path in paths:
-                for point in path[::2]:
-                    size = int(8 + 6 * pulse)
-                    for offset in range(size, 0, -2):
-                        alpha = int(100 * (1 - offset / size))
-                        color = tuple([int(c * alpha / 255) for c in accent_rgb])
-                        draw.ellipse([point[0]-offset, point[1]-offset, 
-                                     point[0]+offset, point[1]+offset], fill=color)
-            
-            frames.append(np.array(img))
+        for y in range(height):
+            ratio = y / height
+            r = int(r1 + (r2 - r1) * ratio)
+            g = int(g1 + (g2 - g1) * ratio)
+            b = int(b1 + (b2 - b1) * ratio)
+            draw.line([(0, y), (width, y)], fill=(r, g, b))
         
-        return frames
+        return img
 
-    def create_glassmorphism_card(self, width, height, scheme, blur_amount=20):
-        """Create glassmorphism effect card"""
+    def create_glassmorphism_card(self, width, height, scheme):
+        """Create glassmorphism card"""
         card = Image.new('RGBA', (width, height), (255, 255, 255, 0))
         
-        # Base glass layer
-        glass_overlay = Image.new('RGBA', (width, height), scheme['glass'])
-        card = Image.alpha_composite(card, glass_overlay)
+        # Glass layer
+        glass = Image.new('RGBA', (width, height), (255, 255, 255, 25))
+        card = Image.alpha_composite(card, glass)
         
         # Border glow
         draw = ImageDraw.Draw(card)
         accent_rgb = self.hex_to_rgb(scheme['accent'])
         
-        for i in range(10, 0, -2):
-            alpha = int(80 - i * 8)
+        for i in range(8, 0, -2):
+            alpha = int(100 - i * 10)
             draw.rounded_rectangle([i, i, width-i, height-i], radius=25, 
                                    outline=accent_rgb + (alpha,), width=3)
         
-        # Apply blur for glass effect
-        card = card.filter(ImageFilter.GaussianBlur(5))
+        card = card.filter(ImageFilter.GaussianBlur(3))
         
         return card
 
-    def get_emoji_image(self, emoji_char):
-        """Get emoji as image (fallback to text)"""
-        # For now, we'll use text rendering with better fallback
-        img = Image.new('RGBA', (100, 100), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(img)
+    def draw_text_with_glow(self, draw, pos, text, font, color, glow_color=None):
+        """Draw text with glow effect"""
+        if glow_color is None:
+            glow_color = color
         
-        try:
-            # Try to use a font that supports emojis
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 70)
-        except:
-            font = ImageFont.load_default()
+        glow_rgb = self.hex_to_rgb(glow_color) if isinstance(glow_color, str) else glow_color
         
-        # Draw emoji
-        bbox = draw.textbbox((0, 0), emoji_char, font=font)
-        text_width = bbox[2] - bbox[0]
-        text_height = bbox[3] - bbox[1]
-        x = (100 - text_width) // 2
-        y = (100 - text_height) // 2
+        # Glow
+        for offset in [(2,2), (-2,2), (2,-2), (-2,-2), (3,3), (-3,-3)]:
+            draw.text((pos[0]+offset[0], pos[1]+offset[1]), text, 
+                     fill=glow_rgb + (60,), font=font)
         
-        draw.text((x, y), emoji_char, font=font, fill=(255, 255, 255, 255))
-        
-        return img
+        # Main text
+        draw.text(pos, text, fill=color, font=font)
 
-    def create_code_card(self, code, day, scheme, output_text=None):
-        """Create modern code card with glassmorphism"""
-        # Calculate dynamic height based on content
-        base_height = 700
-        if output_text:
-            base_height += 150
+    def create_video_frame(self, scheme, day, title, code_lines, output_text, 
+                          code_progress, output_progress, show_output):
+        """Create a single video frame with typing animation"""
         
-        lines = code.split('\n')
-        line_height = 65
-        code_height = len(lines) * line_height + 200
+        # Gradient background
+        frame = self.create_gradient_bg(self.width, self.height, scheme['bg1'], scheme['bg2'])
         
-        card_height = max(base_height, code_height)
-        card_width = 950
-        
-        # Create card with glassmorphism
-        card = self.create_glassmorphism_card(card_width, card_height, scheme)
-        draw = ImageDraw.Draw(card)
-        
-        try:
-            font_code = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 42)
-            font_day = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 60)
-            font_output = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 38)
-        except:
-            font_code = ImageFont.load_default()
-            font_day = ImageFont.load_default()
-            font_output = ImageFont.load_default()
-        
-        # Day badge with parallax effect
-        badge_w, badge_h = 180, 90
-        badge_x, badge_y = 40, 35
-        
-        # Create badge with glow
-        accent_rgb = self.hex_to_rgb(scheme['accent'])
-        for offset in range(12, 0, -3):
-            alpha = max(0, 150 - offset * 12)
-            draw.rounded_rectangle(
-                [badge_x-offset, badge_y-offset, badge_x+badge_w+offset, badge_y+badge_h+offset],
-                radius=25, fill=accent_rgb + (alpha,)
-            )
-        
-        draw.rounded_rectangle([badge_x, badge_y, badge_x+badge_w, badge_y+badge_h], 
-                              radius=25, fill=accent_rgb + (255,))
-        
-        # Day text
-        day_text = f"DAY {day}"
-        bbox = draw.textbbox((0, 0), day_text, font=font_day)
-        text_w = bbox[2] - bbox[0]
-        text_x = badge_x + (badge_w - text_w) // 2
-        draw.text((text_x, badge_y + 20), day_text, fill='#ffffff', font=font_day)
-        
-        # Code with neon syntax highlighting
-        y_offset = 160
-        for line in lines:
-            if not line.strip():
-                y_offset += line_height
-                continue
-            
-            # Neon colors
-            if any(kw in line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'return']):
-                color = '#ff3e9d'
-            elif '"' in line or "'" in line:
-                color = '#00ff88'
-            elif any(c.isdigit() for c in line):
-                color = '#ffff00'
-            else:
-                color = '#ffffff'
-            
-            # Glow effect
-            glow_rgb = self.hex_to_rgb(color)
-            for offset in [(2,2), (-2,2), (2,-2), (-2,-2)]:
-                draw.text((60+offset[0], y_offset+offset[1]), line, 
-                         fill=glow_rgb + (60,), font=font_code)
-            draw.text((60, y_offset), line, fill=color, font=font_code)
-            y_offset += line_height
-        
-        # OUTPUT section with glow
-        if output_text:
-            y_offset += 40
-            output_box_h = 130
-            
-            # Glowing output box
-            for offset in range(10, 0, -2):
-                alpha = 100 - offset * 10
-                draw.rounded_rectangle(
-                    [35-offset, y_offset-offset, card_width-35+offset, y_offset+output_box_h+offset],
-                    radius=20, fill=self.hex_to_rgb('#00ff88') + (alpha,)
-                )
-            
-            draw.rounded_rectangle(
-                [35, y_offset, card_width-35, y_offset+output_box_h],
-                radius=20, fill=(0, 50, 25, 200)
-            )
-            
-            # OUTPUT label with emoji
-            output_emoji = self.get_emoji_image("▶")
-            card.paste(output_emoji, (50, y_offset + 10), output_emoji)
-            
-            draw.text((160, y_offset + 15), "OUTPUT:", fill='#00ff88', font=font_output)
-            draw.text((160, y_offset + 65), output_text, fill='#ffffff', font=font_output)
-        
-        return card
-
-    def create_video(self, day_data, audio_path, scheme):
-        """Create ULTRA-MODERN animated video"""
-        audio = AudioFileClip(str(audio_path))
-        duration = audio.duration
-        
-        # Detect output
-        code = day_data['code']
-        output_text = None
-        if 'print' in code.lower():
-            if "print('Hello, World!')" in code:
-                output_text = "Hello, World!"
-            elif "print" in code:
-                try:
-                    parts = code.split('print(')[1].split(')')[0]
-                    output_text = parts.strip('\'"')[:40]
-                except:
-                    output_text = "Output here"
-        
-        # Create animated background
-        print(f"Creating {scheme['name']} background animation...")
-        if scheme['name'] in ['matrix', 'cyber', 'ice']:
-            bg_frames = self.create_matrix_rain(self.width, self.height, scheme, frame_count=int(self.fps * duration))
-        else:
-            bg_frames = self.create_circuit_board(self.width, self.height, scheme, frame_count=int(self.fps * duration))
-        
-        # Create content layers
-        print("Creating glassmorphism content...")
+        # Add subtle grid pattern
+        draw = ImageDraw.Draw(frame)
+        grid_color = self.hex_to_rgb(scheme['accent'])
+        for x in range(0, self.width, 100):
+            for y in range(0, self.height, 100):
+                draw.rectangle([x, y, x+1, y+1], fill=grid_color + (20,))
         
         # Title card
-        title_card = self.create_glassmorphism_card(self.width - 80, 200, scheme)
-        title_draw = ImageDraw.Draw(title_card)
+        title_card = self.create_glassmorphism_card(self.width - 80, 180, scheme)
         
         try:
             title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
+            code_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
+            day_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
+            output_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 36)
+            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
         except:
             title_font = ImageFont.load_default()
+            code_font = ImageFont.load_default()
+            day_font = ImageFont.load_default()
+            output_font = ImageFont.load_default()
+            cta_font = ImageFont.load_default()
         
-        title_text = f"Day {day_data['day']}: {day_data['title']}"
+        # Draw title on card
+        title_draw = ImageDraw.Draw(title_card)
+        full_title = f"Day {day}: {title}"
         
         # Word wrap
-        words = title_text.split()
+        words = full_title.split()
         lines = []
         current_line = []
         for word in words:
@@ -410,89 +247,207 @@ class YouTubeAutomation:
         if current_line:
             lines.append(' '.join(current_line))
         
-        y = 45
+        y = 40
         for line in lines:
             bbox = title_draw.textbbox((0, 0), line, font=title_font)
             x = ((self.width - 80) - (bbox[2] - bbox[0])) // 2
-            # Glow
-            glow_color = self.hex_to_rgb(scheme['accent'])
-            for offset in [(3,3), (-3,3), (3,-3), (-3,-3)]:
-                title_draw.text((x+offset[0], y+offset[1]), line, 
-                              fill=glow_color + (80,), font=title_font)
-            title_draw.text((x, y), line, fill='#ffffff', font=title_font)
-            y += 75
+            self.draw_text_with_glow(title_draw, (x, y), line, title_font, '#ffffff', scheme['accent'])
+            y += 70
         
-        # Code card
-        code_card = self.create_code_card(code, day_data['day'], scheme, output_text)
+        frame.paste(title_card, (40, 100), title_card)
+        
+        # Code card with dynamic height
+        num_lines = len(code_lines)
+        card_height = 250 + num_lines * 60
+        if show_output and output_text:
+            card_height += 180
+        
+        code_card = self.create_glassmorphism_card(int(self.width * 0.92), card_height, scheme)
+        code_draw = ImageDraw.Draw(code_card)
+        
+        # Day badge with correct color
+        badge_w, badge_h = 170, 85
+        badge_x, badge_y = 35, 30
+        badge_rgb = self.hex_to_rgb(scheme['badge'])
+        
+        # Glow
+        for offset in range(10, 0, -2):
+            alpha = int(120 - offset * 12)
+            code_draw.rounded_rectangle(
+                [badge_x-offset, badge_y-offset, badge_x+badge_w+offset, badge_y+badge_h+offset],
+                radius=22, fill=badge_rgb + (alpha,)
+            )
+        
+        code_draw.rounded_rectangle([badge_x, badge_y, badge_x+badge_w, badge_y+badge_h], 
+                                    radius=22, fill=badge_rgb)
+        
+        day_text = f"DAY {day}"
+        bbox = code_draw.textbbox((0, 0), day_text, font=day_font)
+        text_w = bbox[2] - bbox[0]
+        text_x = badge_x + (badge_w - text_w) // 2
+        code_draw.text((text_x, badge_y + 18), day_text, fill='#000000', font=day_font)
+        
+        # Typing animation for code
+        y_offset = 150
+        for i, line in enumerate(code_lines):
+            if i < len(code_progress):
+                displayed_line = code_progress[i]
+            else:
+                break
+            
+            if not displayed_line.strip():
+                y_offset += 60
+                continue
+            
+            # Syntax coloring
+            if any(kw in displayed_line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'return']):
+                color = '#ff3e9d'
+            elif '"' in displayed_line or "'" in displayed_line:
+                color = '#00ff88'
+            elif any(c.isdigit() for c in displayed_line):
+                color = '#ffff00'
+            else:
+                color = '#ffffff'
+            
+            self.draw_text_with_glow(code_draw, (55, y_offset), displayed_line, code_font, color, color)
+            y_offset += 60
+        
+        # Cursor blinking effect
+        if code_progress and len(code_progress[-1]) < len(code_lines[len(code_progress)-1]):
+            cursor_y = 150 + (len(code_progress) - 1) * 60
+            cursor_x = 55 + code_draw.textbbox((0, 0), code_progress[-1], font=code_font)[2]
+            code_draw.rectangle([cursor_x, cursor_y, cursor_x+3, cursor_y+45], fill='#ffffff')
+        
+        # OUTPUT section with typing animation
+        if show_output and output_text:
+            y_offset += 35
+            
+            # Output box
+            for offset in range(8, 0, -2):
+                alpha = 80 - offset * 10
+                code_draw.rounded_rectangle(
+                    [30-offset, y_offset-offset, code_card.width-30+offset, y_offset+145+offset],
+                    radius=18, fill=self.hex_to_rgb('#00ff88') + (alpha,)
+                )
+            
+            code_draw.rounded_rectangle(
+                [30, y_offset, code_card.width-30, y_offset+145],
+                radius=18, fill=(0, 50, 25, 220)
+            )
+            
+            # OUTPUT label
+            code_draw.text((50, y_offset + 15), "▶ OUTPUT:", fill='#00ff88', font=output_font)
+            
+            # Typing output
+            displayed_output = output_text[:output_progress]
+            code_draw.text((50, y_offset + 65), displayed_output, fill='#ffffff', font=output_font)
+            
+            # Output cursor
+            if output_progress < len(output_text):
+                cursor_x = 50 + code_draw.textbbox((0, 0), displayed_output, font=output_font)[2]
+                code_draw.rectangle([cursor_x, y_offset+65, cursor_x+3, y_offset+105], fill='#ffffff')
+        
+        code_x = (self.width - code_card.width) // 2
+        frame.paste(code_card, (code_x, 320), code_card)
         
         # CTA card
-        cta_card = self.create_glassmorphism_card(self.width - 60, 220, scheme)
+        cta_card = self.create_glassmorphism_card(self.width - 60, 200, scheme)
         cta_draw = ImageDraw.Draw(cta_card)
         
-        try:
-            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 52)
-            sub_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
-        except:
-            cta_font = ImageFont.load_default()
-            sub_font = ImageFont.load_default()
-        
-        # Add emoji images
-        like_emoji = self.get_emoji_image("👍")
-        rocket_emoji = self.get_emoji_image("🚀")
-        
-        cta_text = "  LIKE & FOLLOW  "
+        cta_text = "LIKE & FOLLOW"
         bbox = cta_draw.textbbox((0, 0), cta_text, font=cta_font)
-        cta_x = ((self.width - 60) - (bbox[2] - bbox[0]) - 200) // 2
+        cta_x = ((self.width - 60) - (bbox[2] - bbox[0])) // 2
+        self.draw_text_with_glow(cta_draw, (cta_x, 45), cta_text, cta_font, '#ffffff', scheme['accent'])
         
-        # Place emojis
-        cta_card.paste(like_emoji, (cta_x, 40), like_emoji)
-        cta_card.paste(rocket_emoji, (cta_x + (bbox[2]-bbox[0]) + 100, 40), rocket_emoji)
-        
-        cta_draw.text((cta_x + 110, 50), cta_text, fill='#ffffff', font=cta_font)
-        
-        sub_text = f"Day {day_data['day'] + 1} Coming Soon!"
-        bbox2 = cta_draw.textbbox((0, 0), sub_text, font=sub_font)
+        sub_text = f"Day {day + 1} Coming Soon!"
+        bbox2 = cta_draw.textbbox((0, 0), sub_text, font=output_font)
         sub_x = ((self.width - 60) - (bbox2[2] - bbox2[0])) // 2
-        cta_draw.text((sub_x, 140), sub_text, fill=self.hex_to_rgb(scheme['accent']), font=sub_font)
+        cta_draw.text((sub_x, 125), sub_text, fill=self.hex_to_rgb(scheme['accent']), font=output_font)
         
-        # Composite frames
-        print("Compositing animated frames...")
-        final_frames = []
+        frame.paste(cta_card, (30, self.height - 270), cta_card)
         
-        for i, bg_frame in enumerate(bg_frames):
-            frame_img = Image.fromarray(bg_frame)
-            
-            # Add gradient overlay
-            gradient = Image.new('RGBA', (self.width, self.height), (0, 0, 0, 100))
-            frame_img = Image.alpha_composite(frame_img.convert('RGBA'), gradient).convert('RGB')
-            
-            # Parallax effect - slight movement
-            offset_x = int(10 * np.sin(i * 0.05))
-            offset_y = int(5 * np.cos(i * 0.05))
-            
-            # Paste title card with parallax
-            frame_img.paste(title_card, (40 + offset_x, 120 + offset_y), title_card)
-            
-            # Paste code card
-            code_y = 380
-            code_resized = code_card.resize((int(self.width * 0.92), 
-                                            int(code_card.height * (self.width * 0.92) / code_card.width)))
-            code_x = (self.width - code_resized.width) // 2
-            frame_img.paste(code_resized, (code_x - offset_x, code_y + offset_y // 2), code_resized)
-            
-            # Paste CTA
-            frame_img.paste(cta_card, (30 + offset_x, self.height - 280 - offset_y), cta_card)
-            
-            final_frames.append(np.array(frame_img))
+        return np.array(frame)
+
+    def create_video(self, day_data, audio_path, scheme):
+        """Create video with typing animation"""
+        audio = AudioFileClip(str(audio_path))
+        duration = audio.duration
         
-        # Save first frame and create clip
-        first_frame_path = self.output_folder / f"temp_video_{day_data['day']}.png"
-        Image.fromarray(final_frames[0]).save(str(first_frame_path))
+        code = day_data['code']
+        code_lines = code.split('\n')
         
-        # Create video with animation
+        # Execute code to get real output
+        output_text = self.execute_python_code(code)
+        
+        print(f"Code output: {output_text if output_text else 'None'}")
+        
+        # Animation timing
+        total_frames = int(duration * self.fps)
+        
+        # Phase 1: Type code (60% of time)
+        code_frames = int(total_frames * 0.6)
+        # Phase 2: Show output (30% of time)
+        output_frames = int(total_frames * 0.3) if output_text else 0
+        # Phase 3: Hold (10% of time)
+        
+        frames = []
+        
+        # Calculate typing speed
+        total_chars = sum(len(line) for line in code_lines)
+        chars_per_frame = max(1, total_chars // code_frames) if code_frames > 0 else 1
+        
+        current_line = 0
+        current_char = 0
+        code_progress = []
+        
+        # Generate frames
+        for frame_num in range(total_frames):
+            # Code typing phase
+            if frame_num < code_frames:
+                if current_line < len(code_lines):
+                    line = code_lines[current_line]
+                    
+                    if current_char <= len(line):
+                        if current_line >= len(code_progress):
+                            code_progress.append('')
+                        code_progress[current_line] = line[:current_char]
+                        current_char += chars_per_frame
+                    else:
+                        current_line += 1
+                        current_char = 0
+                
+                frame = self.create_video_frame(
+                    scheme, day_data['day'], day_data['title'], 
+                    code_lines, output_text, code_progress, 0, False
+                )
+            
+            # Output typing phase
+            elif output_text and frame_num < code_frames + output_frames:
+                # Ensure code is complete
+                code_progress = code_lines.copy()
+                
+                output_progress = int(((frame_num - code_frames) / output_frames) * len(output_text))
+                
+                frame = self.create_video_frame(
+                    scheme, day_data['day'], day_data['title'], 
+                    code_lines, output_text, code_progress, output_progress, True
+                )
+            
+            # Hold phase
+            else:
+                code_progress = code_lines.copy()
+                frame = self.create_video_frame(
+                    scheme, day_data['day'], day_data['title'], 
+                    code_lines, output_text, code_progress, 
+                    len(output_text) if output_text else 0, bool(output_text)
+                )
+            
+            frames.append(frame)
+        
+        # Create video
         def make_frame(t):
-            frame_idx = int(t * self.fps) % len(final_frames)
-            return final_frames[frame_idx]
+            frame_idx = int(t * self.fps)
+            return frames[min(frame_idx, len(frames) - 1)]
         
         video_clip = VideoClip(make_frame, duration=duration)
         video_clip = video_clip.set_audio(audio)
@@ -511,22 +466,9 @@ Code:
 
 💡 Master this concept and level up your programming skills!
 
-👉 Follow for Day {day_data['day'] + 1}!
+#python #coding #programming #shorts #viral #codingtutorial #pythonforbeginners"""
 
-#python #coding #programming #shorts #viral #codingtutorial #pythonforbeginners 
-#learnpython #pythonprogramming #codingshorts #programmingshorts #techeducation
-
-⏰ 30 Days of Python - Don't miss a day!
-📚 Perfect for beginners and intermediate programmers
-🚀 Quick, easy-to-understand explanations
-
-Subscribe and turn on notifications! 🔔"""
-
-        tags = [
-            "python", "programming", "coding", "tutorial", "shorts",
-            "python tutorial", "learn python", "coding for beginners",
-            "python programming", "software development", "tech education",
-        ]
+        tags = ["python", "programming", "coding", "tutorial", "shorts"]
         
         return {
             "title": title[:100],
@@ -569,9 +511,12 @@ Subscribe and turn on notifications! 🔔"""
             with open(metadata_path, 'w') as f:
                 json.dump(metadata, f, indent=2)
             
-            # Cleanup temp files
-            for temp_file in self.output_folder.glob(f"temp_*_{day_data['day']}.*"):
-                temp_file.unlink()
+            # Cleanup
+            for temp_file in self.output_folder.glob("temp_*"):
+                try:
+                    temp_file.unlink()
+                except:
+                    pass
             
             time.sleep(2)
 
