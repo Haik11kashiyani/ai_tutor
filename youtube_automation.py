@@ -270,13 +270,14 @@ class YouTubeAutomation:
         badge_x, badge_y = 35, 30
         badge_rgb = self.hex_to_rgb(scheme['badge'])
         
-        # Animated pulsing glow (changes based on frame timing)
-        pulse = abs(np.sin(code_progress[0] if code_progress else 0) * 0.3) + 0.7
+        # Animated pulsing glow (use frame number for animation)
+        pulse_value = len(code_progress) if code_progress else 0
+        pulse = abs(np.sin(pulse_value * 0.2) * 0.3) + 0.7
         for offset in range(15, 0, -2):
             alpha = int(150 * pulse - offset * 10)
             code_draw.rounded_rectangle(
                 [badge_x-offset, badge_y-offset, badge_x+badge_w+offset, badge_y+badge_h+offset],
-                radius=25, fill=badge_rgb + (alpha,)
+                radius=25, fill=badge_rgb + (max(0, alpha),)
             )
         
         # Main badge
