@@ -7,8 +7,6 @@ from moviepy.editor import VideoClip, AudioFileClip, AudioClip
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
-import subprocess
-import sys
 
 class YouTubeAutomation:
     def __init__(self):
@@ -26,7 +24,7 @@ class YouTubeAutomation:
         self.height = 1920
         self.fps = 30
         
-        # Modern color schemes with better accent colors
+        # Modern color schemes
         self.color_schemes = [
             {"name": "matrix", "bg1": "#001a0f", "bg2": "#003d20", "accent": "#00ff41", "text": "#ffffff", "badge": "#00ff41"},
             {"name": "cyber", "bg1": "#0a0e27", "bg2": "#1a1f4f", "accent": "#00d9ff", "text": "#ffffff", "badge": "#7b2ff7"},
@@ -34,6 +32,20 @@ class YouTubeAutomation:
             {"name": "sunset", "bg1": "#1a0a00", "bg2": "#4d1f00", "accent": "#ff6600", "text": "#ffffff", "badge": "#ff3300"},
             {"name": "ice", "bg1": "#001a33", "bg2": "#003366", "accent": "#00ffff", "text": "#ffffff", "badge": "#0099ff"},
         ]
+        
+        # Language display names
+        self.language_names = {
+            "python": "Python",
+            "javascript": "JavaScript",
+            "java": "Java",
+            "cpp": "C++",
+            "go": "Go",
+            "rust": "Rust",
+            "php": "PHP",
+            "ruby": "Ruby",
+            "swift": "Swift",
+            "kotlin": "Kotlin"
+        }
 
     def load_content(self, json_path="content.json"):
         with open(json_path, 'r') as f:
@@ -41,34 +53,37 @@ class YouTubeAutomation:
         return data['days']
 
     def generate_script(self, day_data):
+        """Generate script mentioning the programming language"""
         title = day_data['title']
-        code = day_data['code']
+        language = day_data.get('language', 'python')
+        language_name = self.language_names.get(language, language.capitalize())
+        explanation = day_data.get('explanation', '')
         day = day_data['day']
         
         scripts = [
-            f"Hey coders! Welcome to Day {day}. Today we're learning {title}. "
+            f"Hey coders! Welcome to Day {day}. Today we're learning {title} in {language_name}. "
             f"This is super important, so pay attention! "
             f"Here's the code. Let me break it down for you. "
-            f"{self._explain_code(code, title)} "
+            f"{explanation} "
             f"Pretty cool, right? Practice this and you'll master it! "
             f"Like and follow for Day {day + 1}!",
+            
+            f"What's up everyone! Day {day} is here! "
+            f"Today's topic: {title} in {language_name}. This is going to be awesome! "
+            f"Check out this code. "
+            f"{explanation} "
+            f"See how simple that is? Now you try it! "
+            f"Drop a like if you learned something new!",
+            
+            f"Yo! Day {day} of our coding journey! "
+            f"Let's talk about {title} in {language_name}. This is a game-changer! "
+            f"Look at this code right here. "
+            f"{explanation} "
+            f"That's all there is to it! Keep coding, keep growing! "
+            f"Follow for more daily coding tips!"
         ]
-        return random.choice(scripts)
-
-    def _explain_code(self, code, title):
-        explanations = {
-            "print": "The print function displays output to the screen. Whatever you put inside the quotes will show up when you run the program.",
-            "variable": "Variables store data. Think of them as labeled containers that hold information you can use later.",
-            "loop": "Loops let you repeat code multiple times without writing it over and over. Super efficient!",
-            "function": "Functions are reusable blocks of code. Write once, use anywhere!",
-            "list": "Lists store multiple items in a single variable. They're like a shopping list for your data!",
-            "if": "If statements make decisions in your code. They check conditions and run code based on the result.",
-        }
         
-        for key, explanation in explanations.items():
-            if key in title.lower() or key in code.lower():
-                return explanation
-        return f"This code demonstrates {title}. It's a fundamental concept every programmer should know!"
+        return random.choice(scripts)
 
     def text_to_speech_elevenlabs(self, text, output_path):
         url = "https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM"
@@ -116,33 +131,39 @@ class YouTubeAutomation:
         hex_color = hex_color.lstrip('#')
         return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-    def execute_python_code(self, code):
-        """Execute Python code and capture output"""
-        try:
-            # Create a temporary file
-            temp_file = self.output_folder / "temp_exec.py"
-            with open(temp_file, 'w') as f:
-                f.write(code)
-            
-            # Execute and capture output
-            result = subprocess.run(
-                [sys.executable, str(temp_file)],
-                capture_output=True,
-                text=True,
-                timeout=2
-            )
-            
-            # Cleanup
-            temp_file.unlink()
-            
-            # Return output
-            output = result.stdout.strip()
-            if output:
-                return output[:100]  # Limit length
-            return None
-            
-        except Exception as e:
-            return None
+    def get_syntax_color(self, line, language):
+        """Get syntax color based on programming language"""
+        language = language.lower()
+        
+        # Python keywords
+        if language == "python":
+            if any(kw in line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'return', 'True', 'False']):
+                return '#ff3e9d'
+            elif '"' in line or "'" in line:
+                return '#00ff88'
+            elif any(c.isdigit() for c in line):
+                return '#ffff00'
+        
+        # JavaScript keywords
+        elif language == "javascript":
+            if any(kw in line for kw in ['let', 'const', 'var', 'function', 'if', 'else', 'for', 'while', 'return', 'console', 'true', 'false']):
+                return '#ff3e9d'
+            elif '"' in line or "'" in line or '`' in line:
+                return '#00ff88'
+            elif any(c.isdigit() for c in line):
+                return '#ffff00'
+        
+        # Java keywords
+        elif language == "java":
+            if any(kw in line for kw in ['public', 'class', 'static', 'void', 'int', 'String', 'if', 'else', 'for', 'while', 'return']):
+                return '#ff3e9d'
+            elif '"' in line:
+                return '#00ff88'
+            elif any(c.isdigit() for c in line):
+                return '#ffff00'
+        
+        # Default white for other text
+        return '#ffffff'
 
     def create_gradient_bg(self, width, height, color1, color2):
         """Create smooth gradient background"""
@@ -197,7 +218,7 @@ class YouTubeAutomation:
         # Main text
         draw.text(pos, text, fill=color, font=font)
 
-    def create_video_frame(self, scheme, day, title, code_lines, output_text, 
+    def create_video_frame(self, scheme, day, title, language, code_lines, output_text, 
                           code_progress, output_progress, show_output):
         """Create a single video frame with typing animation"""
         
@@ -229,6 +250,7 @@ class YouTubeAutomation:
         
         # Draw title on card
         title_draw = ImageDraw.Draw(title_card)
+        language_name = self.language_names.get(language, language.capitalize())
         full_title = f"Day {day}: {title}"
         
         # Word wrap
@@ -270,7 +292,7 @@ class YouTubeAutomation:
         badge_x, badge_y = 35, 30
         badge_rgb = self.hex_to_rgb(scheme['badge'])
         
-        # Animated pulsing glow (use frame number for animation)
+        # Animated pulsing glow
         pulse_value = len(code_progress) if code_progress else 0
         pulse = abs(np.sin(pulse_value * 0.2) * 0.3) + 0.7
         for offset in range(15, 0, -2):
@@ -302,7 +324,7 @@ class YouTubeAutomation:
             code_draw.text((text_x+offset[0], badge_y+18+offset[1]), day_text, fill=(255, 255, 255, 100), font=day_font)
         code_draw.text((text_x, badge_y + 18), day_text, fill='#ffffff', font=day_font)
         
-        # Typing animation for code
+        # Typing animation for code with language-specific syntax
         y_offset = 150
         for i, line in enumerate(code_lines):
             if i < len(code_progress):
@@ -314,15 +336,8 @@ class YouTubeAutomation:
                 y_offset += 60
                 continue
             
-            # Syntax coloring
-            if any(kw in displayed_line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'return']):
-                color = '#ff3e9d'
-            elif '"' in displayed_line or "'" in displayed_line:
-                color = '#00ff88'
-            elif any(c.isdigit() for c in displayed_line):
-                color = '#ffff00'
-            else:
-                color = '#ffffff'
+            # Language-specific syntax coloring
+            color = self.get_syntax_color(displayed_line, language)
             
             self.draw_text_with_glow(code_draw, (55, y_offset), displayed_line, code_font, color, color)
             y_offset += 60
@@ -389,12 +404,14 @@ class YouTubeAutomation:
         duration = audio.duration
         
         code = day_data['code']
+        language = day_data.get('language', 'python')
         code_lines = code.split('\n')
         
-        # Execute code to get real output
-        output_text = self.execute_python_code(code)
+        # Get output from JSON (not execution)
+        output_text = day_data.get('output', None)
         
-        print(f"Code output: {output_text if output_text else 'None'}")
+        print(f"Language: {language}")
+        print(f"Output: {output_text if output_text else 'None'}")
         
         # Animation timing
         total_frames = int(duration * self.fps)
@@ -403,17 +420,15 @@ class YouTubeAutomation:
         code_frames = int(total_frames * 0.6)
         # Phase 2: Show output (30% of time)
         output_frames = int(total_frames * 0.3) if output_text else 0
-        # Phase 3: Hold (10% of time)
         
         frames = []
         
         # Calculate typing speed - SLOWER
         total_chars = sum(len(line) for line in code_lines)
-        # Slow down: 1 character every 2 frames instead of multiple chars per frame
         chars_per_frame = 0.5 if code_frames > 0 else 1
         
         current_line = 0
-        current_char = 0.0  # Changed to float for slower typing
+        current_char = 0.0
         code_progress = []
         
         # Generate frames
@@ -427,25 +442,24 @@ class YouTubeAutomation:
                         if current_line >= len(code_progress):
                             code_progress.append('')
                         code_progress[current_line] = line[:int(current_char)]
-                        current_char += chars_per_frame  # Slower increment
+                        current_char += chars_per_frame
                     else:
                         current_line += 1
                         current_char = 0.0
                 
                 frame = self.create_video_frame(
-                    scheme, day_data['day'], day_data['title'], 
+                    scheme, day_data['day'], day_data['title'], language,
                     code_lines, output_text, code_progress, 0, False
                 )
             
             # Output typing phase
             elif output_text and frame_num < code_frames + output_frames:
-                # Ensure code is complete
                 code_progress = code_lines.copy()
                 
                 output_progress = int(((frame_num - code_frames) / output_frames) * len(output_text))
                 
                 frame = self.create_video_frame(
-                    scheme, day_data['day'], day_data['title'], 
+                    scheme, day_data['day'], day_data['title'], language,
                     code_lines, output_text, code_progress, output_progress, True
                 )
             
@@ -453,7 +467,7 @@ class YouTubeAutomation:
             else:
                 code_progress = code_lines.copy()
                 frame = self.create_video_frame(
-                    scheme, day_data['day'], day_data['title'], 
+                    scheme, day_data['day'], day_data['title'], language,
                     code_lines, output_text, code_progress, 
                     len(output_text) if output_text else 0, bool(output_text)
                 )
@@ -471,20 +485,23 @@ class YouTubeAutomation:
         return video_clip
 
     def generate_youtube_metadata(self, day_data):
-        title = f"Day {day_data['day']}: {day_data['title']} | Python Tutorial #shorts #viral #programming"
+        language = day_data.get('language', 'python')
+        language_name = self.language_names.get(language, language.capitalize())
+        
+        title = f"Day {day_data['day']}: {day_data['title']} | {language_name} Tutorial #shorts #viral #programming"
         
         description = f"""🔥 Day {day_data['day']} of our 30-Day Coding Challenge! 
 
-Today's Topic: {day_data['title']}
+Today's Topic: {day_data['title']} in {language_name}
 
 Code:
 {day_data['code']}
 
 💡 Master this concept and level up your programming skills!
 
-#python #coding #programming #shorts #viral #codingtutorial #pythonforbeginners"""
+#{language} #coding #programming #shorts #viral #codingtutorial"""
 
-        tags = ["python", "programming", "coding", "tutorial", "shorts"]
+        tags = [language, "programming", "coding", "tutorial", "shorts"]
         
         return {
             "title": title[:100],
@@ -512,7 +529,8 @@ Code:
             
             video = self.create_video(day_data, audio_path, scheme)
             
-            video_path = self.output_folder / f"day_{day_data['day']}_{language}.mp4"
+            lang = day_data.get('language', language)
+            video_path = self.output_folder / f"day_{day_data['day']}_{lang}.mp4"
             video.write_videofile(
                 str(video_path),
                 fps=self.fps,
@@ -538,7 +556,7 @@ Code:
 
 if __name__ == "__main__":
     automation = YouTubeAutomation()
-    automation.create_all_videos("content.json", language="python")
+    automation.create_all_videos("content.json")
     
     print("\n✨ ALL VIDEOS GENERATED!")
     print(f"📁 Videos in: {automation.output_folder}")
