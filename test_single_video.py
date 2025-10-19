@@ -19,12 +19,14 @@ def test_single_video():
     # Initialize automation
     automation = YouTubeAutomation()
     
-    # Create test content (Day 1)
+    # Create test content (Day 1) - with all new fields
     test_content = {
         "day": 1,
         "title": "Print Hello World",
+        "language": "python",
         "code": "print('Hello, World!')",
-        "explanation": ""
+        "output": "Hello, World!",
+        "explanation": "The print function displays output to the screen. Whatever you put inside the quotes will show up when you run the program."
     }
     
     print("="*60)
@@ -32,12 +34,14 @@ def test_single_video():
     print("="*60)
     print(f"\nGenerating test video for Day {test_content['day']}")
     print(f"Title: {test_content['title']}")
+    print(f"Language: {test_content['language']}")
     print(f"Code: {test_content['code']}")
+    print(f"Output: {test_content['output']}")
     
     # Select color scheme
     import random
     scheme = random.choice(automation.color_schemes)
-    print(f"\nColor Scheme: {scheme['bg1']} → {scheme['bg2']} / {scheme['accent']}")
+    print(f"\nColor Scheme: {scheme['name']} - {scheme['bg1']} → {scheme['bg2']}")
     
     # Generate script
     script = automation.generate_script(test_content)
@@ -67,7 +71,7 @@ def test_single_video():
     video = automation.create_video(test_content, audio_path, scheme)
     
     # Save video
-    video_path = automation.output_folder / "TEST_day_1_python.mp4"
+    video_path = automation.output_folder / f"TEST_day_1_{test_content['language']}.mp4"
     print(f"\n💾 Saving video to: {video_path}")
     
     video.write_videofile(
@@ -105,8 +109,9 @@ def test_single_video():
     print("\n🎉 Next Steps:")
     print("   1. Download the video from Artifacts")
     print("   2. Verify audio and visuals are synced")
-    print("   3. Check if animations look smooth")
-    print("   4. If satisfied, run full generation workflow")
+    print("   3. Check typing animation is smooth")
+    print("   4. Verify language-specific syntax highlighting")
+    print("   5. If satisfied, run full generation workflow")
     
     # Cleanup temp files
     temp_code_path = automation.output_folder / f"temp_code_1.png"
