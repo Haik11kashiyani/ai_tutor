@@ -35,10 +35,8 @@ jobs:
         
     - name: Install Python dependencies
       run: |
-        pip install --upgrade pip
-        pip uninstall -y Pillow || true
-        pip install Pillow==9.0.0
-        pip install moviepy==1.0.3 requests==2.31.0 numpy==1.24.3 imageio==2.31.1 imageio-ffmpeg==0.4.9
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
         
     - name: Verify setup
       run: |
@@ -51,6 +49,9 @@ jobs:
         ELEVENLABS_KEY_1: ${{ secrets.ELEVENLABS_KEY_1 }}
         ELEVENLABS_KEY_2: ${{ secrets.ELEVENLABS_KEY_2 }}
         ELEVENLABS_KEY_3: ${{ secrets.ELEVENLABS_KEY_3 }}
+        YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+        YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+        YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
       run: |
         python test_single_video.py
         
