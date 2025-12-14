@@ -6,6 +6,8 @@ import json
 import os
 from youtube_automation import YouTubeAutomation
 from moviepy.editor import AudioClip
+import numpy as np
+from moviepy.audio.AudioClip import AudioArrayClip
 
 def test_single_video():
     """Generate a single test video"""
@@ -54,17 +56,17 @@ def test_single_video():
     audio_path = automation.output_folder / "test_audio.mp3"
     print(f"\n🎙️  Generating voiceover...")
     
+    audio_success = False
     if os.getenv('ELEVENLABS_KEY_1'):
         audio_success = automation.text_to_speech_elevenlabs(script, str(audio_path))
-        if not audio_success:
-            print("❌ Failed to generate audio. Creating silent video...")
-            # Create silent audio (5 seconds)
-            silent = AudioClip(lambda t: 0, duration=5, fps=44100)
-            silent.write_audiofile(str(audio_path))
-    else:
-        print("⚠️  No API key, creating 5-second silent audio...")
-        silent = AudioClip(lambda t: 0, duration=5, fps=44100)
-        silent.write_audiofile(str(audio_path))
+    
+    if not audio_success:
+        print("❌ Failed or skipped audio. Creating silent video...")
+        # Create silent audio (5 seconds) using robust method
+        duration = 5
+        silence = np.zeros((int(duration * 44100), 2))
+        silent = AudioArrayClip(silence, fps=44100)
+        silent.write_audiofile(str(audio_path), fps=44100)
     
     # Create video
     print(f"\n🎥 Creating video...")
@@ -81,6 +83,7 @@ def test_single_video():
         audio_codec='aac',
         preset='medium',
         bitrate='3000k',
+        audio_fps=44100,
         threads=4
     )
     
