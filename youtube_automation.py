@@ -101,53 +101,87 @@ class YouTubeAutomation:
         ]
         return random.choice(scripts)
 
+    def check_elevenlabs_quota(self, api_key, index):
+        """Check user subscription and quota status"""
+        url = "https://api.elevenlabs.io/v1/user/subscription"
+        headers = {"xi-api-key": api_key}
+        try:
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                char_count = data.get('character_count', 0)
+                char_limit = data.get('character_limit', 0)
+                remaining = char_limit - char_count
+                print(f"   🔑 Key {index}: {remaining}/{char_limit} chars remaining (Tier: {data.get('tier', 'unknown')})")
+                return remaining
+            else:
+                masked_key = f"{api_key[:4]}...{api_key[-4:]}"
+                print(f"   ❌ Key {index} ({masked_key}) Check Failed: {response.status_code}")
+                return 0
+        except Exception as e:
+            print(f"   ❌ Key {index} Exception: {e}")
+            return 0
+
     def text_to_speech_elevenlabs(self, text, output_path):
+        # Rachel Voice
         url = "https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM"
         
         if not self.elevenlabs_keys:
             print("❌ No ElevenLabs API keys found in environment variables!")
             return False
 
-        for attempt in range(len(self.elevenlabs_keys)):
-            api_key = self.elevenlabs_keys[self.current_key_index]
-            
-            masked_key = f"{api_key[:4]}...{api_key[-4:]}" if len(api_key) > 8 else "INVALID"
-            print(f"🔄 Attempting TTS with key {masked_key} (Index: {self.current_key_index})")
-            
-            headers = {
-                "Accept": "audio/mpeg",
-                "Content-Type": "application/json",
-                "xi-api-key": api_key
-            }
-            
-            data = {
-                "text": text,
-                "model_id": "eleven_monolingual_v1",
-                "voice_settings": {
-                    "stability": 0.5,
-                    "similarity_boost": 0.75,
-                }
-            }
-            
-            try:
-                response = requests.post(url, json=data, headers=headers)
-                
-                if response.status_code == 200:
-                    with open(output_path, 'wb') as f:
-                        f.write(response.content)
-                    print(f"✓ Audio generated successfully")
-                    return True
-                elif response.status_code == 401:
-                    print(f"⚠️ Auth failed (401) for key {masked_key}. Response: {response.text}")
-                    self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
-                else:
-                    print(f"❌ API Error: {response.status_code} - {response.text}")
-                    self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
-            except Exception as e:
-                print(f"❌ Exception generating audio: {e}")
-                self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
+        print("\n🔍 Checking ElevenLabs API Keys Quota...")
+        valid_key = None
         
-        print("❌ All ElevenLabs keys failed.")
+        # Proactively check keys to find one with quota
+        for i, key in enumerate(self.elevenlabs_keys):
+            remaining = self.check_elevenlabs_quota(key, i)
+            if remaining > len(text):
+                print(f"   ✅ Key {i} selected (Has {remaining} chars, need ~{len(text)})")
+                valid_key = key
+                self.current_key_index = i
+                break
+            else:
+                print(f"   ⚠️ Key {i} skipped (Insufficient quota or invalid)")
+        
+        if not valid_key:
+            print("❌ All ElevenLabs keys are out of quota or invalid.")
+            return False
+
+        # Attempt generation with the valid key
+        masked_key = f"{valid_key[:4]}...{valid_key[-4:]}"
+        print(f"🔄 Generating Audio with Key {self.current_key_index}...")
+        
+        headers = {
+            "Accept": "audio/mpeg",
+            "Content-Type": "application/json",
+            "xi-api-key": valid_key
+        }
+        
+        data = {
+            "text": text,
+            "model_id": "eleven_multilingual_v2", # UPDATED to V2
+            "voice_settings": {
+                "stability": 0.5,
+                "similarity_boost": 0.75,
+            }
+        }
+        
+        try:
+            response = requests.post(url, json=data, headers=headers)
+            
+            if response.status_code == 200:
+                with open(output_path, 'wb') as f:
+                    f.write(response.content)
+                print(f"✓ Audio generated successfully")
+                return True
+            elif response.status_code == 401:
+                print(f"⚠️ Auth failed (401). Response: {response.text}")
+            else:
+                print(f"❌ API Error: {response.status_code} - {response.text}")
+        except Exception as e:
+            print(f"❌ Exception generating audio: {e}")
+        
         return False
 
     def hex_to_rgb(self, hex_color):
