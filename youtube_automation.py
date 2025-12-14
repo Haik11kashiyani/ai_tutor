@@ -436,13 +436,15 @@ class YouTubeAutomation:
     def create_video(self, day_data, audio_path, scheme):
         """Create video with typing animation"""
         try:
+            # properly load audio file
             audio = AudioFileClip(str(audio_path))
             duration = audio.duration
-        except:
+            print(f"   Audio duration: {duration:.2f}s")
+        except Exception as e:
             # Fallback for silent testing or corrupted audio
-            print("⚠️ Audio file issue, creating silent clip")
+            print(f"⚠️ Audio file issue: {e}. Creating silent clip")
             duration = 10
-            audio = AudioClip(lambda t: 0, duration=duration, fps=44100)
+            audio = AudioClip(lambda t: [0, 0], duration=duration, fps=44100)
         
         code = day_data['code']
         language = day_data.get('language', 'python')
@@ -521,6 +523,7 @@ class YouTubeAutomation:
             return frames[min(frame_idx, len(frames) - 1)]
         
         video_clip = VideoClip(make_frame, duration=duration)
+        # IMPORTANT: Set audio with consistent FPS to avoid buffering issues
         video_clip = video_clip.set_audio(audio)
         
         return video_clip
@@ -644,10 +647,19 @@ Today we are learning about {day_data['title']} in {language_name}.
         print("🎙️ Generating Audio...")
         if not self.text_to_speech_elevenlabs(script, str(audio_path)):
             print("⚠️ Audio generation failed or no keys available. Creating silent fallback.")
-            silent = AudioClip(lambda t: 0, duration=10, fps=44100)
-            silent.write_audiofile(str(audio_path))
+            # Use a longer duration and simpler approach for silent audio to avoid MoviePy buffering issues
+            from moviepy.audio.AudioClip import AudioArrayClip
+            import numpy as np
+            
+            duration = 10
+            # Create silence @ 44100Hz
+            silence = np.zeros((int(duration * 44100), 2))
+            silent_clip = AudioArrayClip(silence, fps=44100)
+            silent_clip.write_audiofile(str(audio_path), fps=44100)
         
         print("🎥 Generating Video...")
+        # Ensure we release the file handle from previous write
+        time.sleep(1)
         video = self.create_video(day_data, audio_path, scheme)
         
         video_path = self.output_folder / f"day_{day_data['day']}_shorts.mp4"
@@ -657,7 +669,9 @@ Today we are learning about {day_data['title']} in {language_name}.
             codec='libx264',
             audio_codec='aac',
             preset='medium',
-            bitrate='5000k'
+            bitrate='5000k',
+            # Add audio_fps to avoid potential mismatch
+            audio_fps=44100
         )
         
         # 2. Upload to YouTube
