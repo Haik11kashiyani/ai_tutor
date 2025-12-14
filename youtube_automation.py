@@ -7,6 +7,13 @@ from moviepy.editor import VideoClip, AudioFileClip, AudioClip
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
+from datetime import datetime
+
+# Google API imports
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 
 class YouTubeAutomation:
     def __init__(self):
@@ -16,6 +23,11 @@ class YouTubeAutomation:
             os.getenv('ELEVENLABS_KEY_3')
         ]
         self.current_key_index = 0
+        
+        # YouTube Credentials
+        self.yt_client_id = os.getenv('YOUTUBE_CLIENT_ID')
+        self.yt_client_secret = os.getenv('YOUTUBE_CLIENT_SECRET')
+        self.yt_refresh_token = os.getenv('YOUTUBE_REFRESH_TOKEN')
         
         self.output_folder = Path("output")
         self.output_folder.mkdir(exist_ok=True)
@@ -50,7 +62,18 @@ class YouTubeAutomation:
     def load_content(self, json_path="content.json"):
         with open(json_path, 'r') as f:
             data = json.load(f)
-        return data['days']
+        return data
+
+    def save_content(self, data, json_path="content.json"):
+        with open(json_path, 'w') as f:
+            json.dump(data, f, indent=2)
+
+    def get_next_pending_day(self, data):
+        """Find the first day that hasn't been uploaded yet"""
+        for day in data['days']:
+            if day.get('status') != 'uploaded':
+                return day
+        return None
 
     def generate_script(self, day_data):
         """Generate script mentioning the programming language"""
@@ -119,10 +142,13 @@ class YouTubeAutomation:
                     print(f"✓ Audio generated")
                     return True
                 elif response.status_code == 401:
+                    print(f"⚠️ Key index {self.current_key_index} invalid or limit reached.")
                     self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
                 else:
+                    print(f"Error generating audio: {response.status_code} - {response.text}")
                     return False
             except Exception as e:
+                print(f"Exception generating audio: {e}")
                 self.current_key_index = (self.current_key_index + 1) % len(self.elevenlabs_keys)
         
         return False
@@ -236,11 +262,20 @@ class YouTubeAutomation:
         title_card = self.create_glassmorphism_card(self.width - 80, 180, scheme)
         
         try:
-            title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
-            code_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
-            day_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
-            output_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 36)
-            cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
+            # Try to load system fonts, fallback to default if not found
+            if os.path.exists("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):
+                title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
+                code_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
+                day_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
+                output_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 36)
+                cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
+            else:
+                # Windows paths or generic fallback
+                title_font = ImageFont.load_default()
+                code_font = ImageFont.load_default()
+                day_font = ImageFont.load_default()
+                output_font = ImageFont.load_default()
+                cta_font = ImageFont.load_default()
         except:
             title_font = ImageFont.load_default()
             code_font = ImageFont.load_default()
@@ -250,7 +285,7 @@ class YouTubeAutomation:
         
         # Draw title on card
         title_draw = ImageDraw.Draw(title_card)
-        language_name = self.language_names.get(language, language.capitalize())
+        # language_name = self.language_names.get(language, language.capitalize())
         full_title = f"Day {day}: {title}"
         
         # Word wrap
@@ -400,8 +435,14 @@ class YouTubeAutomation:
 
     def create_video(self, day_data, audio_path, scheme):
         """Create video with typing animation"""
-        audio = AudioFileClip(str(audio_path))
-        duration = audio.duration
+        try:
+            audio = AudioFileClip(str(audio_path))
+            duration = audio.duration
+        except:
+            # Fallback for silent testing or corrupted audio
+            print("⚠️ Audio file issue, creating silent clip")
+            duration = 10
+            audio = AudioClip(lambda t: 0, duration=duration, fps=44100)
         
         code = day_data['code']
         language = day_data.get('language', 'python')
@@ -424,7 +465,7 @@ class YouTubeAutomation:
         frames = []
         
         # Calculate typing speed - SLOWER
-        total_chars = sum(len(line) for line in code_lines)
+        # total_chars = sum(len(line) for line in code_lines)
         chars_per_frame = 0.5 if code_frames > 0 else 1
         
         current_line = 0
@@ -488,75 +529,167 @@ class YouTubeAutomation:
         language = day_data.get('language', 'python')
         language_name = self.language_names.get(language, language.capitalize())
         
-        title = f"Day {day_data['day']}: {day_data['title']} | {language_name} Tutorial #shorts #viral #programming"
+        # VIRAL STRATEGY: Hook + Benefit + Searchable Terms
+        title = f"Day {day_data['day']}: Learn {day_data['title']} in {language_name} 🚀 #shorts"
         
-        description = f"""🔥 Day {day_data['day']} of our 30-Day Coding Challenge! 
+        description = f"""🔥 Day {day_data['day']} of the 30-Day Coding Challenge! 
 
-Today's Topic: {day_data['title']} in {language_name}
+Today we are learning about {day_data['title']} in {language_name}.
+👇 CODE SNIPPET BELOW 👇
 
-Code:
 {day_data['code']}
 
-💡 Master this concept and level up your programming skills!
+💡 Explanation:
+{day_data.get('explanation', 'Learning to code one step at a time!')}
 
-#{language} #coding #programming #shorts #viral #codingtutorial"""
+👉 Subscribe for Day {day_data['day'] + 1}! Created with AI.
+#coding #programming #{language} #learncoding #python #javascript #developer #tech #tutorial"""
 
-        tags = [language, "programming", "coding", "tutorial", "shorts"]
+        # Optimized tags for reach
+        tags = [
+            language, 
+            f"{language} tutorial",
+            "coding for beginners",
+            "programming",
+            "learn to code",
+            "developer",
+            "tech",
+            "daily coding",
+            "software engineer",
+            "shorts"
+        ]
         
         return {
             "title": title[:100],
             "description": description,
             "tags": tags,
-            "category": "27",
+            "category": "27", # Education
             "privacyStatus": "public"
         }
 
-    def create_all_videos(self, json_path="content.json", language="python"):
-        days = self.load_content(json_path)
-        
-        for day_data in days:
-            print(f"\n{'='*50}")
-            print(f"Processing Day {day_data['day']}: {day_data['title']}")
-            print(f"{'='*50}")
-            
-            scheme = random.choice(self.color_schemes)
-            script = self.generate_script(day_data)
-            
-            audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
-            if not self.text_to_speech_elevenlabs(script, str(audio_path)):
-                silent = AudioClip(lambda t: 0, duration=5, fps=44100)
-                silent.write_audiofile(str(audio_path))
-            
-            video = self.create_video(day_data, audio_path, scheme)
-            
-            lang = day_data.get('language', language)
-            video_path = self.output_folder / f"day_{day_data['day']}_{lang}.mp4"
-            video.write_videofile(
-                str(video_path),
-                fps=self.fps,
-                codec='libx264',
-                audio_codec='aac',
-                preset='medium',
-                bitrate='3000k'
+    def upload_to_youtube(self, video_path, metadata):
+        """Upload video to YouTube"""
+        if not self.yt_refresh_token or not self.yt_client_id:
+            print("⚠️ YouTube credentials missing. Skipping upload.")
+            return False
+
+        try:
+            print("🚀 Authenticating with YouTube...")
+            credentials = google.oauth2.credentials.Credentials.from_authorized_user_info(
+                info={
+                    "client_id": self.yt_client_id,
+                    "client_secret": self.yt_client_secret,
+                    "refresh_token": self.yt_refresh_token
+                }
             )
             
-            metadata = self.generate_youtube_metadata(day_data)
-            metadata_path = self.output_folder / f"day_{day_data['day']}_metadata.json"
-            with open(metadata_path, 'w') as f:
-                json.dump(metadata, f, indent=2)
+            youtube = build("youtube", "v3", credentials=credentials)
             
-            # Cleanup
-            for temp_file in self.output_folder.glob("temp_*"):
-                try:
-                    temp_file.unlink()
-                except:
-                    pass
+            body = {
+                "snippet": {
+                    "title": metadata["title"],
+                    "description": metadata["description"],
+                    "tags": metadata["tags"],
+                    "categoryId": metadata["category"]
+                },
+                "status": {
+                    "privacyStatus": metadata["privacyStatus"],
+                    "selfDeclaredMadeForKids": False
+                }
+            }
             
-            time.sleep(2)
+            print(f"📤 Uploading: {video_path}")
+            media = MediaFileUpload(str(video_path), chunksize=-1, resumable=True)
+            
+            request = youtube.videos().insert(
+                part="snippet,status",
+                body=body,
+                media_body=media
+            )
+            
+            response = None
+            while response is None:
+                status, response = request.next_chunk()
+                if status:
+                    print(f"   Upload progress: {int(status.progress() * 100)}%")
+            
+            print(f"✅ Upload Complete! Video ID: {response['id']}")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Upload Failed: {e}")
+            return False
+
+    def run_daily_automation(self, json_path="content.json"):
+        """Run the daily automation flow"""
+        print(f"📂 Loading content from {json_path}")
+        data = self.load_content(json_path)
+        
+        # Find next pending day
+        day_data = self.get_next_pending_day(data)
+        
+        if not day_data:
+            print("🎉 No pending videos! All days have been uploaded.")
+            return
+        
+        print(f"\n{'='*50}")
+        print(f"🔥 Processing Day {day_data['day']}: {day_data['title']}")
+        print(f"{'='*50}")
+        
+        # 1. Generate Assets using ONE key
+        scheme = random.choice(self.color_schemes)
+        script = self.generate_script(day_data)
+        
+        audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
+        print("🎙️ Generating Audio...")
+        if not self.text_to_speech_elevenlabs(script, str(audio_path)):
+            print("⚠️ Audio generation failed or no keys available. Creating silent fallback.")
+            silent = AudioClip(lambda t: 0, duration=10, fps=44100)
+            silent.write_audiofile(str(audio_path))
+        
+        print("🎥 Generating Video...")
+        video = self.create_video(day_data, audio_path, scheme)
+        
+        video_path = self.output_folder / f"day_{day_data['day']}_shorts.mp4"
+        video.write_videofile(
+            str(video_path),
+            fps=self.fps,
+            codec='libx264',
+            audio_codec='aac',
+            preset='medium',
+            bitrate='5000k'
+        )
+        
+        # 2. Upload to YouTube
+        metadata = self.generate_youtube_metadata(day_data)
+        
+        # Save metadata for debug
+        with open(self.output_folder / f"day_{day_data['day']}_metadata.json", 'w') as f:
+            json.dump(metadata, f, indent=2)
+
+        # Upload - Only if "uploaded" not already set (re-check logic if needed, but here we assume pending)
+        upload_success = self.upload_to_youtube(video_path, metadata)
+        
+        if upload_success:
+            # 3. Update State
+            print("📝 Updating content.json status...")
+            day_data['status'] = 'uploaded'
+            day_data['upload_date'] = datetime.now().strftime("%Y-%m-%d")
+            
+            # Save back to file
+            self.save_content(data, json_path)
+            print("✅ Status updated to 'uploaded'")
+        else:
+            print("⚠️ Video generated but NOT uploaded (check credentials). Status not updated.")
+            
+        # Cleanup
+        # for temp_file in self.output_folder.glob("day_*"):
+        #     if temp_file != video_path: # Keep the video for artifact
+        #         try:
+        #             temp_file.unlink()
+        #         except:
+        #             pass
 
 if __name__ == "__main__":
     automation = YouTubeAutomation()
-    automation.create_all_videos("content.json")
-    
-    print("\n✨ ALL VIDEOS GENERATED!")
-    print(f"📁 Videos in: {automation.output_folder}")
+    automation.run_daily_automation("content.json")
