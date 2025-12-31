@@ -26,7 +26,9 @@
       "language": "python",
       "code": "x = 5\ny = 3\nprint(x + y)",
       "output": "8",
-      "explanation": "Python can do math too! Add, subtract, multiply, divide \u2014 just like your calculator but in code!"
+      "explanation": "Python can do math too! Add, subtract, multiply, divide \u2014 just like your calculator but in code!",
+      "status": "uploaded",
+      "upload_date": "2025-12-31"
     },
     {
       "day": 4,
