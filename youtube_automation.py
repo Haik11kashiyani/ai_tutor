@@ -166,6 +166,10 @@ class YouTubeAutomation:
                 REQUIREMENTS:
                 1. Tone: Energetic, Fast-paced, Viral. 
                 2. Return ONLY the spoken text. No "Scene 1" labels.
+                3. USE DRAMATIC PUNCTUATION:
+                   - Use CAPS for emphasis (e.g. "STOP scrolling!")
+                   - Use "..." for suspense.
+                   - Use "!" for excitement.
                 """
                 response = self.genai_model.generate_content(prompt)
                 return response.text.strip()
@@ -175,8 +179,8 @@ class YouTubeAutomation:
         # Fallback Template using new viral fields
         language_name = self.language_names.get(language, language.capitalize())
         
-        script = f"{hook} Welcome to Day {day} of learning {language_name}. " \
-                 f"Today is all about {title}. Look at this code. {explanation} " \
+        script = f"{hook} Welcome to Day {day} of learning {language_name}! " \
+                 f"Today is all about {title}. Look at this code... {explanation} " \
                  f"{cta} See you tomorrow!"
         return script.replace("Sub ", "Subscribe ")
 
@@ -241,9 +245,9 @@ class YouTubeAutomation:
             "text": text,
             "model_id": "eleven_multilingual_v2", # UPDATED to V2
             "voice_settings": {
-                "stability": 0.3,       # Ultra-low for maximum variability/emotion
+                "stability": 0.15,      # EXTREME emotion (can be unstable but very expressive)
                 "similarity_boost": 0.8,
-                "style": 0.5,           # High exaggeration
+                "style": 0.75,          # Very High exaggeration
                 "use_speaker_boost": True
             }
         }
