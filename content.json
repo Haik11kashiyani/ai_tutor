@@ -4,7 +4,7 @@
       "day": 1,
       "title": "The First Line of Code You MUST Write 🤯",
       "hook": "Stop scrolling! If you want to code, you HAVE to start here.",
-      "cta": "Sub for Day 2!",
+      "cta": "Subscribe for Day 2!",
       "language": "python",
       "code": "print('Hello, World!')",
       "output": "Hello, World!",
@@ -265,14 +265,14 @@
       "explanation": "You can put if statements inside each other — that’s called nesting. Super handy for detailed checks!"
     },
     {
-        "day": 29,
-        "title": "Bulletproof Code (Try/Except) 🛡️",
-        "hook": "Stop your code from crashing.",
-        "cta": "Error handled!",
-        "language": "python",
-        "code": "try:\n  print(1/0)\nexcept:\n  print('Saved')",
-        "output": "Saved",
-        "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely."
+      "day": 29,
+      "title": "Bulletproof Code (Try/Except) 🛡️",
+      "hook": "Stop your code from crashing.",
+      "cta": "Error handled!",
+      "language": "python",
+      "code": "try:\n  print(1/0)\nexcept:\n  print('Saved')",
+      "output": "Saved",
+      "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely."
     },
     {
       "day": 30,

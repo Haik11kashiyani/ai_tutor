@@ -41,8 +41,7 @@ def test_single_video():
     print(f"Output: {test_content['output']}")
     
     # Select color scheme
-    import random
-    scheme = random.choice(automation.color_schemes)
+    scheme = automation.generate_dynamic_theme(test_content['title'])
     print(f"\nColor Scheme: {scheme['name']} - {scheme['bg1']} → {scheme['bg2']}")
     
     # Generate script

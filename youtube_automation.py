@@ -178,7 +178,7 @@ class YouTubeAutomation:
         script = f"{hook} Welcome to Day {day} of learning {language_name}. " \
                  f"Today is all about {title}. Look at this code. {explanation} " \
                  f"{cta} See you tomorrow!"
-        return script
+        return script.replace("Sub ", "Subscribe ")
 
     def check_elevenlabs_quota(self, api_key, index):
         """Check user subscription and quota status"""
@@ -241,8 +241,10 @@ class YouTubeAutomation:
             "text": text,
             "model_id": "eleven_multilingual_v2", # UPDATED to V2
             "voice_settings": {
-                "stability": 0.5,
-                "similarity_boost": 0.75,
+                "stability": 0.4,       # Lower = more emotion/variability
+                "similarity_boost": 0.8,
+                "style": 0.2,           # Exaggeration
+                "use_speaker_boost": True
             }
         }
         
@@ -427,38 +429,25 @@ class YouTubeAutomation:
                  # Use transparency for subtle grid
                 draw.rectangle([x, y, x+1, y+1], fill=grid_color + (30,))
         
-        title_card = self.create_glassmorphism_card(self.width - 80, 180, scheme)
         
-        try:
-            if os.path.exists("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):
-                title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
-                code_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
-                day_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
-                output_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 36)
-                cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
-            else:
-                title_font = ImageFont.load_default()
-                code_font = ImageFont.load_default()
-                day_font = ImageFont.load_default()
-                output_font = ImageFont.load_default()
-                cta_font = ImageFont.load_default()
-        except:
-            title_font = ImageFont.load_default()
-            code_font = ImageFont.load_default()
-            day_font = ImageFont.load_default()
-            output_font = ImageFont.load_default()
-            cta_font = ImageFont.load_default()
+        # --- TITLE LOGIC (Dynamic Height & Emoji Stripping) ---
+        import re
+        # Strip emojis for video display (keep ASCII + basic punctuation)
+        clean_title = title.encode('ascii', 'ignore').decode('ascii').strip()
+        full_title = f"Day {day}: {clean_title}"
         
-        title_draw = ImageDraw.Draw(title_card)
-        full_title = f"Day {day}: {title}"
-        
+        # Word Wrap
+        title_draw_temp = ImageDraw.Draw(Image.new('RGBA', (1,1))) # Temp for measuring
         words = full_title.split()
         lines = []
         current_line = []
+        
+        max_width = self.width - 180
+        
         for word in words:
-            test = ' '.join(current_line + [word])
-            bbox = title_draw.textbbox((0, 0), test, font=title_font)
-            if bbox[2] - bbox[0] < (self.width - 180):
+            test_line = ' '.join(current_line + [word])
+            bbox = title_draw_temp.textbbox((0, 0), test_line, font=title_font)
+            if (bbox[2] - bbox[0]) < max_width:
                 current_line.append(word)
             else:
                 if current_line:
@@ -466,14 +455,24 @@ class YouTubeAutomation:
                 current_line = [word]
         if current_line:
             lines.append(' '.join(current_line))
+            
+        # Calculate Dynamic Height
+        line_height = 70
+        padding = 50
+        card_h = (len(lines) * line_height) + (padding * 2)
         
-        y = 40
+        # Create Card
+        title_card = self.create_glassmorphism_card(self.width - 80, card_h, scheme)
+        title_draw = ImageDraw.Draw(title_card)
+        
+        y = padding
         for line in lines:
             bbox = title_draw.textbbox((0, 0), line, font=title_font)
             x = ((self.width - 80) - (bbox[2] - bbox[0])) // 2
             self.draw_text_with_glow(title_draw, (x, y), line, title_font, '#ffffff', scheme['accent'])
-            y += 70
-        frame.paste(title_card, (40, 100), title_card)
+            y += line_height
+            
+        frame.paste(title_card, (40, 50), title_card)
         
         # --- SCROLLING LOGIC ---
         MAX_LINES = 14
@@ -641,8 +640,8 @@ class YouTubeAutomation:
     def create_video(self, day_data, audio_path, scheme):
         try:
             audio = AudioFileClip(str(audio_path))
-            duration = audio.duration
-            print(f"   Audio duration: {duration:.2f}s")
+            duration = audio.duration + 1.5 # Add 1.5s buffer for pacing
+            print(f"   Audio duration: {audio.duration:.2f}s (+1.5s buffer = {duration:.2f}s)")
         except Exception as e:
             print(f"⚠️ Audio file issue: {e}. Creating silent clip")
             duration = 10
