@@ -855,6 +855,11 @@ class YouTubeAutomation:
         if not day_data:
             print("🎉 No pending videos! All days have been uploaded.")
             return
+
+        # LAUNCH GUARD: Skip runs on Jan 6th 2026 (User requested start from the 7th)
+        if datetime.now().strftime('%Y-%m-%d') == '2026-01-06':
+             print("🛑 Skipping run (Launch starts Jan 7th).")
+             return
         
         print(f"\n{'='*50}")
         print(f"🔥 Processing Day {day_data['day']}: {day_data['title']}")
