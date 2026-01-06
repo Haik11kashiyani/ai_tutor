@@ -750,10 +750,13 @@ class YouTubeAutomation:
         
         if self.has_ai:
             try:
+                current_date_str = datetime.now().strftime("%B %Y")
                 prompt = f"""
                 You are a YouTube viral marketing expert. Generate metadata for a YouTube Short.
                 
-                TOPIC: Day {day_data['day']} - {day_data['title']}
+                CONTEXT:
+                - Date: {current_date_str} (Use this for trending/seasonal tags)
+                - TOPIC: Day {day_data['day']} - {day_data['title']}
                 LANGUAGE/CATEGORY: {language_name}
                 EXPLANATION: {day_data.get('explanation', '')}
                 CONTENT SNIPPET: {day_data['code']}
@@ -762,8 +765,11 @@ class YouTubeAutomation:
                 1. TITLE: EXTREME CLICKBAIT, under 100 chars. MUST include #shorts #viral. Use CAPS and Emojis (e.g. "STOP DOING THIS! 🛑").
                 2. DESCRIPTION: High energy. Start with a hook. Use bullet points for readability. Include MANY emojis. Mention "Day {day_data['day']}".
                    Explain the content simply but dramatically. End with strong CTA.
-                3. TAGS: Comma-separated list of 15-20 high-ranking, viral tags (mix of broad and niche).
-                   Examples: #fyp #trending #coding #python #softwareengineer #tech #developer
+                3. TAGS: Comma-separated list of 15-20 high-ranking tags.
+                   - MUST include broad viral tags (e.g. #fyp, #trending).
+                   - MUST include niche specific tags (e.g. #{language}, #coding).
+                   - MUST include TIME-SENSITIVE tags relevant to {current_date_str} (e.g. if it's January, maybe #newyearcoding, #2026goals).
+                   - Ensure the mix optimizes for BOTH Search and Browse features.
                 
                 OUTPUT FORMAT (JSON):
                 {{
@@ -818,11 +824,14 @@ class YouTubeAutomation:
         
         Subscribe for Day {day_data['day']+1}! #coding #{language} #python #programming #tech"""
         
+        current_month = datetime.now().strftime("%B").lower()
+        current_year = datetime.now().year
         tags = [
             language, "coding", "shorts", "viral", "python", "learncoding", 
             "programming", "developer", "softwareengineer", "tech", "technology",
             "codinglife", "fyp", "trending", "coder", "python3", "webdevelopment",
-            "dayinthelife", "career", "productivity", "hacks", "computerscience"
+            "dayinthelife", "career", "productivity", "hacks", "computerscience",
+            f"#{current_month}{current_year}", f"#{current_year}trends", "new"
         ]
         return {"title": title, "description": description, "tags": tags, "category": "27", "privacyStatus": "public"}
 
