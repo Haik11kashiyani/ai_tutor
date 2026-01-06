@@ -2,169 +2,203 @@
   "days": [
     {
       "day": 1,
-      "title": "Print Hello World",
+      "title": "The First Line of Code You MUST Write 🤯",
+      "hook": "Stop scrolling! If you want to code, you HAVE to start here.",
+      "cta": "Sub for Day 2!",
       "language": "python",
       "code": "print('Hello, World!')",
       "output": "Hello, World!",
-      "explanation": "Alright, let\u2019s kick things off! The print function shows text on your screen. Whatever you put inside the quotes gets displayed \u2014 just like saying hello to Python!",
-      "status": "uploaded",
-      "upload_date": "2025-12-29"
+      "explanation": "Alright, let’s kick things off! The print function shows text on your screen. Whatever you put inside the quotes gets displayed — just like saying hello to Python!"
     },
     {
       "day": 2,
-      "title": "Using Variables",
+      "title": "Variables: The DNA of Coding 🧬",
+      "hook": "Imagine a box that can hold ANYTHING. That's a variable.",
+      "cta": "Like if you get it!",
       "language": "python",
       "code": "name = 'Python'\nprint(name)",
       "output": "Python",
-      "explanation": "Variables are like boxes that hold information. Here, we stored the word \u2018Python\u2019 in a box called name, and print it out!",
-      "status": "uploaded",
-      "upload_date": "2025-12-30"
+      "explanation": "Variables are like boxes that hold information. Here, we stored the word ‘Python’ in a box called name, and print it out!"
     },
     {
       "day": 3,
-      "title": "Numbers and Math",
+      "title": "Math in Python is INSANE ⚡",
+      "hook": "Throw away your calculator. Python is faster.",
+      "cta": "Follow for more hacks!",
       "language": "python",
       "code": "x = 5\ny = 3\nprint(x + y)",
       "output": "8",
-      "explanation": "Python can do math too! Add, subtract, multiply, divide \u2014 just like your calculator but in code!",
-      "status": "uploaded",
-      "upload_date": "2025-12-31"
+      "explanation": "Python can do math too! Add, subtract, multiply, divide — just like your calculator but in code!"
     },
     {
       "day": 4,
-      "title": "User Input",
+      "title": "Make Your Code TALK Back 🗣️",
+      "hook": "Want your code to actually listen to you? Watch this.",
+      "cta": "Comment your name!",
       "language": "python",
       "code": "name = input('Enter your name: ')\nprint('Hello', name)",
       "output": "Hello Hardik",
-      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after \u2014 just like saying hello personally!"
+      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after — just like saying hello personally!"
     },
     {
       "day": 5,
-      "title": "Type Conversion",
+      "title": "The 'Age' Glitch in Python ⚠️",
+      "hook": "Warning! Your age is NOT a number in Python... yet.",
+      "cta": "Did you know this?",
       "language": "python",
-      "code": "age = int(input('Enter your age: '))\nprint(age + 1)",
+      "code": "age = int(input('Age? '))\nprint(age + 1)",
       "output": "26",
-      "explanation": "Inputs are always strings, even if you type numbers. Use int() to turn it into a real number for math!"
+      "explanation": "Inputs are text by default! If you don't use 'int()', Python thinks your age is a word. Convert it, or your math will break!"
     },
     {
       "day": 6,
-      "title": "Strings and Concatenation",
+      "title": "Merging Words Like Magic 🪄",
+      "hook": "You can literally glue words together in code.",
+      "cta": "Hit connect!",
       "language": "python",
       "code": "first = 'Py'\nsecond = 'thon'\nprint(first + second)",
       "output": "Python",
-      "explanation": "You can join two strings using a plus sign! It\u2019s like sticking two words together to make a new one."
+      "explanation": "You can join two strings using a plus sign! It’s like sticking two words together to make a new one."
     },
     {
       "day": 7,
-      "title": "String Formatting",
+      "title": "The Ultimate String Hack (f-strings) 🔥",
+      "hook": "Stop using plus signs! Do this instead.",
+      "cta": "Game changer right?",
       "language": "python",
-      "code": "name = 'Alex'\nage = 20\nprint(f'My name is {name} and I am {age}')",
-      "output": "My name is Alex and I am 20",
-      "explanation": "Using f-strings makes your sentences dynamic! Just wrap your variables in curly braces inside an f-string."
+      "code": "name = 'Alex'\nprint(f'Hi {name}')",
+      "output": "Hi Alex",
+      "explanation": "See that 'f'? It stands for Fast. Or Format. Doesn't matter. It lets you put variables RIGHT inside the text. Clean. Professional."
     },
     {
       "day": 8,
-      "title": "If Statements",
+      "title": "How Computers Make Decisions 🧠",
+      "hook": "Your code has a brain. Here is how it thinks.",
+      "cta": "Smart code!",
       "language": "python",
       "code": "age = 18\nif age >= 18:\n    print('You are an adult!')",
       "output": "You are an adult!",
-      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside \u2014 simple logic power!"
+      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside — simple logic power!"
     },
     {
       "day": 9,
-      "title": "Else Statement",
+      "title": "The 'Else' Universe 🌌",
+      "hook": "What happens if the answer is NO?",
+      "cta": "Logic flows!",
       "language": "python",
       "code": "age = 16\nif age >= 18:\n    print('Adult')\nelse:\n    print('Minor')",
       "output": "Minor",
-      "explanation": "If something isn\u2019t true, the else block runs instead. It\u2019s like saying: if not this, then that!"
+      "explanation": "If something isn’t true, the else block runs instead. It’s like saying: if not this, then that!"
     },
     {
       "day": 10,
-      "title": "Elif Condition",
+      "title": "Grading System in 3 Lines 📝",
+      "hook": "I built a teacher in 3 lines of code.",
+      "cta": "Grade yourself!",
       "language": "python",
       "code": "score = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelse:\n    print('C')",
       "output": "B",
-      "explanation": "Elif means \u2018else if\u2019. You can check multiple conditions one after another \u2014 perfect for grading systems!"
+      "explanation": "Elif means ‘else if’. You can check multiple conditions one after another — perfect for grading systems!"
     },
     {
       "day": 11,
-      "title": "Lists in Python",
+      "title": "Lists: The Super Variable 📦",
+      "hook": "Why have 10 variables when you can have 1?",
+      "cta": "Organize your life!",
       "language": "python",
-      "code": "fruits = ['apple', 'banana', 'cherry']\nprint(fruits[0])",
+      "code": "fruits = ['apple', 'nbna']\nprint(fruits[0])",
       "output": "apple",
-      "explanation": "Lists hold multiple items in one variable! Use indexes (starting from 0) to pick specific elements."
+      "explanation": "A List is a backpack. Throw anything in it. Pull it out by its number. Index 0 is the first item. Always."
     },
     {
       "day": 12,
-      "title": "Adding to a List",
+      "title": "Infinite List Glitch? ♾️",
+      "hook": "You can add items to lists forever.",
+      "cta": "Keep adding!",
       "language": "python",
-      "code": "fruits = ['apple', 'banana']\nfruits.append('cherry')\nprint(fruits)",
-      "output": "['apple', 'banana', 'cherry']",
-      "explanation": "Want to add more stuff? append() adds new elements to the end of your list."
+      "code": "items = []\nitems.append('Gold')\nprint(items)",
+      "output": "['Gold']",
+      "explanation": ".append() is your best friend. It pushes new data to the end of the line. Your list grows as your data grows."
     },
     {
       "day": 13,
-      "title": "For Loop",
+      "title": "The Loop of Infinity 🔄",
+      "hook": "Don't repeat yourself. Let Python do it.",
+      "cta": "Loop it!",
       "language": "python",
       "code": "for i in range(3):\n    print('Hello')",
       "output": "Hello\nHello\nHello",
-      "explanation": "Loops repeat code! The range(3) makes it run three times \u2014 like hitting replay on your code."
+      "explanation": "Loops repeat code! The range(3) makes it run three times — like hitting replay on your code."
     },
     {
       "day": 14,
-      "title": "Looping Through a List",
+      "title": "Scanning Data Like a Pro 🕵️",
+      "hook": "How does Instagram show all your photos?",
+      "cta": "Scroll on!",
       "language": "python",
       "code": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)",
       "output": "apple\nbanana\ncherry",
-      "explanation": "For loops can walk through each item in a list \u2014 super handy for working with collections!"
+      "explanation": "For loops can walk through each item in a list — super handy for working with collections!"
     },
     {
       "day": 15,
-      "title": "While Loop",
+      "title": "The Loop That NEVER Ends ⚠️",
+      "hook": "Warning: This loop could crash your computer.",
+      "cta": "Stay safe!",
       "language": "python",
-      "code": "count = 1\nwhile count <= 3:\n    print(count)\n    count += 1",
+      "code": "x = 1\nwhile x < 4:\n    print(x)\n    x += 1",
       "output": "1\n2\n3",
-      "explanation": "While loops run until the condition becomes false. It\u2019s like saying \u2014 keep going until you\u2019re done!"
+      "explanation": "While loops run until the condition becomes false. It’s like saying — keep going until you’re done!"
     },
     {
       "day": 16,
-      "title": "Functions in Python",
+      "title": "Defining Your Own Powers 🦸",
+      "hook": "You can invent your own Python commands.",
+      "cta": "Create functionality!",
       "language": "python",
       "code": "def greet():\n    print('Hello there!')\n\ngreet()",
       "output": "Hello there!",
-      "explanation": "Functions are reusable blocks of code! Define once, call anytime \u2014 just like shortcuts for your logic."
+      "explanation": "Functions are reusable blocks of code! Define once, call anytime — just like shortcuts for your logic."
     },
     {
       "day": 17,
-      "title": "Function with Parameters",
+      "title": "Functions Level 2: Arguments ⚔️",
+      "hook": "Make your functions smarter.",
+      "cta": "Pass the data!",
       "language": "python",
-      "code": "def greet(name):\n    print('Hello', name)\n\ngreet('Sam')",
-      "output": "Hello Sam",
-      "explanation": "Functions can take inputs too! Parameters make them more flexible and powerful."
+      "code": "def hi(name):\n    print('Hi', name)\nhi('Bro')",
+      "output": "Hi Bro",
+      "explanation": "We passed 'Bro' INTO the function. It's like feeding a machine. Input goes in, action comes out."
     },
     {
       "day": 18,
-      "title": "Return Values",
+      "title": "The Function Payback 💰",
+      "hook": "Functions can give you things back.",
+      "cta": "Return on investment!",
       "language": "python",
       "code": "def add(a, b):\n    return a + b\n\nprint(add(2, 3))",
       "output": "5",
-      "explanation": "Return sends data back from a function. Think of it like answering a question \u2014 you send the result back!"
+      "explanation": "Return sends data back from a function. Think of it like answering a question — you send the result back!"
     },
     {
       "day": 19,
-      "title": "Default Parameters",
+      "title": "Lazy Coding Hacks (Defaults) 😴",
+      "hook": "Too lazy to type? Python has your back.",
+      "cta": "Work smart!",
       "language": "python",
       "code": "def greet(name='User'):\n    print('Hello', name)\n\ngreet()",
       "output": "Hello User",
-      "explanation": "Default parameters kick in when no value is given \u2014 super useful for quick function calls."
+      "explanation": "Default parameters kick in when no value is given — super useful for quick function calls."
     },
     {
       "day": 20,
-      "title": "List Slicing",
+      "title": "Slicing Data Ninja Style 🗡️",
+      "hook": "Grab exactly what you want from any list.",
+      "cta": "Slice it up!",
       "language": "python",
       "code": "nums = [1,2,3,4,5]\nprint(nums[1:4])",
       "output": "[2, 3, 4]",
-      "explanation": "Slicing helps you grab parts of a list \u2014 from index 1 up to (but not including) 4."
+      "explanation": "Slicing helps you grab parts of a list — from index 1 up to (but not including) 4."
     },
     {
       "day": 21,
@@ -172,7 +206,7 @@
       "language": "python",
       "code": "colors = ('red', 'green', 'blue')\nprint(colors[0])",
       "output": "red",
-      "explanation": "Tuples are like lists but can\u2019t be changed. Perfect for data you want to keep safe."
+      "explanation": "Tuples are like lists but can’t be changed. Perfect for data you want to keep safe."
     },
     {
       "day": 22,
@@ -180,7 +214,7 @@
       "language": "python",
       "code": "person = {'name': 'Alex', 'age': 25}\nprint(person['name'])",
       "output": "Alex",
-      "explanation": "Dictionaries store data in key-value pairs \u2014 just like a contact book where each name has info!"
+      "explanation": "Dictionaries store data in key-value pairs — just like a contact book where each name has info!"
     },
     {
       "day": 23,
@@ -188,7 +222,7 @@
       "language": "python",
       "code": "person = {'name': 'Alex'}\nperson['age'] = 25\nprint(person)",
       "output": "{'name': 'Alex', 'age': 25}",
-      "explanation": "You can easily add new key-value pairs \u2014 dictionaries are super flexible!"
+      "explanation": "You can easily add new key-value pairs — dictionaries are super flexible!"
     },
     {
       "day": 24,
@@ -196,7 +230,7 @@
       "language": "python",
       "code": "fruits = ['apple', 'banana']\nif 'apple' in fruits:\n    print('Yes, apple is here!')",
       "output": "Yes, apple is here!",
-      "explanation": "You can check if an item exists using \u2018in\u2019. It\u2019s a quick way to search through lists."
+      "explanation": "You can check if an item exists using ‘in’. It’s a quick way to search through lists."
     },
     {
       "day": 25,
@@ -204,7 +238,7 @@
       "language": "python",
       "code": "for i in range(2):\n    for j in range(2):\n        print(i, j)",
       "output": "0 0\n0 1\n1 0\n1 1",
-      "explanation": "Loops inside loops \u2014 perfect for grids, patterns, or combinations!"
+      "explanation": "Loops inside loops — perfect for grids, patterns, or combinations!"
     },
     {
       "day": 26,
@@ -212,7 +246,7 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
       "output": "0\n1\n2",
-      "explanation": "Break stops the loop early \u2014 great when you\u2019ve found what you were looking for!"
+      "explanation": "Break stops the loop early — great when you’ve found what you were looking for!"
     },
     {
       "day": 27,
@@ -220,7 +254,7 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 2:\n        continue\n    print(i)",
       "output": "0\n1\n3\n4",
-      "explanation": "Continue skips the current loop step \u2014 like saying \u2018skip this one, move on!\u2019"
+      "explanation": "Continue skips the current loop step — like saying ‘skip this one, move on!’"
     },
     {
       "day": 28,
@@ -228,15 +262,17 @@
       "language": "python",
       "code": "age = 20\nif age > 18:\n    if age < 25:\n        print('Young Adult!')",
       "output": "Young Adult!",
-      "explanation": "You can put if statements inside each other \u2014 that\u2019s called nesting. Super handy for detailed checks!"
+      "explanation": "You can put if statements inside each other — that’s called nesting. Super handy for detailed checks!"
     },
     {
-      "day": 29,
-      "title": "Try and Except",
-      "language": "python",
-      "code": "try:\n    num = int('abc')\nexcept:\n    print('Error occurred!')",
-      "output": "Error occurred!",
-      "explanation": "Try and except keep your code safe from crashes. If something breaks, except handles it smoothly!"
+        "day": 29,
+        "title": "Bulletproof Code (Try/Except) 🛡️",
+        "hook": "Stop your code from crashing.",
+        "cta": "Error handled!",
+        "language": "python",
+        "code": "try:\n  print(1/0)\nexcept:\n  print('Saved')",
+        "output": "Saved",
+        "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely."
     },
     {
       "day": 30,
@@ -244,7 +280,7 @@
       "language": "python",
       "code": "name = input('Your name: ')\nprint(f'Welcome to Python, {name}!')",
       "output": "Welcome to Python, Hardik!",
-      "explanation": "Congrats! You\u2019ve learned the basics. This simple app greets the user \u2014 and shows how input, variables, and f-strings come together!"
+      "explanation": "Congrats! You’ve learned the basics. This simple app greets the user — and shows how input, variables, and f-strings come together!"
     }
   ]
 }
