@@ -412,7 +412,7 @@ class YouTubeAutomation:
         draw.text(pos, text, fill=color, font=font)
 
     def create_video_frame(self, scheme, day, title, language, code_lines, output_text, 
-                          code_progress, output_progress, show_output, t_val=0, total_duration=10, keywords=None):
+                          code_progress, output_progress, show_output, t_val=0, total_duration=10):
         
         frame = self.create_animated_bg(self.width, self.height, scheme['bg1'], scheme['bg2'], t_val)
         draw = ImageDraw.Draw(frame)
@@ -656,10 +656,7 @@ class YouTubeAutomation:
         print(f"Language: {language}")
         print(f"Output: {output_text if output_text else 'None'}")
         
-        # Generate Dynamic Keywords
-        print("🧠 Generating Syntax Keywords...")
-        keywords = self.generate_syntax_keywords(code, language)
-        print(f"   Keywords: {keywords[:5]}...")
+
         
         total_frames = int(duration * self.fps)
         code_frames = int(total_frames * 0.6)
@@ -687,16 +684,16 @@ class YouTubeAutomation:
                         current_line += 1
                         current_char = 0.0
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, 0, False, t_val=t_val, total_duration=duration, keywords=keywords)
+                    code_lines, output_text, code_progress, 0, False, t_val=t_val, total_duration=duration)
             elif output_text and frame_num < code_frames + output_frames:
                 code_progress = code_lines.copy()
                 output_progress = int(((frame_num - code_frames) / output_frames) * len(output_text))
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, output_progress, True, t_val=t_val, total_duration=duration, keywords=keywords)
+                    code_lines, output_text, code_progress, output_progress, True, t_val=t_val, total_duration=duration)
             else:
                 code_progress = code_lines.copy()
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, len(output_text) if output_text else 0, bool(output_text), t_val=t_val, total_duration=duration, keywords=keywords)
+                    code_lines, output_text, code_progress, len(output_text) if output_text else 0, bool(output_text), t_val=t_val, total_duration=duration)
             frames.append(frame)
             
             # Print progress every 30 frames
