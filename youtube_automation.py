@@ -241,9 +241,9 @@ class YouTubeAutomation:
             "text": text,
             "model_id": "eleven_multilingual_v2", # UPDATED to V2
             "voice_settings": {
-                "stability": 0.4,       # Lower = more emotion/variability
+                "stability": 0.3,       # Ultra-low for maximum variability/emotion
                 "similarity_boost": 0.8,
-                "style": 0.2,           # Exaggeration
+                "style": 0.5,           # High exaggeration
                 "use_speaker_boost": True
             }
         }
@@ -632,9 +632,20 @@ class YouTubeAutomation:
                 out_y += 40
                 
             # Cursor for output
+            # Cursor for output (Follows text)
             if output_progress < len(output_text):
                  if int(t_val * 4) % 2 == 0:
-                    code_draw.rectangle([50, out_y, 60, out_y+5], fill='#ffffff')
+                    # Calculate width of last visible line to position cursor
+                    last_line_width = 0
+                    if visible_out:
+                        try:
+                            last_line_width = code_draw.textbbox((0, 0), visible_out[-1], font=output_font)[2]
+                        except: pass
+                    
+                    cursor_x_out = 50 + last_line_width + 2
+                    cursor_y_out = out_y - 40 # out_y was incremented after loop, move back to last line
+                    
+                    code_draw.rectangle([cursor_x_out, cursor_y_out, cursor_x_out+10, cursor_y_out+35], fill='#ffffff')
 
         code_x = (self.width - code_card.width) // 2
         frame.paste(code_card, (code_x, 320), code_card)
