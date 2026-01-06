@@ -759,10 +759,11 @@ class YouTubeAutomation:
                 CONTENT SNIPPET: {day_data['code']}
                 
                 REQUIREMENTS:
-                1. TITLE: Must be clickbaity, under 100 chars. MUST include #shorts #viral. 
-                2. DESCRIPTION: High energy. Start with a hook. Include emojis. Mention "Day {day_data['day']}". 
-                   Explain the content simply. End with CTA.
-                3. TAGS: Comma-separated list of 10-15 high-ranking tags relevant to the TOPIC.
+                1. TITLE: EXTREME CLICKBAIT, under 100 chars. MUST include #shorts #viral. Use CAPS and Emojis (e.g. "STOP DOING THIS! 🛑").
+                2. DESCRIPTION: High energy. Start with a hook. Use bullet points for readability. Include MANY emojis. Mention "Day {day_data['day']}".
+                   Explain the content simply but dramatically. End with strong CTA.
+                3. TAGS: Comma-separated list of 15-20 high-ranking, viral tags (mix of broad and niche).
+                   Examples: #fyp #trending #coding #python #softwareengineer #tech #developer
                 
                 OUTPUT FORMAT (JSON):
                 {{
@@ -817,7 +818,12 @@ class YouTubeAutomation:
         
         Subscribe for Day {day_data['day']+1}! #coding #{language} #python #programming #tech"""
         
-        tags = [language, "coding", "shorts", "viral", "python", "learncoding", "programming", "developer"]
+        tags = [
+            language, "coding", "shorts", "viral", "python", "learncoding", 
+            "programming", "developer", "softwareengineer", "tech", "technology",
+            "codinglife", "fyp", "trending", "coder", "python3", "webdevelopment",
+            "dayinthelife", "career", "productivity", "hacks", "computerscience"
+        ]
         return {"title": title, "description": description, "tags": tags, "category": "27", "privacyStatus": "public"}
 
     def upload_to_youtube(self, video_path, metadata):
