@@ -2,8 +2,14 @@ name: Daily YouTube Shorts Automation
 
 on:
   schedule:
-    # Runs at 08:00 UTC every day
-    - cron: '0 8 * * *'
+    # Mon, Tue, Wed, Fri @ 2:00 PM EST (19:00 UTC)
+    - cron: '0 19 * * 1,2,3,5'
+    # Thursday @ 12:00 PM EST (17:00 UTC)
+    - cron: '0 17 * * 4'
+    # Saturday @ 10:00 AM EST (15:00 UTC)
+    - cron: '0 15 * * 6'
+    # Sunday @ 11:00 AM EST (16:00 UTC)
+    - cron: '0 16 * * 0'
   workflow_dispatch:  # Allows manual runs from the Actions tab
 
 jobs:
