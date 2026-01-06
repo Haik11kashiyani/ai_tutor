@@ -430,6 +430,27 @@ class YouTubeAutomation:
                 draw.rectangle([x, y, x+1, y+1], fill=grid_color + (30,))
         
         
+        
+        try:
+            if os.path.exists("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):
+                title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
+                code_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 40)
+                day_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 55)
+                output_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 36)
+                cta_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 50)
+            else:
+                title_font = ImageFont.load_default()
+                code_font = ImageFont.load_default()
+                day_font = ImageFont.load_default()
+                output_font = ImageFont.load_default()
+                cta_font = ImageFont.load_default()
+        except:
+            title_font = ImageFont.load_default()
+            code_font = ImageFont.load_default()
+            day_font = ImageFont.load_default()
+            output_font = ImageFont.load_default()
+            cta_font = ImageFont.load_default()
+
         # --- TITLE LOGIC (Dynamic Height & Emoji Stripping) ---
         import re
         # Strip emojis for video display (keep ASCII + basic punctuation)
