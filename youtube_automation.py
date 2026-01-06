@@ -9,6 +9,18 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from datetime import datetime
 
+import math
+
+import math
+
+try:
+    from pygments import lex
+    from pygments.lexers import get_lexer_by_name, guess_lexer
+    from pygments.token import Token
+    HAS_PYGMENTS = True
+except ImportError:
+    HAS_PYGMENTS = False
+
 # Google API imports
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
@@ -32,6 +44,21 @@ class YouTubeAutomation:
         self.yt_client_id = os.getenv('YOUTUBE_CLIENT_ID', '').strip()
         self.yt_client_secret = os.getenv('YOUTUBE_CLIENT_SECRET', '').strip()
         self.yt_refresh_token = os.getenv('YOUTUBE_REFRESH_TOKEN', '').strip()
+
+        # Google AI Key
+        self.google_ai_key = os.getenv('GOOGLE_AI_API_KEY', '').strip()
+        
+        # Initialize Gemini if key exists
+        if self.google_ai_key:
+            try:
+                import google.generativeai as genai
+                genai.configure(api_key=self.google_ai_key)
+                self.genai_model = genai.GenerativeModel('gemini-1.5-flash')
+                self.has_ai = True
+            except:
+                self.has_ai = False
+        else:
+            self.has_ai = False
         
         self.output_folder = Path("output")
         self.output_folder.mkdir(exist_ok=True)
@@ -39,15 +66,6 @@ class YouTubeAutomation:
         self.width = 1080
         self.height = 1920
         self.fps = 30
-        
-        # Modern color schemes
-        self.color_schemes = [
-            {"name": "matrix", "bg1": "#001a0f", "bg2": "#003d20", "accent": "#00ff41", "text": "#ffffff", "badge": "#00ff41"},
-            {"name": "cyber", "bg1": "#0a0e27", "bg2": "#1a1f4f", "accent": "#00d9ff", "text": "#ffffff", "badge": "#7b2ff7"},
-            {"name": "neon", "bg1": "#1a0033", "bg2": "#330066", "accent": "#ff00ff", "text": "#ffffff", "badge": "#ff0080"},
-            {"name": "sunset", "bg1": "#1a0a00", "bg2": "#4d1f00", "accent": "#ff6600", "text": "#ffffff", "badge": "#ff3300"},
-            {"name": "ice", "bg1": "#001a33", "bg2": "#003366", "accent": "#00ffff", "text": "#ffffff", "badge": "#0099ff"},
-        ]
         
         self.language_names = {
             "python": "Python",
@@ -77,29 +95,90 @@ class YouTubeAutomation:
                 return day
         return None
 
-    def generate_script(self, day_data):
-        title = day_data['title']
-        language = day_data.get('language', 'python')
-        language_name = self.language_names.get(language, language.capitalize())
-        explanation = day_data.get('explanation', '')
-        day = day_data['day']
+    def generate_dynamic_theme(self, topic):
+        """Generates a unique color scheme for the video using AI or Random Logic."""
+        if self.has_ai:
+            try:
+                prompt = f"""
+                Generate a dark, modern, high-contrast color palette for a video about "{topic}".
+                Return ONLY a JSON object with keys: "bg1", "bg2" (gradients), "accent" (bright), "text", "badge".
+                Use hex codes. Example: purity, cyber, matrix styles.
+                """
+                response = self.genai_model.generate_content(prompt)
+                text = response.text.replace('```json', '').replace('```', '').strip()
+                scheme = json.loads(text)
+                scheme['name'] = 'ai_generated'
+                return scheme
+            except Exception as e:
+                print(f"⚠️ AI Theme Gen Failed: {e}. Using Random.")
         
-        scripts = [
-            f"Hey coders! Welcome to Day {day}. Today we're learning {title} in {language_name}. "
-            f"This is super important, so pay attention! "
-            f"Here's the code. Let me break it down for you. "
-            f"{explanation} "
-            f"Pretty cool, right? Practice this and you'll master it! "
-            f"Like and follow for Day {day + 1}!",
+        # Fallback Random Logic
+        hues = [0, 30, 60, 120, 180, 240, 280, 330] # Random base hues
+        base_hue = random.choice(hues)
+        
+        def hsv_to_hex(h, s, v):
+            import colorsys
+            r, g, b = colorsys.hsv_to_rgb(h/360, s, v)
+            return '#{:02x}{:02x}{:02x}'.format(int(r*255), int(g*255), int(b*255))
             
-            f"What's up everyone! Day {day} is here! "
-            f"Today's topic: {title} in {language_name}. This is going to be awesome! "
-            f"Check out this code. "
-            f"{explanation} "
-            f"See how simple that is? Now you try it! "
-            f"Drop a like if you learned something new!",
-        ]
-        return random.choice(scripts)
+        return {
+            "name": "dynamic_random",
+            "bg1": hsv_to_hex(base_hue, 0.9, 0.1), # Very dark background
+            "bg2": hsv_to_hex(base_hue, 0.8, 0.2), # Slightly lighter gradient
+            "accent": hsv_to_hex((base_hue + 180) % 360, 1.0, 1.0), # Complementary accent
+            "text": "#ffffff",
+            "badge": hsv_to_hex((base_hue + 180) % 360, 0.8, 0.8)
+        }
+
+
+
+
+    def generate_script(self, day_data):
+        """Generates a viral spoken script based on the provided explanation."""
+        title = day_data['title']
+        explanation = day_data.get('explanation', '')
+        language = day_data.get('language', 'python')
+        day = day_data['day']
+        hook = day_data.get('hook', '')
+        cta = day_data.get('cta', '')
+
+        if self.has_ai:
+            try:
+                # Determine broader topic from data or default to General
+                category = day_data.get('category', 'Education')
+                
+                prompt = f"""
+                Write a 30-45 second spoken script for a YouTube Short.
+                
+                CONTEXT:
+                - Series: Day {day} of 30 Days of Learning.
+                - Topic: {title} ({language})
+                - The content/code and explanation are provided below.
+                
+                SOURCE MATERIAL:
+                "{explanation}"
+                
+                MANDATORY STRUCTURE:
+                1. HOOK: "{hook}" (Read this EXACTLY as written, with high energy)
+                2. BODY: Explain the concept simply using the source material.
+                3. OUTRO: "{cta}" (Read this EXACTLY)
+                
+                REQUIREMENTS:
+                1. Tone: Energetic, Fast-paced, Viral. 
+                2. Return ONLY the spoken text. No "Scene 1" labels.
+                """
+                response = self.genai_model.generate_content(prompt)
+                return response.text.strip()
+            except Exception as e:
+                print(f"⚠️ AI Script Gen Failed: {e}. Using Template.")
+
+        # Fallback Template using new viral fields
+        language_name = self.language_names.get(language, language.capitalize())
+        
+        script = f"{hook} Welcome to Day {day} of learning {language_name}. " \
+                 f"Today is all about {title}. Look at this code. {explanation} " \
+                 f"{cta} See you tomorrow!"
+        return script
 
     def check_elevenlabs_quota(self, api_key, index):
         """Check user subscription and quota status"""
@@ -188,29 +267,127 @@ class YouTubeAutomation:
         hex_color = hex_color.lstrip('#')
         return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-    def get_syntax_color(self, line, language):
-        language = language.lower()
-        if language == "python":
-            if any(kw in line for kw in ['print', 'def', 'class', 'if', 'else', 'for', 'while', 'import', 'return', 'True', 'False']):
-                return '#ff3e9d'
-            elif '"' in line or "'" in line:
-                return '#00ff88'
-            elif any(c.isdigit() for c in line):
-                return '#ffff00'
-        return '#ffffff'
+    def get_text_chunks(self, text, language):
+        """
+        Returns a list of (text_segment, hex_color) tuples for syntax highlighting.
+        Uses Pygments if available, otherwise falls back to simple logic.
+        """
+        if not text:
+            return []
+            
+        chunks = []
+        
+        if HAS_PYGMENTS:
+            try:
+                # Map Pygments Token types to Hex Colors
+                # Dracular/Monokai-ish style
+                STYLE_MAP = {
+                    Token.Keyword: '#ff79c6',       # Pink
+                    Token.Keyword.Declaration: '#8be9fd', # Cyan (def, class)
+                    Token.Keyword.Namespace: '#ff79c6',   # Pink (import)
+                    Token.Name.Function: '#50fa7b', # Green
+                    Token.Name.Class: '#50fa7b',    # Green
+                    Token.Name.Builtin: '#8be9fd',  # Cyan
+                    Token.String: '#f1fa8c',        # Yellow
+                    Token.Number: '#bd93f9',        # Purple
+                    Token.Operator: '#ff79c6',      # Pink
+                    Token.Comment: '#6272a4',       # Grey/Blue
+                    Token.Text: '#f8f8f2',          # White
+                    Token.Literal: '#bd93f9',
+                    Token.Punctuation: '#f8f8f2'
+                }
+                
+                try:
+                    lexer = get_lexer_by_name(language)
+                except:
+                    lexer = get_lexer_by_name("text")
+                    
+                tokens = lex(text, lexer)
+                
+                for token_type, value in tokens:
+                    # Find best color match (walk up the token hierarchy)
+                    color = '#f8f8f2' # Default white
+                    parent = token_type
+                    while parent:
+                        if parent in STYLE_MAP:
+                            color = STYLE_MAP[parent]
+                            break
+                        parent = parent.parent
+                    
+                    chunks.append((value, color))
+                return chunks
+                
+            except Exception as e:
+                print(f"Pygments Error: {e}")
+                # Fallthrough to fallback
+        
+        # --- FALLBACK (Old logic) ---
+        # Generic Syntax Highlighting for ANY language
+        keywords = [
+            'print', 'def', 'class', 'if', 'else', 'elif', 'for', 'while', 'import', 'return', 
+            'true', 'false', 'null', 'none', 'var', 'let', 'const', 'function', 'func', 
+            'public', 'private', 'protected', 'void', 'int', 'string', 'bool', 'float'
+        ]
+        
+        line_lower = text.lower()
+        color = '#ffffff'
+        
+        if text.strip().startswith('#') or text.strip().startswith('//'):
+            color = '#808080'
+        elif any(f"{kw}" in line_lower for kw in keywords):
+            color = '#ff3e9d'
+        elif '"' in text or "'" in text:
+            color = '#00ff88'
+        elif any(c.isdigit() for c in text):
+            color = '#ffff00'
+            
+        return [(text, color)]
 
-    def create_gradient_bg(self, width, height, color1, color2):
+    def get_color_shift(self, hex_color, t, speed=0.5):
+        """Shifts the hue of a color over time."""
+        import colorsys
+        r, g, b = self.hex_to_rgb(hex_color)
+        h, s, v = colorsys.rgb_to_hsv(r/255, g/255, b/255)
+        new_h = (h + t * speed) % 1.0
+        r, g, b = colorsys.hsv_to_rgb(new_h, s, v)
+        return '#{:02x}{:02x}{:02x}'.format(int(r*255), int(g*255), int(b*255))
+
+    def create_animated_bg(self, width, height, color1, color2, t):
+        """Creates a gradient using numpy for speed."""
+        c1 = self.get_color_shift(color1, t, 0.1)
+        c2 = self.get_color_shift(color2, t, 0.15)
+        
+        # Use simple gradient calculation with numpy if possible, or fallback to efficient line drawing
+        # For 30FPS rendering, we need speed. 
+        # Let's use a simpler approach: Pre-calculate the gradient line and tile it?
+        # No, let's just use the existing logic but with shifted colors and optimized drawing.
+        
         img = Image.new('RGB', (width, height))
         draw = ImageDraw.Draw(img)
-        r1, g1, b1 = self.hex_to_rgb(color1)
-        r2, g2, b2 = self.hex_to_rgb(color2)
-        for y in range(height):
-            ratio = y / height
-            r = int(r1 + (r2 - r1) * ratio)
-            g = int(g1 + (g2 - g1) * ratio)
-            b = int(b1 + (b2 - b1) * ratio)
-            draw.line([(0, y), (width, y)], fill=(r, g, b))
-        return img
+        
+        # Color shifting already makes it dynamic. 
+        # To make it faster, we can draw fewer lines (interpolated) or use a smaller image and resize.
+        # Resizing from a smaller gradient is much faster and looks smooth for gradients.
+        
+        small_h = 100 # Generate gradient at low res
+        r1, g1, b1 = self.hex_to_rgb(c1)
+        r2, g2, b2 = self.hex_to_rgb(c2)
+        
+        # Create array of colors
+        channels = []
+        for c_start, c_end in [(r1, r2), (g1, g2), (b1, b2)]:
+            arr = np.linspace(c_start, c_end, small_h)
+            channels.append(arr)
+            
+        # Stack and resize
+        gradient = np.dstack(channels).astype(np.uint8) # Shape (small_h, 1, 3)
+        # Repeat to fill width (only need 1 pixel width actually)
+        gradient = np.tile(gradient, (1, 1, 1)) # Keep it 1px wide for resize
+        
+        grad_img = Image.fromarray(gradient)
+        grad_img = grad_img.resize((width, height), resample=Image.Resampling.LANCZOS)
+        
+        return grad_img
 
     def create_glassmorphism_card(self, width, height, scheme):
         card = Image.new('RGBA', (width, height), (255, 255, 255, 0))
@@ -235,13 +412,20 @@ class YouTubeAutomation:
         draw.text(pos, text, fill=color, font=font)
 
     def create_video_frame(self, scheme, day, title, language, code_lines, output_text, 
-                          code_progress, output_progress, show_output):
-        frame = self.create_gradient_bg(self.width, self.height, scheme['bg1'], scheme['bg2'])
+                          code_progress, output_progress, show_output, t_val=0, total_duration=10, keywords=None):
+        
+        frame = self.create_animated_bg(self.width, self.height, scheme['bg1'], scheme['bg2'], t_val)
         draw = ImageDraw.Draw(frame)
+        
+        # Moving Grid
         grid_color = self.hex_to_rgb(scheme['accent'])
-        for x in range(0, self.width, 100):
-            for y in range(0, self.height, 100):
-                draw.rectangle([x, y, x+1, y+1], fill=grid_color + (20,))
+        grid_offset_y = int(t_val * 20) % 100
+        grid_offset_x = int(t_val * 10) % 100
+        
+        for x in range(0 - grid_offset_x, self.width, 100):
+            for y in range(0 - grid_offset_y, self.height, 100):
+                 # Use transparency for subtle grid
+                draw.rectangle([x, y, x+1, y+1], fill=grid_color + (30,))
         
         title_card = self.create_glassmorphism_card(self.width - 80, 180, scheme)
         
@@ -291,10 +475,17 @@ class YouTubeAutomation:
             y += 70
         frame.paste(title_card, (40, 100), title_card)
         
-        num_lines = len(code_lines)
-        card_height = 250 + num_lines * 60
-        if show_output and output_text:
-            card_height += 180
+        # --- SCROLLING LOGIC ---
+        MAX_LINES = 14
+        active_line_idx = len(code_progress) - 1
+        # Calculate scroll offset to keep active line within view
+        # We start scrolling when we go past MAX_LINES - 3
+        scroll_offset = max(0, active_line_idx - (MAX_LINES - 3)) 
+        
+        visible_lines = code_lines[scroll_offset : scroll_offset + MAX_LINES]
+        
+        # Fixed height for code card to ensure fit, large enough for code + output
+        card_height = 1200 
         
         code_card = self.create_glassmorphism_card(int(self.width * 0.92), card_height, scheme)
         code_draw = ImageDraw.Draw(code_card)
@@ -327,46 +518,104 @@ class YouTubeAutomation:
         text_w = bbox[2] - bbox[0]
         text_x = badge_x + (badge_w - text_w) // 2
         for offset in [(2,2), (-2,2), (2,-2), (-2,-2)]:
-            code_draw.text((text_x+offset[0], badge_y+18+offset[1]), day_text, fill=(255, 255, 255, 100), font=day_font)
+             code_draw.text((text_x+offset[0], badge_y+18+offset[1]), day_text, fill=(255, 255, 255, 100), font=day_font)
         code_draw.text((text_x, badge_y + 18), day_text, fill='#ffffff', font=day_font)
         
         y_offset = 150
-        for i, line in enumerate(code_lines):
-            if i < len(code_progress):
-                displayed_line = code_progress[i]
+        
+        # Draw Code Lines (Scrolled)
+        for i, line in enumerate(visible_lines):
+            # The line index in the original list is (i + scroll_offset)
+            original_idx = i + scroll_offset
+            
+            if original_idx < len(code_progress):
+                displayed_line = code_progress[original_idx]
             else:
-                break
+                break # Don't draw future lines
+                
+            line_num_str = f"{original_idx + 1}."
+            self.draw_text_with_glow(code_draw, (15, y_offset), line_num_str, code_font, '#888888', '#888888')
+            
             if not displayed_line.strip():
                 y_offset += 60
                 continue
-            color = self.get_syntax_color(displayed_line, language)
-            self.draw_text_with_glow(code_draw, (55, y_offset), displayed_line, code_font, color, color)
+            
+            # Syntax Highlighting with Chunks
+            chunks = self.get_text_chunks(displayed_line, language)
+            
+            x_current = 85
+            for chunk_text, chunk_color in chunks:
+                self.draw_text_with_glow(code_draw, (x_current, y_offset), chunk_text, code_font, chunk_color, chunk_color)
+                # Calculate width of this chunk to advance cursor
+                try:
+                    chunk_w = code_draw.textbbox((0,0), chunk_text, font=code_font)[2]
+                except: chunk_w = 0
+                x_current += chunk_w
+                
             y_offset += 60
         
-        if code_progress and len(code_progress[-1]) < len(code_lines[len(code_progress)-1]):
-            cursor_y = 150 + (len(code_progress) - 1) * 60
-            cursor_x = 55 + code_draw.textbbox((0, 0), code_progress[-1], font=code_font)[2]
-            code_draw.rectangle([cursor_x, cursor_y, cursor_x+3, cursor_y+45], fill='#ffffff')
-        
+        # Cursor logic
+        if code_progress:
+            last_visible_idx = len(code_progress) - 1 - scroll_offset
+            # Only draw cursor if it's within visible range
+            if 0 <= last_visible_idx < MAX_LINES:
+                current_line_content = code_progress[-1]
+                cursor_y = 150 + last_visible_idx * 60
+                
+                try:
+                    width_of_text = code_draw.textbbox((0, 0), current_line_content, font=code_font)[2]
+                except: width_of_text = 0
+                cursor_x = 85 + width_of_text
+                
+                # Blinking effect
+                if int(t_val * 2) % 2 == 0:
+                    code_draw.rectangle([cursor_x, cursor_y, cursor_x+5, cursor_y+45], fill='#ffffff')
+
+        # Output logic (Pinned to bottom of card)
         if show_output and output_text:
-            y_offset += 35
+            output_y_start = card_height - 250
+            
+            # Draw output container
             for offset in range(8, 0, -2):
                 alpha = 80 - offset * 10
                 code_draw.rounded_rectangle(
-                    [30-offset, y_offset-offset, code_card.width-30+offset, y_offset+145+offset],
+                    [30-offset, output_y_start-offset, code_card.width-30+offset, output_y_start+145+offset],
                     radius=18, fill=self.hex_to_rgb('#00ff88') + (alpha,)
                 )
             code_draw.rounded_rectangle(
-                [30, y_offset, code_card.width-30, y_offset+145],
+                [30, output_y_start, code_card.width-30, output_y_start+145],
                 radius=18, fill=(0, 50, 25, 220)
             )
-            code_draw.text((50, y_offset + 15), "▶ OUTPUT:", fill='#00ff88', font=output_font)
+            code_draw.text((50, output_y_start + 15), "▶ OUTPUT:", fill='#00ff88', font=output_font)
             displayed_output = output_text[:output_progress]
-            code_draw.text((50, y_offset + 65), displayed_output, fill='#ffffff', font=output_font)
+            
+            # Wrap output text
+            out_lines = []
+            curr_l = ""
+            for char in displayed_output:
+                if char == '\n':
+                    out_lines.append(curr_l)
+                    curr_l = ""
+                else:
+                    curr_l += char
+                    if len(curr_l) > 30: 
+                         out_lines.append(curr_l)
+                         curr_l = ""
+            if curr_l: out_lines.append(curr_l)
+            
+            # Show last 3 visible lines
+            visible_out = out_lines[-3:]
+            
+            out_y = output_y_start + 65
+            for ol in visible_out:
+                code_draw.text((50, out_y), ol, fill='#ffffff', font=output_font)
+                out_y += 40
+                
+            # Cursor for output
             if output_progress < len(output_text):
-                cursor_x = 50 + code_draw.textbbox((0, 0), displayed_output, font=output_font)[2]
-                code_draw.rectangle([cursor_x, y_offset+65, cursor_x+3, y_offset+105], fill='#ffffff')
-        
+                 if int(t_val * 4) % 2 == 0:
+                    code_draw.rectangle([50, out_y, 60, out_y+5], fill='#ffffff')
+
         code_x = (self.width - code_card.width) // 2
         frame.paste(code_card, (code_x, 320), code_card)
         
@@ -380,6 +629,12 @@ class YouTubeAutomation:
         bbox2 = cta_draw.textbbox((0, 0), sub_text, font=output_font)
         sub_x = ((self.width - 60) - (bbox2[2] - bbox2[0])) // 2
         cta_draw.text((sub_x, 125), sub_text, fill=self.hex_to_rgb(scheme['accent']), font=output_font)
+        
+        # Progress Bar at the top
+        progress_pct = min(1.0, t_val / total_duration)
+        bar_height = 15
+        draw.rectangle([0, 0, int(self.width * progress_pct), bar_height], fill=self.hex_to_rgb(scheme['accent']))
+        
         frame.paste(cta_card, (30, self.height - 270), cta_card)
         return np.array(frame)
 
@@ -401,6 +656,11 @@ class YouTubeAutomation:
         print(f"Language: {language}")
         print(f"Output: {output_text if output_text else 'None'}")
         
+        # Generate Dynamic Keywords
+        print("🧠 Generating Syntax Keywords...")
+        keywords = self.generate_syntax_keywords(code, language)
+        print(f"   Keywords: {keywords[:5]}...")
+        
         total_frames = int(duration * self.fps)
         code_frames = int(total_frames * 0.6)
         output_frames = int(total_frames * 0.3) if output_text else 0
@@ -412,6 +672,9 @@ class YouTubeAutomation:
         code_progress = []
         
         for frame_num in range(total_frames):
+            
+            t_val = frame_num / self.fps
+
             if frame_num < code_frames:
                 if current_line < len(code_lines):
                     line = code_lines[current_line]
@@ -424,17 +687,21 @@ class YouTubeAutomation:
                         current_line += 1
                         current_char = 0.0
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, 0, False)
+                    code_lines, output_text, code_progress, 0, False, t_val=t_val, total_duration=duration, keywords=keywords)
             elif output_text and frame_num < code_frames + output_frames:
                 code_progress = code_lines.copy()
                 output_progress = int(((frame_num - code_frames) / output_frames) * len(output_text))
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, output_progress, True)
+                    code_lines, output_text, code_progress, output_progress, True, t_val=t_val, total_duration=duration, keywords=keywords)
             else:
                 code_progress = code_lines.copy()
                 frame = self.create_video_frame(scheme, day_data['day'], day_data['title'], language,
-                    code_lines, output_text, code_progress, len(output_text) if output_text else 0, bool(output_text))
+                    code_lines, output_text, code_progress, len(output_text) if output_text else 0, bool(output_text), t_val=t_val, total_duration=duration, keywords=keywords)
             frames.append(frame)
+            
+            # Print progress every 30 frames
+            if frame_num % 30 == 0:
+                print(f"   Rendering Frame {frame_num}/{total_frames}", end='\r')
         
         def make_frame(t):
             frame_idx = int(t * self.fps)
@@ -445,24 +712,81 @@ class YouTubeAutomation:
         return video_clip
 
     def generate_youtube_metadata(self, day_data):
+        """Generates viral, dynamic metadata using Gemini AI or fallback templates."""
         language = day_data.get('language', 'python')
         language_name = self.language_names.get(language, language.capitalize())
-        title = f"Day {day_data['day']}: Learn {day_data['title']} in {language_name} 🚀 #shorts"
-        description = f"""🔥 Day {day_data['day']} of the 30-Day Coding Challenge! 
-
-Today we are learning about {day_data['title']} in {language_name}.
-👇 CODE SNIPPET BELOW 👇
-
-{day_data['code']}
-
-💡 Explanation:
-{day_data.get('explanation', 'Learning to code one step at a time!')}
-
-👉 Subscribe for Day {day_data['day'] + 1}! Created with AI.
-#coding #programming #{language} #learncoding #python #javascript #developer #tech #tutorial"""
-        tags = [language, f"{language} tutorial", "coding for beginners", "programming", "learn to code",
-                "developer", "tech", "daily coding", "software engineer", "shorts"]
-        return {"title": title[:100], "description": description, "tags": tags, "category": "27", "privacyStatus": "public"}
+        
+        if self.has_ai:
+            try:
+                prompt = f"""
+                You are a YouTube viral marketing expert. Generate metadata for a YouTube Short.
+                
+                TOPIC: Day {day_data['day']} - {day_data['title']}
+                LANGUAGE/CATEGORY: {language_name}
+                EXPLANATION: {day_data.get('explanation', '')}
+                CONTENT SNIPPET: {day_data['code']}
+                
+                REQUIREMENTS:
+                1. TITLE: Must be clickbaity, under 100 chars. MUST include #shorts #viral. 
+                2. DESCRIPTION: High energy. Start with a hook. Include emojis. Mention "Day {day_data['day']}". 
+                   Explain the content simply. End with CTA.
+                3. TAGS: Comma-separated list of 10-15 high-ranking tags relevant to the TOPIC.
+                
+                OUTPUT FORMAT (JSON):
+                {{
+                    "title": "string",
+                    "description": "string",
+                    "tags": ["tag1", "tag2"]
+                }}
+                """
+                
+                response = self.genai_model.generate_content(prompt)
+                cleaned_text = response.text.replace('```json', '').replace('```', '').strip()
+                ai_data = json.loads(cleaned_text)
+                
+                # Enforce mandatory tags
+                title = ai_data['title']
+                if "#shorts" not in title.lower(): title += " #shorts"
+                if "#viral" not in title.lower(): title += " #viral"
+                
+                return {
+                    "title": title[:100], 
+                    "description": ai_data['description'], 
+                    "tags": ai_data['tags'], 
+                    "category": "27", 
+                    "privacyStatus": "public"
+                }
+            except Exception as e:
+                print(f"⚠️ AI Metadata Generation Failed: {e}. Falling back.")
+        
+        # FALLBACK
+        year = datetime.now().year
+        titles = [
+            f"Secrets of {day_data['title']} Revealed! 🤯 ({year}) #shorts #viral",
+            f"Master {day_data['title']} in {language_name} 🚀 #shorts #viral",
+             f"Day {day_data['day']}: {day_data['title']} Explained 😱 #shorts #viral"
+        ]
+        title = random.choice(titles)
+        
+        # Use HOOK and CTA in description
+        hook = day_data.get('hook', day_data['title'])
+        cta = day_data.get('cta', 'Like & Subscribe!')
+        
+        description = f"""{hook}
+        
+        Day {day_data['day']} of 30 Days of Code!
+        Today: {day_data['title']} in {language_name}.
+        
+        {day_data['code']}
+        
+        {day_data.get('explanation', '')}
+        
+        {cta}
+        
+        Subscribe for Day {day_data['day']+1}! #coding #{language} #python #programming #tech"""
+        
+        tags = [language, "coding", "shorts", "viral", "python", "learncoding", "programming", "developer"]
+        return {"title": title, "description": description, "tags": tags, "category": "27", "privacyStatus": "public"}
 
     def upload_to_youtube(self, video_path, metadata):
         if not self.yt_refresh_token or not self.yt_client_id:
@@ -504,7 +828,11 @@ Today we are learning about {day_data['title']} in {language_name}.
         print(f"🔥 Processing Day {day_data['day']}: {day_data['title']}")
         print(f"{'='*50}")
         
-        scheme = random.choice(self.color_schemes)
+        # Dynamic Theme Generation
+        print("🎨 Generating Dynamic Theme...")
+        scheme = self.generate_dynamic_theme(day_data['title'])
+        print(f"   Theme: {scheme.get('name', 'custom')}")
+        
         script = self.generate_script(day_data)
         audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
         print("🎙️ Generating Audio...")
