@@ -3,7 +3,7 @@ name: Daily YouTube Shorts Automation
 on:
   schedule:
     # Runs at 08:00 UTC every day
-    - cron: '0 8 * * *
+    - cron: '0 8 * * *'
   workflow_dispatch:  # Allows manual runs from the Actions tab
 
 jobs:
