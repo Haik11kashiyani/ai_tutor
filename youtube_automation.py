@@ -56,10 +56,16 @@ class YouTubeAutomation:
                 genai.configure(api_key=self.google_ai_key)
                 self.genai_model = genai.GenerativeModel('gemini-1.5-flash')
                 self.has_ai = True
-                print("✅ AI Model Validated")
+                print("✅ AI Model Validated (gemini-1.5-flash)")
             except Exception as e:
-                print(f"⚠️ AI Initialization Failed: {e}")
-                self.has_ai = False
+                print(f"⚠️ Primary Model Failed, trying gemini-pro: {e}")
+                try:
+                    self.genai_model = genai.GenerativeModel('gemini-pro')
+                    self.has_ai = True
+                    print("✅ AI Model Validated (gemini-pro)")
+                except Exception as e2:
+                    print(f"⚠️ AI Initialization Failed: {e2}")
+                    self.has_ai = False
         else:
             print("❌ Gemini API Key NOT found in environment variables.")
             self.has_ai = False
