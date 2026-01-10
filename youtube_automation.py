@@ -54,18 +54,33 @@ class YouTubeAutomation:
             try:
                 import google.generativeai as genai
                 genai.configure(api_key=self.google_ai_key)
-                self.genai_model = genai.GenerativeModel('gemini-1.5-flash')
-                self.has_ai = True
-                print("✅ AI Model Validated (gemini-1.5-flash)")
-            except Exception as e:
-                print(f"⚠️ Primary Model Failed, trying gemini-pro: {e}")
+                
+                # Dynamic Model Discovery
+                print("🔍 Discovering available AI models...")
+                active_model = None
                 try:
-                    self.genai_model = genai.GenerativeModel('gemini-pro')
+                    for m in genai.list_models():
+                        if 'generateContent' in m.supported_generation_methods:
+                            print(f"   - Found: {m.name}")
+                            if 'gemini' in m.name.lower() and not active_model:
+                                active_model = m.name
+                    
+                    if active_model:
+                        print(f"✅ Selected Model: {active_model}")
+                        self.genai_model = genai.GenerativeModel(active_model)
+                    else:
+                        print("⚠️ No specific 'gemini' model found, defaulting to 'gemini-pro'")
+                        self.genai_model = genai.GenerativeModel('gemini-pro')
+                        
                     self.has_ai = True
-                    print("✅ AI Model Validated (gemini-pro)")
-                except Exception as e2:
-                    print(f"⚠️ AI Initialization Failed: {e2}")
-                    self.has_ai = False
+                except Exception as list_err:
+                     print(f"⚠️ Failed to list models (Auth/Region issue?): {list_err}")
+                     # Try fallback anyway
+                     self.genai_model = genai.GenerativeModel('gemini-pro')
+                     self.has_ai = True
+            except Exception as e:
+                print(f"⚠️ AI Initialization Failed: {e}")
+                self.has_ai = False
         else:
             print("❌ Gemini API Key NOT found in environment variables.")
             self.has_ai = False
