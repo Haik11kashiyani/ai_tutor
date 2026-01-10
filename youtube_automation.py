@@ -913,7 +913,8 @@ class YouTubeAutomation:
             self.save_content(data, json_path)
             print("✅ Status updated to 'uploaded'")
         else:
-            print("⚠️ Video generated but NOT uploaded (check credentials). Status not updated.")
+            print("❌ Upload failed. See logs for details.")
+            raise Exception("YouTube Upload Failed - Action Failed to Alert User")
 
 if __name__ == "__main__":
     automation = YouTubeAutomation()
