@@ -46,7 +46,7 @@ class YouTubeAutomation:
         self.yt_refresh_token = os.getenv('YOUTUBE_REFRESH_TOKEN', '').strip()
 
         # Google AI Key
-        self.google_ai_key = os.getenv('GOOGLE_AI_API_KEY', '').strip()
+        self.google_ai_key = os.getenv('GOOGLE_AI_API_KEY', '').strip() or os.getenv('GEMINI_API_KEY', '').strip()
         
         # Initialize Gemini if key exists
         if self.google_ai_key:
