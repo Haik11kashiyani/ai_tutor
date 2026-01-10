@@ -788,8 +788,16 @@ class YouTubeAutomation:
              }}
              """
              
-             # Direct Generation (No Fallback)
-             response = self.genai_model.generate_content(prompt)
+             # Direct Generation (with Auto-Fallback)
+             try:
+                 response = self.genai_model.generate_content(prompt)
+             except Exception as e:
+                 print(f"⚠️ Primary Model Generation Failed: {e}")
+                 print("🔄 Switching to Fallback Model: gemini-pro")
+                 import google.generativeai as genai
+                 self.genai_model = genai.GenerativeModel('gemini-pro')
+                 response = self.genai_model.generate_content(prompt)
+
              cleaned_text = response.text.replace('```json', '').replace('```', '').strip()
              ai_data = json.loads(cleaned_text)
              
