@@ -50,14 +50,18 @@ class YouTubeAutomation:
         
         # Initialize Gemini if key exists
         if self.google_ai_key:
+            print(f"🔑 Gemini API Key found (Length: {len(self.google_ai_key)})")
             try:
                 import google.generativeai as genai
                 genai.configure(api_key=self.google_ai_key)
                 self.genai_model = genai.GenerativeModel('gemini-1.5-flash')
                 self.has_ai = True
-            except:
+                print("✅ AI Model Validated")
+            except Exception as e:
+                print(f"⚠️ AI Initialization Failed: {e}")
                 self.has_ai = False
         else:
+            print("❌ Gemini API Key NOT found in environment variables.")
             self.has_ai = False
         
         self.output_folder = Path("output")
