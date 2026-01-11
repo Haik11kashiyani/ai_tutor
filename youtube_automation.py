@@ -805,6 +805,7 @@ class YouTubeAutomation:
              1. TITLE: EXTREME CLICKBAIT, under 100 chars. MUST include #shorts #viral. Use CAPS and Emojis (e.g. "STOP DOING THIS! 🛑").
              2. DESCRIPTION: High energy. Start with a hook. Use bullet points for readability. Include MANY emojis. Mention "Day {day_data['day']}".
                 Explain the content simply but dramatically. End with strong CTA.
+                **IMPORTANT: End the description with a block of 5-10 trending hashtags like #shorts #viral #coding #python #learntocode etc.**
              3. TAGS: Comma-separated list of 15-20 high-ranking tags.
                 - MUST include broad viral tags (e.g. #fyp, #trending).
                 - MUST include niche specific tags (e.g. #{language}, #coding).
@@ -832,14 +833,20 @@ class YouTubeAutomation:
              cleaned_text = response.text.replace('```json', '').replace('```', '').strip()
              ai_data = json.loads(cleaned_text)
              
-             # Enforce mandatory tags
+             # Enforce mandatory tags in TITLE
              title = ai_data['title']
              if "#shorts" not in title.lower(): title += " #shorts"
              if "#viral" not in title.lower(): title += " #viral"
              
+             # Enforce mandatory hashtags in DESCRIPTION
+             description = ai_data['description']
+             mandatory_hashtags = "\n\n#shorts #viral #coding #programming #learntocode #tech #developer"
+             if "#shorts" not in description.lower():
+                 description += mandatory_hashtags
+             
              return {
                  "title": title[:100], 
-                 "description": ai_data['description'], 
+                 "description": description, 
                  "tags": ai_data['tags'], 
                  "category": "27", 
                  "privacyStatus": "public"
