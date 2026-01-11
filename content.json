@@ -20,7 +20,9 @@
       "language": "python",
       "code": "name = 'Python'\nprint(name)",
       "output": "Python",
-      "explanation": "Variables are like boxes that hold information. Here, we stored the word \u2018Python\u2019 in a box called name, and print it out!"
+      "explanation": "Variables are like boxes that hold information. Here, we stored the word \u2018Python\u2019 in a box called name, and print it out!",
+      "status": "uploaded",
+      "upload_date": "2026-01-11"
     },
     {
       "day": 3,
