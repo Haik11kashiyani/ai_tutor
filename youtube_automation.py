@@ -231,66 +231,82 @@ class YouTubeAutomation:
             return 0
 
     def text_to_speech_elevenlabs(self, text, output_path):
-        # Rachel Voice
-        url = "https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM"
+        """
+        Generates speech using ElevenLabs API with smart key rotation.
+        Falls back to Google TTS (gTTS - free) if all ElevenLabs keys are exhausted.
+        """
+        # Josh Voice - Clear, confident male voice, great for tutorials
+        VOICE_ID = "TxGEqnHWrfWFTfGW9XjX"  # Josh
+        url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}"
         
-        if not self.elevenlabs_keys:
-            print("❌ No ElevenLabs API keys found in environment variables!")
-            return False
-
-        print("\n🔍 Checking ElevenLabs API Keys Quota...")
-        valid_key = None
-        
-        # Proactively check keys to find one with quota
-        for i, key in enumerate(self.elevenlabs_keys):
-            remaining = self.check_elevenlabs_quota(key, i)
-            if remaining > len(text):
-                print(f"   ✅ Key {i} selected (Has {remaining} chars, need ~{len(text)})")
-                valid_key = key
-                self.current_key_index = i
-                break
-            else:
-                print(f"   ⚠️ Key {i} skipped (Insufficient quota or invalid)")
-        
-        if not valid_key:
-            print("❌ All ElevenLabs keys are out of quota or invalid.")
-            return False
-
-        # Attempt generation with the valid key
-        masked_key = f"{valid_key[:4]}...{valid_key[-4:]}"
-        print(f"🔄 Generating Audio with Key {self.current_key_index}...")
-        
-        headers = {
-            "Accept": "audio/mpeg",
-            "Content-Type": "application/json",
-            "xi-api-key": valid_key
-        }
-        
-        data = {
-            "text": text,
-            "model_id": "eleven_multilingual_v2", # UPDATED to V2
-            "voice_settings": {
-                "stability": 0.15,      # EXTREME emotion (can be unstable but very expressive)
-                "similarity_boost": 0.8,
-                "style": 0.75,          # Very High exaggeration
-                "use_speaker_boost": True
-            }
-        }
-        
-        try:
-            response = requests.post(url, json=data, headers=headers)
+        # --- ElevenLabs Attempt ---
+        if self.elevenlabs_keys:
+            print("\n🔍 Checking ElevenLabs API Keys Quota...")
+            valid_key = None
             
-            if response.status_code == 200:
-                with open(output_path, 'wb') as f:
-                    f.write(response.content)
-                print(f"✓ Audio generated successfully")
-                return True
-            elif response.status_code == 401:
-                print(f"⚠️ Auth failed (401). Response: {response.text}")
+            for i, key in enumerate(self.elevenlabs_keys):
+                remaining = self.check_elevenlabs_quota(key, i)
+                # Need about 50 extra chars for safety margin
+                if remaining > len(text) + 50:
+                    print(f"   ✅ Key {i} selected (Has {remaining} chars, need ~{len(text)})")
+                    valid_key = key
+                    self.current_key_index = i
+                    break
+                else:
+                    print(f"   ⚠️ Key {i} skipped (Insufficient quota or invalid)")
+            
+            if valid_key:
+                print(f"🔄 Generating Audio with ElevenLabs Key {self.current_key_index}...")
+                
+                headers = {
+                    "Accept": "audio/mpeg",
+                    "Content-Type": "application/json",
+                    "xi-api-key": valid_key
+                }
+                
+                # Balanced voice settings for clarity + emotion
+                data = {
+                    "text": text,
+                    "model_id": "eleven_multilingual_v2",
+                    "voice_settings": {
+                        "stability": 0.40,           # Balanced: 0.3-0.5 is stable but expressive
+                        "similarity_boost": 0.75,
+                        "style": 0.50,               # Moderate exaggeration
+                        "use_speaker_boost": True
+                    }
+                }
+                
+                try:
+                    response = requests.post(url, json=data, headers=headers)
+                    
+                    if response.status_code == 200:
+                        with open(output_path, 'wb') as f:
+                            f.write(response.content)
+                        print(f"✓ ElevenLabs Audio generated successfully")
+                        return True
+                    elif response.status_code == 401:
+                        print(f"⚠️ Auth failed (401). Response: {response.text}")
+                    else:
+                        print(f"❌ ElevenLabs API Error: {response.status_code} - {response.text}")
+                except Exception as e:
+                    print(f"❌ ElevenLabs Exception: {e}")
             else:
-                print(f"❌ API Error: {response.status_code} - {response.text}")
+                print("⚠️ All ElevenLabs keys exhausted. Trying free fallback...")
+        else:
+            print("⚠️ No ElevenLabs API keys configured. Using free fallback...")
+        
+        # --- Free Fallback: Google TTS (gTTS) ---
+        print("🔄 Generating Audio with Google TTS (Free Fallback)...")
+        try:
+            from gtts import gTTS
+            tts = gTTS(text=text, lang='en', slow=False)
+            tts.save(output_path)
+            print(f"✓ gTTS Audio generated successfully (Free)")
+            return True
+        except ImportError:
+            print("❌ gTTS not installed. Install with: pip install gTTS")
         except Exception as e:
-            print(f"❌ Exception generating audio: {e}")
+            print(f"❌ gTTS Exception: {e}")
         
         return False
 
