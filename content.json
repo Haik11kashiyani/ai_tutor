@@ -44,7 +44,9 @@
       "language": "python",
       "code": "name = input('Enter your name: ')\nprint('Hello', name)",
       "output": "Hello Hardik",
-      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after \u2014 just like saying hello personally!"
+      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after \u2014 just like saying hello personally!",
+      "status": "uploaded",
+      "upload_date": "2026-01-12"
     },
     {
       "day": 5,
