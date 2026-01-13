@@ -56,7 +56,9 @@
       "language": "python",
       "code": "age = int(input('Age? '))\nprint(age + 1)",
       "output": "26",
-      "explanation": "Inputs are text by default! If you don't use 'int()', Python thinks your age is a word. Convert it, or your math will break!"
+      "explanation": "Inputs are text by default! If you don't use 'int()', Python thinks your age is a word. Convert it, or your math will break!",
+      "status": "uploaded",
+      "upload_date": "2026-01-13"
     },
     {
       "day": 6,
