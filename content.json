@@ -68,7 +68,9 @@
       "language": "python",
       "code": "first = 'Py'\nsecond = 'thon'\nprint(first + second)",
       "output": "Python",
-      "explanation": "You can join two strings using a plus sign! It\u2019s like sticking two words together to make a new one."
+      "explanation": "You can join two strings using a plus sign! It\u2019s like sticking two words together to make a new one.",
+      "status": "uploaded",
+      "upload_date": "2026-01-14"
     },
     {
       "day": 7,
