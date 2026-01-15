@@ -80,7 +80,9 @@
       "language": "python",
       "code": "name = 'Alex'\nprint(f'Hi {name}')",
       "output": "Hi Alex",
-      "explanation": "See that 'f'? It stands for Fast. Or Format. Doesn't matter. It lets you put variables RIGHT inside the text. Clean. Professional."
+      "explanation": "See that 'f'? It stands for Fast. Or Format. Doesn't matter. It lets you put variables RIGHT inside the text. Clean. Professional.",
+      "status": "uploaded",
+      "upload_date": "2026-01-15"
     },
     {
       "day": 8,
