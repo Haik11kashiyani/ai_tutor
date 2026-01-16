@@ -92,7 +92,9 @@
       "language": "python",
       "code": "age = 18\nif age >= 18:\n    print('You are an adult!')",
       "output": "You are an adult!",
-      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside \u2014 simple logic power!"
+      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside \u2014 simple logic power!",
+      "status": "uploaded",
+      "upload_date": "2026-01-16"
     },
     {
       "day": 9,
