@@ -104,7 +104,9 @@
       "language": "python",
       "code": "age = 16\nif age >= 18:\n    print('Adult')\nelse:\n    print('Minor')",
       "output": "Minor",
-      "explanation": "If something isn\u2019t true, the else block runs instead. It\u2019s like saying: if not this, then that!"
+      "explanation": "If something isn\u2019t true, the else block runs instead. It\u2019s like saying: if not this, then that!",
+      "status": "uploaded",
+      "upload_date": "2026-01-17"
     },
     {
       "day": 10,
