@@ -116,7 +116,9 @@
       "language": "python",
       "code": "score = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelse:\n    print('C')",
       "output": "B",
-      "explanation": "Elif means \u2018else if\u2019. You can check multiple conditions one after another \u2014 perfect for grading systems!"
+      "explanation": "Elif means \u2018else if\u2019. You can check multiple conditions one after another \u2014 perfect for grading systems!",
+      "status": "uploaded",
+      "upload_date": "2026-01-18"
     },
     {
       "day": 11,
