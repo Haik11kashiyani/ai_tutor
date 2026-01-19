@@ -128,7 +128,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'nbna']\nprint(fruits[0])",
       "output": "apple",
-      "explanation": "A List is a backpack. Throw anything in it. Pull it out by its number. Index 0 is the first item. Always."
+      "explanation": "A List is a backpack. Throw anything in it. Pull it out by its number. Index 0 is the first item. Always.",
+      "status": "uploaded",
+      "upload_date": "2026-01-19"
     },
     {
       "day": 12,
