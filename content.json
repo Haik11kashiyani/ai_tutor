@@ -140,7 +140,9 @@
       "language": "python",
       "code": "items = []\nitems.append('Gold')\nprint(items)",
       "output": "['Gold']",
-      "explanation": ".append() is your best friend. It pushes new data to the end of the line. Your list grows as your data grows."
+      "explanation": ".append() is your best friend. It pushes new data to the end of the line. Your list grows as your data grows.",
+      "status": "uploaded",
+      "upload_date": "2026-01-20"
     },
     {
       "day": 13,
