@@ -152,7 +152,9 @@
       "language": "python",
       "code": "for i in range(3):\n    print('Hello')",
       "output": "Hello\nHello\nHello",
-      "explanation": "Loops repeat code! The range(3) makes it run three times \u2014 like hitting replay on your code."
+      "explanation": "Loops repeat code! The range(3) makes it run three times \u2014 like hitting replay on your code.",
+      "status": "uploaded",
+      "upload_date": "2026-01-21"
     },
     {
       "day": 14,
