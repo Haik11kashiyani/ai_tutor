@@ -164,7 +164,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)",
       "output": "apple\nbanana\ncherry",
-      "explanation": "For loops can walk through each item in a list \u2014 super handy for working with collections!"
+      "explanation": "For loops can walk through each item in a list \u2014 super handy for working with collections!",
+      "status": "uploaded",
+      "upload_date": "2026-01-22"
     },
     {
       "day": 15,
