@@ -176,7 +176,9 @@
       "language": "python",
       "code": "x = 1\nwhile x < 4:\n    print(x)\n    x += 1",
       "output": "1\n2\n3",
-      "explanation": "While loops run until the condition becomes false. It\u2019s like saying \u2014 keep going until you\u2019re done!"
+      "explanation": "While loops run until the condition becomes false. It\u2019s like saying \u2014 keep going until you\u2019re done!",
+      "status": "uploaded",
+      "upload_date": "2026-01-24"
     },
     {
       "day": 16,
