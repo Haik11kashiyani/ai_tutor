@@ -188,7 +188,9 @@
       "language": "python",
       "code": "def greet():\n    print('Hello there!')\n\ngreet()",
       "output": "Hello there!",
-      "explanation": "Functions are reusable blocks of code! Define once, call anytime \u2014 just like shortcuts for your logic."
+      "explanation": "Functions are reusable blocks of code! Define once, call anytime \u2014 just like shortcuts for your logic.",
+      "status": "uploaded",
+      "upload_date": "2026-01-25"
     },
     {
       "day": 17,
