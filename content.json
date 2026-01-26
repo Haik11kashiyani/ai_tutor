@@ -200,7 +200,9 @@
       "language": "python",
       "code": "def hi(name):\n    print('Hi', name)\nhi('Bro')",
       "output": "Hi Bro",
-      "explanation": "We passed 'Bro' INTO the function. It's like feeding a machine. Input goes in, action comes out."
+      "explanation": "We passed 'Bro' INTO the function. It's like feeding a machine. Input goes in, action comes out.",
+      "status": "uploaded",
+      "upload_date": "2026-01-26"
     },
     {
       "day": 18,
