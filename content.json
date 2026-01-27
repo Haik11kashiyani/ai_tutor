@@ -212,7 +212,9 @@
       "language": "python",
       "code": "def add(a, b):\n    return a + b\n\nprint(add(2, 3))",
       "output": "5",
-      "explanation": "Return sends data back from a function. Think of it like answering a question \u2014 you send the result back!"
+      "explanation": "Return sends data back from a function. Think of it like answering a question \u2014 you send the result back!",
+      "status": "uploaded",
+      "upload_date": "2026-01-27"
     },
     {
       "day": 19,
