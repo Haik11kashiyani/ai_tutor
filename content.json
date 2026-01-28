@@ -224,7 +224,9 @@
       "language": "python",
       "code": "def greet(name='User'):\n    print('Hello', name)\n\ngreet()",
       "output": "Hello User",
-      "explanation": "Default parameters kick in when no value is given \u2014 super useful for quick function calls."
+      "explanation": "Default parameters kick in when no value is given \u2014 super useful for quick function calls.",
+      "status": "uploaded",
+      "upload_date": "2026-01-28"
     },
     {
       "day": 20,
