@@ -236,7 +236,9 @@
       "language": "python",
       "code": "nums = [1,2,3,4,5]\nprint(nums[1:4])",
       "output": "[2, 3, 4]",
-      "explanation": "Slicing helps you grab parts of a list \u2014 from index 1 up to (but not including) 4."
+      "explanation": "Slicing helps you grab parts of a list \u2014 from index 1 up to (but not including) 4.",
+      "status": "uploaded",
+      "upload_date": "2026-01-29"
     },
     {
       "day": 21,
