@@ -246,7 +246,9 @@
       "language": "python",
       "code": "colors = ('red', 'green', 'blue')\nprint(colors[0])",
       "output": "red",
-      "explanation": "Tuples are like lists but can\u2019t be changed. Perfect for data you want to keep safe."
+      "explanation": "Tuples are like lists but can\u2019t be changed. Perfect for data you want to keep safe.",
+      "status": "uploaded",
+      "upload_date": "2026-01-30"
     },
     {
       "day": 22,
