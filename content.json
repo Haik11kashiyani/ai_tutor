@@ -256,7 +256,9 @@
       "language": "python",
       "code": "person = {'name': 'Alex', 'age': 25}\nprint(person['name'])",
       "output": "Alex",
-      "explanation": "Dictionaries store data in key-value pairs \u2014 just like a contact book where each name has info!"
+      "explanation": "Dictionaries store data in key-value pairs \u2014 just like a contact book where each name has info!",
+      "status": "uploaded",
+      "upload_date": "2026-01-31"
     },
     {
       "day": 23,
