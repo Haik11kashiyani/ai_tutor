@@ -266,7 +266,9 @@
       "language": "python",
       "code": "person = {'name': 'Alex'}\nperson['age'] = 25\nprint(person)",
       "output": "{'name': 'Alex', 'age': 25}",
-      "explanation": "You can easily add new key-value pairs \u2014 dictionaries are super flexible!"
+      "explanation": "You can easily add new key-value pairs \u2014 dictionaries are super flexible!",
+      "status": "uploaded",
+      "upload_date": "2026-02-01"
     },
     {
       "day": 24,
