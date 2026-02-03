@@ -276,7 +276,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'banana']\nif 'apple' in fruits:\n    print('Yes, apple is here!')",
       "output": "Yes, apple is here!",
-      "explanation": "You can check if an item exists using \u2018in\u2019. It\u2019s a quick way to search through lists."
+      "explanation": "You can check if an item exists using \u2018in\u2019. It\u2019s a quick way to search through lists.",
+      "status": "uploaded",
+      "upload_date": "2026-02-03"
     },
     {
       "day": 25,
