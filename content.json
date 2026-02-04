@@ -286,7 +286,9 @@
       "language": "python",
       "code": "for i in range(2):\n    for j in range(2):\n        print(i, j)",
       "output": "0 0\n0 1\n1 0\n1 1",
-      "explanation": "Loops inside loops \u2014 perfect for grids, patterns, or combinations!"
+      "explanation": "Loops inside loops \u2014 perfect for grids, patterns, or combinations!",
+      "status": "uploaded",
+      "upload_date": "2026-02-04"
     },
     {
       "day": 26,
