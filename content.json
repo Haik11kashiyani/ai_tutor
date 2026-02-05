@@ -296,7 +296,9 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
       "output": "0\n1\n2",
-      "explanation": "Break stops the loop early \u2014 great when you\u2019ve found what you were looking for!"
+      "explanation": "Break stops the loop early \u2014 great when you\u2019ve found what you were looking for!",
+      "status": "uploaded",
+      "upload_date": "2026-02-05"
     },
     {
       "day": 27,
