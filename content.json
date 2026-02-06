@@ -306,7 +306,9 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 2:\n        continue\n    print(i)",
       "output": "0\n1\n3\n4",
-      "explanation": "Continue skips the current loop step \u2014 like saying \u2018skip this one, move on!\u2019"
+      "explanation": "Continue skips the current loop step \u2014 like saying \u2018skip this one, move on!\u2019",
+      "status": "uploaded",
+      "upload_date": "2026-02-06"
     },
     {
       "day": 28,
