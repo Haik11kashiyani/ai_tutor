@@ -20,7 +20,9 @@
       "language": "python",
       "code": "name = 'Python'\nprint(name)",
       "output": "Python",
-      "explanation": "Variables are like boxes that hold information. Here, we stored the word \u2018Python\u2019 in a box called name, and print it out!"
+      "explanation": "Variables are like boxes that hold information. Here, we stored the word \u2018Python\u2019 in a box called name, and print it out!",
+      "status": "uploaded",
+      "upload_date": "2026-01-11"
     },
     {
       "day": 3,
@@ -30,7 +32,9 @@
       "language": "python",
       "code": "x = 5\ny = 3\nprint(x + y)",
       "output": "8",
-      "explanation": "Python can do math too! Add, subtract, multiply, divide \u2014 just like your calculator but in code!"
+      "explanation": "Python can do math too! Add, subtract, multiply, divide \u2014 just like your calculator but in code!",
+      "status": "uploaded",
+      "upload_date": "2026-01-11"
     },
     {
       "day": 4,
@@ -40,7 +44,9 @@
       "language": "python",
       "code": "name = input('Enter your name: ')\nprint('Hello', name)",
       "output": "Hello Hardik",
-      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after \u2014 just like saying hello personally!"
+      "explanation": "Want to talk to the user? The input function lets them type something, and you can use it right after \u2014 just like saying hello personally!",
+      "status": "uploaded",
+      "upload_date": "2026-01-12"
     },
     {
       "day": 5,
@@ -50,7 +56,9 @@
       "language": "python",
       "code": "age = int(input('Age? '))\nprint(age + 1)",
       "output": "26",
-      "explanation": "Inputs are text by default! If you don't use 'int()', Python thinks your age is a word. Convert it, or your math will break!"
+      "explanation": "Inputs are text by default! If you don't use 'int()', Python thinks your age is a word. Convert it, or your math will break!",
+      "status": "uploaded",
+      "upload_date": "2026-01-13"
     },
     {
       "day": 6,
@@ -60,7 +68,9 @@
       "language": "python",
       "code": "first = 'Py'\nsecond = 'thon'\nprint(first + second)",
       "output": "Python",
-      "explanation": "You can join two strings using a plus sign! It\u2019s like sticking two words together to make a new one."
+      "explanation": "You can join two strings using a plus sign! It\u2019s like sticking two words together to make a new one.",
+      "status": "uploaded",
+      "upload_date": "2026-01-14"
     },
     {
       "day": 7,
@@ -70,7 +80,9 @@
       "language": "python",
       "code": "name = 'Alex'\nprint(f'Hi {name}')",
       "output": "Hi Alex",
-      "explanation": "See that 'f'? It stands for Fast. Or Format. Doesn't matter. It lets you put variables RIGHT inside the text. Clean. Professional."
+      "explanation": "See that 'f'? It stands for Fast. Or Format. Doesn't matter. It lets you put variables RIGHT inside the text. Clean. Professional.",
+      "status": "uploaded",
+      "upload_date": "2026-01-15"
     },
     {
       "day": 8,
@@ -80,7 +92,9 @@
       "language": "python",
       "code": "age = 18\nif age >= 18:\n    print('You are an adult!')",
       "output": "You are an adult!",
-      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside \u2014 simple logic power!"
+      "explanation": "If statements let you make decisions. If the condition is true, Python runs the code inside \u2014 simple logic power!",
+      "status": "uploaded",
+      "upload_date": "2026-01-16"
     },
     {
       "day": 9,
@@ -90,7 +104,9 @@
       "language": "python",
       "code": "age = 16\nif age >= 18:\n    print('Adult')\nelse:\n    print('Minor')",
       "output": "Minor",
-      "explanation": "If something isn\u2019t true, the else block runs instead. It\u2019s like saying: if not this, then that!"
+      "explanation": "If something isn\u2019t true, the else block runs instead. It\u2019s like saying: if not this, then that!",
+      "status": "uploaded",
+      "upload_date": "2026-01-17"
     },
     {
       "day": 10,
@@ -100,7 +116,9 @@
       "language": "python",
       "code": "score = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelse:\n    print('C')",
       "output": "B",
-      "explanation": "Elif means \u2018else if\u2019. You can check multiple conditions one after another \u2014 perfect for grading systems!"
+      "explanation": "Elif means \u2018else if\u2019. You can check multiple conditions one after another \u2014 perfect for grading systems!",
+      "status": "uploaded",
+      "upload_date": "2026-01-18"
     },
     {
       "day": 11,
@@ -110,7 +128,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'nbna']\nprint(fruits[0])",
       "output": "apple",
-      "explanation": "A List is a backpack. Throw anything in it. Pull it out by its number. Index 0 is the first item. Always."
+      "explanation": "A List is a backpack. Throw anything in it. Pull it out by its number. Index 0 is the first item. Always.",
+      "status": "uploaded",
+      "upload_date": "2026-01-19"
     },
     {
       "day": 12,
@@ -120,7 +140,9 @@
       "language": "python",
       "code": "items = []\nitems.append('Gold')\nprint(items)",
       "output": "['Gold']",
-      "explanation": ".append() is your best friend. It pushes new data to the end of the line. Your list grows as your data grows."
+      "explanation": ".append() is your best friend. It pushes new data to the end of the line. Your list grows as your data grows.",
+      "status": "uploaded",
+      "upload_date": "2026-01-20"
     },
     {
       "day": 13,
@@ -130,7 +152,9 @@
       "language": "python",
       "code": "for i in range(3):\n    print('Hello')",
       "output": "Hello\nHello\nHello",
-      "explanation": "Loops repeat code! The range(3) makes it run three times \u2014 like hitting replay on your code."
+      "explanation": "Loops repeat code! The range(3) makes it run three times \u2014 like hitting replay on your code.",
+      "status": "uploaded",
+      "upload_date": "2026-01-21"
     },
     {
       "day": 14,
@@ -140,7 +164,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)",
       "output": "apple\nbanana\ncherry",
-      "explanation": "For loops can walk through each item in a list \u2014 super handy for working with collections!"
+      "explanation": "For loops can walk through each item in a list \u2014 super handy for working with collections!",
+      "status": "uploaded",
+      "upload_date": "2026-01-22"
     },
     {
       "day": 15,
@@ -150,7 +176,9 @@
       "language": "python",
       "code": "x = 1\nwhile x < 4:\n    print(x)\n    x += 1",
       "output": "1\n2\n3",
-      "explanation": "While loops run until the condition becomes false. It\u2019s like saying \u2014 keep going until you\u2019re done!"
+      "explanation": "While loops run until the condition becomes false. It\u2019s like saying \u2014 keep going until you\u2019re done!",
+      "status": "uploaded",
+      "upload_date": "2026-01-24"
     },
     {
       "day": 16,
@@ -160,7 +188,9 @@
       "language": "python",
       "code": "def greet():\n    print('Hello there!')\n\ngreet()",
       "output": "Hello there!",
-      "explanation": "Functions are reusable blocks of code! Define once, call anytime \u2014 just like shortcuts for your logic."
+      "explanation": "Functions are reusable blocks of code! Define once, call anytime \u2014 just like shortcuts for your logic.",
+      "status": "uploaded",
+      "upload_date": "2026-01-25"
     },
     {
       "day": 17,
@@ -170,7 +200,9 @@
       "language": "python",
       "code": "def hi(name):\n    print('Hi', name)\nhi('Bro')",
       "output": "Hi Bro",
-      "explanation": "We passed 'Bro' INTO the function. It's like feeding a machine. Input goes in, action comes out."
+      "explanation": "We passed 'Bro' INTO the function. It's like feeding a machine. Input goes in, action comes out.",
+      "status": "uploaded",
+      "upload_date": "2026-01-26"
     },
     {
       "day": 18,
@@ -180,7 +212,9 @@
       "language": "python",
       "code": "def add(a, b):\n    return a + b\n\nprint(add(2, 3))",
       "output": "5",
-      "explanation": "Return sends data back from a function. Think of it like answering a question \u2014 you send the result back!"
+      "explanation": "Return sends data back from a function. Think of it like answering a question \u2014 you send the result back!",
+      "status": "uploaded",
+      "upload_date": "2026-01-27"
     },
     {
       "day": 19,
@@ -190,7 +224,9 @@
       "language": "python",
       "code": "def greet(name='User'):\n    print('Hello', name)\n\ngreet()",
       "output": "Hello User",
-      "explanation": "Default parameters kick in when no value is given \u2014 super useful for quick function calls."
+      "explanation": "Default parameters kick in when no value is given \u2014 super useful for quick function calls.",
+      "status": "uploaded",
+      "upload_date": "2026-01-28"
     },
     {
       "day": 20,
@@ -200,7 +236,9 @@
       "language": "python",
       "code": "nums = [1,2,3,4,5]\nprint(nums[1:4])",
       "output": "[2, 3, 4]",
-      "explanation": "Slicing helps you grab parts of a list \u2014 from index 1 up to (but not including) 4."
+      "explanation": "Slicing helps you grab parts of a list \u2014 from index 1 up to (but not including) 4.",
+      "status": "uploaded",
+      "upload_date": "2026-01-29"
     },
     {
       "day": 21,
@@ -208,7 +246,9 @@
       "language": "python",
       "code": "colors = ('red', 'green', 'blue')\nprint(colors[0])",
       "output": "red",
-      "explanation": "Tuples are like lists but can\u2019t be changed. Perfect for data you want to keep safe."
+      "explanation": "Tuples are like lists but can\u2019t be changed. Perfect for data you want to keep safe.",
+      "status": "uploaded",
+      "upload_date": "2026-01-30"
     },
     {
       "day": 22,
@@ -216,7 +256,9 @@
       "language": "python",
       "code": "person = {'name': 'Alex', 'age': 25}\nprint(person['name'])",
       "output": "Alex",
-      "explanation": "Dictionaries store data in key-value pairs \u2014 just like a contact book where each name has info!"
+      "explanation": "Dictionaries store data in key-value pairs \u2014 just like a contact book where each name has info!",
+      "status": "uploaded",
+      "upload_date": "2026-01-31"
     },
     {
       "day": 23,
@@ -224,7 +266,9 @@
       "language": "python",
       "code": "person = {'name': 'Alex'}\nperson['age'] = 25\nprint(person)",
       "output": "{'name': 'Alex', 'age': 25}",
-      "explanation": "You can easily add new key-value pairs \u2014 dictionaries are super flexible!"
+      "explanation": "You can easily add new key-value pairs \u2014 dictionaries are super flexible!",
+      "status": "uploaded",
+      "upload_date": "2026-02-01"
     },
     {
       "day": 24,
@@ -232,7 +276,9 @@
       "language": "python",
       "code": "fruits = ['apple', 'banana']\nif 'apple' in fruits:\n    print('Yes, apple is here!')",
       "output": "Yes, apple is here!",
-      "explanation": "You can check if an item exists using \u2018in\u2019. It\u2019s a quick way to search through lists."
+      "explanation": "You can check if an item exists using \u2018in\u2019. It\u2019s a quick way to search through lists.",
+      "status": "uploaded",
+      "upload_date": "2026-02-03"
     },
     {
       "day": 25,
@@ -240,7 +286,9 @@
       "language": "python",
       "code": "for i in range(2):\n    for j in range(2):\n        print(i, j)",
       "output": "0 0\n0 1\n1 0\n1 1",
-      "explanation": "Loops inside loops \u2014 perfect for grids, patterns, or combinations!"
+      "explanation": "Loops inside loops \u2014 perfect for grids, patterns, or combinations!",
+      "status": "uploaded",
+      "upload_date": "2026-02-04"
     },
     {
       "day": 26,
@@ -248,7 +296,9 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
       "output": "0\n1\n2",
-      "explanation": "Break stops the loop early \u2014 great when you\u2019ve found what you were looking for!"
+      "explanation": "Break stops the loop early \u2014 great when you\u2019ve found what you were looking for!",
+      "status": "uploaded",
+      "upload_date": "2026-02-05"
     },
     {
       "day": 27,
@@ -256,7 +306,9 @@
       "language": "python",
       "code": "for i in range(5):\n    if i == 2:\n        continue\n    print(i)",
       "output": "0\n1\n3\n4",
-      "explanation": "Continue skips the current loop step \u2014 like saying \u2018skip this one, move on!\u2019"
+      "explanation": "Continue skips the current loop step \u2014 like saying \u2018skip this one, move on!\u2019",
+      "status": "uploaded",
+      "upload_date": "2026-02-06"
     },
     {
       "day": 28,
