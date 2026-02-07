@@ -56,25 +56,56 @@ class YouTubeAutomation:
                 genai.configure(api_key=self.google_ai_key)
                 
                 # Dynamic Model Discovery
-                print("🔍 Discovering available AI models...")
+                print("🔍 Discovering available AI models...", flush=True)
                 active_model = None
+                
+                # Priority list of models to check for
+                PREFERRED_MODELS = [
+                    "models/gemini-2.5-flash",
+                    "models/gemini-2.5-pro",
+                    "models/gemini-2.0-flash",
+                    "models/gemini-1.5-flash",
+                    "models/gemini-1.5-pro",
+                    "models/gemini-pro"
+                ]
+                
                 try:
+                    found_models = []
+                    # List models but stop if we find a high-priority one, or limit 
                     for m in genai.list_models():
                         if 'generateContent' in m.supported_generation_methods:
-                            print(f"   - Found: {m.name}")
-                            if 'gemini' in m.name.lower() and not active_model:
+                            print(f"   - Found: {m.name}", flush=True)
+                            found_models.append(m.name)
+                            
+                            # If we found our top preference, stop searching (optimization)
+                            if m.name == PREFERRED_MODELS[0]:
                                 active_model = m.name
+                                break
                     
+                    # Select the best available model from our preferences
+                    if not active_model:
+                        for pref in PREFERRED_MODELS:
+                            if pref in found_models:
+                                active_model = pref
+                                break
+                    
+                    # Fallback to the first 'gemini' model found if none of the preferences match
+                    if not active_model:
+                        for m_name in found_models:
+                            if 'gemini' in m_name.lower():
+                                active_model = m_name
+                                break
+
                     if active_model:
-                        print(f"✅ Selected Model: {active_model}")
+                        print(f"✅ Selected Model: {active_model}", flush=True)
                         self.genai_model = genai.GenerativeModel(active_model)
                     else:
-                        print("⚠️ No specific 'gemini' model found, defaulting to 'gemini-pro'")
+                        print("⚠️ No specific 'gemini' model found, defaulting to 'gemini-pro'", flush=True)
                         self.genai_model = genai.GenerativeModel('gemini-pro')
                         
                     self.has_ai = True
                 except Exception as list_err:
-                     print(f"⚠️ Failed to list models (Auth/Region issue?): {list_err}")
+                     print(f"⚠️ Failed to list models (Auth/Region issue?): {list_err}", flush=True)
                      # Try fallback anyway
                      self.genai_model = genai.GenerativeModel('gemini-pro')
                      self.has_ai = True
