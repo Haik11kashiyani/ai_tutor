@@ -316,7 +316,9 @@
       "language": "python",
       "code": "age = 20\nif age > 18:\n    if age < 25:\n        print('Young Adult!')",
       "output": "Young Adult!",
-      "explanation": "You can put if statements inside each other \u2014 that\u2019s called nesting. Super handy for detailed checks!"
+      "explanation": "You can put if statements inside each other \u2014 that\u2019s called nesting. Super handy for detailed checks!",
+      "status": "pending",
+      "upload_date": "2026-02-08"
     },
     {
       "day": 29,
@@ -326,7 +328,9 @@
       "language": "python",
       "code": "try:\n  print(1/0)\nexcept:\n  print('Saved')",
       "output": "Saved",
-      "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely."
+      "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely.",
+      "status": "pending",
+      "upload_date": "2026-02-09"
     },
     {
       "day": 30,
@@ -334,7 +338,19 @@
       "language": "python",
       "code": "name = input('Your name: ')\nprint(f'Welcome to Python, {name}!')",
       "output": "Welcome to Python, Hardik!",
-      "explanation": "Congrats! You\u2019ve learned the basics. This simple app greets the user \u2014 and shows how input, variables, and f-strings come together!"
+      "explanation": "Congrats! You\u2019ve learned the basics. This simple app greets the user \u2014 and shows how input, variables, and f-strings come together!",
+      "status": "pending",
+      "upload_date": "2026-02-10"
+    },
+    {
+      "day": 31,
+      "title": "INSERT TITLE HERE",
+      "language": "python",
+      "code": "INSERT CODE HERE",
+      "output": "INSERT OUTPUT HERE",
+      "explanation": "INSERT EXPLANATION HERE",
+      "status": "pending",
+      "upload_date": "2026-02-11"
     }
   ]
 }
