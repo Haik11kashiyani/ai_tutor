@@ -865,20 +865,29 @@ class YouTubeAutomation:
              ai_data = json.loads(cleaned_text)
              
              # Enforce mandatory tags in TITLE
-             title = ai_data['title']
+             title = ai_data.get('title', '')
              if "#shorts" not in title.lower(): title += " #shorts"
              if "#viral" not in title.lower(): title += " #viral"
              
+             # Sanitize Title
+             title = title.replace("<", "").replace(">", "")
+             
              # Enforce mandatory hashtags in DESCRIPTION
-             description = ai_data['description']
+             description = ai_data.get('description', '')
              mandatory_hashtags = "\n\n#shorts #viral #coding #programming #learntocode #tech #developer"
              if "#shorts" not in description.lower():
                  description += mandatory_hashtags
+                 
+             # Sanitize Description
+             description = description.replace("<", "").replace(">", "")
+             
+             print(f"   Generated Title: {title}")
+             print(f"   Generated Description Length: {len(description)}")
              
              return {
                  "title": title[:100], 
-                 "description": description, 
-                 "tags": ai_data['tags'], 
+                 "description": description[:5000],  # Ensure within limit
+                 "tags": ai_data.get('tags', []), 
                  "category": "27", 
                  "privacyStatus": "public"
              }
