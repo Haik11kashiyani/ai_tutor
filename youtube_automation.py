@@ -630,6 +630,17 @@ class YouTubeAutomation:
                 break # Don't draw future lines
                 
             line_num_str = f"{original_idx + 1}."
+            
+            # --- DEBUG MODE: HIGHLIGHT ACTIVE LINE ---
+            # If this is the active line being typed (last line in progress), highlight it
+            if original_idx == len(code_progress) - 1 and len(code_progress) <= len(code_lines):
+                 # Draw semi-transparent rectangle behind the line
+                 highlight_color = self.hex_to_rgb(scheme['accent'])
+                 # Calculate width based on code card width (approx)
+                 highlight_w = code_card.width - 20
+                 # Draw with low alpha for subtle highlight
+                 code_draw.rectangle([10, y_offset, 10 + highlight_w, y_offset + 50], fill=highlight_color + (50,))
+
             self.draw_text_with_glow(code_draw, (15, y_offset), line_num_str, code_font, '#888888', '#888888')
             
             if not displayed_line.strip():
@@ -669,23 +680,57 @@ class YouTubeAutomation:
 
         # Output logic (Pinned to bottom of card)
         if show_output and output_text:
-            output_y_start = card_height - 250
+            # Wrap output text to calculate dynamic height
+            out_lines = []
+            curr_l = ""
+            displayed_output = output_text[:output_progress]
+            
+            # Pre-calculate ALL lines to determine full height needed
+            full_out_lines = []
+            temp_l = ""
+            for char in output_text: # Calculate based on FULL text to size box correctly from start
+                if char == '\n':
+                    full_out_lines.append(temp_l)
+                    temp_l = ""
+                else:
+                    temp_l += char
+                    # Approx char limit per line
+                    if len(temp_l) > 30: 
+                         full_out_lines.append(temp_l)
+                         temp_l = ""
+            if temp_l: full_out_lines.append(temp_l)
+            
+            # Dynamic Height Calculation
+            # Base height 145 (approx 3 lines) -> each extra line adds ~40px
+            # Cap at some reasonable max to avoid covering too much code (e.g., 6 lines)
+            num_lines = len(full_out_lines)
+            
+            # Min 3 lines, Max 8 lines
+            display_lines_count = max(3, min(8, num_lines))
+            
+            line_height = 40
+            padding_top = 15
+            padding_bottom = 25 # Space for cursor/padding
+            header_height = 40
+            
+            output_box_height = header_height + (display_lines_count * line_height) + padding_bottom
+            
+            output_y_start = card_height - output_box_height - 30 # 30px margin from bottom
             
             # Draw output container
             for offset in range(8, 0, -2):
                 alpha = 80 - offset * 10
                 code_draw.rounded_rectangle(
-                    [30-offset, output_y_start-offset, code_card.width-30+offset, output_y_start+145+offset],
+                    [30-offset, output_y_start-offset, code_card.width-30+offset, output_y_start+output_box_height+offset],
                     radius=18, fill=self.hex_to_rgb('#00ff88') + (alpha,)
                 )
             code_draw.rounded_rectangle(
-                [30, output_y_start, code_card.width-30, output_y_start+145],
+                [30, output_y_start, code_card.width-30, output_y_start+output_box_height],
                 radius=18, fill=(0, 50, 25, 220)
             )
             code_draw.text((50, output_y_start + 15), "▶ OUTPUT:", fill='#00ff88', font=output_font)
-            displayed_output = output_text[:output_progress]
             
-            # Wrap output text
+            # Re-process displayed lines for actual rendering
             out_lines = []
             curr_l = ""
             for char in displayed_output:
@@ -699,8 +744,8 @@ class YouTubeAutomation:
                          curr_l = ""
             if curr_l: out_lines.append(curr_l)
             
-            # Show last 3 visible lines
-            visible_out = out_lines[-3:]
+            # Show last N visible lines based on dynamic height
+            visible_out = out_lines[-display_lines_count:]
             
             out_y = output_y_start + 65
             for ol in visible_out:
