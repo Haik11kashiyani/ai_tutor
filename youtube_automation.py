@@ -923,8 +923,19 @@ class YouTubeAutomation:
              if "#shorts" not in description.lower():
                  description += mandatory_hashtags
                  
-             # Sanitize Description
+             # Sanitize Description - Remove patterns YouTube rejects
+             import re
+             # Remove any URL-like patterns (YouTube rejects certain URL formats)
+             description = re.sub(r'https?://[^\s]+', '', description)
+             description = re.sub(r'www\.[^\s]+', '', description)
+             # Remove angle brackets and HTML-like patterns
+             description = re.sub(r'<[^>]*>', '', description)
              description = description.replace("<", "").replace(">", "")
+             # Remove excessive special characters that might cause issues
+             description = re.sub(r'[<>{}|\[\]\\^`]', '', description)
+             # Clean up any resulting double spaces or excessive newlines
+             description = re.sub(r' +', ' ', description)
+             description = re.sub(r'\n{3,}', '\n\n', description)
              
              print(f"   Generated Title: {title}")
              print(f"   Generated Description Length: {len(description)}")
