@@ -317,8 +317,8 @@
       "code": "age = 20\nif age > 18:\n    if age < 25:\n        print('Young Adult!')",
       "output": "Young Adult!",
       "explanation": "You can put if statements inside each other \u2014 that\u2019s called nesting. Super handy for detailed checks!",
-      "status": "pending",
-      "upload_date": "2026-02-08"
+      "status": "uploaded",
+      "upload_date": "2026-02-09"
     },
     {
       "day": 29,
