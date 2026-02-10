@@ -329,8 +329,8 @@
       "code": "try:\n  print(1/0)\nexcept:\n  print('Saved')",
       "output": "Saved",
       "explanation": "You tried to divide by zero! That crashes programs. But 'Except' catches the crash and handles it safely.",
-      "status": "pending",
-      "upload_date": "2026-02-09"
+      "status": "uploaded",
+      "upload_date": "2026-02-10"
     },
     {
       "day": 30,
