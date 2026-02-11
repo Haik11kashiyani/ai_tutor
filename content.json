@@ -339,8 +339,8 @@
       "code": "name = input('Your name: ')\nprint(f'Welcome to Python, {name}!')",
       "output": "Welcome to Python, Hardik!",
       "explanation": "Congrats! You\u2019ve learned the basics. This simple app greets the user \u2014 and shows how input, variables, and f-strings come together!",
-      "status": "pending",
-      "upload_date": "2026-02-10"
+      "status": "uploaded",
+      "upload_date": "2026-02-11"
     },
     {
       "day": 31,
