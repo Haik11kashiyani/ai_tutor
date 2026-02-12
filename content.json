@@ -349,8 +349,8 @@
       "code": "INSERT CODE HERE",
       "output": "INSERT OUTPUT HERE",
       "explanation": "INSERT EXPLANATION HERE",
-      "status": "pending",
-      "upload_date": "2026-02-11"
+      "status": "uploaded",
+      "upload_date": "2026-02-12"
     }
   ]
 }
