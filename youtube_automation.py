@@ -137,13 +137,54 @@ class YouTubeAutomation:
         }
 
     def load_content(self, json_path="content.json"):
+        try:
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            return data
+        except json.JSONDecodeError as e:
+            print(f"⚠️ JSON Decode Error in {json_path}: {e}")
+            print("🔄 Attempting to repair JSON...")
+            return self.repair_json(json_path)
+
+    def repair_json(self, json_path):
+        """Attempts to fix common JSON corruptions like 'Extra data'."""
         with open(json_path, 'r') as f:
-            data = json.load(f)
-        return data
+            content = f.read()
+        
+        # Scenario 1: Extra Data (e.g. Concatenated JSONs) - take the first valid object
+        try:
+            from json import JSONDecoder
+            decoder = JSONDecoder()
+            data, index = decoder.raw_decode(content)
+            print(f"   ✅ Recovered valid JSON (First {index} bytes used).")
+            # Optional: Save back the clean version immediately
+            self.save_content(data, json_path) 
+            return data
+        except Exception as repair_error:
+            print(f"   ❌ Repair failed: {repair_error}")
+            raise repair_error  # Re-raise the repair error
 
     def save_content(self, data, json_path="content.json"):
-        with open(json_path, 'w') as f:
-            json.dump(data, f, indent=2)
+        import tempfile
+        import shutil
+        
+        # Atomic Write: Write to temp file first, then move to destination
+        # This prevents file corruption if the script crashes during write
+        temp_file = None
+        try:
+            # Create temp file in the same directory to ensure atomic move works
+            dir_name = os.path.dirname(json_path) or '.'
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=dir_name, indent=2) as tmp:
+                json.dump(data, tmp, indent=2)
+                temp_file = tmp.name
+            
+            # Atomic move
+            shutil.move(temp_file, json_path)
+        except Exception as e:
+            print(f"❌ Failed to save content: {e}")
+            if temp_file and os.path.exists(temp_file):
+                os.remove(temp_file)
+            raise e
 
     def get_next_pending_day(self, data):
         for day in data['days']:
