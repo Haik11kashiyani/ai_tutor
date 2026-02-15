@@ -174,7 +174,7 @@ class YouTubeAutomation:
         try:
             # Create temp file in the same directory to ensure atomic move works
             dir_name = os.path.dirname(json_path) or '.'
-            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=dir_name, indent=2) as tmp:
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=dir_name) as tmp:
                 json.dump(data, tmp, indent=2)
                 temp_file = tmp.name
             
