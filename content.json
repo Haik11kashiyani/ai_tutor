@@ -351,8 +351,8 @@
       "code": "names = ['Alice', 'Bob']\nfor i, name in enumerate(names, 1):\n    print(i, name)",
       "output": "1 Alice\n2 Bob",
       "explanation": "Enumerate gives you the item AND its position. No more manually counting i = 0 then i += 1!",
-      "status": "pending",
-      "upload_date": "2026-02-12"
+      "status": "uploaded",
+      "upload_date": "2026-02-15"
     },
     {
       "day": 32,
