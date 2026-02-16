@@ -364,7 +364,7 @@
       "output": "Leo uses Fire\nNeo uses Ice",
       "explanation": "Zip stitches two lists together like a zipper! Perfect for pairing data without complex loops.",
       "status": "pending",
-      "upload_date": "2026-02-13"
+      "upload_date": "2026-02-17"
     },
     {
       "day": 33,
@@ -376,7 +376,7 @@
       "output": "{1, 2, 3}",
       "explanation": "Sets are collections that refuse duplicates. Convert a list to a set, and all repeats vanish instantly!",
       "status": "pending",
-      "upload_date": "2026-02-14"
+      "upload_date": "2026-02-18"
     },
     {
       "day": 34,
@@ -388,7 +388,7 @@
       "output": "{3}",
       "explanation": "The & operator finds the intersection\u2014items that exist in BOTH sets. It\u2019s math magic in Python!",
       "status": "pending",
-      "upload_date": "2026-02-15"
+      "upload_date": "2026-02-19"
     },
     {
       "day": 35,
@@ -400,7 +400,7 @@
       "output": "[1, 4, 9]",
       "explanation": "List comprehensions let you run a loop inside a list! It\u2019s cleaner, faster, and makes you look like a pro.",
       "status": "pending",
-      "upload_date": "2026-02-16"
+      "upload_date": "2026-02-20"
     },
     {
       "day": 36,
@@ -412,7 +412,7 @@
       "output": "Crash!\nI still run.",
       "explanation": "Finally runs no matter what\u2014error or no error. It\u2019s perfect for cleaning up messes or closing files.",
       "status": "pending",
-      "upload_date": "2026-02-17"
+      "upload_date": "2026-02-21"
     },
     {
       "day": 37,
@@ -424,7 +424,7 @@
       "output": "ValueError: Age fail!",
       "explanation": "Sometimes you WANT your program to crash if data is bad. Raise lets you trigger your own errors!",
       "status": "pending",
-      "upload_date": "2026-02-18"
+      "upload_date": "2026-02-22"
     },
     {
       "day": 38,
@@ -436,7 +436,7 @@
       "output": "10",
       "explanation": "The * lets you pass as many arguments as you want! Python packs them all into a tuple called nums.",
       "status": "pending",
-      "upload_date": "2026-02-19"
+      "upload_date": "2026-02-23"
     },
     {
       "day": 39,
@@ -448,7 +448,7 @@
       "output": "{'name': 'Ash', 'age': 10}",
       "explanation": "The ** gathers named arguments into a dictionary. It\u2019s perfect for functions that need flexibility!",
       "status": "pending",
-      "upload_date": "2026-02-20"
+      "upload_date": "2026-02-24"
     },
     {
       "day": 40,
@@ -460,7 +460,7 @@
       "output": "25",
       "explanation": "Lambdas are tiny, one-line functions without a name. Great for quick math or sorting tricks!",
       "status": "pending",
-      "upload_date": "2026-02-21"
+      "upload_date": "2026-02-25"
     },
     {
       "day": 41,
@@ -472,7 +472,7 @@
       "output": "4.0\n3",
       "explanation": "Math module is your scientific calculator. Square roots, trigonometry, rounding\u2014it\u2019s all there!",
       "status": "pending",
-      "upload_date": "2026-02-22"
+      "upload_date": "2026-02-26"
     },
     {
       "day": 42,
@@ -484,7 +484,7 @@
       "output": "Pizza",
       "explanation": "Can't decide? Let Python pick! random.choice is perfect for games, lotteries, or dinner plans.",
       "status": "pending",
-      "upload_date": "2026-02-23"
+      "upload_date": "2026-02-27"
     },
     {
       "day": 43,
@@ -496,7 +496,7 @@
       "output": "Loading...\nDone!",
       "explanation": "time.sleep() pauses your program. Essential for dramatic effect, countdowns, or waiting for data.",
       "status": "pending",
-      "upload_date": "2026-02-24"
+      "upload_date": "2026-02-28"
     },
     {
       "day": 44,
@@ -508,7 +508,7 @@
       "output": "14:30:05",
       "explanation": "Computers live by the clock. datetime lets you grab the exact moment, format it, and track time.",
       "status": "pending",
-      "upload_date": "2026-02-25"
+      "upload_date": "2026-03-01"
     },
     {
       "day": 45,
@@ -520,7 +520,7 @@
       "output": "/Users/You/Code",
       "explanation": "The OS module lets you talk to your operating system. Find out where you are, list files, or make folders!",
       "status": "pending",
-      "upload_date": "2026-02-26"
+      "upload_date": "2026-03-02"
     },
     {
       "day": 46,
@@ -532,7 +532,7 @@
       "output": "File created.",
       "explanation": "Programs usually forget everything when they stop. Writing to a file saves your data FOREVER (until you delete it).",
       "status": "pending",
-      "upload_date": "2026-02-27"
+      "upload_date": "2026-03-03"
     },
     {
       "day": 47,
@@ -544,7 +544,7 @@
       "output": "This is hidden.",
       "explanation": "Reading brings data back into your program. Only existing files can be read, or Python crashes!",
       "status": "pending",
-      "upload_date": "2026-02-28"
+      "upload_date": "2026-03-04"
     },
     {
       "day": 48,
@@ -556,7 +556,7 @@
       "output": "Entry added.",
       "explanation": "Start mode 'w' wipes the file clean. Mode 'a' (append) adds to the end\u2014perfect for diaries or logs!",
       "status": "pending",
-      "upload_date": "2026-03-01"
+      "upload_date": "2026-03-05"
     },
     {
       "day": 49,
@@ -568,7 +568,7 @@
       "output": "File saved.",
       "explanation": "Forget file.close()? Python has your back. The with block closes the file automatically, even if errors happen!",
       "status": "pending",
-      "upload_date": "2026-03-02"
+      "upload_date": "2026-03-06"
     },
     {
       "day": 50,
@@ -580,7 +580,7 @@
       "output": "{\"name\": \"Max\", \"level\": 5}",
       "explanation": "Text files are boring. JSON lets you save Lists and Dictionaries as text, then load them back perfectly!",
       "status": "pending",
-      "upload_date": "2026-03-03"
+      "upload_date": "2026-03-07"
     },
     {
       "day": 51,
@@ -592,7 +592,7 @@
       "output": "<__main__.Robot object at 0x...>",
       "explanation": "A Class is a blueprint. An Object is the thing you build from it. We just built an empty robot!",
       "status": "pending",
-      "upload_date": "2026-03-04"
+      "upload_date": "2026-03-08"
     },
     {
       "day": 52,
@@ -604,7 +604,7 @@
       "output": "I am alive!",
       "explanation": "The __init__ function runs AUTOMATICALLY when you create an object. It\u2019s the spark of life!",
       "status": "pending",
-      "upload_date": "2026-03-05"
+      "upload_date": "2026-03-09"
     },
     {
       "day": 53,
@@ -616,7 +616,7 @@
       "output": "R2",
       "explanation": "Self refers to the specific object being built. self.name attaches the name tag to THIS robot.",
       "status": "pending",
-      "upload_date": "2026-03-06"
+      "upload_date": "2026-03-10"
     },
     {
       "day": 54,
@@ -628,7 +628,7 @@
       "output": "Beep Boop!",
       "explanation": "Methods are just functions inside a class. They let objects DO things, like speak or move.",
       "status": "pending",
-      "upload_date": "2026-03-07"
+      "upload_date": "2026-03-11"
     },
     {
       "day": 55,
@@ -640,7 +640,7 @@
       "output": "3 3",
       "explanation": "Class variables are shared by ALL objects. Every robot knows the 3 laws!",
       "status": "pending",
-      "upload_date": "2026-03-08"
+      "upload_date": "2026-03-12"
     },
     {
       "day": 56,
@@ -652,7 +652,7 @@
       "output": "On",
       "explanation": "Robots inherit from Machines! They get all the parent\u2019s abilities for free. Less code, more power.",
       "status": "pending",
-      "upload_date": "2026-03-09"
+      "upload_date": "2026-03-13"
     },
     {
       "day": 57,
@@ -664,7 +664,7 @@
       "output": "Vroom!",
       "explanation": "Child classes can change how inherited methods work. A car starts differently than a washing machine!",
       "status": "pending",
-      "upload_date": "2026-03-10"
+      "upload_date": "2026-03-14"
     },
     {
       "day": 58,
@@ -676,7 +676,7 @@
       "output": "Meow",
       "explanation": "By default, printing an object looks ugly. __str__ lets you decide what an object looks like as text!",
       "status": "pending",
-      "upload_date": "2026-03-11"
+      "upload_date": "2026-03-15"
     },
     {
       "day": 59,
@@ -688,7 +688,7 @@
       "output": "Hi",
       "explanation": "Any Python file is a module! Save your functions in one file, import them in another. Organize your life.",
       "status": "pending",
-      "upload_date": "2026-03-12"
+      "upload_date": "2026-03-16"
     },
     {
       "day": 60,
@@ -700,7 +700,7 @@
       "output": "60",
       "explanation": "You made a video game character! It has health, and it can heal. This is the power of OOP!",
       "status": "pending",
-      "upload_date": "2026-03-13"
+      "upload_date": "2026-03-17"
     }
   ]
 }
