@@ -363,8 +363,8 @@
       "code": "names = ['Leo', 'Neo']\npowers = ['Fire', 'Ice']\nfor n, p in zip(names, powers):\n    print(f'{n} uses {p}')",
       "output": "Leo uses Fire\nNeo uses Ice",
       "explanation": "Zip stitches two lists together like a zipper! Perfect for pairing data without complex loops.",
-      "status": "pending",
-      "upload_date": "2026-02-17"
+      "status": "uploaded",
+      "upload_date": "2026-02-16"
     },
     {
       "day": 33,
