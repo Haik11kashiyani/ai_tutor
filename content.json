@@ -375,8 +375,8 @@
       "code": "ids = [1, 2, 2, 3]\nunique_ids = set(ids)\nprint(unique_ids)",
       "output": "{1, 2, 3}",
       "explanation": "Sets are collections that refuse duplicates. Convert a list to a set, and all repeats vanish instantly!",
-      "status": "pending",
-      "upload_date": "2026-02-18"
+      "status": "uploaded",
+      "upload_date": "2026-02-17"
     },
     {
       "day": 34,
