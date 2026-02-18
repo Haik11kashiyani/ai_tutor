@@ -387,8 +387,8 @@
       "code": "A = {1, 2, 3}\nB = {3, 4, 5}\nprint(A & B)",
       "output": "{3}",
       "explanation": "The & operator finds the intersection\u2014items that exist in BOTH sets. It\u2019s math magic in Python!",
-      "status": "pending",
-      "upload_date": "2026-02-19"
+      "status": "uploaded",
+      "upload_date": "2026-02-18"
     },
     {
       "day": 35,
