@@ -399,8 +399,8 @@
       "code": "nums = [1, 2, 3]\nsquared = [x**2 for x in nums]\nprint(squared)",
       "output": "[1, 4, 9]",
       "explanation": "List comprehensions let you run a loop inside a list! It\u2019s cleaner, faster, and makes you look like a pro.",
-      "status": "pending",
-      "upload_date": "2026-02-20"
+      "status": "uploaded",
+      "upload_date": "2026-02-19"
     },
     {
       "day": 36,
