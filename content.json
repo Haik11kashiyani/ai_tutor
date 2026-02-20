@@ -411,8 +411,8 @@
       "code": "try:\n    print(1/0)\nexcept:\n    print('Crash!')\nfinally:\n    print('I still run.')",
       "output": "Crash!\nI still run.",
       "explanation": "Finally runs no matter what\u2014error or no error. It\u2019s perfect for cleaning up messes or closing files.",
-      "status": "pending",
-      "upload_date": "2026-02-21"
+      "status": "uploaded",
+      "upload_date": "2026-02-20"
     },
     {
       "day": 37,
