@@ -423,8 +423,8 @@
       "code": "age = -5\nif age < 0:\n    raise ValueError('Age fail!')",
       "output": "ValueError: Age fail!",
       "explanation": "Sometimes you WANT your program to crash if data is bad. Raise lets you trigger your own errors!",
-      "status": "pending",
-      "upload_date": "2026-02-22"
+      "status": "uploaded",
+      "upload_date": "2026-02-21"
     },
     {
       "day": 38,
