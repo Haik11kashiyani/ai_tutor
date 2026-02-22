@@ -435,8 +435,8 @@
       "code": "def add(*nums):\n    return sum(nums)\n\nprint(add(1, 2, 3, 4))",
       "output": "10",
       "explanation": "The * lets you pass as many arguments as you want! Python packs them all into a tuple called nums.",
-      "status": "pending",
-      "upload_date": "2026-02-23"
+      "status": "uploaded",
+      "upload_date": "2026-02-22"
     },
     {
       "day": 39,
