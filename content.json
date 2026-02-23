@@ -447,8 +447,8 @@
       "code": "def profile(**data):\n    print(data)\n\nprofile(name='Ash', age=10)",
       "output": "{'name': 'Ash', 'age': 10}",
       "explanation": "The ** gathers named arguments into a dictionary. It\u2019s perfect for functions that need flexibility!",
-      "status": "pending",
-      "upload_date": "2026-02-24"
+      "status": "uploaded",
+      "upload_date": "2026-02-23"
     },
     {
       "day": 40,
