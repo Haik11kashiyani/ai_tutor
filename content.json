@@ -459,8 +459,8 @@
       "code": "square = lambda x: x ** 2\nprint(square(5))",
       "output": "25",
       "explanation": "Lambdas are tiny, one-line functions without a name. Great for quick math or sorting tricks!",
-      "status": "pending",
-      "upload_date": "2026-02-25"
+      "status": "uploaded",
+      "upload_date": "2026-02-24"
     },
     {
       "day": 41,
