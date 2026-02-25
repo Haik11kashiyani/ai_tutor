@@ -471,8 +471,8 @@
       "code": "import math\nprint(math.sqrt(16))\nprint(math.ceil(2.1))",
       "output": "4.0\n3",
       "explanation": "Math module is your scientific calculator. Square roots, trigonometry, rounding\u2014it\u2019s all there!",
-      "status": "pending",
-      "upload_date": "2026-02-26"
+      "status": "uploaded",
+      "upload_date": "2026-02-25"
     },
     {
       "day": 42,
