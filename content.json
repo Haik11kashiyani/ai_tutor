@@ -483,8 +483,8 @@
       "code": "import random\nchoices = ['Pizza', 'Sushi']\nprint(random.choice(choices))",
       "output": "Pizza",
       "explanation": "Can't decide? Let Python pick! random.choice is perfect for games, lotteries, or dinner plans.",
-      "status": "pending",
-      "upload_date": "2026-02-27"
+      "status": "uploaded",
+      "upload_date": "2026-02-26"
     },
     {
       "day": 43,
