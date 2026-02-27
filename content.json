@@ -495,8 +495,8 @@
       "code": "import time\nprint('Loading...')\ntime.sleep(2)\nprint('Done!')",
       "output": "Loading...\nDone!",
       "explanation": "time.sleep() pauses your program. Essential for dramatic effect, countdowns, or waiting for data.",
-      "status": "pending",
-      "upload_date": "2026-02-28"
+      "status": "uploaded",
+      "upload_date": "2026-02-27"
     },
     {
       "day": 44,
