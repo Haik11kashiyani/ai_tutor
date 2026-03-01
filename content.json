@@ -519,8 +519,8 @@
       "code": "import os\nprint(os.getcwd())",
       "output": "/Users/You/Code",
       "explanation": "The OS module lets you talk to your operating system. Find out where you are, list files, or make folders!",
-      "status": "pending",
-      "upload_date": "2026-03-02"
+      "status": "uploaded",
+      "upload_date": "2026-03-01"
     },
     {
       "day": 46,
