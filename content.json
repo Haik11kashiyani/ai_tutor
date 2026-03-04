@@ -543,7 +543,7 @@
       "code": "file = open('secret.txt', 'r')\ncontent = file.read()\nprint(content)\nfile.close()",
       "output": "This is hidden.",
       "explanation": "Reading brings data back into your program. Only existing files can be read, or Python crashes!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-04"
     },
     {
