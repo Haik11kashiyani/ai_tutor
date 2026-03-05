@@ -555,7 +555,7 @@
       "code": "file = open('log.txt', 'a')\nfile.write('New entry!\\n')\nfile.close()",
       "output": "Entry added.",
       "explanation": "Start mode 'w' wipes the file clean. Mode 'a' (append) adds to the end\u2014perfect for diaries or logs!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-05"
     },
     {
