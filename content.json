@@ -567,7 +567,7 @@
       "code": "with open('data.txt', 'w') as f:\n    f.write('Safe!')\n# File closes automatically here",
       "output": "File saved.",
       "explanation": "Forget file.close()? Python has your back. The with block closes the file automatically, even if errors happen!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-06"
     },
     {
