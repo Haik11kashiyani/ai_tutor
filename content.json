@@ -579,7 +579,7 @@
       "code": "import json\ndata = {'name': 'Max', 'level': 5}\nsaved = json.dumps(data)\nprint(saved)",
       "output": "{\"name\": \"Max\", \"level\": 5}",
       "explanation": "Text files are boring. JSON lets you save Lists and Dictionaries as text, then load them back perfectly!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-07"
     },
     {
