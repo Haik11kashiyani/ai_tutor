@@ -591,7 +591,7 @@
       "code": "class Robot:\n    pass\n\nmy_bot = Robot()\nprint(my_bot)",
       "output": "<__main__.Robot object at 0x...>",
       "explanation": "A Class is a blueprint. An Object is the thing you build from it. We just built an empty robot!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-08"
     },
     {
