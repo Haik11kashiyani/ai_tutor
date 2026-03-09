@@ -603,7 +603,7 @@
       "code": "class Robot:\n    def __init__(self):\n        print('I am alive!')\n\nr = Robot()",
       "output": "I am alive!",
       "explanation": "The __init__ function runs AUTOMATICALLY when you create an object. It\u2019s the spark of life!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-09"
     },
     {
