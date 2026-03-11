@@ -627,7 +627,7 @@
       "code": "class Robot:\n    def say_hi(self):\n        print('Beep Boop!')\n\nr = Robot()\nr.say_hi()",
       "output": "Beep Boop!",
       "explanation": "Methods are just functions inside a class. They let objects DO things, like speak or move.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-11"
     },
     {
