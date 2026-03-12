@@ -639,7 +639,7 @@
       "code": "class Robot:\n    laws = 3\n\na = Robot()\nb = Robot()\nprint(a.laws, b.laws)",
       "output": "3 3",
       "explanation": "Class variables are shared by ALL objects. Every robot knows the 3 laws!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-12"
     },
     {
