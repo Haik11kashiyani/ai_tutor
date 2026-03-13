@@ -651,7 +651,7 @@
       "code": "class Machine:\n    def start(self): print('On')\n\nclass Robot(Machine):\n    pass\n\nr = Robot()\nr.start()",
       "output": "On",
       "explanation": "Robots inherit from Machines! They get all the parent\u2019s abilities for free. Less code, more power.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-13"
     },
     {
