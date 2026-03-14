@@ -663,7 +663,7 @@
       "code": "class Machine:\n    def start(self): print('On')\n\nclass Car(Machine):\n    def start(self): print('Vroom!')\n\nc = Car()\nc.start()",
       "output": "Vroom!",
       "explanation": "Child classes can change how inherited methods work. A car starts differently than a washing machine!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-14"
     },
     {
