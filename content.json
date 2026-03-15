@@ -675,7 +675,7 @@
       "code": "class Cat:\n    def __str__(self): return 'Meow'\n\nc = Cat()\nprint(c)",
       "output": "Meow",
       "explanation": "By default, printing an object looks ugly. __str__ lets you decide what an object looks like as text!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-15"
     },
     {
