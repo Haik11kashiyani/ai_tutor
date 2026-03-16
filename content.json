@@ -687,7 +687,7 @@
       "code": "# In file bot.py\ndef speak(): print('Hi')\n\n# In main.py\nimport bot\nbot.speak()",
       "output": "Hi",
       "explanation": "Any Python file is a module! Save your functions in one file, import them in another. Organize your life.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-16"
     },
     {
