@@ -699,7 +699,7 @@
       "code": "class Hero:\n    def __init__(self, hp): self.hp = hp\n    def heal(self): self.hp += 10\n\np = Hero(50)\np.heal()\nprint(p.hp)",
       "output": "60",
       "explanation": "You made a video game character! It has health, and it can heal. This is the power of OOP!",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-03-17"
     }
   ]
