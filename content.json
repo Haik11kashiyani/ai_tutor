@@ -701,6 +701,606 @@
       "explanation": "You made a video game character! It has health, and it can heal. This is the power of OOP!",
       "status": "uploaded",
       "upload_date": "2026-03-17"
+    },
+    {
+      "day": 61,
+      "title": "Recursion: Function Calling Itself",
+      "language": "python",
+      "code": "def fact(n):\n    return 1 if n <= 1 else n * fact(n - 1)\n\nprint(fact(5))",
+      "output": "120",
+      "explanation": "Recursion breaks a big problem into smaller versions of itself. Here factorial keeps reducing until the base case.",
+      "status": "pending",
+      "upload_date": "2026-03-21"
+    },
+    {
+      "day": 62,
+      "title": "Binary Search in Minutes",
+      "language": "python",
+      "code": "nums = [2, 4, 7, 10, 13, 17]\nleft, right, target = 0, len(nums)-1, 10\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        print(mid); break\n    if nums[mid] < target: left = mid + 1\n    else: right = mid - 1",
+      "output": "3",
+      "explanation": "Binary search cuts the search space in half each step, making lookup very fast on sorted data.",
+      "status": "pending",
+      "upload_date": "2026-03-22"
+    },
+    {
+      "day": 63,
+      "title": "Custom Sorting with key",
+      "language": "python",
+      "code": "words = ['python', 'ai', 'automation', 'ml']\nprint(sorted(words, key=len, reverse=True))",
+      "output": "['automation', 'python', 'ai', 'ml']",
+      "explanation": "The key function tells Python what value to compare. Here we sort by length, not alphabetically.",
+      "status": "pending",
+      "upload_date": "2026-03-23"
+    },
+    {
+      "day": 64,
+      "title": "Dictionary Comprehension Pro Move",
+      "language": "python",
+      "code": "nums = [1, 2, 3, 4]\nsquares = {n: n*n for n in nums}\nprint(squares)",
+      "output": "{1: 1, 2: 4, 3: 9, 4: 16}",
+      "explanation": "Comprehensions build collections in a clean and expressive one-liner.",
+      "status": "pending",
+      "upload_date": "2026-03-24"
+    },
+    {
+      "day": 65,
+      "title": "Generators Save Memory",
+      "language": "python",
+      "code": "def countdown(n):\n    while n:\n        yield n\n        n -= 1\n\nprint(list(countdown(3)))",
+      "output": "[3, 2, 1]",
+      "explanation": "Generators yield values lazily, so you do not store everything in memory at once.",
+      "status": "pending",
+      "upload_date": "2026-03-25"
+    },
+    {
+      "day": 66,
+      "title": "Generator Delegation with yield from",
+      "language": "python",
+      "code": "def letters():\n    yield from 'ABC'\n\nprint(list(letters()))",
+      "output": "['A', 'B', 'C']",
+      "explanation": "yield from forwards values from another iterable, making generator composition simple.",
+      "status": "pending",
+      "upload_date": "2026-03-26"
+    },
+    {
+      "day": 67,
+      "title": "Decorators: Upgrade Functions",
+      "language": "python",
+      "code": "def loud(fn):\n    def wrapper():\n        return fn().upper()\n    return wrapper\n\n@loud\ndef greet():\n    return 'hello'\n\nprint(greet())",
+      "output": "HELLO",
+      "explanation": "Decorators wrap behavior around a function without changing its core code.",
+      "status": "pending",
+      "upload_date": "2026-03-27"
+    },
+    {
+      "day": 68,
+      "title": "Parameterized Decorators",
+      "language": "python",
+      "code": "def repeat(times):\n    def deco(fn):\n        def wrapper():\n            for _ in range(times):\n                fn()\n        return wrapper\n    return deco\n\n@repeat(2)\ndef ping():\n    print('ping')\n\nping()",
+      "output": "ping\nping",
+      "explanation": "A decorator can accept arguments, so behavior becomes reusable and configurable.",
+      "status": "pending",
+      "upload_date": "2026-03-28"
+    },
+    {
+      "day": 69,
+      "title": "Closures Keep State",
+      "language": "python",
+      "code": "def counter():\n    value = 0\n    def inc():\n        nonlocal value\n        value += 1\n        return value\n    return inc\n\nc = counter()\nprint(c(), c())",
+      "output": "1 2",
+      "explanation": "A closure remembers variables from its outer scope, even after that scope is finished.",
+      "status": "pending",
+      "upload_date": "2026-03-29"
+    },
+    {
+      "day": 70,
+      "title": "map filter reduce Combo",
+      "language": "python",
+      "code": "from functools import reduce\nnums = [1, 2, 3, 4]\nev = list(filter(lambda x: x % 2 == 0, nums))\nprint(reduce(lambda a, b: a + b, ev))",
+      "output": "6",
+      "explanation": "Functional tools let you transform, filter, and aggregate data in pipeline style.",
+      "status": "pending",
+      "upload_date": "2026-03-30"
+    },
+    {
+      "day": 71,
+      "title": "any and all for Fast Validation",
+      "language": "python",
+      "code": "scores = [90, 82, 77]\nprint(all(s >= 70 for s in scores))\nprint(any(s > 95 for s in scores))",
+      "output": "True\nFalse",
+      "explanation": "Use all for every-condition checks and any for at-least-one checks.",
+      "status": "pending",
+      "upload_date": "2026-03-31"
+    },
+    {
+      "day": 72,
+      "title": "Advanced Unpacking",
+      "language": "python",
+      "code": "first, *middle, last = [10, 20, 30, 40, 50]\nprint(first, middle, last)",
+      "output": "10 [20, 30, 40] 50",
+      "explanation": "Star unpacking captures flexible chunks from iterables.",
+      "status": "pending",
+      "upload_date": "2026-04-01"
+    },
+    {
+      "day": 73,
+      "title": "Mastering args and kwargs",
+      "language": "python",
+      "code": "def debug(*args, **kwargs):\n    print(args)\n    print(kwargs)\n\ndebug(1, 2, mode='fast', retry=3)",
+      "output": "(1, 2)\n{'mode': 'fast', 'retry': 3}",
+      "explanation": "Use *args for positional flexibility and **kwargs for named flexibility.",
+      "status": "pending",
+      "upload_date": "2026-04-02"
+    },
+    {
+      "day": 74,
+      "title": "Dataclasses for Clean Models",
+      "language": "python",
+      "code": "from dataclasses import dataclass\n\n@dataclass\nclass User:\n    name: str\n    level: int\n\nprint(User('Hardik', 7))",
+      "output": "User(name='Hardik', level=7)",
+      "explanation": "Dataclasses auto-generate init and repr, reducing boilerplate.",
+      "status": "pending",
+      "upload_date": "2026-04-03"
+    },
+    {
+      "day": 75,
+      "title": "Properties for Controlled Access",
+      "language": "python",
+      "code": "class Temp:\n    def __init__(self, c): self._c = c\n    @property\n    def f(self): return self._c * 9/5 + 32\n\nprint(Temp(30).f)",
+      "output": "86.0",
+      "explanation": "Properties expose computed values like attributes while keeping logic inside class methods.",
+      "status": "pending",
+      "upload_date": "2026-04-04"
+    },
+    {
+      "day": 76,
+      "title": "classmethod vs staticmethod",
+      "language": "python",
+      "code": "class Item:\n    tax = 0.1\n    @classmethod\n    def with_tax(cls, price): return price * (1 + cls.tax)\n    @staticmethod\n    def is_valid(price): return price > 0\n\nprint(Item.with_tax(100), Item.is_valid(100))",
+      "output": "110.00000000000001 True",
+      "explanation": "classmethod knows the class, staticmethod is just a namespaced utility function.",
+      "status": "pending",
+      "upload_date": "2026-04-05"
+    },
+    {
+      "day": 77,
+      "title": "Custom Exceptions for Clear Errors",
+      "language": "python",
+      "code": "class NegativeBalanceError(Exception):\n    pass\n\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise NegativeBalanceError('Insufficient funds')\n\nwithdraw(100, 120)",
+      "output": "NegativeBalanceError: Insufficient funds",
+      "explanation": "Custom exceptions communicate intent better than generic crashes.",
+      "status": "pending",
+      "upload_date": "2026-04-06"
+    },
+    {
+      "day": 78,
+      "title": "Production Logging Basics",
+      "language": "python",
+      "code": "import logging\nlogging.basicConfig(level=logging.INFO)\nlogging.info('Pipeline started')",
+      "output": "INFO:root:Pipeline started",
+      "explanation": "Logging is better than print in real systems because levels and formatting are built in.",
+      "status": "pending",
+      "upload_date": "2026-04-07"
+    },
+    {
+      "day": 79,
+      "title": "Pathlib Beats String Paths",
+      "language": "python",
+      "code": "from pathlib import Path\np = Path('output') / 'video.mp4'\nprint(p.as_posix())",
+      "output": "output/video.mp4",
+      "explanation": "Pathlib gives cleaner, safer file path operations across operating systems.",
+      "status": "pending",
+      "upload_date": "2026-04-08"
+    },
+    {
+      "day": 80,
+      "title": "Regex Quick Start",
+      "language": "python",
+      "code": "import re\ntext = 'mail me at hi@test.com'\nprint(bool(re.search(r'\\S+@\\S+\\.\\S+', text)))",
+      "output": "True",
+      "explanation": "Regular expressions help match complex text patterns efficiently.",
+      "status": "pending",
+      "upload_date": "2026-04-09"
+    },
+    {
+      "day": 81,
+      "title": "Regex Groups Extraction",
+      "language": "python",
+      "code": "import re\nm = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', '2026-04-10')\nprint(m.groups())",
+      "output": "('2026', '04', '10')",
+      "explanation": "Groups let you capture specific pieces from a matched pattern.",
+      "status": "pending",
+      "upload_date": "2026-04-10"
+    },
+    {
+      "day": 82,
+      "title": "Build a Context Manager Class",
+      "language": "python",
+      "code": "class Timer:\n    def __enter__(self):\n        print('start')\n    def __exit__(self, exc_type, exc, tb):\n        print('end')\n\nwith Timer():\n    print('work')",
+      "output": "start\nwork\nend",
+      "explanation": "Context managers guarantee setup and cleanup around critical code blocks.",
+      "status": "pending",
+      "upload_date": "2026-04-11"
+    },
+    {
+      "day": 83,
+      "title": "contextlib Shortcut",
+      "language": "python",
+      "code": "from contextlib import contextmanager\n\n@contextmanager\ndef section(name):\n    print(f'BEGIN {name}')\n    yield\n    print(f'END {name}')\n\nwith section('ETL'):\n    print('running')",
+      "output": "BEGIN ETL\nrunning\nEND ETL",
+      "explanation": "contextmanager decorator creates context managers without writing a full class.",
+      "status": "pending",
+      "upload_date": "2026-04-12"
+    },
+    {
+      "day": 84,
+      "title": "Type Hints That Scale",
+      "language": "python",
+      "code": "from typing import List\n\ndef avg(nums: List[int]) -> float:\n    return sum(nums)/len(nums)\n\nprint(avg([2, 4, 6]))",
+      "output": "4.0",
+      "explanation": "Type hints improve readability and tooling for larger codebases.",
+      "status": "pending",
+      "upload_date": "2026-04-13"
+    },
+    {
+      "day": 85,
+      "title": "Abstract Base Classes",
+      "language": "python",
+      "code": "from abc import ABC, abstractmethod\n\nclass Storage(ABC):\n    @abstractmethod\n    def save(self, data): ...",
+      "output": "No output",
+      "explanation": "ABCs define contracts so implementations stay consistent.",
+      "status": "pending",
+      "upload_date": "2026-04-14"
+    },
+    {
+      "day": 86,
+      "title": "Unit Testing with unittest",
+      "language": "python",
+      "code": "import unittest\n\ndef add(a, b): return a + b\n\nclass TestMath(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)",
+      "output": "Test passes",
+      "explanation": "Automated tests catch regressions before they hit production.",
+      "status": "pending",
+      "upload_date": "2026-04-15"
+    },
+    {
+      "day": 87,
+      "title": "Testing Exceptions",
+      "language": "python",
+      "code": "import unittest\n\nclass T(unittest.TestCase):\n    def test_error(self):\n        with self.assertRaises(ZeroDivisionError):\n            _ = 1/0",
+      "output": "Test passes",
+      "explanation": "Good tests verify both expected behavior and expected failures.",
+      "status": "pending",
+      "upload_date": "2026-04-16"
+    },
+    {
+      "day": 88,
+      "title": "Mocking External Calls",
+      "language": "python",
+      "code": "from unittest.mock import patch\n\nwith patch('random.randint', return_value=7):\n    import random\n    print(random.randint(1, 10))",
+      "output": "7",
+      "explanation": "Mocks isolate your tests from external randomness, APIs, and side effects.",
+      "status": "pending",
+      "upload_date": "2026-04-17"
+    },
+    {
+      "day": 89,
+      "title": "Robust JSON Read Write",
+      "language": "python",
+      "code": "import json\npayload = {'ok': True, 'count': 3}\ntext = json.dumps(payload)\nprint(json.loads(text)['count'])",
+      "output": "3",
+      "explanation": "Serialize with dumps and deserialize with loads to move structured data safely.",
+      "status": "pending",
+      "upload_date": "2026-04-18"
+    },
+    {
+      "day": 90,
+      "title": "CSV Processing Pipeline",
+      "language": "python",
+      "code": "import csv\nrows = [['name', 'score'], ['A', 90], ['B', 75]]\nprint(rows[1][0], rows[1][1])",
+      "output": "A 90",
+      "explanation": "CSV is still a major data format in analytics and automation pipelines.",
+      "status": "pending",
+      "upload_date": "2026-04-19"
+    },
+    {
+      "day": 91,
+      "title": "SQLite Database Basics",
+      "language": "python",
+      "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\ncur = conn.cursor()\ncur.execute('CREATE TABLE users(name TEXT)')\ncur.execute('INSERT INTO users VALUES (?)', ('Hardik',))\nprint(cur.execute('SELECT COUNT(*) FROM users').fetchone()[0])",
+      "output": "1",
+      "explanation": "SQLite is perfect for local apps, prototyping, and lightweight persistence.",
+      "status": "pending",
+      "upload_date": "2026-04-20"
+    },
+    {
+      "day": 92,
+      "title": "Transactions and Rollback",
+      "language": "python",
+      "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\ncur = conn.cursor()\ncur.execute('CREATE TABLE t(v INT)')\nconn.execute('BEGIN')\ncur.execute('INSERT INTO t VALUES (1)')\nconn.rollback()\nprint(cur.execute('SELECT COUNT(*) FROM t').fetchone()[0])",
+      "output": "0",
+      "explanation": "Transactions ensure all-or-nothing safety for critical data changes.",
+      "status": "pending",
+      "upload_date": "2026-04-21"
+    },
+    {
+      "day": 93,
+      "title": "Priority Queue with heapq",
+      "language": "python",
+      "code": "import heapq\nq = []\nheapq.heappush(q, (2, 'low'))\nheapq.heappush(q, (1, 'high'))\nprint(heapq.heappop(q)[1])",
+      "output": "high",
+      "explanation": "Heaps always pop the smallest priority first, ideal for schedulers and pathfinding.",
+      "status": "pending",
+      "upload_date": "2026-04-22"
+    },
+    {
+      "day": 94,
+      "title": "Counter and defaultdict",
+      "language": "python",
+      "code": "from collections import Counter, defaultdict\nprint(Counter('banana')['a'])\nd = defaultdict(int); d['x'] += 1; print(d['x'])",
+      "output": "3\n1",
+      "explanation": "collections module gives battle-tested data structures for common patterns.",
+      "status": "pending",
+      "upload_date": "2026-04-23"
+    },
+    {
+      "day": 95,
+      "title": "Sliding Window with deque",
+      "language": "python",
+      "code": "from collections import deque\nwindow = deque(maxlen=3)\nfor x in [1,2,3,4]: window.append(x)\nprint(list(window))",
+      "output": "[2, 3, 4]",
+      "explanation": "deque with maxlen is perfect for rolling buffers and streaming metrics.",
+      "status": "pending",
+      "upload_date": "2026-04-24"
+    },
+    {
+      "day": 96,
+      "title": "Binary Insert with bisect",
+      "language": "python",
+      "code": "import bisect\narr = [1, 3, 8]\nbisect.insort(arr, 5)\nprint(arr)",
+      "output": "[1, 3, 5, 8]",
+      "explanation": "bisect keeps sorted lists ordered with logarithmic search positioning.",
+      "status": "pending",
+      "upload_date": "2026-04-25"
+    },
+    {
+      "day": 97,
+      "title": "itertools Product and Permutations",
+      "language": "python",
+      "code": "from itertools import product, permutations\nprint(list(product([1,2], ['A'])))\nprint(len(list(permutations([1,2,3], 2))))",
+      "output": "[(1, 'A'), (2, 'A')]\n6",
+      "explanation": "itertools helps generate combinations efficiently without manual nested loops.",
+      "status": "pending",
+      "upload_date": "2026-04-26"
+    },
+    {
+      "day": 98,
+      "title": "Grouping with itertools.groupby",
+      "language": "python",
+      "code": "from itertools import groupby\nitems = ['a', 'a', 'b', 'b', 'b']\nfor k, g in groupby(items):\n    print(k, len(list(g)))",
+      "output": "a 2\nb 3",
+      "explanation": "groupby summarizes consecutive runs, useful after sorting by key.",
+      "status": "pending",
+      "upload_date": "2026-04-27"
+    },
+    {
+      "day": 99,
+      "title": "Memoization with lru_cache",
+      "language": "python",
+      "code": "from functools import lru_cache\n@lru_cache(maxsize=None)\ndef fib(n):\n    return n if n < 2 else fib(n-1) + fib(n-2)\nprint(fib(10))",
+      "output": "55",
+      "explanation": "Caching saves repeated computation and can turn slow recursion into fast solutions.",
+      "status": "pending",
+      "upload_date": "2026-04-28"
+    },
+    {
+      "day": 100,
+      "title": "Dynamic Programming Starter",
+      "language": "python",
+      "code": "def climb(n):\n    dp = [0, 1, 2]\n    for i in range(3, n+1):\n        dp.append(dp[i-1] + dp[i-2])\n    return dp[n]\n\nprint(climb(5))",
+      "output": "8",
+      "explanation": "Dynamic programming stores subproblem results to avoid recalculating work.",
+      "status": "pending",
+      "upload_date": "2026-04-29"
+    },
+    {
+      "day": 101,
+      "title": "Two Pointers Pattern",
+      "language": "python",
+      "code": "s = 'level'\nl, r = 0, len(s)-1\nok = True\nwhile l < r:\n    if s[l] != s[r]: ok = False; break\n    l += 1; r -= 1\nprint(ok)",
+      "output": "True",
+      "explanation": "Two pointers solve many array and string tasks in linear time.",
+      "status": "pending",
+      "upload_date": "2026-04-30"
+    },
+    {
+      "day": 102,
+      "title": "Stack Pattern: Valid Parentheses",
+      "language": "python",
+      "code": "s = '([])'\nstack = []\npairs = {')':'(', ']':'[', '}':'{'}\nfor ch in s:\n    if ch in '([{': stack.append(ch)\n    else:\n        if not stack or stack.pop() != pairs[ch]:\n            print(False); break\nelse:\n    print(not stack)",
+      "output": "True",
+      "explanation": "Stacks track nested structure and are essential for parser-like problems.",
+      "status": "pending",
+      "upload_date": "2026-05-01"
+    },
+    {
+      "day": 103,
+      "title": "Queue Pattern: BFS",
+      "language": "python",
+      "code": "from collections import deque\ngraph = {1:[2,3], 2:[4], 3:[], 4:[]}\nq, seen = deque([1]), {1}\nwhile q:\n    node = q.popleft(); print(node, end=' ')\n    for nei in graph[node]:\n        if nei not in seen: seen.add(nei); q.append(nei)",
+      "output": "1 2 3 4",
+      "explanation": "BFS explores level by level and is core to shortest path in unweighted graphs.",
+      "status": "pending",
+      "upload_date": "2026-05-02"
+    },
+    {
+      "day": 104,
+      "title": "Depth First Search",
+      "language": "python",
+      "code": "graph = {1:[2,3], 2:[4], 3:[], 4:[]}\nseen = set()\ndef dfs(n):\n    if n in seen: return\n    seen.add(n); print(n, end=' ')\n    for nei in graph[n]: dfs(nei)\ndfs(1)",
+      "output": "1 2 4 3",
+      "explanation": "DFS goes deep before backtracking and appears in trees, graphs, and backtracking tasks.",
+      "status": "pending",
+      "upload_date": "2026-05-03"
+    },
+    {
+      "day": 105,
+      "title": "Dijkstra Shortest Path",
+      "language": "python",
+      "code": "import heapq\ng = {'A':[('B',1),('C',4)], 'B':[('C',2)], 'C':[]}\nd = {'A':0,'B':float('inf'),'C':float('inf')}\npq = [(0,'A')]\nwhile pq:\n    dist,u = heapq.heappop(pq)\n    if dist > d[u]: continue\n    for v,w in g[u]:\n        if dist + w < d[v]: d[v] = dist + w; heapq.heappush(pq,(d[v],v))\nprint(d['C'])",
+      "output": "3",
+      "explanation": "Dijkstra finds shortest paths on weighted graphs with non-negative edges.",
+      "status": "pending",
+      "upload_date": "2026-05-04"
+    },
+    {
+      "day": 106,
+      "title": "Binary Tree Traversal",
+      "language": "python",
+      "code": "class Node:\n    def __init__(self, v, l=None, r=None): self.v, self.l, self.r = v, l, r\nroot = Node(1, Node(2), Node(3))\ndef inorder(n):\n    if not n: return\n    inorder(n.l); print(n.v, end=' '); inorder(n.r)\ninorder(root)",
+      "output": "2 1 3",
+      "explanation": "Tree traversals are foundational for hierarchical data processing.",
+      "status": "pending",
+      "upload_date": "2026-05-05"
+    },
+    {
+      "day": 107,
+      "title": "Merge Intervals",
+      "language": "python",
+      "code": "intervals = [[1,3],[2,6],[8,10]]\nintervals.sort()\nmerged = [intervals[0]]\nfor s,e in intervals[1:]:\n    if s <= merged[-1][1]: merged[-1][1] = max(merged[-1][1], e)\n    else: merged.append([s,e])\nprint(merged)",
+      "output": "[[1, 6], [8, 10]]",
+      "explanation": "Interval merging is a classic real-world pattern for schedules and ranges.",
+      "status": "pending",
+      "upload_date": "2026-05-06"
+    },
+    {
+      "day": 108,
+      "title": "Top K Elements with Heap",
+      "language": "python",
+      "code": "import heapq\nnums = [9, 1, 7, 3, 10]\nprint(heapq.nlargest(3, nums))",
+      "output": "[10, 9, 7]",
+      "explanation": "Heaps extract top-k efficiently without full sorting.",
+      "status": "pending",
+      "upload_date": "2026-05-07"
+    },
+    {
+      "day": 109,
+      "title": "Asyncio First Step",
+      "language": "python",
+      "code": "import asyncio\n\nasync def main():\n    print('start')\n    await asyncio.sleep(0.1)\n    print('done')\n\nasyncio.run(main())",
+      "output": "start\ndone",
+      "explanation": "Async lets a program handle many waiting tasks efficiently in one thread.",
+      "status": "pending",
+      "upload_date": "2026-05-08"
+    },
+    {
+      "day": 110,
+      "title": "Run Tasks Concurrently with gather",
+      "language": "python",
+      "code": "import asyncio\n\nasync def work(n):\n    await asyncio.sleep(0.1)\n    return n\n\nprint(asyncio.run(asyncio.gather(work(1), work(2))))",
+      "output": "[1, 2]",
+      "explanation": "gather schedules multiple coroutines and waits for all results together.",
+      "status": "pending",
+      "upload_date": "2026-05-09"
+    },
+    {
+      "day": 111,
+      "title": "Async Timeout Protection",
+      "language": "python",
+      "code": "import asyncio\n\nasync def slow():\n    await asyncio.sleep(1)\n\nasync def main():\n    try:\n        await asyncio.wait_for(slow(), timeout=0.1)\n    except asyncio.TimeoutError:\n        print('timed out')\n\nasyncio.run(main())",
+      "output": "timed out",
+      "explanation": "Timeouts prevent your async workflow from hanging forever on slow operations.",
+      "status": "pending",
+      "upload_date": "2026-05-10"
+    },
+    {
+      "day": 112,
+      "title": "Threading with Queue",
+      "language": "python",
+      "code": "from queue import Queue\nfrom threading import Thread\nq = Queue()\n\ndef worker():\n    print(q.get())\n    q.task_done()\n\nThread(target=worker).start()\nq.put('job-1')",
+      "output": "job-1",
+      "explanation": "Queue makes thread communication safer than sharing mutable data directly.",
+      "status": "pending",
+      "upload_date": "2026-05-11"
+    },
+    {
+      "day": 113,
+      "title": "Multiprocessing for CPU Work",
+      "language": "python",
+      "code": "from multiprocessing import Pool\n\ndef square(x): return x*x\n\nwith Pool(2) as p:\n    print(p.map(square, [2,3,4]))",
+      "output": "[4, 9, 16]",
+      "explanation": "Use processes for CPU-heavy tasks to bypass the GIL and scale better.",
+      "status": "pending",
+      "upload_date": "2026-05-12"
+    },
+    {
+      "day": 114,
+      "title": "HTTP Requests with urllib",
+      "language": "python",
+      "code": "from urllib.parse import urlencode\nparams = urlencode({'q': 'python'})\nprint(f'https://example.com/search?{params}')",
+      "output": "https://example.com/search?q=python",
+      "explanation": "Even with stdlib, you can build robust URLs and request workflows.",
+      "status": "pending",
+      "upload_date": "2026-05-13"
+    },
+    {
+      "day": 115,
+      "title": "Retry with Exponential Backoff",
+      "language": "python",
+      "code": "import time\nfor attempt in range(3):\n    wait = 2 ** attempt\n    print(f'attempt {attempt+1}, wait {wait}s')\n    time.sleep(0)",
+      "output": "attempt 1, wait 1s\nattempt 2, wait 2s\nattempt 3, wait 4s",
+      "explanation": "Backoff retries reduce pressure on flaky services and improve reliability.",
+      "status": "pending",
+      "upload_date": "2026-05-14"
+    },
+    {
+      "day": 116,
+      "title": "Professional CLI with argparse",
+      "language": "python",
+      "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--name')\nargs = parser.parse_args(['--name', 'Hardik'])\nprint(args.name)",
+      "output": "Hardik",
+      "explanation": "argparse turns scripts into proper command-line tools.",
+      "status": "pending",
+      "upload_date": "2026-05-15"
+    },
+    {
+      "day": 117,
+      "title": "Package Your Code Cleanly",
+      "language": "python",
+      "code": "# mypkg/__init__.py\n# mypkg/core.py\ndef run():\n    return 'ready'\n\nprint(run())",
+      "output": "ready",
+      "explanation": "Organizing code into packages keeps projects maintainable as they grow.",
+      "status": "pending",
+      "upload_date": "2026-05-16"
+    },
+    {
+      "day": 118,
+      "title": "Mini Project: API Client Class",
+      "language": "python",
+      "code": "class APIClient:\n    def __init__(self, base): self.base = base\n    def endpoint(self, path): return f'{self.base}/{path}'\n\nclient = APIClient('https://api.site.com')\nprint(client.endpoint('health'))",
+      "output": "https://api.site.com/health",
+      "explanation": "Create reusable client abstractions for cleaner integration code.",
+      "status": "pending",
+      "upload_date": "2026-05-17"
+    },
+    {
+      "day": 119,
+      "title": "Mini Project: Task Scheduler Core",
+      "language": "python",
+      "code": "tasks = []\ndef add_task(name, prio): tasks.append((prio, name))\nadd_task('render', 2); add_task('upload', 1)\nprint(sorted(tasks))",
+      "output": "[(1, 'upload'), (2, 'render')]",
+      "explanation": "A small scheduler combines data structures, sorting, and system design thinking.",
+      "status": "pending",
+      "upload_date": "2026-05-18"
+    },
+    {
+      "day": 120,
+      "title": "Final Project: CLI Data Pipeline",
+      "language": "python",
+      "code": "def extract(): return [1,2,3]\ndef transform(data): return [x*10 for x in data]\ndef load(data): print(data)\n\nload(transform(extract()))",
+      "output": "[10, 20, 30]",
+      "explanation": "You now combine modular design, transformations, and execution flow like a real engineering pipeline.",
+      "status": "pending",
+      "upload_date": "2026-05-19"
     }
   ]
 }
