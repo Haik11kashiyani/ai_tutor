@@ -709,8 +709,8 @@
       "code": "def fact(n):\n    return 1 if n <= 1 else n * fact(n - 1)\n\nprint(fact(5))",
       "output": "120",
       "explanation": "Recursion breaks a big problem into smaller versions of itself. Here factorial keeps reducing until the base case.",
-      "status": "pending",
-      "upload_date": "2026-03-21"
+      "status": "uploaded",
+      "upload_date": "2026-03-20"
     },
     {
       "day": 62,
