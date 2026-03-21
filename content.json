@@ -719,8 +719,8 @@
       "code": "nums = [2, 4, 7, 10, 13, 17]\nleft, right, target = 0, len(nums) - 1, 10\n\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        print(mid)\n        break\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1",
       "output": "3",
       "explanation": "Binary search cuts the search space in half each step, making lookup very fast on sorted data.",
-      "status": "pending",
-      "upload_date": "2026-03-22"
+      "status": "uploaded",
+      "upload_date": "2026-03-21"
     },
     {
       "day": 63,
