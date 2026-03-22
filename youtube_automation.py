@@ -545,6 +545,8 @@ class YouTubeAutomation:
         if text == "":
             return [""]
 
+        text = text.expandtabs(4)
+
         leading_spaces = len(text) - len(text.lstrip(' '))
         continuation_prefix = " " * (leading_spaces + 4)
 
@@ -582,6 +584,38 @@ class YouTubeAutomation:
 
             remaining = remaining[cut:].lstrip(' \t')
             first_segment = False
+
+        return wrapped if wrapped else [""]
+
+    def wrap_text_by_width(self, text, draw, font, max_width):
+        """Wrap text by pixel width for UI-safe rendering."""
+        if text is None:
+            return [""]
+
+        if text == "":
+            return [""]
+
+        wrapped = []
+        remaining = text
+
+        while remaining:
+            cut = len(remaining)
+            while cut > 0 and self.measure_text_width(draw, remaining[:cut], font) > max_width:
+                cut -= 1
+
+            if cut <= 0:
+                cut = 1
+
+            chunk = remaining[:cut]
+
+            if cut < len(remaining):
+                break_at = chunk.rfind(' ')
+                if break_at > 0:
+                    chunk = remaining[:break_at + 1]
+                    cut = break_at + 1
+
+            wrapped.append(chunk.rstrip())
+            remaining = remaining[cut:].lstrip()
 
         return wrapped if wrapped else [""]
 
@@ -767,25 +801,15 @@ class YouTubeAutomation:
 
         # Output logic (Pinned to bottom of card)
         if show_output and output_text:
-            # Wrap output text to calculate dynamic height
+            # Wrap output text by pixel width so content never clips.
             out_lines = []
-            curr_l = ""
             displayed_output = output_text[:output_progress]
+            output_text_max_w = (code_card.width - 30) - 50 - 20
             
             # Pre-calculate ALL lines to determine full height needed
             full_out_lines = []
-            temp_l = ""
-            for char in output_text: # Calculate based on FULL text to size box correctly from start
-                if char == '\n':
-                    full_out_lines.append(temp_l)
-                    temp_l = ""
-                else:
-                    temp_l += char
-                    # Approx char limit per line
-                    if len(temp_l) > 30: 
-                         full_out_lines.append(temp_l)
-                         temp_l = ""
-            if temp_l: full_out_lines.append(temp_l)
+            for raw_line in output_text.split('\n'):
+                full_out_lines.extend(self.wrap_text_by_width(raw_line, code_draw, output_font, output_text_max_w))
             
             # Dynamic Height Calculation
             # Base height 145 (approx 3 lines) -> each extra line adds ~40px
@@ -819,17 +843,8 @@ class YouTubeAutomation:
             
             # Re-process displayed lines for actual rendering
             out_lines = []
-            curr_l = ""
-            for char in displayed_output:
-                if char == '\n':
-                    out_lines.append(curr_l)
-                    curr_l = ""
-                else:
-                    curr_l += char
-                    if len(curr_l) > 30: 
-                         out_lines.append(curr_l)
-                         curr_l = ""
-            if curr_l: out_lines.append(curr_l)
+            for raw_line in displayed_output.split('\n'):
+                out_lines.extend(self.wrap_text_by_width(raw_line, code_draw, output_font, output_text_max_w))
             
             # Show last N visible lines based on dynamic height
             visible_out = out_lines[-display_lines_count:]
