@@ -729,8 +729,8 @@
       "code": "words = ['python', 'ai', 'automation', 'ml']\nprint(sorted(words, key=len, reverse=True))",
       "output": "['automation', 'python', 'ai', 'ml']",
       "explanation": "The key function tells Python what value to compare. Here we sort by length, not alphabetically.",
-      "status": "pending",
-      "upload_date": "2026-03-23"
+      "status": "uploaded",
+      "upload_date": "2026-03-22"
     },
     {
       "day": 64,
