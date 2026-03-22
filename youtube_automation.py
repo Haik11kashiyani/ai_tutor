@@ -530,6 +530,61 @@ class YouTubeAutomation:
                      fill=glow_rgb + (60,), font=font)
         draw.text(pos, text, fill=color, font=font)
 
+    def measure_text_width(self, draw, text, font):
+        try:
+            bbox = draw.textbbox((0, 0), text, font=font)
+            return bbox[2] - bbox[0]
+        except Exception:
+            return 0
+
+    def wrap_code_line(self, text, draw, font, max_width):
+        """Wrap a single code line by pixel width while preserving indentation."""
+        if text is None:
+            return [""]
+
+        if text == "":
+            return [""]
+
+        leading_spaces = len(text) - len(text.lstrip(' '))
+        continuation_prefix = " " * (leading_spaces + 4)
+
+        wrapped = []
+        remaining = text
+        first_segment = True
+
+        while remaining:
+            prefix = "" if first_segment else continuation_prefix
+            prefix_w = self.measure_text_width(draw, prefix, font)
+            available_w = max_width - prefix_w
+
+            if available_w <= 10:
+                available_w = max_width
+                prefix = ""
+
+            cut = len(remaining)
+            while cut > 0 and self.measure_text_width(draw, remaining[:cut], font) > available_w:
+                cut -= 1
+
+            if cut <= 0:
+                cut = 1
+
+            chunk = remaining[:cut]
+
+            if cut < len(remaining):
+                break_at = max(chunk.rfind(' '), chunk.rfind('\t'))
+                if break_at > 0:
+                    chunk = remaining[:break_at + 1]
+                    cut = break_at + 1
+
+            chunk = chunk.rstrip(' \t')
+            segment_text = chunk if first_segment else (prefix + chunk.lstrip(' \t'))
+            wrapped.append(segment_text)
+
+            remaining = remaining[cut:].lstrip(' \t')
+            first_segment = False
+
+        return wrapped if wrapped else [""]
+
     def create_video_frame(self, scheme, day, title, language, code_lines, output_text, 
                           code_progress, output_progress, show_output, t_val=0, total_duration=10):
         
@@ -612,14 +667,9 @@ class YouTubeAutomation:
             
         frame.paste(title_card, (40, 50), title_card)
         
-        # --- SCROLLING LOGIC ---
-        MAX_LINES = 14
-        active_line_idx = len(code_progress) - 1
-        # Calculate scroll offset to keep active line within view
-        # We start scrolling when we go past MAX_LINES - 3
-        scroll_offset = max(0, active_line_idx - (MAX_LINES - 3)) 
-        
-        visible_lines = code_lines[scroll_offset : scroll_offset + MAX_LINES]
+        # --- CODE RENDERING LOGIC (WRAPPED VISUAL LINES) ---
+        MAX_VISUAL_LINES = 16
+        LINE_HEIGHT = 56
         
         # Fixed height for code card to ensure fit, large enough for code + output
         card_height = 1200 
@@ -659,65 +709,61 @@ class YouTubeAutomation:
         code_draw.text((text_x, badge_y + 18), day_text, fill='#ffffff', font=day_font)
         
         y_offset = 150
-        
-        # Draw Code Lines (Scrolled)
-        for i, line in enumerate(visible_lines):
-            # The line index in the original list is (i + scroll_offset)
-            original_idx = i + scroll_offset
-            
-            if original_idx < len(code_progress):
-                displayed_line = code_progress[original_idx]
-            else:
-                break # Don't draw future lines
-                
-            line_num_str = f"{original_idx + 1}."
-            
-            # --- DEBUG MODE: HIGHLIGHT ACTIVE LINE ---
-            # If this is the active line being typed (last line in progress), highlight it
-            if original_idx == len(code_progress) - 1 and len(code_progress) <= len(code_lines):
-                 # Draw semi-transparent rectangle behind the line
-                 highlight_color = self.hex_to_rgb(scheme['accent'])
-                 # Calculate width based on code card width (approx)
-                 highlight_w = code_card.width - 20
-                 # Draw with low alpha for subtle highlight
-                 code_draw.rectangle([10, y_offset, 10 + highlight_w, y_offset + 50], fill=highlight_color + (50,))
+        code_text_x = 85
+        code_text_max_w = code_card.width - code_text_x - 30
 
-            self.draw_text_with_glow(code_draw, (15, y_offset), line_num_str, code_font, '#888888', '#888888')
-            
-            if not displayed_line.strip():
-                y_offset += 60
-                continue
-            
-            # Syntax Highlighting with Chunks
-            chunks = self.get_text_chunks(displayed_line, language)
-            
-            x_current = 85
-            for chunk_text, chunk_color in chunks:
-                self.draw_text_with_glow(code_draw, (x_current, y_offset), chunk_text, code_font, chunk_color, chunk_color)
-                # Calculate width of this chunk to advance cursor
-                try:
-                    chunk_w = code_draw.textbbox((0,0), chunk_text, font=code_font)[2]
-                except: chunk_w = 0
-                x_current += chunk_w
-                
-            y_offset += 60
-        
-        # Cursor logic
-        if code_progress:
-            last_visible_idx = len(code_progress) - 1 - scroll_offset
-            # Only draw cursor if it's within visible range
-            if 0 <= last_visible_idx < MAX_LINES:
-                current_line_content = code_progress[-1]
-                cursor_y = 150 + last_visible_idx * 60
-                
-                try:
-                    width_of_text = code_draw.textbbox((0, 0), current_line_content, font=code_font)[2]
-                except: width_of_text = 0
-                cursor_x = 85 + width_of_text
-                
-                # Blinking effect
-                if int(t_val * 2) % 2 == 0:
-                    code_draw.rectangle([cursor_x, cursor_y, cursor_x+5, cursor_y+45], fill='#ffffff')
+        visual_entries = []
+        typed_count = len(code_progress)
+
+        for original_idx in range(typed_count):
+            displayed_line = code_progress[original_idx]
+            wrapped_segments = self.wrap_code_line(displayed_line, code_draw, code_font, code_text_max_w)
+
+            if not wrapped_segments:
+                wrapped_segments = [""]
+
+            for seg_idx, segment in enumerate(wrapped_segments):
+                visual_entries.append({
+                    "original_idx": original_idx,
+                    "line_num": f"{original_idx + 1}." if seg_idx == 0 else "",
+                    "text": segment,
+                    "is_active": (original_idx == typed_count - 1 and seg_idx == len(wrapped_segments) - 1)
+                })
+
+        visible_entries = visual_entries[-MAX_VISUAL_LINES:]
+        active_entry_for_cursor = None
+
+        for entry in visible_entries:
+            if entry["is_active"]:
+                highlight_color = self.hex_to_rgb(scheme['accent'])
+                highlight_w = code_card.width - 20
+                code_draw.rectangle([10, y_offset, 10 + highlight_w, y_offset + 50], fill=highlight_color + (50,))
+
+            if entry["line_num"]:
+                self.draw_text_with_glow(code_draw, (15, y_offset), entry["line_num"], code_font, '#888888', '#888888')
+
+            if entry["text"].strip():
+                chunks = self.get_text_chunks(entry["text"], language)
+                x_current = code_text_x
+                for chunk_text, chunk_color in chunks:
+                    self.draw_text_with_glow(code_draw, (x_current, y_offset), chunk_text, code_font, chunk_color, chunk_color)
+                    chunk_w = self.measure_text_width(code_draw, chunk_text, code_font)
+                    x_current += chunk_w
+
+            if entry["is_active"]:
+                active_entry_for_cursor = {
+                    "x": code_text_x + self.measure_text_width(code_draw, entry["text"], code_font),
+                    "y": y_offset
+                }
+
+            y_offset += LINE_HEIGHT
+
+        if active_entry_for_cursor and int(t_val * 2) % 2 == 0:
+            code_draw.rectangle(
+                [active_entry_for_cursor["x"], active_entry_for_cursor["y"],
+                 active_entry_for_cursor["x"] + 5, active_entry_for_cursor["y"] + 45],
+                fill='#ffffff'
+            )
 
         # Output logic (Pinned to bottom of card)
         if show_output and output_text:
