@@ -739,8 +739,8 @@
       "code": "nums = [1, 2, 3, 4]\nsquares = {n: n*n for n in nums}\nprint(squares)",
       "output": "{1: 1, 2: 4, 3: 9, 4: 16}",
       "explanation": "Comprehensions build collections in a clean and expressive one-liner.",
-      "status": "pending",
-      "upload_date": "2026-03-24"
+      "status": "uploaded",
+      "upload_date": "2026-03-23"
     },
     {
       "day": 65,
