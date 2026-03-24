@@ -749,8 +749,8 @@
       "code": "def countdown(n):\n    while n:\n        yield n\n        n -= 1\n\nprint(list(countdown(3)))",
       "output": "[3, 2, 1]",
       "explanation": "Generators yield values lazily, so you do not store everything in memory at once.",
-      "status": "pending",
-      "upload_date": "2026-03-25"
+      "status": "uploaded",
+      "upload_date": "2026-03-24"
     },
     {
       "day": 66,
