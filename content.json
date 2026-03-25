@@ -759,8 +759,8 @@
       "code": "def letters():\n    yield from 'ABC'\n\nprint(list(letters()))",
       "output": "['A', 'B', 'C']",
       "explanation": "yield from forwards values from another iterable, making generator composition simple.",
-      "status": "pending",
-      "upload_date": "2026-03-26"
+      "status": "uploaded",
+      "upload_date": "2026-03-25"
     },
     {
       "day": 67,
