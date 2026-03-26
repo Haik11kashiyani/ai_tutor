@@ -769,8 +769,8 @@
       "code": "def loud(fn):\n    def wrapper():\n        return fn().upper()\n    return wrapper\n\n@loud\ndef greet():\n    return 'hello'\n\nprint(greet())",
       "output": "HELLO",
       "explanation": "Decorators wrap behavior around a function without changing its core code.",
-      "status": "pending",
-      "upload_date": "2026-03-27"
+      "status": "uploaded",
+      "upload_date": "2026-03-26"
     },
     {
       "day": 68,
