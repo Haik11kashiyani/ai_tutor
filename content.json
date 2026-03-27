@@ -779,8 +779,8 @@
       "code": "def repeat(times):\n    def deco(fn):\n        def wrapper():\n            for _ in range(times):\n                fn()\n        return wrapper\n    return deco\n\n@repeat(2)\ndef ping():\n    print('ping')\n\nping()",
       "output": "ping\nping",
       "explanation": "A decorator can accept arguments, so behavior becomes reusable and configurable.",
-      "status": "pending",
-      "upload_date": "2026-03-28"
+      "status": "uploaded",
+      "upload_date": "2026-03-27"
     },
     {
       "day": 69,
