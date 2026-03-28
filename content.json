@@ -789,8 +789,8 @@
       "code": "def counter():\n    value = 0\n    def inc():\n        nonlocal value\n        value += 1\n        return value\n    return inc\n\nc = counter()\nprint(c(), c())",
       "output": "1 2",
       "explanation": "A closure remembers variables from its outer scope, even after that scope is finished.",
-      "status": "pending",
-      "upload_date": "2026-03-29"
+      "status": "uploaded",
+      "upload_date": "2026-03-28"
     },
     {
       "day": 70,
