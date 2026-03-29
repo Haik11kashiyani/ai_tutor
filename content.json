@@ -799,8 +799,8 @@
       "code": "from functools import reduce\nnums = [1, 2, 3, 4]\nev = list(filter(lambda x: x % 2 == 0, nums))\nprint(reduce(lambda a, b: a + b, ev))",
       "output": "6",
       "explanation": "Functional tools let you transform, filter, and aggregate data in pipeline style.",
-      "status": "pending",
-      "upload_date": "2026-03-30"
+      "status": "uploaded",
+      "upload_date": "2026-03-29"
     },
     {
       "day": 71,
