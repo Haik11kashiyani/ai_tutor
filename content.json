@@ -809,8 +809,8 @@
       "code": "scores = [90, 82, 77]\nprint(all(s >= 70 for s in scores))\nprint(any(s > 95 for s in scores))",
       "output": "True\nFalse",
       "explanation": "Use all for every-condition checks and any for at-least-one checks.",
-      "status": "pending",
-      "upload_date": "2026-03-31"
+      "status": "uploaded",
+      "upload_date": "2026-03-30"
     },
     {
       "day": 72,
