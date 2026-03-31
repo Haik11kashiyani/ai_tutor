@@ -819,8 +819,8 @@
       "code": "first, *middle, last = [10, 20, 30, 40, 50]\nprint(first, middle, last)",
       "output": "10 [20, 30, 40] 50",
       "explanation": "Star unpacking captures flexible chunks from iterables.",
-      "status": "pending",
-      "upload_date": "2026-04-01"
+      "status": "uploaded",
+      "upload_date": "2026-03-31"
     },
     {
       "day": 73,
