@@ -829,8 +829,8 @@
       "code": "def debug(*args, **kwargs):\n    print(args)\n    print(kwargs)\n\ndebug(1, 2, mode='fast', retry=3)",
       "output": "(1, 2)\n{'mode': 'fast', 'retry': 3}",
       "explanation": "Use *args for positional flexibility and **kwargs for named flexibility.",
-      "status": "pending",
-      "upload_date": "2026-04-02"
+      "status": "uploaded",
+      "upload_date": "2026-04-01"
     },
     {
       "day": 74,
