@@ -839,8 +839,8 @@
       "code": "from dataclasses import dataclass\n\n@dataclass\nclass User:\n    name: str\n    level: int\n\nprint(User('Hardik', 7))",
       "output": "User(name='Hardik', level=7)",
       "explanation": "Dataclasses auto-generate init and repr, reducing boilerplate.",
-      "status": "pending",
-      "upload_date": "2026-04-03"
+      "status": "uploaded",
+      "upload_date": "2026-04-02"
     },
     {
       "day": 75,
