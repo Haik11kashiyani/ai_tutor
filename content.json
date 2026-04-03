@@ -849,8 +849,8 @@
       "code": "class Temp:\n    def __init__(self, c):\n        self._c = c\n\n    @property\n    def f(self):\n        return self._c * 9 / 5 + 32\n\n\nprint(Temp(30).f)",
       "output": "86.0",
       "explanation": "Properties expose computed values like attributes while keeping logic inside class methods.",
-      "status": "pending",
-      "upload_date": "2026-04-04"
+      "status": "uploaded",
+      "upload_date": "2026-04-03"
     },
     {
       "day": 76,
