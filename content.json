@@ -859,8 +859,8 @@
       "code": "class Item:\n    tax = 0.1\n\n    @classmethod\n    def with_tax(cls, price):\n        return price * (1 + cls.tax)\n\n    @staticmethod\n    def is_valid(price):\n        return price > 0\n\n\nprint(Item.with_tax(100), Item.is_valid(100))",
       "output": "110.00000000000001 True",
       "explanation": "classmethod knows the class, staticmethod is just a namespaced utility function.",
-      "status": "pending",
-      "upload_date": "2026-04-05"
+      "status": "uploaded",
+      "upload_date": "2026-04-04"
     },
     {
       "day": 77,
