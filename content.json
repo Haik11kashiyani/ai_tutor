@@ -869,8 +869,8 @@
       "code": "class NegativeBalanceError(Exception):\n    pass\n\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise NegativeBalanceError('Insufficient funds')\n\nwithdraw(100, 120)",
       "output": "NegativeBalanceError: Insufficient funds",
       "explanation": "Custom exceptions communicate intent better than generic crashes.",
-      "status": "pending",
-      "upload_date": "2026-04-06"
+      "status": "uploaded",
+      "upload_date": "2026-04-05"
     },
     {
       "day": 78,
