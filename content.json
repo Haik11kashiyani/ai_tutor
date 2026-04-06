@@ -879,8 +879,8 @@
       "code": "import logging\nlogging.basicConfig(level=logging.INFO)\nlogging.info('Pipeline started')",
       "output": "INFO:root:Pipeline started",
       "explanation": "Logging is better than print in real systems because levels and formatting are built in.",
-      "status": "pending",
-      "upload_date": "2026-04-07"
+      "status": "uploaded",
+      "upload_date": "2026-04-06"
     },
     {
       "day": 79,
