@@ -889,8 +889,8 @@
       "code": "from pathlib import Path\np = Path('output') / 'video.mp4'\nprint(p.as_posix())",
       "output": "output/video.mp4",
       "explanation": "Pathlib gives cleaner, safer file path operations across operating systems.",
-      "status": "pending",
-      "upload_date": "2026-04-08"
+      "status": "uploaded",
+      "upload_date": "2026-04-07"
     },
     {
       "day": 80,
