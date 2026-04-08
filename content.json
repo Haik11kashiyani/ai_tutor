@@ -899,8 +899,8 @@
       "code": "import re\ntext = 'mail me at hi@test.com'\nprint(bool(re.search(r'\\S+@\\S+\\.\\S+', text)))",
       "output": "True",
       "explanation": "Regular expressions help match complex text patterns efficiently.",
-      "status": "pending",
-      "upload_date": "2026-04-09"
+      "status": "uploaded",
+      "upload_date": "2026-04-08"
     },
     {
       "day": 81,
