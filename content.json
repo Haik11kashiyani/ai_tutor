@@ -909,7 +909,7 @@
       "code": "import re\nm = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', '2026-04-10')\nprint(m.groups())",
       "output": "('2026', '04', '10')",
       "explanation": "Groups let you capture specific pieces from a matched pattern.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-10"
     },
     {
