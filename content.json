@@ -919,7 +919,7 @@
       "code": "class Timer:\n    def __enter__(self):\n        print('start')\n    def __exit__(self, exc_type, exc, tb):\n        print('end')\n\nwith Timer():\n    print('work')",
       "output": "start\nwork\nend",
       "explanation": "Context managers guarantee setup and cleanup around critical code blocks.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-11"
     },
     {
