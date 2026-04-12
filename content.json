@@ -929,7 +929,7 @@
       "code": "from contextlib import contextmanager\n\n@contextmanager\ndef section(name):\n    print(f'BEGIN {name}')\n    yield\n    print(f'END {name}')\n\nwith section('ETL'):\n    print('running')",
       "output": "BEGIN ETL\nrunning\nEND ETL",
       "explanation": "contextmanager decorator creates context managers without writing a full class.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-12"
     },
     {
