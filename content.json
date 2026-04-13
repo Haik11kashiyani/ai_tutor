@@ -939,7 +939,7 @@
       "code": "from typing import List\n\ndef avg(nums: List[int]) -> float:\n    return sum(nums)/len(nums)\n\nprint(avg([2, 4, 6]))",
       "output": "4.0",
       "explanation": "Type hints improve readability and tooling for larger codebases.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-13"
     },
     {
