@@ -949,7 +949,7 @@
       "code": "from abc import ABC, abstractmethod\n\nclass Storage(ABC):\n    @abstractmethod\n    def save(self, data): ...",
       "output": "No output",
       "explanation": "ABCs define contracts so implementations stay consistent.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-14"
     },
     {
