@@ -959,7 +959,7 @@
       "code": "import unittest\n\ndef add(a, b): return a + b\n\nclass TestMath(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)",
       "output": "Test passes",
       "explanation": "Automated tests catch regressions before they hit production.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-15"
     },
     {
