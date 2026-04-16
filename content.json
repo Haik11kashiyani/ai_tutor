@@ -969,7 +969,7 @@
       "code": "import unittest\n\nclass T(unittest.TestCase):\n    def test_error(self):\n        with self.assertRaises(ZeroDivisionError):\n            _ = 1/0",
       "output": "Test passes",
       "explanation": "Good tests verify both expected behavior and expected failures.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-16"
     },
     {
