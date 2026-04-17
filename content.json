@@ -979,7 +979,7 @@
       "code": "from unittest.mock import patch\n\nwith patch('random.randint', return_value=7):\n    import random\n    print(random.randint(1, 10))",
       "output": "7",
       "explanation": "Mocks isolate your tests from external randomness, APIs, and side effects.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-17"
     },
     {
