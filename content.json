@@ -989,7 +989,7 @@
       "code": "import json\npayload = {'ok': True, 'count': 3}\ntext = json.dumps(payload)\nprint(json.loads(text)['count'])",
       "output": "3",
       "explanation": "Serialize with dumps and deserialize with loads to move structured data safely.",
-      "status": "pending",
+      "status": "uploaded",
       "upload_date": "2026-04-18"
     },
     {
