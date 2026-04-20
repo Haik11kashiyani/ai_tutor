@@ -999,8 +999,8 @@
       "code": "import csv\nrows = [['name', 'score'], ['A', 90], ['B', 75]]\nprint(rows[1][0], rows[1][1])",
       "output": "A 90",
       "explanation": "CSV is still a major data format in analytics and automation pipelines.",
-      "status": "pending",
-      "upload_date": "2026-04-19"
+      "status": "uploaded",
+      "upload_date": "2026-04-20"
     },
     {
       "day": 91,
