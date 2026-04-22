@@ -1009,8 +1009,8 @@
       "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\ncur = conn.cursor()\ncur.execute('CREATE TABLE users(name TEXT)')\ncur.execute('INSERT INTO users VALUES (?)', ('Hardik',))\nprint(cur.execute('SELECT COUNT(*) FROM users').fetchone()[0])",
       "output": "1",
       "explanation": "SQLite is perfect for local apps, prototyping, and lightweight persistence.",
-      "status": "pending",
-      "upload_date": "2026-04-20"
+      "status": "uploaded",
+      "upload_date": "2026-04-22"
     },
     {
       "day": 92,
