@@ -1019,8 +1019,8 @@
       "code": "import sqlite3\nconn = sqlite3.connect(':memory:')\ncur = conn.cursor()\ncur.execute('CREATE TABLE t(v INT)')\nconn.execute('BEGIN')\ncur.execute('INSERT INTO t VALUES (1)')\nconn.rollback()\nprint(cur.execute('SELECT COUNT(*) FROM t').fetchone()[0])",
       "output": "0",
       "explanation": "Transactions ensure all-or-nothing safety for critical data changes.",
-      "status": "pending",
-      "upload_date": "2026-04-21"
+      "status": "uploaded",
+      "upload_date": "2026-04-23"
     },
     {
       "day": 93,
