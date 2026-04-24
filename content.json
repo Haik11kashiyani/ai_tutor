@@ -1029,8 +1029,8 @@
       "code": "import heapq\nq = []\nheapq.heappush(q, (2, 'low'))\nheapq.heappush(q, (1, 'high'))\nprint(heapq.heappop(q)[1])",
       "output": "high",
       "explanation": "Heaps always pop the smallest priority first, ideal for schedulers and pathfinding.",
-      "status": "pending",
-      "upload_date": "2026-04-22"
+      "status": "uploaded",
+      "upload_date": "2026-04-24"
     },
     {
       "day": 94,
