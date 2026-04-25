@@ -1039,8 +1039,8 @@
       "code": "from collections import Counter, defaultdict\n\nprint(Counter('banana')['a'])\n\nd = defaultdict(int)\nd['x'] += 1\nprint(d['x'])",
       "output": "3\n1",
       "explanation": "collections module gives battle-tested data structures for common patterns.",
-      "status": "pending",
-      "upload_date": "2026-04-23"
+      "status": "uploaded",
+      "upload_date": "2026-04-25"
     },
     {
       "day": 95,
