@@ -1049,8 +1049,8 @@
       "code": "from collections import deque\n\nwindow = deque(maxlen=3)\nfor x in [1, 2, 3, 4]:\n    window.append(x)\n\nprint(list(window))",
       "output": "[2, 3, 4]",
       "explanation": "deque with maxlen is perfect for rolling buffers and streaming metrics.",
-      "status": "pending",
-      "upload_date": "2026-04-24"
+      "status": "uploaded",
+      "upload_date": "2026-04-26"
     },
     {
       "day": 96,
