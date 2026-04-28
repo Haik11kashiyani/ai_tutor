@@ -1069,8 +1069,8 @@
       "code": "from itertools import product, permutations\nprint(list(product([1,2], ['A'])))\nprint(len(list(permutations([1,2,3], 2))))",
       "output": "[(1, 'A'), (2, 'A')]\n6",
       "explanation": "itertools helps generate combinations efficiently without manual nested loops.",
-      "status": "pending",
-      "upload_date": "2026-04-26"
+      "status": "uploaded",
+      "upload_date": "2026-04-28"
     },
     {
       "day": 98,
