@@ -1079,8 +1079,8 @@
       "code": "from itertools import groupby\nitems = ['a', 'a', 'b', 'b', 'b']\nfor k, g in groupby(items):\n    print(k, len(list(g)))",
       "output": "a 2\nb 3",
       "explanation": "groupby summarizes consecutive runs, useful after sorting by key.",
-      "status": "pending",
-      "upload_date": "2026-04-27"
+      "status": "uploaded",
+      "upload_date": "2026-04-29"
     },
     {
       "day": 99,
