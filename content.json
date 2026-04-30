@@ -1089,8 +1089,8 @@
       "code": "from functools import lru_cache\n@lru_cache(maxsize=None)\ndef fib(n):\n    return n if n < 2 else fib(n-1) + fib(n-2)\nprint(fib(10))",
       "output": "55",
       "explanation": "Caching saves repeated computation and can turn slow recursion into fast solutions.",
-      "status": "pending",
-      "upload_date": "2026-04-28"
+      "status": "uploaded",
+      "upload_date": "2026-04-30"
     },
     {
       "day": 100,
