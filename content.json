@@ -1109,8 +1109,8 @@
       "code": "s = 'level'\nl, r = 0, len(s) - 1\nok = True\n\nwhile l < r:\n    if s[l] != s[r]:\n        ok = False\n        break\n    l += 1\n    r -= 1\n\nprint(ok)",
       "output": "True",
       "explanation": "Two pointers solve many array and string tasks in linear time.",
-      "status": "pending",
-      "upload_date": "2026-04-30"
+      "status": "uploaded",
+      "upload_date": "2026-05-02"
     },
     {
       "day": 102,
