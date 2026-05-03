@@ -1119,8 +1119,8 @@
       "code": "s = '([])'\nstack = []\npairs = {')':'(', ']':'[', '}':'{'}\nfor ch in s:\n    if ch in '([{': stack.append(ch)\n    else:\n        if not stack or stack.pop() != pairs[ch]:\n            print(False); break\nelse:\n    print(not stack)",
       "output": "True",
       "explanation": "Stacks track nested structure and are essential for parser-like problems.",
-      "status": "pending",
-      "upload_date": "2026-05-01"
+      "status": "uploaded",
+      "upload_date": "2026-05-03"
     },
     {
       "day": 103,
