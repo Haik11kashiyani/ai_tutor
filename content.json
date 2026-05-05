@@ -1129,8 +1129,8 @@
       "code": "from collections import deque\n\ngraph = {1: [2, 3], 2: [4], 3: [], 4: []}\nq, seen = deque([1]), {1}\n\nwhile q:\n    node = q.popleft()\n    print(node, end=' ')\n    for nei in graph[node]:\n        if nei not in seen:\n            seen.add(nei)\n            q.append(nei)",
       "output": "1 2 3 4",
       "explanation": "BFS explores level by level and is core to shortest path in unweighted graphs.",
-      "status": "pending",
-      "upload_date": "2026-05-02"
+      "status": "uploaded",
+      "upload_date": "2026-05-05"
     },
     {
       "day": 104,
