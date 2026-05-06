@@ -1139,8 +1139,8 @@
       "code": "graph = {1: [2, 3], 2: [4], 3: [], 4: []}\nseen = set()\n\ndef dfs(n):\n    if n in seen:\n        return\n    seen.add(n)\n    print(n, end=' ')\n    for nei in graph[n]:\n        dfs(nei)\n\n\ndfs(1)",
       "output": "1 2 4 3",
       "explanation": "DFS goes deep before backtracking and appears in trees, graphs, and backtracking tasks.",
-      "status": "pending",
-      "upload_date": "2026-05-03"
+      "status": "uploaded",
+      "upload_date": "2026-05-06"
     },
     {
       "day": 105,
