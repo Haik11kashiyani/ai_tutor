@@ -1149,8 +1149,8 @@
       "code": "import heapq\n\ng = {'A': [('B', 1), ('C', 4)], 'B': [('C', 2)], 'C': []}\nd = {'A': 0, 'B': float('inf'), 'C': float('inf')}\npq = [(0, 'A')]\n\nwhile pq:\n    dist, u = heapq.heappop(pq)\n    if dist > d[u]:\n        continue\n    for v, w in g[u]:\n        if dist + w < d[v]:\n            d[v] = dist + w\n            heapq.heappush(pq, (d[v], v))\n\nprint(d['C'])",
       "output": "3",
       "explanation": "Dijkstra finds shortest paths on weighted graphs with non-negative edges.",
-      "status": "pending",
-      "upload_date": "2026-05-04"
+      "status": "uploaded",
+      "upload_date": "2026-05-07"
     },
     {
       "day": 106,
