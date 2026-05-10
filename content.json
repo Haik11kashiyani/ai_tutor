@@ -1179,8 +1179,8 @@
       "code": "import heapq\nnums = [9, 1, 7, 3, 10]\nprint(heapq.nlargest(3, nums))",
       "output": "[10, 9, 7]",
       "explanation": "Heaps extract top-k efficiently without full sorting.",
-      "status": "pending",
-      "upload_date": "2026-05-07"
+      "status": "uploaded",
+      "upload_date": "2026-05-10"
     },
     {
       "day": 109,
