@@ -1189,8 +1189,8 @@
       "code": "import asyncio\n\nasync def main():\n    print('start')\n    await asyncio.sleep(0.1)\n    print('done')\n\nasyncio.run(main())",
       "output": "start\ndone",
       "explanation": "Async lets a program handle many waiting tasks efficiently in one thread.",
-      "status": "pending",
-      "upload_date": "2026-05-08"
+      "status": "uploaded",
+      "upload_date": "2026-05-11"
     },
     {
       "day": 110,
