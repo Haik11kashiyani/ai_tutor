@@ -1199,8 +1199,8 @@
       "code": "import asyncio\n\nasync def work(n):\n    await asyncio.sleep(0.1)\n    return n\n\n\nasync def main():\n    results = await asyncio.gather(work(1), work(2))\n    print(results)\n\n\nasyncio.run(main())",
       "output": "[1, 2]",
       "explanation": "gather schedules multiple coroutines and waits for all results together.",
-      "status": "pending",
-      "upload_date": "2026-05-09"
+      "status": "uploaded",
+      "upload_date": "2026-05-12"
     },
     {
       "day": 111,
