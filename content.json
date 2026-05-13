@@ -1209,8 +1209,8 @@
       "code": "import asyncio\n\nasync def slow():\n    await asyncio.sleep(1)\n\nasync def main():\n    try:\n        await asyncio.wait_for(slow(), timeout=0.1)\n    except asyncio.TimeoutError:\n        print('timed out')\n\nasyncio.run(main())",
       "output": "timed out",
       "explanation": "Timeouts prevent your async workflow from hanging forever on slow operations.",
-      "status": "pending",
-      "upload_date": "2026-05-10"
+      "status": "uploaded",
+      "upload_date": "2026-05-13"
     },
     {
       "day": 112,
