@@ -1219,8 +1219,8 @@
       "code": "from queue import Queue\nfrom threading import Thread\nq = Queue()\n\ndef worker():\n    print(q.get())\n    q.task_done()\n\nThread(target=worker).start()\nq.put('job-1')",
       "output": "job-1",
       "explanation": "Queue makes thread communication safer than sharing mutable data directly.",
-      "status": "pending",
-      "upload_date": "2026-05-11"
+      "status": "uploaded",
+      "upload_date": "2026-05-14"
     },
     {
       "day": 113,
