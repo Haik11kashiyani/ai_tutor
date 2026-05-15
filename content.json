@@ -1229,8 +1229,8 @@
       "code": "from multiprocessing import Pool\n\ndef square(x): return x*x\n\nwith Pool(2) as p:\n    print(p.map(square, [2,3,4]))",
       "output": "[4, 9, 16]",
       "explanation": "Use processes for CPU-heavy tasks to bypass the GIL and scale better.",
-      "status": "pending",
-      "upload_date": "2026-05-12"
+      "status": "uploaded",
+      "upload_date": "2026-05-15"
     },
     {
       "day": 114,
