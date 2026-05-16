@@ -1239,8 +1239,8 @@
       "code": "from urllib.parse import urlencode\nparams = urlencode({'q': 'python'})\nprint(f'https://example.com/search?{params}')",
       "output": "https://example.com/search?q=python",
       "explanation": "Even with stdlib, you can build robust URLs and request workflows.",
-      "status": "pending",
-      "upload_date": "2026-05-13"
+      "status": "uploaded",
+      "upload_date": "2026-05-16"
     },
     {
       "day": 115,
