@@ -1249,8 +1249,8 @@
       "code": "import time\nfor attempt in range(3):\n    wait = 2 ** attempt\n    print(f'attempt {attempt+1}, wait {wait}s')\n    time.sleep(0)",
       "output": "attempt 1, wait 1s\nattempt 2, wait 2s\nattempt 3, wait 4s",
       "explanation": "Backoff retries reduce pressure on flaky services and improve reliability.",
-      "status": "pending",
-      "upload_date": "2026-05-14"
+      "status": "uploaded",
+      "upload_date": "2026-05-17"
     },
     {
       "day": 116,
