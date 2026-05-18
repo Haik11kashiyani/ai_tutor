@@ -1259,8 +1259,8 @@
       "code": "import argparse\nparser = argparse.ArgumentParser()\nparser.add_argument('--name')\nargs = parser.parse_args(['--name', 'Hardik'])\nprint(args.name)",
       "output": "Hardik",
       "explanation": "argparse turns scripts into proper command-line tools.",
-      "status": "pending",
-      "upload_date": "2026-05-15"
+      "status": "uploaded",
+      "upload_date": "2026-05-18"
     },
     {
       "day": 117,
