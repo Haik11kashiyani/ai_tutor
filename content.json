@@ -1269,8 +1269,8 @@
       "code": "# mypkg/__init__.py\n# mypkg/core.py\ndef run():\n    return 'ready'\n\nprint(run())",
       "output": "ready",
       "explanation": "Organizing code into packages keeps projects maintainable as they grow.",
-      "status": "pending",
-      "upload_date": "2026-05-16"
+      "status": "uploaded",
+      "upload_date": "2026-05-19"
     },
     {
       "day": 118,
