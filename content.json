@@ -1279,8 +1279,8 @@
       "code": "class APIClient:\n    def __init__(self, base): self.base = base\n    def endpoint(self, path): return f'{self.base}/{path}'\n\nclient = APIClient('https://api.site.com')\nprint(client.endpoint('health'))",
       "output": "https://api.site.com/health",
       "explanation": "Create reusable client abstractions for cleaner integration code.",
-      "status": "pending",
-      "upload_date": "2026-05-17"
+      "status": "uploaded",
+      "upload_date": "2026-05-20"
     },
     {
       "day": 119,
