@@ -1289,8 +1289,8 @@
       "code": "tasks = []\n\ndef add_task(name, prio):\n    tasks.append((prio, name))\n\n\nadd_task('render', 2)\nadd_task('upload', 1)\nprint(sorted(tasks))",
       "output": "[(1, 'upload'), (2, 'render')]",
       "explanation": "A small scheduler combines data structures, sorting, and system design thinking.",
-      "status": "pending",
-      "upload_date": "2026-05-18"
+      "status": "uploaded",
+      "upload_date": "2026-05-21"
     },
     {
       "day": 120,
