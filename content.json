@@ -1299,8 +1299,8 @@
       "code": "def extract(): return [1,2,3]\ndef transform(data): return [x*10 for x in data]\ndef load(data): print(data)\n\nload(transform(extract()))",
       "output": "[10, 20, 30]",
       "explanation": "You now combine modular design, transformations, and execution flow like a real engineering pipeline.",
-      "status": "pending",
-      "upload_date": "2026-05-19"
+      "status": "uploaded",
+      "upload_date": "2026-05-22"
     }
   ]
 }
