@@ -192,6 +192,32 @@ class YouTubeAutomation:
                 return day
         return None
 
+    def create_next_pending_day(self, data):
+        """Create a draft day when the queue is exhausted so the automation can keep running."""
+        days = data.get('days', [])
+        if not days:
+            return None
+
+        last_day = max(days, key=lambda day: day.get('day', 0))
+        next_day_number = int(last_day.get('day', len(days))) + 1
+
+        next_day = {
+            'day': next_day_number,
+            'title': f'Day {next_day_number}: New Python Concept',
+            'hook': 'Fresh lesson incoming!',
+            'cta': 'Follow for the next one!',
+            'language': last_day.get('language', 'python'),
+            'code': "print('Coming soon')",
+            'output': 'Coming soon',
+            'explanation': (
+                'Auto-generated placeholder lesson created because every existing day was already uploaded.'
+            ),
+            'status': 'pending'
+        }
+
+        days.append(next_day)
+        return next_day
+
     def generate_dynamic_theme(self, topic):
         """Generates a unique color scheme for the video using AI or Random Logic."""
         if self.has_ai:
@@ -1086,8 +1112,13 @@ class YouTubeAutomation:
         data = self.load_content(json_path)
         day_data = self.get_next_pending_day(data)
         if not day_data:
-            print("🎉 No pending videos! All days have been uploaded.")
-            return
+            print("⚠️ No pending videos found. Creating the next draft day automatically.")
+            day_data = self.create_next_pending_day(data)
+            if not day_data:
+                print("❌ Could not create a fallback day. Please add a new pending entry to content.json.")
+                return
+            self.save_content(data, json_path)
+            print(f"📝 Added draft Day {day_data['day']} to {json_path}")
 
         # LAUNCH GUARD: Skip runs on Jan 6th 2026 (User requested start from the 7th)
         if datetime.now().strftime('%Y-%m-%d') == '2026-01-06':
