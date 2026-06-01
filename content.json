@@ -1313,6 +1313,18 @@
       "explanation": "Auto-generated placeholder lesson created because every existing day was already uploaded.",
       "status": "uploaded",
       "upload_date": "2026-05-31"
+    },
+    {
+      "day": 122,
+      "title": "Day 122: New Python Concept",
+      "hook": "Fresh lesson incoming!",
+      "cta": "Follow for the next one!",
+      "language": "python",
+      "code": "print('Coming soon')",
+      "output": "Coming soon",
+      "explanation": "Auto-generated placeholder lesson created because every existing day was already uploaded.",
+      "status": "uploaded",
+      "upload_date": "2026-06-01"
     }
   ]
 }
