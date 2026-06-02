@@ -11,8 +11,6 @@ from datetime import datetime
 
 import math
 
-import math
-
 try:
     from pygments import lex
     from pygments.lexers import get_lexer_by_name, guess_lexer
@@ -193,27 +191,119 @@ class YouTubeAutomation:
         return None
 
     def create_next_pending_day(self, data):
-        """Create a draft day when the queue is exhausted so the automation can keep running."""
+        """Create a draft day when the queue is exhausted so the automation can keep running.
+        Uses AI to generate real lesson content instead of placeholder text."""
         days = data.get('days', [])
         if not days:
             return None
 
         last_day = max(days, key=lambda day: day.get('day', 0))
         next_day_number = int(last_day.get('day', len(days))) + 1
+        language = last_day.get('language', 'python')
 
-        next_day = {
-            'day': next_day_number,
-            'title': f'Day {next_day_number}: New Python Concept',
-            'hook': 'Fresh lesson incoming!',
-            'cta': 'Follow for the next one!',
-            'language': last_day.get('language', 'python'),
-            'code': "print('Coming soon')",
-            'output': 'Coming soon',
-            'explanation': (
-                'Auto-generated placeholder lesson created because every existing day was already uploaded.'
-            ),
-            'status': 'pending'
-        }
+        # Collect recent topics to avoid repetition
+        recent_titles = [d.get('title', '') for d in days[-10:]]
+        recent_topics_str = ', '.join(recent_titles)
+
+        next_day = None
+
+        # Try AI-generated content first
+        if self.has_ai:
+            try:
+                prompt = f"""
+                Generate a new Python coding lesson for Day {next_day_number} of a "Learn Python" YouTube Shorts series.
+
+                RECENT TOPICS (avoid repeating these):
+                {recent_topics_str}
+
+                REQUIREMENTS:
+                1. Pick a useful, interesting Python concept that hasn't been covered recently.
+                2. The code MUST be short (3-8 lines max) and run without external dependencies.
+                3. The code MUST produce visible output via print().
+                4. The output MUST be the EXACT text the code produces when run.
+                5. Title should be catchy with an emoji.
+                6. Hook should be a short attention-grabbing sentence.
+                7. Explanation should be 1-2 sentences, simple and energetic.
+
+                Return ONLY a JSON object with these exact keys:
+                {{
+                    "title": "Catchy Title With Emoji",
+                    "hook": "Short attention grabbing hook",
+                    "cta": "Short call to action",
+                    "code": "the python code",
+                    "output": "exact output of the code",
+                    "explanation": "Simple 1-2 sentence explanation"
+                }}
+                """
+                response = self.genai_model.generate_content(prompt)
+                text = response.text.replace('```json', '').replace('```', '').strip()
+                ai_content = json.loads(text)
+
+                next_day = {
+                    'day': next_day_number,
+                    'title': ai_content.get('title', f'Python Tip #{next_day_number}'),
+                    'hook': ai_content.get('hook', 'Check this out!'),
+                    'cta': ai_content.get('cta', 'Follow for more!'),
+                    'language': language,
+                    'code': ai_content.get('code', ''),
+                    'output': ai_content.get('output', ''),
+                    'explanation': ai_content.get('explanation', ''),
+                    'status': 'pending'
+                }
+
+                # Validate: code and output must not be empty or placeholder
+                if not next_day['code'].strip() or not next_day['output'].strip():
+                    print("⚠️ AI returned empty code/output. Falling back to template.")
+                    next_day = None
+                else:
+                    print(f"✅ AI generated Day {next_day_number}: {next_day['title']}")
+
+            except Exception as e:
+                print(f"⚠️ AI content generation failed: {e}. Using template fallback.")
+                next_day = None
+
+        # Fallback: use a real code template (NOT "Coming soon")
+        if next_day is None:
+            # Rotate through useful real code snippets
+            fallback_lessons = [
+                {
+                    'title': f'Quick Python Tip #{next_day_number} \U0001f4a1',
+                    'code': "words = 'hello world'.split()\nprint(words)",
+                    'output': "['hello', 'world']",
+                    'explanation': 'The split method breaks a string into a list of words. Super handy for text processing!',
+                },
+                {
+                    'title': f'Python Shortcut #{next_day_number} \u26a1',
+                    'code': "nums = [3, 1, 4, 1, 5]\nprint(max(nums), min(nums))",
+                    'output': '5 1',
+                    'explanation': 'max() and min() instantly find the biggest and smallest values in any collection!',
+                },
+                {
+                    'title': f'Python Trick #{next_day_number} \U0001f525',
+                    'code': "text = 'Python'\nprint(text[::-1])",
+                    'output': 'nohtyP',
+                    'explanation': 'Slicing with [::-1] reverses any string or list instantly. One line magic!',
+                },
+                {
+                    'title': f'Python Hack #{next_day_number} \U0001f680',
+                    'code': "a, b = 5, 10\na, b = b, a\nprint(a, b)",
+                    'output': '10 5',
+                    'explanation': 'Python lets you swap variables in one line. No temp variable needed!',
+                },
+            ]
+            fallback = fallback_lessons[next_day_number % len(fallback_lessons)]
+            next_day = {
+                'day': next_day_number,
+                'title': fallback['title'],
+                'hook': 'Check this out!',
+                'cta': 'Follow for the next one!',
+                'language': language,
+                'code': fallback['code'],
+                'output': fallback['output'],
+                'explanation': fallback['explanation'],
+                'status': 'pending'
+            }
+            print(f"📝 Using template fallback for Day {next_day_number}")
 
         days.append(next_day)
         return next_day
@@ -737,7 +827,13 @@ class YouTubeAutomation:
         code_card = self.create_glassmorphism_card(int(self.width * 0.92), card_height, scheme)
         code_draw = ImageDraw.Draw(code_card)
         
-        badge_w, badge_h = 220, 95
+        # Dynamic badge width based on day number text
+        day_text = f"DAY {day}"
+        day_text_bbox = code_draw.textbbox((0, 0), day_text, font=day_font)
+        day_text_w = day_text_bbox[2] - day_text_bbox[0]
+        badge_padding = 60  # horizontal padding inside badge
+        badge_w = max(220, day_text_w + badge_padding)
+        badge_h = 95
         badge_x, badge_y = 35, 30
         badge_rgb = self.hex_to_rgb(scheme['badge'])
         
@@ -760,7 +856,6 @@ class YouTubeAutomation:
             radius=25, outline=(255, 255, 255, 200), width=3
         )
         
-        day_text = f"DAY {day}"
         bbox = code_draw.textbbox((0, 0), day_text, font=day_font)
         text_w = bbox[2] - bbox[0]
         text_x = badge_x + (badge_w - text_w) // 2
@@ -769,7 +864,11 @@ class YouTubeAutomation:
         code_draw.text((text_x, badge_y + 18), day_text, fill='#ffffff', font=day_font)
         
         y_offset = 150
-        code_text_x = 85
+        # Dynamic line number gutter: measure widest possible line number
+        max_line_num = len(code_lines) if code_lines else 1
+        gutter_text = f"{max_line_num}."
+        gutter_w = self.measure_text_width(code_draw, gutter_text, code_font)
+        code_text_x = max(85, 15 + gutter_w + 15)  # 15px left pad + gutter + 15px gap
         code_text_max_w = code_card.width - code_text_x - 30
 
         visual_entries = []
