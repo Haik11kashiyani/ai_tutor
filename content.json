@@ -1325,6 +1325,18 @@
       "explanation": "Auto-generated placeholder lesson created because every existing day was already uploaded.",
       "status": "uploaded",
       "upload_date": "2026-06-01"
+    },
+    {
+      "day": 123,
+      "title": "Lightweight Objects with namedtuple! \u26a1",
+      "hook": "Need simple, structured data without full classes?",
+      "cta": "Follow for more Python superpowers!",
+      "language": "python",
+      "code": "from collections import namedtuple\n\n# Define a Product namedtuple\nProduct = namedtuple('Product', ['name', 'price', 'quantity'])\n\n# Create an instance\nitem = Product('Laptop', 1200.50, 2)\n\nprint(f\"Item: {item.name}, Price: ${item.price}, Qty: {item.quantity}\")\nprint(f\"Total value: ${item.price * item.quantity:.2f}\")",
+      "output": "Item: Laptop, Price: $1200.5, Qty: 2\nTotal value: $2401.00",
+      "explanation": "Python's `namedtuple` from the `collections` module lets you create simple, immutable object types with named fields. It's perfect for quickly structuring data like a class, but with less boilerplate and memory overhead!",
+      "status": "uploaded",
+      "upload_date": "2026-06-02"
     }
   ]
 }
