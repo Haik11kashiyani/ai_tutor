@@ -1337,6 +1337,18 @@
       "explanation": "Python's `namedtuple` from the `collections` module lets you create simple, immutable object types with named fields. It's perfect for quickly structuring data like a class, but with less boilerplate and memory overhead!",
       "status": "uploaded",
       "upload_date": "2026-06-02"
+    },
+    {
+      "day": 124,
+      "title": "No More KeyErrors! `defaultdict` Magic! \u2728",
+      "hook": "Tired of checking if a dictionary key exists before adding to a list?",
+      "cta": "Follow for more Python secrets!",
+      "language": "python",
+      "code": "from collections import defaultdict\n\ndata = [('apple', 1), ('banana', 2), ('apple', 3), ('orange', 4)]\ngroups = defaultdict(list)\n\nfor key, value in data:\n    groups[key].append(value)\n\nprint(groups)",
+      "output": "defaultdict(<class 'list'>, {'apple': [1, 3], 'banana': [2], 'orange': [4]})",
+      "explanation": "The `defaultdict` from the `collections` module automatically creates a default value (like an empty list here) for new keys you try to access. This makes grouping data into dictionaries incredibly clean and concise, letting you ditch those annoying KeyErrors!",
+      "status": "uploaded",
+      "upload_date": "2026-06-03"
     }
   ]
 }
