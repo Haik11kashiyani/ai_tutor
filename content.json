@@ -1349,6 +1349,18 @@
       "explanation": "The `defaultdict` from the `collections` module automatically creates a default value (like an empty list here) for new keys you try to access. This makes grouping data into dictionaries incredibly clean and concise, letting you ditch those annoying KeyErrors!",
       "status": "uploaded",
       "upload_date": "2026-06-03"
+    },
+    {
+      "day": 125,
+      "title": "Zip Uneven Lists Seamlessly! \ud83e\udde9",
+      "hook": "Tired of `zip()` cutting off your data when lists are uneven?",
+      "cta": "Level up your data pairing game!",
+      "language": "python",
+      "code": "from itertools import zip_longest\n\nnames = [\"Alice\", \"Bob\"]\nages = [25, 30, 35]\n\ncombined = list(zip_longest(names, ages, fillvalue=\"N/A\"))\nprint(combined)",
+      "output": "[('Alice', 25), ('Bob', 30), ('N/A', 35)]",
+      "explanation": "Python's `itertools.zip_longest` intelligently pairs items from multiple iterables, filling missing values with a default instead of stopping short. It's perfect for combining data when lengths don't match, ensuring you don't lose any information!",
+      "status": "uploaded",
+      "upload_date": "2026-06-04"
     }
   ]
 }
