@@ -1361,6 +1361,18 @@
       "explanation": "Python's `itertools.zip_longest` intelligently pairs items from multiple iterables, filling missing values with a default instead of stopping short. It's perfect for combining data when lengths don't match, ensuring you don't lose any information!",
       "status": "uploaded",
       "upload_date": "2026-06-04"
+    },
+    {
+      "day": 126,
+      "title": "Check Conditions Easily with `any()` & `all()`! \u2705",
+      "hook": "Need to quickly check if *all* or *any* elements in a list meet a condition?",
+      "cta": "Like and subscribe for more daily Python tips!",
+      "language": "python",
+      "code": "numbers = [2, 4, 6, 8, 9]\nis_all_even = all(n % 2 == 0 for n in numbers)\nhas_odd = any(n % 2 != 0 for n in numbers)\n\nprint(f\"Are all numbers even? {is_all_even}\")\nprint(f\"Is there at least one odd number? {has_odd}\")",
+      "output": "Are all numbers even? False\nIs there at least one odd number? True",
+      "explanation": "`any()` returns True if *any* item in an iterable is true, while `all()` returns True only if *all* items are true. They're perfect for concise boolean checks over collections!",
+      "status": "uploaded",
+      "upload_date": "2026-06-05"
     }
   ]
 }
