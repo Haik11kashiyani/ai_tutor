@@ -1373,6 +1373,18 @@
       "explanation": "`any()` returns True if *any* item in an iterable is true, while `all()` returns True only if *all* items are true. They're perfect for concise boolean checks over collections!",
       "status": "uploaded",
       "upload_date": "2026-06-05"
+    },
+    {
+      "day": 127,
+      "title": "Count Anything Instantly with `Counter`! \ud83d\udcca",
+      "hook": "Need to quickly count items in a list or string?",
+      "cta": "Like for more Python power-ups!",
+      "language": "python",
+      "code": "from collections import Counter\n\ndata = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple']\ncounts = Counter(data)\nprint(counts)\nprint(counts['apple'])",
+      "output": "Counter({'apple': 3, 'banana': 2, 'orange': 1})\n3",
+      "explanation": "Python's `collections.Counter` is your go-to for tallying hashable objects. It turns any iterable into a dictionary-like object mapping items to their frequencies!",
+      "status": "uploaded",
+      "upload_date": "2026-06-06"
     }
   ]
 }
