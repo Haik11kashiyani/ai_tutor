@@ -1385,6 +1385,18 @@
       "explanation": "Python's `collections.Counter` is your go-to for tallying hashable objects. It turns any iterable into a dictionary-like object mapping items to their frequencies!",
       "status": "uploaded",
       "upload_date": "2026-06-06"
+    },
+    {
+      "day": 128,
+      "title": "Flexible Functions with `*args`! \u2728",
+      "hook": "Ever wanted a function that can take any number of arguments?",
+      "cta": "Like and follow for more Python tips!",
+      "language": "python",
+      "code": "def sum_all(*numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total\n\nprint(sum_all(1, 2, 3))\nprint(sum_all(10, 20, 30, 40, 50))",
+      "output": "6\n150",
+      "explanation": "Use `*args` in your function definition to accept an arbitrary number of positional arguments, which are then collected into a tuple. This makes your functions incredibly flexible!",
+      "status": "uploaded",
+      "upload_date": "2026-06-07"
     }
   ]
 }
