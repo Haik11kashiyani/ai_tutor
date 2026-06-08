@@ -1397,6 +1397,18 @@
       "explanation": "Use `*args` in your function definition to accept an arbitrary number of positional arguments, which are then collected into a tuple. This makes your functions incredibly flexible!",
       "status": "uploaded",
       "upload_date": "2026-06-07"
+    },
+    {
+      "day": 129,
+      "title": "Lambda Functions: Instant Mini-Functions! \ud83d\ude80",
+      "hook": "Need a quick, one-line function without a formal definition?",
+      "cta": "Hit that Like & Subscribe for daily Python tricks!",
+      "language": "python",
+      "code": "data = [('apple', 3), ('banana', 1), ('cherry', 2)]\nsorted_data = sorted(data, key=lambda item: item[1])\nprint(sorted_data)",
+      "output": "[('banana', 1), ('cherry', 2), ('apple', 3)]",
+      "explanation": "Lambda functions are small, anonymous functions you define in a single line. They're perfect for quick operations, like telling `sorted()` how to sort custom data!",
+      "status": "uploaded",
+      "upload_date": "2026-06-08"
     }
   ]
 }
