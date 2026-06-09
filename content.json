@@ -1409,6 +1409,18 @@
       "explanation": "Lambda functions are small, anonymous functions you define in a single line. They're perfect for quick operations, like telling `sorted()` how to sort custom data!",
       "status": "uploaded",
       "upload_date": "2026-06-08"
+    },
+    {
+      "day": 130,
+      "title": "Unlock Safe Dictionary Access! `dict.get()`! \ud83d\udd12",
+      "hook": "Want to grab data from dictionaries without scary `KeyError` crashes?",
+      "cta": "Like & Follow for more Python power-ups!",
+      "language": "python",
+      "code": "data = {\"name\": \"Alice\", \"age\": 30}\n\n# Get an existing key\nprint(f\"Name: {data.get('name', 'N/A')}\")\n\n# Try to get a missing key with a default\nprint(f\"City: {data.get('city', 'Unknown')}\")\n\n# Try to get a missing key without a default (returns None)\nprint(f\"Country: {data.get('country')}\")",
+      "output": "Name: Alice\nCity: Unknown\nCountry: None",
+      "explanation": "`dict.get()` lets you retrieve a value for a key, and if the key isn't found, it returns a specified default instead of an error. This keeps your code running smoothly, preventing crashes from missing keys!",
+      "status": "uploaded",
+      "upload_date": "2026-06-09"
     }
   ]
 }
