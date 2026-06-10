@@ -1421,6 +1421,18 @@
       "explanation": "`dict.get()` lets you retrieve a value for a key, and if the key isn't found, it returns a specified default instead of an error. This keeps your code running smoothly, preventing crashes from missing keys!",
       "status": "uploaded",
       "upload_date": "2026-06-09"
+    },
+    {
+      "day": 131,
+      "title": "Stitch Strings Together! \ud83e\uddf5",
+      "hook": "Tired of looping to combine words? Python has a cleaner way!",
+      "cta": "Like, share, and subscribe for more Python tips!",
+      "language": "python",
+      "code": "parts = [\"Python\", \"is\", \"awesome\"]\nsentence = \" \".join(parts)\nprint(f\"Sentence: '{sentence}'\")\n\ndata = [\"user\", \"data\", \"info\"]\nfilename = \"_\".join(data) + \".txt\"\nprint(f\"Filename: '{filename}'\")",
+      "output": "Sentence: 'Python is awesome'\nFilename: 'user_data_info.txt'",
+      "explanation": "The `.join()` method lets you concatenate strings from a list or tuple, using the string you call it on as the separator between each item! It's super efficient for building sentences, paths, or filenames without manual loops.",
+      "status": "uploaded",
+      "upload_date": "2026-06-10"
     }
   ]
 }
