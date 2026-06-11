@@ -1433,6 +1433,18 @@
       "explanation": "The `.join()` method lets you concatenate strings from a list or tuple, using the string you call it on as the separator between each item! It's super efficient for building sentences, paths, or filenames without manual loops.",
       "status": "uploaded",
       "upload_date": "2026-06-10"
+    },
+    {
+      "day": 132,
+      "title": "Don't Crash! `try-except` Save! \ud83d\udca5",
+      "hook": "Stop your Python code from crashing when things go wrong!",
+      "cta": "Level up your error handling!",
+      "language": "python",
+      "code": "user_input = \"hello\"\ntry:\n    number = int(user_input)\n    print(f\"Success! Your number is: {number}\")\nexcept ValueError:\n    print(\"Error: Could not convert input to a number!\")",
+      "output": "Error: Could not convert input to a number!",
+      "explanation": "The `try` block attempts code that might fail. If a `ValueError` occurs, the `except` block gracefully handles it, preventing your program from crashing!",
+      "status": "uploaded",
+      "upload_date": "2026-06-11"
     }
   ]
 }
