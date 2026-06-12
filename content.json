@@ -1445,6 +1445,18 @@
       "explanation": "The `try` block attempts code that might fail. If a `ValueError` occurs, the `except` block gracefully handles it, preventing your program from crashing!",
       "status": "uploaded",
       "upload_date": "2026-06-11"
+    },
+    {
+      "day": 133,
+      "title": "Supercharge Your Strings with F-Strings! \ud83d\ude80",
+      "hook": "Want to make your Python strings dynamic and easy to read?",
+      "cta": "Like, Share, and Follow for more Python tips!",
+      "language": "python",
+      "code": "name = \"Alice\"\nscore = 95\nprint(f\"Hello, {name}! Your score is {score}.\")\n\nitem = \"Banana\"\nprice = 0.75\nprint(f\"You owe ${price:.2f} for the {item}.\")",
+      "output": "Hello, Alice! Your score is 95.\nYou owe $0.75 for the Banana.",
+      "explanation": "F-strings provide a concise way to embed expressions inside string literals by prefixing the string with 'f' and using curly braces to insert variables. This makes string formatting incredibly readable and powerful!",
+      "status": "uploaded",
+      "upload_date": "2026-06-12"
     }
   ]
 }
