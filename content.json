@@ -1457,6 +1457,18 @@
       "explanation": "F-strings provide a concise way to embed expressions inside string literals by prefixing the string with 'f' and using curly braces to insert variables. This makes string formatting incredibly readable and powerful!",
       "status": "uploaded",
       "upload_date": "2026-06-12"
+    },
+    {
+      "day": 134,
+      "title": "List Comprehensions: Supercharge Your Lists! \u26a1",
+      "hook": "Tired of long 'for' loops to create lists? Python has a faster, cleaner way!",
+      "cta": "Master list comprehensions and write incredibly efficient Python!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4, 5, 6]\neven_squares = [n * n for n in numbers if n % 2 == 0]\nprint(even_squares)",
+      "output": "[4, 16, 36]",
+      "explanation": "List comprehensions let you create new lists from existing iterables in a single, elegant line, even with conditions! They make your code more concise, readable, and often more performant than traditional loops.",
+      "status": "uploaded",
+      "upload_date": "2026-06-13"
     }
   ]
 }
