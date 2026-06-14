@@ -1469,6 +1469,18 @@
       "explanation": "List comprehensions let you create new lists from existing iterables in a single, elegant line, even with conditions! They make your code more concise, readable, and often more performant than traditional loops.",
       "status": "uploaded",
       "upload_date": "2026-06-13"
+    },
+    {
+      "day": 135,
+      "title": "Python Sets: Master Unique Collections! \ud83d\udd2e",
+      "hook": "Need to find common items or combine unique ones?",
+      "cta": "Like and follow for more Python tips!",
+      "language": "python",
+      "code": "set1 = {1, 2, 3, 4}\nset2 = {3, 4, 5, 6}\n\nprint(\"Union:\", set1.union(set2))\nprint(\"Intersection:\", set1.intersection(set2))",
+      "output": "Union: {1, 2, 3, 4, 5, 6}\nIntersection: {3, 4}",
+      "explanation": "Python sets store unique items, and you can easily find common elements with `intersection()` or combine all unique ones with `union()`.",
+      "status": "uploaded",
+      "upload_date": "2026-06-14"
     }
   ]
 }
