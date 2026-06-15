@@ -1481,6 +1481,18 @@
       "explanation": "Python sets store unique items, and you can easily find common elements with `intersection()` or combine all unique ones with `union()`.",
       "status": "uploaded",
       "upload_date": "2026-06-14"
+    },
+    {
+      "day": 136,
+      "title": "Pair Up Data with `zip()`! \ud83e\udd1d",
+      "hook": "Ever need to combine items from different lists, index by index?",
+      "cta": "Subscribe for more Python magic!",
+      "language": "python",
+      "code": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [90, 85, 92]\n\nprint(\"Student Scores:\")\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")",
+      "output": "Student Scores:\nAlice: 90\nBob: 85\nCharlie: 92",
+      "explanation": "Python's `zip()` function takes multiple iterables and aggregates elements from each into tuples. It's perfect for pairing related data or iterating through multiple lists simultaneously!",
+      "status": "uploaded",
+      "upload_date": "2026-06-15"
     }
   ]
 }
