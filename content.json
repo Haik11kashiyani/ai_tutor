@@ -1493,6 +1493,18 @@
       "explanation": "Python's `zip()` function takes multiple iterables and aggregates elements from each into tuples. It's perfect for pairing related data or iterating through multiple lists simultaneously!",
       "status": "uploaded",
       "upload_date": "2026-06-15"
+    },
+    {
+      "day": 137,
+      "title": "Loop with Index? `enumerate()`! \ud83c\udfaf",
+      "hook": "Need to loop through a list and know the item's position? Python has a trick!",
+      "cta": "Like for more Python power-ups!",
+      "language": "python",
+      "code": "shopping_list = [\"milk\", \"eggs\", \"bread\"]\nprint(\"Your Shopping List:\")\nfor i, item in enumerate(shopping_list):\n    print(f\"{i+1}. {item}\")",
+      "output": "Your Shopping List:\n1. milk\n2. eggs\n3. bread",
+      "explanation": "`enumerate()` pairs each item in your iterable with its index, making loops cleaner and more powerful. No more manual index tracking!",
+      "status": "uploaded",
+      "upload_date": "2026-06-16"
     }
   ]
 }
