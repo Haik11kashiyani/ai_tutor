@@ -1505,6 +1505,18 @@
       "explanation": "`enumerate()` pairs each item in your iterable with its index, making loops cleaner and more powerful. No more manual index tracking!",
       "status": "uploaded",
       "upload_date": "2026-06-16"
+    },
+    {
+      "day": 138,
+      "title": "Sort Anything Effortlessly! `sorted()`! \ud83d\uddc4\ufe0f",
+      "hook": "Need to get your data in order? Python's `sorted()` function is your best friend!",
+      "cta": "Like, share, and subscribe for more Python power!",
+      "language": "python",
+      "code": "numbers = [5, 2, 8, 1, 9]\nsorted_numbers = sorted(numbers)\nwords = [\"banana\", \"apple\", \"zebra\", \"grape\"]\nsorted_words = sorted(words)\nprint(f\"Original Numbers: {numbers}\")\nprint(f\"Sorted Numbers: {sorted_numbers}\")\nprint(f\"Original Words: {words}\")\nprint(f\"Sorted Words: {sorted_words}\")",
+      "output": "Original Numbers: [5, 2, 8, 1, 9]\nSorted Numbers: [1, 2, 5, 8, 9]\nOriginal Words: ['banana', 'apple', 'zebra', 'grape']\nSorted Words: ['apple', 'banana', 'grape', 'zebra']",
+      "explanation": "The `sorted()` function takes any iterable (like lists or strings) and returns a NEW sorted list, leaving the original unchanged. It's perfect for quickly organizing numbers or text!",
+      "status": "uploaded",
+      "upload_date": "2026-06-17"
     }
   ]
 }
