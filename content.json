@@ -1517,6 +1517,18 @@
       "explanation": "The `sorted()` function takes any iterable (like lists or strings) and returns a NEW sorted list, leaving the original unchanged. It's perfect for quickly organizing numbers or text!",
       "status": "uploaded",
       "upload_date": "2026-06-17"
+    },
+    {
+      "day": 139,
+      "title": "Dict Comprehensions: Supercharge Your Dictionaries! \ud83d\ude80",
+      "hook": "Generate dictionaries with a single line of code!",
+      "cta": "Follow for daily Python power-ups!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4]\nsquared_dict = {num: num*num for num in numbers}\nprint(squared_dict)",
+      "output": "{1: 1, 2: 4, 3: 9, 4: 16}",
+      "explanation": "Dictionary comprehensions let you create dictionaries concisely from existing iterables. It's like list comprehensions, but for key-value pairs, making your code cleaner and faster!",
+      "status": "uploaded",
+      "upload_date": "2026-06-18"
     }
   ]
 }
