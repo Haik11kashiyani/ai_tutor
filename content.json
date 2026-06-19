@@ -1529,6 +1529,18 @@
       "explanation": "Dictionary comprehensions let you create dictionaries concisely from existing iterables. It's like list comprehensions, but for key-value pairs, making your code cleaner and faster!",
       "status": "uploaded",
       "upload_date": "2026-06-18"
+    },
+    {
+      "day": 140,
+      "title": "String Magic with `.join()`! \u2728",
+      "hook": "Combine a list of strings into one, effortlessly!",
+      "cta": "Hit subscribe for more Python power!",
+      "language": "python",
+      "code": "words = [\"Python\", \"is\", \"awesome!\"]\nsentence = \" \".join(words)\nprint(sentence)\n\ntags = [\"python\", \"coding\", \"shorts\"]\nhashtag_string = \"#\".join(tags)\nprint(hashtag_string)",
+      "output": "Python is awesome!\npython#coding#shorts",
+      "explanation": "The `str.join()` method concatenates all elements of an iterable (like a list) into a single string, using the string it's called on as a separator. It's super efficient for building strings from many parts!",
+      "status": "uploaded",
+      "upload_date": "2026-06-19"
     }
   ]
 }
