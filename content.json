@@ -1541,6 +1541,18 @@
       "explanation": "The `str.join()` method concatenates all elements of an iterable (like a list) into a single string, using the string it's called on as a separator. It's super efficient for building strings from many parts!",
       "status": "uploaded",
       "upload_date": "2026-06-19"
+    },
+    {
+      "day": 141,
+      "title": "Slice Strings with `.split()`! \ud83d\udd2a",
+      "hook": "Need to break a sentence into words or data into pieces?",
+      "cta": "Follow for more Python string magic!",
+      "language": "python",
+      "code": "sentence = \"Python is awesome for everyone\"\nwords = sentence.split()\nprint(f\"Original: '{sentence}'\")\nprint(f\"Words: {words}\")\n\ndata = \"apple,banana,cherry\"\nfruits = data.split(',')\nprint(f\"Fruits: {fruits}\")",
+      "output": "Original: 'Python is awesome for everyone'\nWords: ['Python', 'is', 'awesome', 'for', 'everyone']\nFruits: ['apple', 'banana', 'cherry']",
+      "explanation": "The `.split()` method breaks a string into a list of substrings, using whitespace by default or a specified delimiter. It's perfect for parsing text or comma-separated values into usable data!",
+      "status": "uploaded",
+      "upload_date": "2026-06-20"
     }
   ]
 }
