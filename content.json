@@ -1553,6 +1553,18 @@
       "explanation": "The `.split()` method breaks a string into a list of substrings, using whitespace by default or a specified delimiter. It's perfect for parsing text or comma-separated values into usable data!",
       "status": "uploaded",
       "upload_date": "2026-06-20"
+    },
+    {
+      "day": 142,
+      "title": "One-Liner Functions: `lambda` Magic! \u2728",
+      "hook": "Need a quick, disposable function? Python's `lambda` is your answer!",
+      "cta": "Unlock quick functions with `lambda`!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4]\nsquared_numbers = list(map(lambda x: x * x, numbers))\nprint(squared_numbers)",
+      "output": "[1, 4, 9, 16]",
+      "explanation": "Python's `lambda` lets you create small, anonymous functions for quick, one-off operations. They're perfect for short transformations, especially when passed to functions like `map()` or `filter()`.",
+      "status": "uploaded",
+      "upload_date": "2026-06-21"
     }
   ]
 }
