@@ -1565,6 +1565,18 @@
       "explanation": "Python's `lambda` lets you create small, anonymous functions for quick, one-off operations. They're perfect for short transformations, especially when passed to functions like `map()` or `filter()`.",
       "status": "uploaded",
       "upload_date": "2026-06-21"
+    },
+    {
+      "day": 143,
+      "title": "Check Conditions with `any()` & `all()`! \u2705",
+      "hook": "Ever need to know if *any* or *all* items in a list meet a condition?",
+      "cta": "Hit like & subscribe for more Python power!",
+      "language": "python",
+      "code": "numbers = [0, 1, 2, 3]\nhas_positive = any(n > 0 for n in numbers)\nall_positive = all(n > 0 for n in numbers)\nprint(f\"Are any numbers positive? {has_positive}\")\nprint(f\"Are all numbers positive? {all_positive}\")\n\nwords = [\"apple\", \"banana\", \"cat\"]\nall_short = all(len(w) < 10 for w in words)\nprint(f\"Are all words short? {all_short}\")",
+      "output": "Are any numbers positive? True\nAre all numbers positive? False\nAre all words short? True",
+      "explanation": "`any()` returns `True` if at least one item in an iterable is true, while `all()` returns `True` only if *all* items are true. Use them for super efficient conditional checks on your data!",
+      "status": "uploaded",
+      "upload_date": "2026-06-22"
     }
   ]
 }
