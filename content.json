@@ -1577,6 +1577,18 @@
       "explanation": "`any()` returns `True` if at least one item in an iterable is true, while `all()` returns `True` only if *all* items are true. Use them for super efficient conditional checks on your data!",
       "status": "uploaded",
       "upload_date": "2026-06-22"
+    },
+    {
+      "day": 144,
+      "title": "Reverse Your Iteration! \u23ea",
+      "hook": "Need to process a sequence from end to start without modifying it?",
+      "cta": "Master iteration with `reversed()`!",
+      "language": "python",
+      "code": "my_list = [10, 20, 30, 40, 50]\nprint(\"Original:\", my_list)\nprint(\"Reversed items:\")\nfor num in reversed(my_list):\n    print(num, end=\" \")\nprint()",
+      "output": "Original: [10, 20, 30, 40, 50]\nReversed items:\n50 40 30 20 10 ",
+      "explanation": "The `reversed()` function gives you an efficient iterator to process any sequence from end to start. It's perfect for when you need to iterate backwards without altering the original!",
+      "status": "uploaded",
+      "upload_date": "2026-06-23"
     }
   ]
 }
