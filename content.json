@@ -1589,6 +1589,18 @@
       "explanation": "The `reversed()` function gives you an efficient iterator to process any sequence from end to start. It's perfect for when you need to iterate backwards without altering the original!",
       "status": "uploaded",
       "upload_date": "2026-06-23"
+    },
+    {
+      "day": 145,
+      "title": "Apply Functions Fast with `map()`! \u26a1",
+      "hook": "Need to apply the same function to every item in a list? There's a quick way!",
+      "cta": "Like and follow for more Python tricks!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4]\nsquared_map = map(lambda x: x * x, numbers)\nsquared_list = list(squared_map)\nprint(\"Original:\", numbers)\nprint(\"Squared:\", squared_list)",
+      "output": "Original: [1, 2, 3, 4]\nSquared: [1, 4, 9, 16]",
+      "explanation": "The `map()` function applies a given function to each item in an iterable, returning a map object. It's super efficient for transforming collections of data!",
+      "status": "uploaded",
+      "upload_date": "2026-06-24"
     }
   ]
 }
