@@ -1601,6 +1601,18 @@
       "explanation": "The `map()` function applies a given function to each item in an iterable, returning a map object. It's super efficient for transforming collections of data!",
       "status": "uploaded",
       "upload_date": "2026-06-24"
+    },
+    {
+      "day": 146,
+      "title": "F-Strings: Format Like a Pro! \ud83d\udcac",
+      "hook": "Stop struggling with complicated string formatting!",
+      "cta": "Like, share, and follow for more Python tips!",
+      "language": "python",
+      "code": "name = \"Alice\"\nscore = 95\n\nmessage = f\"Hello, {name}! Your score is {score}.\"\nprint(message)\nprint(f\"Next year, {name} will have {score + 5} points!\")",
+      "output": "Hello, Alice! Your score is 95.\nNext year, Alice will have 100 points!",
+      "explanation": "F-strings let you embed variables and expressions directly inside string literals by putting an `f` before the quotes. This makes your string formatting incredibly clean, readable, and powerful!",
+      "status": "uploaded",
+      "upload_date": "2026-06-25"
     }
   ]
 }
