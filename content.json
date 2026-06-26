@@ -1613,6 +1613,18 @@
       "explanation": "F-strings let you embed variables and expressions directly inside string literals by putting an `f` before the quotes. This makes your string formatting incredibly clean, readable, and powerful!",
       "status": "uploaded",
       "upload_date": "2026-06-25"
+    },
+    {
+      "day": 147,
+      "title": "Combine Lists Like Magic! `zip()`! \ud83e\ude84",
+      "hook": "Ever need to pair elements from different lists? Python's `zip()` has you covered!",
+      "cta": "Like, subscribe, and keep coding!",
+      "language": "python",
+      "code": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [95, 88, 92]\ncities = [\"NY\", \"LA\", \"CHI\"]\n\ncombined_data = list(zip(names, scores, cities))\nprint(f\"Paired Data: {combined_data}\")",
+      "output": "Paired Data: [('Alice', 95, 'NY'), ('Bob', 88, 'LA'), ('Charlie', 92, 'CHI')]",
+      "explanation": "`zip()` takes multiple iterables and aggregates their elements into tuples, returning an iterator of these tuples. It's perfect for combining related data points from separate lists or other sequences!",
+      "status": "uploaded",
+      "upload_date": "2026-06-26"
     }
   ]
 }
