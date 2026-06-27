@@ -1625,6 +1625,18 @@
       "explanation": "`zip()` takes multiple iterables and aggregates their elements into tuples, returning an iterator of these tuples. It's perfect for combining related data points from separate lists or other sequences!",
       "status": "uploaded",
       "upload_date": "2026-06-26"
+    },
+    {
+      "day": 148,
+      "title": "Filter Lists Like a Pro! \ud83d\udd0d",
+      "hook": "Want to grab *only* the specific items you need from a list?",
+      "cta": "Like, share, and subscribe for more Python Shorts!",
+      "language": "python",
+      "code": "numbers = [10, 5, 22, 1, 8, 17, 30]\n# Filter out numbers less than 10\nfiltered_numbers = filter(lambda x: x >= 10, numbers)\nprint(\"Filtered:\", list(filtered_numbers))",
+      "output": "Filtered: [10, 22, 17, 30]",
+      "explanation": "The `filter()` function lets you select elements from an iterable that satisfy a given condition. It's super handy for quickly sifting through data, returning an iterator of only the items that pass the test!",
+      "status": "uploaded",
+      "upload_date": "2026-06-27"
     }
   ]
 }
