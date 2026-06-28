@@ -1637,6 +1637,18 @@
       "explanation": "The `filter()` function lets you select elements from an iterable that satisfy a given condition. It's super handy for quickly sifting through data, returning an iterator of only the items that pass the test!",
       "status": "uploaded",
       "upload_date": "2026-06-27"
+    },
+    {
+      "day": 149,
+      "title": "Loop with Index: `enumerate()`! \ud83d\ude80",
+      "hook": "Need to know the index AND the value in your loop? Python has a secret weapon!",
+      "cta": "Hit like and follow for more Python tips!",
+      "language": "python",
+      "code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor index, fruit in enumerate(fruits):\n    print(f\"Fruit {index+1}: {fruit}\")",
+      "output": "Fruit 1: apple\nFruit 2: banana\nFruit 3: cherry",
+      "explanation": "`enumerate()` is your go-to for looping through any iterable while getting both the item's index and its value at the same time! It makes tracking your position super easy.",
+      "status": "uploaded",
+      "upload_date": "2026-06-28"
     }
   ]
 }
