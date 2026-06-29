@@ -1649,6 +1649,18 @@
       "explanation": "`enumerate()` is your go-to for looping through any iterable while getting both the item's index and its value at the same time! It makes tracking your position super easy.",
       "status": "uploaded",
       "upload_date": "2026-06-28"
+    },
+    {
+      "day": 150,
+      "title": "Set Secrets Unlocked! \ud83d\udd11",
+      "hook": "Tired of duplicates or need to find common items fast?",
+      "cta": "Like, subscribe, and tell me your favorite set operation!",
+      "language": "python",
+      "code": "# Define two lists with some common and duplicate items\nlist_a = [\"apple\", \"banana\", \"orange\", \"apple\", \"grape\"]\nlist_b = [\"banana\", \"kiwi\", \"grape\", \"melon\"]\n\n# Convert lists to sets to get unique elements and perform operations\nset_a = set(list_a)\nset_b = set(list_b)\n\nprint(f\"Unique A: {set_a}\")\nprint(f\"Common: {set_a.intersection(set_b)}\")\nprint(f\"All Unique: {set_a.union(set_b)}\")",
+      "output": "Unique A: {'orange', 'grape', 'apple', 'banana'}\nCommon: {'grape', 'banana'}\nAll Unique: {'orange', 'kiwi', 'grape', 'melon', 'apple', 'banana'}",
+      "explanation": "Python's `set` type stores only unique elements, perfect for removing duplicates! You can then perform powerful operations like finding common items with `intersection()` or combining all unique elements with `union()` efficiently.",
+      "status": "uploaded",
+      "upload_date": "2026-06-29"
     }
   ]
 }
