@@ -1,0 +1,26 @@
+# Auto detect text files and ensure LF line endings on checkout
+* text=auto eol=lf
+
+# Explicitly mark file types as text
+*.py text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+*.gitignore text eol=lf
+
+# Mark binary files to prevent corruption
+*.mp4 binary
+*.mp3 binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.pyc binary
+*.pyo binary
+*.class binary
+*.so binary
+*.egg binary
