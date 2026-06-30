@@ -1661,6 +1661,18 @@
       "explanation": "Python's `set` type stores only unique elements, perfect for removing duplicates! You can then perform powerful operations like finding common items with `intersection()` or combining all unique elements with `union()` efficiently.",
       "status": "uploaded",
       "upload_date": "2026-06-29"
+    },
+    {
+      "day": 151,
+      "title": "List Comprehensions: Build Lists Super Fast! \ud83d\ude80",
+      "hook": "Want to create new lists from old ones in a single line?",
+      "cta": "Like and follow for more Python shorts!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4, 5, 6]\neven_squared = [n * n for n in numbers if n % 2 == 0]\nprint(f\"Original: {numbers}\")\nprint(f\"Even Squared: {even_squared}\")",
+      "output": "Original: [1, 2, 3, 4, 5, 6]\nEven Squared: [4, 16, 36]",
+      "explanation": "List comprehensions let you create new lists with a single, elegant line of code! They're incredibly powerful for transforming and filtering sequences quickly.",
+      "status": "uploaded",
+      "upload_date": "2026-06-30"
     }
   ]
 }
