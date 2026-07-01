@@ -1673,6 +1673,18 @@
       "explanation": "List comprehensions let you create new lists with a single, elegant line of code! They're incredibly powerful for transforming and filtering sequences quickly.",
       "status": "uploaded",
       "upload_date": "2026-06-30"
+    },
+    {
+      "day": 152,
+      "title": "Flex Your Functions with *args! \ud83d\udcaa",
+      "hook": "Want functions that can take ANY number of arguments?",
+      "cta": "Master flexible functions!",
+      "language": "python",
+      "code": "def sum_all(*nums):\n    return sum(nums)\n\nprint(f\"Summing (packed): {sum_all(1, 2, 3)}\")\n\nmy_list = [10, 20, 30]\nprint(f\"Summing (unpacked): {sum_all(*my_list)}\")",
+      "output": "Summing (packed): 6\nSumming (unpacked): 60",
+      "explanation": "The `*args` (here `*nums`) lets your function accept any number of arguments, packing them into a tuple. You can also use `*` when calling a function to unpack an iterable (like a list) into individual arguments!",
+      "status": "uploaded",
+      "upload_date": "2026-07-01"
     }
   ]
 }
