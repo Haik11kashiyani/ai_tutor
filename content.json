@@ -1685,6 +1685,18 @@
       "explanation": "The `*args` (here `*nums`) lets your function accept any number of arguments, packing them into a tuple. You can also use `*` when calling a function to unpack an iterable (like a list) into individual arguments!",
       "status": "uploaded",
       "upload_date": "2026-07-01"
+    },
+    {
+      "day": 153,
+      "title": "String `.join()`: Stitch Your Text! \ud83e\uddf5",
+      "hook": "Ever need to connect a list of words into one string? Python's `join()` method is your friend!",
+      "cta": "Like and follow for more Python tips! \u2728",
+      "language": "python",
+      "code": "words = [\"Learn\", \"Python\", \"with\", \"Shorts\"]\nsentence = \" \".join(words)\nprint(sentence)\n\ndash_sep = \"-\".join([\"data\", \"science\"])\nprint(dash_sep)",
+      "output": "Learn Python with Shorts\ndata-science",
+      "explanation": "The `.join()` method stitches together all items in an iterable (like a list) into a single string. The string it's called on acts as the separator between the items!",
+      "status": "uploaded",
+      "upload_date": "2026-07-02"
     }
   ]
 }
