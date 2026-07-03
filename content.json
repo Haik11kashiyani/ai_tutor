@@ -1697,6 +1697,18 @@
       "explanation": "The `.join()` method stitches together all items in an iterable (like a list) into a single string. The string it's called on acts as the separator between the items!",
       "status": "uploaded",
       "upload_date": "2026-07-02"
+    },
+    {
+      "day": 154,
+      "title": "Check Conditions Fast with `any()` & `all()`! \u2705",
+      "hook": "Need to quickly check if *any* or *all* items in a list meet a condition?",
+      "cta": "Follow for more Python power-ups!",
+      "language": "python",
+      "code": "temps = [25, 28, 19, 30]\nis_any_hot = any(t > 29 for t in temps)\nis_all_warm = all(t >= 18 for t in temps)\nprint(f\"Any temp above 29? {is_any_hot}\")\nprint(f\"All temps above or equal to 18? {is_all_warm}\")",
+      "output": "Any temp above 29? True\nAll temps above or equal to 18? True",
+      "explanation": "`any()` returns `True` if *at least one* item in an iterable is true. `all()` returns `True` if *all* items in an iterable are true. Use them to make your conditional checks concise and powerful!",
+      "status": "uploaded",
+      "upload_date": "2026-07-03"
     }
   ]
 }
