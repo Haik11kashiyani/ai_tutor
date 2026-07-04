@@ -1709,6 +1709,18 @@
       "explanation": "`any()` returns `True` if *at least one* item in an iterable is true. `all()` returns `True` if *all* items in an iterable are true. Use them to make your conditional checks concise and powerful!",
       "status": "uploaded",
       "upload_date": "2026-07-03"
+    },
+    {
+      "day": 155,
+      "title": "Safe Dictionary Access: `dict.get()`! \ud83d\udee1\ufe0f",
+      "hook": "Prevent crashes from missing dictionary keys!",
+      "cta": "Like, share, and subscribe for more Python tips!",
+      "language": "python",
+      "code": "my_profile = {\"name\": \"Alice\", \"age\": 30}\n\nprint(my_profile.get(\"name\", \"Guest\"))\nprint(my_profile.get(\"city\", \"Not Specified\"))",
+      "output": "Alice\nNot Specified",
+      "explanation": "The `.get()` method safely retrieves a dictionary value. If the key doesn't exist, it returns a specified default value instead of raising a KeyError, making your code more resilient!",
+      "status": "uploaded",
+      "upload_date": "2026-07-04"
     }
   ]
 }
