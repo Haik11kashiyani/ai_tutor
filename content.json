@@ -1721,6 +1721,18 @@
       "explanation": "The `.get()` method safely retrieves a dictionary value. If the key doesn't exist, it returns a specified default value instead of raising a KeyError, making your code more resilient!",
       "status": "uploaded",
       "upload_date": "2026-07-04"
+    },
+    {
+      "day": 156,
+      "title": "Custom Sorts with `key=lambda`! \ud83d\udd11",
+      "hook": "Sort lists of dictionaries or objects exactly how you need to!",
+      "cta": "Unlock powerful sorting in Python!",
+      "language": "python",
+      "code": "items = [\n    {'name': 'Apple', 'price': 1.2},\n    {'name': 'Banana', 'price': 0.8},\n    {'name': 'Orange', 'price': 1.5}\n]\nsorted_items = sorted(items, key=lambda item: item['price'])\nprint(\"Items by price (low to high):\")\nfor item in sorted_items:\n    print(f\"{item['name']}: ${item['price']:.2f}\")",
+      "output": "Items by price (low to high):\nBanana: $0.80\nApple: $1.20\nOrange: $1.50",
+      "explanation": "The `key` argument in `sorted()` takes a function (like a `lambda`) to extract a comparison key from each list item. This lets you sort complex data structures based on specific attributes!",
+      "status": "uploaded",
+      "upload_date": "2026-07-05"
     }
   ]
 }
