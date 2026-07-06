@@ -1733,6 +1733,18 @@
       "explanation": "The `key` argument in `sorted()` takes a function (like a `lambda`) to extract a comparison key from each list item. This lets you sort complex data structures based on specific attributes!",
       "status": "uploaded",
       "upload_date": "2026-07-05"
+    },
+    {
+      "day": 157,
+      "title": "F-Strings: Format Your Text Super Fast! \u2728",
+      "hook": "Tired of old-school string formatting? Meet your new best friend!",
+      "cta": "Master your strings \u2013 like and subscribe for more!",
+      "language": "python",
+      "code": "name = \"World\"\nversion = 3.9\nis_awesome = True\n\ngreeting = f\"Hello, {name}! Python {version:.1f} is here.\"\nstatus = f\"Is Python awesome? {is_awesome}. Yes!\"\n\nprint(greeting)\nprint(status)",
+      "output": "Hello, World! Python 3.9 is here.\nIs Python awesome? True. Yes!",
+      "explanation": "F-strings let you embed expressions directly inside string literals by prefixing the string with `f` and using curly braces `{}`. They make string formatting incredibly readable and powerful!",
+      "status": "uploaded",
+      "upload_date": "2026-07-06"
     }
   ]
 }
