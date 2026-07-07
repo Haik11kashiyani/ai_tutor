@@ -1745,6 +1745,18 @@
       "explanation": "F-strings let you embed expressions directly inside string literals by prefixing the string with `f` and using curly braces `{}`. They make string formatting incredibly readable and powerful!",
       "status": "uploaded",
       "upload_date": "2026-07-06"
+    },
+    {
+      "day": 158,
+      "title": "Zip Lists Together! \ud83d\udd17",
+      "hook": "Ever need to pair elements from two different lists?",
+      "cta": "Hit like and subscribe for more Python tips!",
+      "language": "python",
+      "code": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [95, 88, 92]\n\ncombined_data = list(zip(names, scores))\nprint(f\"Combined student data: {combined_data}\")",
+      "output": "Combined student data: [('Alice', 95), ('Bob', 88), ('Charlie', 92)]",
+      "explanation": "The `zip()` function takes multiple iterables and aggregates elements from each into tuples, pairing them up. It's super handy for combining related data from different sources into one structure!",
+      "status": "uploaded",
+      "upload_date": "2026-07-07"
     }
   ]
 }
