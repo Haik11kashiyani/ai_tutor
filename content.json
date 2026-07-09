@@ -1769,6 +1769,18 @@
       "explanation": "The `map()` function applies a given function to each item in an iterable, returning a map object. Convert it to a list to see your transformed data instantly!",
       "status": "uploaded",
       "upload_date": "2026-07-08"
+    },
+    {
+      "day": 160,
+      "title": "Enumerate: Index Your Loops! \ud83d\udd22",
+      "hook": "Want to grab the index AND the item in your Python loops?",
+      "cta": "Like and subscribe for more Python shorts!",
+      "language": "python",
+      "code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(\"Items with indices:\")\nfor index, fruit in enumerate(fruits):\n    print(f\"{index}: {fruit}\")",
+      "output": "Items with indices:\n0: apple\n1: banana\n2: cherry",
+      "explanation": "The `enumerate()` function adds a counter to your iterables, returning tuples of (index, item) for easy access in loops. It's super handy when you need both the position and the value!",
+      "status": "uploaded",
+      "upload_date": "2026-07-09"
     }
   ]
 }
