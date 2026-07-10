@@ -1781,6 +1781,18 @@
       "explanation": "The `enumerate()` function adds a counter to your iterables, returning tuples of (index, item) for easy access in loops. It's super handy when you need both the position and the value!",
       "status": "uploaded",
       "upload_date": "2026-07-09"
+    },
+    {
+      "day": 161,
+      "title": "Handle Errors Like a Pro with try-except! \ud83d\udee1\ufe0f",
+      "hook": "Don't let unexpected errors crash your Python scripts!",
+      "cta": "Like, share, and follow for more Python tips!",
+      "language": "python",
+      "code": "num_str = \"abc\"\ntry:\n    num = int(num_str)\n    print(f\"Success: {num}\")\nexcept ValueError:\n    print(f\"Error: '{num_str}' cannot be converted to int!\")\nprint(\"Always runs after try/except.\")",
+      "output": "Error: 'abc' cannot be converted to int!\nAlways runs after try/except.",
+      "explanation": "Use `try` to wrap code that might fail. If a `ValueError` occurs, the `except` block catches it gracefully, preventing your program from crashing and letting you handle problems smoothly.",
+      "status": "uploaded",
+      "upload_date": "2026-07-10"
     }
   ]
 }
