@@ -1793,6 +1793,18 @@
       "explanation": "Use `try` to wrap code that might fail. If a `ValueError` occurs, the `except` block catches it gracefully, preventing your program from crashing and letting you handle problems smoothly.",
       "status": "uploaded",
       "upload_date": "2026-07-10"
+    },
+    {
+      "day": 162,
+      "title": "List Comprehensions: Short & Sweet List Magic! \u2728",
+      "hook": "Want to transform lists with incredible power and brevity?",
+      "cta": "Unlock concise list creation!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4, 5]\nsquared_numbers = [num * num for num in numbers]\nprint(f\"Original: {numbers}\")\nprint(f\"Squared: {squared_numbers}\")",
+      "output": "Original: [1, 2, 3, 4, 5]\nSquared: [1, 4, 9, 16, 25]",
+      "explanation": "List comprehensions let you create new lists from existing ones in a single, readable line of code! They're super powerful for concise data manipulation, making your Python cleaner and faster.",
+      "status": "uploaded",
+      "upload_date": "2026-07-11"
     }
   ]
 }
