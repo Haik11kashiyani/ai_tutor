@@ -1805,6 +1805,18 @@
       "explanation": "List comprehensions let you create new lists from existing ones in a single, readable line of code! They're super powerful for concise data manipulation, making your Python cleaner and faster.",
       "status": "uploaded",
       "upload_date": "2026-07-11"
+    },
+    {
+      "day": 163,
+      "title": "Pick Random Items with `random.choice()`! \ud83c\udfb2",
+      "hook": "Need your Python program to make a random pick?",
+      "cta": "Give it a try with your own lists!",
+      "language": "python",
+      "code": "import random\n\noptions = [\"apple\", \"banana\", \"cherry\", \"date\"]\npick = random.choice(options)\n\nprint(f\"Today's random fruit is: {pick}!\")",
+      "output": "Today's random fruit is: banana!",
+      "explanation": "The `random.choice()` function is your go-to for selecting a single random item from any non-empty sequence, like a list or tuple. It's super handy for games, simulations, or just adding an element of surprise to your code!",
+      "status": "uploaded",
+      "upload_date": "2026-07-12"
     }
   ]
 }
