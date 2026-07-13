@@ -1817,6 +1817,18 @@
       "explanation": "The `random.choice()` function is your go-to for selecting a single random item from any non-empty sequence, like a list or tuple. It's super handy for games, simulations, or just adding an element of surprise to your code!",
       "status": "uploaded",
       "upload_date": "2026-07-12"
+    },
+    {
+      "day": 164,
+      "title": "Combine Strings Like a Pro with `.join()`! \u2795",
+      "hook": "Need to merge a list of strings into one super string?",
+      "cta": "Master string joining!",
+      "language": "python",
+      "code": "words = [\"Hello\", \"Python\", \"World\"]\nsentence = \" \".join(words)\nprint(f\"Space-joined: '{sentence}'\")\n\ndata_items = [\"apple\", \"banana\", \"orange\"]\ncsv_line = \",\".join(data_items)\nprint(f\"Comma-joined: '{csv_line}'\")",
+      "output": "Space-joined: 'Hello Python World'\nComma-joined: 'apple,banana,orange'",
+      "explanation": "The `.join()` method quickly merges all elements of an iterable (like a list) into a single string. You choose the separator that goes between each element, making it super flexible!",
+      "status": "uploaded",
+      "upload_date": "2026-07-13"
     }
   ]
 }
