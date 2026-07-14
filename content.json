@@ -1829,6 +1829,18 @@
       "explanation": "The `.join()` method quickly merges all elements of an iterable (like a list) into a single string. You choose the separator that goes between each element, making it super flexible!",
       "status": "uploaded",
       "upload_date": "2026-07-13"
+    },
+    {
+      "day": 165,
+      "title": "Set Intersection: Find What's Common! \ud83e\udde9",
+      "hook": "Ever wondered how to quickly find shared items between two collections?",
+      "cta": "Hit subscribe for daily Python short lessons!",
+      "language": "python",
+      "code": "set1 = {1, 2, 3, 4, 5}\nset2 = {4, 5, 6, 7, 8}\n\n# Find common elements\ncommon_elements = set1.intersection(set2)\nprint(common_elements)",
+      "output": "{4, 5}",
+      "explanation": "Python sets are powerful for unique collections, and the `intersection()` method lets you effortlessly find elements that exist in *all* specified sets. It's perfect for comparing data and extracting overlaps!",
+      "status": "uploaded",
+      "upload_date": "2026-07-14"
     }
   ]
 }
