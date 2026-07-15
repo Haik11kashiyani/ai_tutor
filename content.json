@@ -1841,6 +1841,18 @@
       "explanation": "Python sets are powerful for unique collections, and the `intersection()` method lets you effortlessly find elements that exist in *all* specified sets. It's perfect for comparing data and extracting overlaps!",
       "status": "uploaded",
       "upload_date": "2026-07-14"
+    },
+    {
+      "day": 166,
+      "title": "Are ALL conditions met? Use `all()`! \u2705",
+      "hook": "Quickly check if every item in an iterable is truthy or satisfies a condition!",
+      "cta": "Like for more Python tips! #Python #Coding #Shorts",
+      "language": "python",
+      "code": "numbers = [2, 4, 6, 8]\nall_even = all(n % 2 == 0 for n in numbers)\nprint(f\"All numbers are even: {all_even}\")\n\ndata = [True, 1, \"hello\", []] # Empty list is False-y\nall_truthy = all(data)\nprint(f\"All items are truthy: {all_truthy}\")",
+      "output": "All numbers are even: True\nAll items are truthy: False",
+      "explanation": "The `all()` function returns `True` if all elements of an iterable are truthy (or the iterable is empty), otherwise it returns `False`. It's perfect for validating collections with a single line!",
+      "status": "uploaded",
+      "upload_date": "2026-07-15"
     }
   ]
 }
