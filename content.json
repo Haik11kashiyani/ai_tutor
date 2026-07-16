@@ -1853,6 +1853,18 @@
       "explanation": "The `all()` function returns `True` if all elements of an iterable are truthy (or the iterable is empty), otherwise it returns `False`. It's perfect for validating collections with a single line!",
       "status": "uploaded",
       "upload_date": "2026-07-15"
+    },
+    {
+      "day": 167,
+      "title": "Reverse Anything FAST! \u23ea",
+      "hook": "Want to flip your data in a flash?",
+      "cta": "Hit like and subscribe for more Python magic!",
+      "language": "python",
+      "code": "original = \"Python\"\nreversed_text = original[::-1]\n\nnumbers = [1, 2, 3, 4, 5]\nreversed_list = numbers[::-1]\n\nprint(f\"Original Text: {original}\")\nprint(f\"Reversed Text: {reversed_text}\")\nprint(f\"Original List: {numbers}\")\nprint(f\"Reversed List: {reversed_list}\")",
+      "output": "Original Text: Python\nReversed Text: nohtyP\nOriginal List: [1, 2, 3, 4, 5]\nReversed List: [5, 4, 3, 2, 1]",
+      "explanation": "The `[::-1]` slice creates a reversed copy of a sequence (like strings or lists) by starting at the end and going to the beginning with a step of -1. It's a super-handy shortcut for quick reversals!",
+      "status": "uploaded",
+      "upload_date": "2026-07-16"
     }
   ]
 }
