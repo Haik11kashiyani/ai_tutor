@@ -1865,6 +1865,18 @@
       "explanation": "The `[::-1]` slice creates a reversed copy of a sequence (like strings or lists) by starting at the end and going to the beginning with a step of -1. It's a super-handy shortcut for quick reversals!",
       "status": "uploaded",
       "upload_date": "2026-07-16"
+    },
+    {
+      "day": 168,
+      "title": "Check if ANY condition is true! \u2728",
+      "hook": "Need to quickly see if *at least one* condition in a list is met?",
+      "cta": "Simplify your checks with `any()`!",
+      "language": "python",
+      "code": "tasks = [\"finish report\", \"\", \"call client\", \"check emails\"]\nurgent_tasks = [\"\", \"\"]\n\nhas_pending = any(task != \"\" for task in tasks)\nprint(f\"Any pending tasks? {has_pending}\")\n\nhas_urgent = any(task != \"\" for task in urgent_tasks)\nprint(f\"Any *actual* urgent tasks? {has_urgent}\")",
+      "output": "Any pending tasks? True\nAny *actual* urgent tasks? False",
+      "explanation": "The `any()` function returns `True` if *any* item in an iterable is truthy, or if *any* element satisfies a given condition. It's perfect for quickly verifying existence or state without looping manually!",
+      "status": "uploaded",
+      "upload_date": "2026-07-17"
     }
   ]
 }
