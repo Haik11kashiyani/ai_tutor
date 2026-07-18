@@ -1877,6 +1877,18 @@
       "explanation": "The `any()` function returns `True` if *any* item in an iterable is truthy, or if *any* element satisfies a given condition. It's perfect for quickly verifying existence or state without looping manually!",
       "status": "uploaded",
       "upload_date": "2026-07-17"
+    },
+    {
+      "day": 169,
+      "title": "Pair Up Your Data with `zip()`! \ud83d\udd17",
+      "hook": "Need to combine elements from multiple lists into neat pairs?",
+      "cta": "Like for more Python power!",
+      "language": "python",
+      "code": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [95, 88, 76]\ngrades = [\"A\", \"B+\", \"C\"]\n\n# Use zip to combine them!\nstudent_data = zip(names, scores, grades)\n\n# Convert to a list to see the result\nprint(list(student_data))",
+      "output": "[('Alice', 95, 'A'), ('Bob', 88, 'B+'), ('Charlie', 76, 'C')]",
+      "explanation": "The `zip()` function effortlessly pairs corresponding elements from multiple iterables, creating tuples of combined data. It's super handy for associating related items side-by-side!",
+      "status": "uploaded",
+      "upload_date": "2026-07-18"
     }
   ]
 }
