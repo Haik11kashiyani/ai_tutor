@@ -1889,6 +1889,18 @@
       "explanation": "The `zip()` function effortlessly pairs corresponding elements from multiple iterables, creating tuples of combined data. It's super handy for associating related items side-by-side!",
       "status": "uploaded",
       "upload_date": "2026-07-18"
+    },
+    {
+      "day": 170,
+      "title": "Transform Elements with `map()`! \ud83e\ude84",
+      "hook": "Need to apply the same function to every item in a list?",
+      "cta": "Level up your data transformations!",
+      "language": "python",
+      "code": "numbers_str = [\"10\", \"20\", \"30\", \"40\"]\nnumbers_int = list(map(int, numbers_str))\nprint(f\"Original strings: {numbers_str}\")\nprint(f\"Transformed integers: {numbers_int}\")",
+      "output": "Original strings: ['10', '20', '30', '40']\nTransformed integers: [10, 20, 30, 40]",
+      "explanation": "The `map()` function applies a given function to each item in an iterable, returning a map object. Convert it to a list to easily see your transformed values!",
+      "status": "uploaded",
+      "upload_date": "2026-07-19"
     }
   ]
 }
