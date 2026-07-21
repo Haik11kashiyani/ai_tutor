@@ -1913,6 +1913,18 @@
       "explanation": "The `enumerate()` function makes looping with an index super easy! It gives you a counter and the item from your iterable, perfect for creating numbered lists or tracking positions.",
       "status": "uploaded",
       "upload_date": "2026-07-20"
+    },
+    {
+      "day": 172,
+      "title": "Filter Lists with `lambda` & `filter()`! \ud83d\udca7",
+      "hook": "Need to quickly pick out specific items from a list?",
+      "cta": "Hit like & subscribe for more Python tricks!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\neven_numbers = list(filter(lambda x: x % 2 == 0, numbers))\nprint(f\"Even numbers: {even_numbers}\")",
+      "output": "Even numbers: [2, 4, 6, 8, 10]",
+      "explanation": "The `filter()` function creates an iterator from elements of an iterable for which a function returns true. We're using a `lambda` function for a super-short, anonymous way to define our filtering condition!",
+      "status": "uploaded",
+      "upload_date": "2026-07-21"
     }
   ]
 }
