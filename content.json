@@ -1925,6 +1925,18 @@
       "explanation": "The `filter()` function creates an iterator from elements of an iterable for which a function returns true. We're using a `lambda` function for a super-short, anonymous way to define our filtering condition!",
       "status": "uploaded",
       "upload_date": "2026-07-21"
+    },
+    {
+      "day": 173,
+      "title": "Format Strings Effortlessly with F-strings! \u2728",
+      "hook": "Tired of clunky string concatenation?",
+      "cta": "Master string formatting!",
+      "language": "python",
+      "code": "name = \"Alice\"\nage = 30\ncity = \"New York\"\nmessage = f\"Hello, I'm {name}, I'm {age} years old, and I live in {city}.\"\nprint(message)",
+      "output": "Hello, I'm Alice, I'm 30 years old, and I live in New York.",
+      "explanation": "F-strings provide a concise and convenient way to embed expressions inside string literals. Just put an `f` before the quote and use curly braces `{}` for variables!",
+      "status": "uploaded",
+      "upload_date": "2026-07-22"
     }
   ]
 }
