@@ -1937,6 +1937,18 @@
       "explanation": "F-strings provide a concise and convenient way to embed expressions inside string literals. Just put an `f` before the quote and use curly braces `{}` for variables!",
       "status": "uploaded",
       "upload_date": "2026-07-22"
+    },
+    {
+      "day": 174,
+      "title": "Get Dictionary Values Safely with `.get()`! \ud83d\udee1\ufe0f",
+      "hook": "Avoid dreaded KeyErrors in your dictionaries!",
+      "cta": "Follow for daily Python tips!",
+      "language": "python",
+      "code": "data = {\"name\": \"Alice\", \"age\": 30}\n\n# Get existing value\nname = data.get(\"name\", \"Guest\")\n\n# Get non-existent value with a default\ncity = data.get(\"city\", \"Unknown\")\nzip_code = data.get(\"zip\", \"N/A\")\n\nprint(f\"Name: {name}\")\nprint(f\"City: {city}\")\nprint(f\"Zip: {zip_code}\")",
+      "output": "Name: Alice\nCity: Unknown\nZip: N/A",
+      "explanation": "The `.get()` method lets you safely retrieve dictionary values. If a key isn't found, it returns a specified default value instead of raising an error, making your code more robust!",
+      "status": "uploaded",
+      "upload_date": "2026-07-23"
     }
   ]
 }
