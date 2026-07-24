@@ -1949,6 +1949,18 @@
       "explanation": "The `.get()` method lets you safely retrieve dictionary values. If a key isn't found, it returns a specified default value instead of raising an error, making your code more robust!",
       "status": "uploaded",
       "upload_date": "2026-07-23"
+    },
+    {
+      "day": 175,
+      "title": "Stitch Strings Together with `.join()`! \ud83e\uddf5",
+      "hook": "Ever need to turn a list of words into a single sentence?",
+      "cta": "Master string manipulation!",
+      "language": "python",
+      "code": "words = [\"Python\", \"is\", \"awesome\"]\nsentence = \" \".join(words)\nprint(f\"Joined with spaces: {sentence}\")\n\nitems = [\"apple\", \"banana\", \"cherry\"]\ncsv_line = \", \".join(items)\nprint(f\"Joined with comma: {csv_line}\")",
+      "output": "Joined with spaces: Python is awesome\nJoined with comma: apple, banana, cherry",
+      "explanation": "The `.join()` method lets you combine all items in an iterable (like a list of strings) into one single string, using the string it's called on as the separator between each item. It's super handy for creating sentences, file paths, or CSV lines!",
+      "status": "uploaded",
+      "upload_date": "2026-07-24"
     }
   ]
 }
