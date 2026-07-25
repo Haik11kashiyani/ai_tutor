@@ -1961,6 +1961,18 @@
       "explanation": "The `.join()` method lets you combine all items in an iterable (like a list of strings) into one single string, using the string it's called on as the separator between each item. It's super handy for creating sentences, file paths, or CSV lines!",
       "status": "uploaded",
       "upload_date": "2026-07-24"
+    },
+    {
+      "day": 176,
+      "title": "Find Min & Max Values FAST! \ud83d\udcc8",
+      "hook": "Need to quickly find the smallest or largest item in a list?",
+      "cta": "Hit follow for more Python tricks!",
+      "language": "python",
+      "code": "numbers = [34, 12, 89, 5, 67]\nmin_val = min(numbers)\nmax_val = max(numbers)\nprint(f\"Smallest: {min_val}\")\nprint(f\"Largest: {max_val}\")",
+      "output": "Smallest: 5\nLargest: 89",
+      "explanation": "Use `min()` to effortlessly get the smallest value and `max()` to grab the largest from any iterable. Python makes finding extremes super simple!",
+      "status": "uploaded",
+      "upload_date": "2026-07-25"
     }
   ]
 }
