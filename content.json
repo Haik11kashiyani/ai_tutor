@@ -1973,6 +1973,18 @@
       "explanation": "Use `min()` to effortlessly get the smallest value and `max()` to grab the largest from any iterable. Python makes finding extremes super simple!",
       "status": "uploaded",
       "upload_date": "2026-07-25"
+    },
+    {
+      "day": 177,
+      "title": "Check if ALL conditions are met! \u2705",
+      "hook": "Need to know if EVERY item in your list passes a test? Python's `all()` is your friend!",
+      "cta": "Like and follow for more Python tips!",
+      "language": "python",
+      "code": "ages = [18, 22, 16, 25]\nall_adults = all(age >= 18 for age in ages)\nprint(f\"All adults? {all_adults}\")\n\ntasks = [\"finish report\", \"email\", \"call client\"]\nall_long_enough = all(len(task) > 5 for task in tasks)\nprint(f\"All tasks long enough? {all_long_enough}\")",
+      "output": "All adults? False\nAll tasks long enough? False",
+      "explanation": "The `all()` function returns `True` only if *all* elements in an iterable satisfy a given condition or are truthy. It's perfect for quickly verifying if every item meets your criteria.",
+      "status": "uploaded",
+      "upload_date": "2026-07-26"
     }
   ]
 }
