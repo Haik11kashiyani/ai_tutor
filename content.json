@@ -1985,6 +1985,18 @@
       "explanation": "The `all()` function returns `True` only if *all* elements in an iterable satisfy a given condition or are truthy. It's perfect for quickly verifying if every item meets your criteria.",
       "status": "uploaded",
       "upload_date": "2026-07-26"
+    },
+    {
+      "day": 178,
+      "title": "Make Lists FAST! \u26a1",
+      "hook": "Want to create new lists from existing ones in just one super concise line?",
+      "cta": "Like and follow for more Python tricks!",
+      "language": "python",
+      "code": "numbers = [1, 2, 3, 4, 5]\nsquared_evens = [n*n for n in numbers if n % 2 == 0]\nprint(squared_evens)",
+      "output": "[4, 16]",
+      "explanation": "List comprehensions let you create new lists by transforming or filtering elements from another iterable, all in a single, readable line! It's a super Pythonic way to build lists quickly and efficiently.",
+      "status": "uploaded",
+      "upload_date": "2026-07-27"
     }
   ]
 }
