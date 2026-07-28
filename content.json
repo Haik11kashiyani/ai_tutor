@@ -1997,6 +1997,18 @@
       "explanation": "List comprehensions let you create new lists by transforming or filtering elements from another iterable, all in a single, readable line! It's a super Pythonic way to build lists quickly and efficiently.",
       "status": "uploaded",
       "upload_date": "2026-07-27"
+    },
+    {
+      "day": 179,
+      "title": "Sort Your Data Instantly! \u2195\ufe0f",
+      "hook": "Untangle your lists and get them perfectly ordered!",
+      "cta": "Follow for more Python tips!",
+      "language": "python",
+      "code": "numbers = [5, 2, 8, 1, 9, 3]\nsorted_numbers = sorted(numbers)\nreversed_sorted = sorted(numbers, reverse=True)\n\nprint(f\"Original: {numbers}\")\nprint(f\"Sorted: {sorted_numbers}\")\nprint(f\"Reverse Sorted: {reversed_sorted}\")",
+      "output": "Original: [5, 2, 8, 1, 9, 3]\nSorted: [1, 2, 3, 5, 8, 9]\nReverse Sorted: [9, 8, 5, 3, 2, 1]",
+      "explanation": "The `sorted()` function returns a brand new sorted list from any iterable, leaving the original untouched. Use the `reverse=True` argument to sort from highest to lowest!",
+      "status": "uploaded",
+      "upload_date": "2026-07-28"
     }
   ]
 }
