@@ -2009,6 +2009,18 @@
       "explanation": "The `sorted()` function returns a brand new sorted list from any iterable, leaving the original untouched. Use the `reverse=True` argument to sort from highest to lowest!",
       "status": "uploaded",
       "upload_date": "2026-07-28"
+    },
+    {
+      "day": 180,
+      "title": "Combine Lists with `zip()`! \ud83e\udd1d",
+      "hook": "Pair up elements from different lists instantly!",
+      "cta": "Like, Share, & Follow for more Python tips!",
+      "language": "python",
+      "code": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [95, 88, 92]\n\n# Combine them into a list of tuples\ncombined_data = list(zip(names, scores))\nprint(f\"Combined: {combined_data}\")\n\n# Or create a dictionary!\nstudent_scores = dict(zip(names, scores))\nprint(f\"Scores Map: {student_scores}\")",
+      "output": "Combined: [('Alice', 95), ('Bob', 88), ('Charlie', 92)]\nScores Map: {'Alice': 95, 'Bob': 88, 'Charlie': 92}",
+      "explanation": "The `zip()` function combines corresponding elements from multiple iterables into tuples. It's super handy for pairing up related data or even creating dictionaries!",
+      "status": "uploaded",
+      "upload_date": "2026-07-29"
     }
   ]
 }
