@@ -2021,6 +2021,18 @@
       "explanation": "The `zip()` function combines corresponding elements from multiple iterables into tuples. It's super handy for pairing up related data or even creating dictionaries!",
       "status": "uploaded",
       "upload_date": "2026-07-29"
+    },
+    {
+      "day": 181,
+      "title": "Make Your Lists Unique with Sets! \ud83d\udc8e",
+      "hook": "Tired of duplicate items messing up your lists?",
+      "cta": "Follow for more Python tips!",
+      "language": "python",
+      "code": "numbers = [1, 2, 2, 3, 4, 1, 5, 3]\nunique_numbers = list(set(numbers))\nprint(\"Original:\", numbers)\nprint(\"Unique:\", unique_numbers)",
+      "output": "Original: [1, 2, 2, 3, 4, 1, 5, 3]\nUnique: [1, 2, 3, 4, 5]",
+      "explanation": "Transform your lists into sets to automatically remove duplicates, then convert them back to a list! Sets are fantastic for efficiently ensuring every item is unique.",
+      "status": "uploaded",
+      "upload_date": "2026-07-30"
     }
   ]
 }
