@@ -2033,6 +2033,18 @@
       "explanation": "Transform your lists into sets to automatically remove duplicates, then convert them back to a list! Sets are fantastic for efficiently ensuring every item is unique.",
       "status": "uploaded",
       "upload_date": "2026-07-30"
+    },
+    {
+      "day": 182,
+      "title": "Slice Strings into Lists with `.split()`! \ud83d\udd2a",
+      "hook": "Need to break a sentence down into individual words?",
+      "cta": "Follow for daily Python tips!",
+      "language": "python",
+      "code": "sentence = \"Python is awesome for daily coding challenges\"\nwords = sentence.split()\nprint(words)\n\n# Split by a specific character!\nparts = sentence.split(\"o\")\nprint(parts)",
+      "output": "['Python', 'is', 'awesome', 'for', 'daily', 'coding', 'challenges']\n['Pyth', 'n is awesome f', 'r daily c', 'ding challenges']",
+      "explanation": "The `.split()` method turns a string into a list of substrings. By default, it splits by whitespace, but you can specify any character as your delimiter!",
+      "status": "uploaded",
+      "upload_date": "2026-07-31"
     }
   ]
 }
