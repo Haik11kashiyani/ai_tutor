@@ -2045,6 +2045,18 @@
       "explanation": "The `.split()` method turns a string into a list of substrings. By default, it splits by whitespace, but you can specify any character as your delimiter!",
       "status": "uploaded",
       "upload_date": "2026-07-31"
+    },
+    {
+      "day": 183,
+      "title": "Loop with Index & Value using `enumerate()`! \ud83d\udd22",
+      "hook": "Need to know the position of items while looping?",
+      "cta": "Like for more Python power-ups!",
+      "language": "python",
+      "code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor index, fruit in enumerate(fruits):\n    print(f\"Fruit {index}: {fruit}\")",
+      "output": "Fruit 0: apple\nFruit 1: banana\nFruit 2: cherry",
+      "explanation": "The `enumerate()` function makes looping through iterables with both an index and its corresponding value super easy! It returns pairs of (index, value) for each item.",
+      "status": "uploaded",
+      "upload_date": "2026-08-01"
     }
   ]
 }
