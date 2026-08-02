@@ -2057,6 +2057,18 @@
       "explanation": "The `enumerate()` function makes looping through iterables with both an index and its corresponding value super easy! It returns pairs of (index, value) for each item.",
       "status": "uploaded",
       "upload_date": "2026-08-01"
+    },
+    {
+      "day": 184,
+      "title": "Check if ANY condition is met! \ud83e\udd14",
+      "hook": "Need to know if *at least one* item in your list meets a specific condition?",
+      "cta": "Like, subscribe, and follow for more Python tips!",
+      "language": "python",
+      "code": "nums = [10, 2, 0, 5, -3]\n\nhas_negative = any(n < 0 for n in nums)\nhas_zero = any(n == 0 for n in nums)\nhas_large = any(n > 100 for n in nums)\n\nprint(f\"Any negative? {has_negative}\")\nprint(f\"Any zero? {has_zero}\")\nprint(f\"Any number > 100? {has_large}\")",
+      "output": "Any negative? True\nAny zero? True\nAny number > 100? False",
+      "explanation": "The `any()` function returns `True` if *any* element in an iterable satisfies a given condition. It's super handy for quick checks when you only need one match!",
+      "status": "uploaded",
+      "upload_date": "2026-08-02"
     }
   ]
 }
