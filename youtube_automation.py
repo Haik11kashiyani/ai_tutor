@@ -1,5 +1,13 @@
+import sys
 import json
 import os
+
+# Ensure UTF-8 stdout and stderr on Windows / all platforms
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 import requests
 import time
 from pathlib import Path
@@ -136,7 +144,7 @@ class YouTubeAutomation:
 
     def load_content(self, json_path="content.json"):
         try:
-            with open(json_path, 'r') as f:
+            with open(json_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             return data
         except json.JSONDecodeError as e:
@@ -146,7 +154,7 @@ class YouTubeAutomation:
 
     def repair_json(self, json_path):
         """Attempts to fix common JSON corruptions like 'Extra data'."""
-        with open(json_path, 'r') as f:
+        with open(json_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
         # Scenario 1: Extra Data (e.g. Concatenated JSONs) - take the first valid object
@@ -172,8 +180,8 @@ class YouTubeAutomation:
         try:
             # Create temp file in the same directory to ensure atomic move works
             dir_name = os.path.dirname(json_path) or '.'
-            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=dir_name) as tmp:
-                json.dump(data, tmp, indent=2)
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=dir_name, encoding='utf-8') as tmp:
+                json.dump(data, tmp, indent=2, ensure_ascii=False)
                 temp_file = tmp.name
             
             # Atomic move
@@ -200,6 +208,8 @@ class YouTubeAutomation:
         last_day = max(days, key=lambda day: day.get('day', 0))
         next_day_number = int(last_day.get('day', len(days))) + 1
         language = last_day.get('language', 'python')
+        language_name = self.language_names.get(language, language.capitalize())
+        output_fn = 'console.log()' if language == 'javascript' else 'print()'
 
         # Collect recent topics to avoid repetition
         recent_titles = [d.get('title', '') for d in days[-10:]]
@@ -211,15 +221,15 @@ class YouTubeAutomation:
         if self.has_ai:
             try:
                 prompt = f"""
-                Generate a new Python coding lesson for Day {next_day_number} of a "Learn Python" YouTube Shorts series.
+                Generate a new {language_name} coding lesson for Day {next_day_number} of a "Learn {language_name}" YouTube Shorts series.
 
                 RECENT TOPICS (avoid repeating these):
                 {recent_topics_str}
 
                 REQUIREMENTS:
-                1. Pick a useful, interesting Python concept that hasn't been covered recently.
+                1. Pick a useful, interesting {language_name} concept that hasn't been covered recently.
                 2. The code MUST be short (3-8 lines max) and run without external dependencies.
-                3. The code MUST produce visible output via print().
+                3. The code MUST produce visible output via {output_fn}.
                 4. The output MUST be the EXACT text the code produces when run.
                 5. Title should be catchy with an emoji.
                 6. Hook should be a short attention-grabbing sentence.
@@ -230,7 +240,7 @@ class YouTubeAutomation:
                     "title": "Catchy Title With Emoji",
                     "hook": "Short attention grabbing hook",
                     "cta": "Short call to action",
-                    "code": "the python code",
+                    "code": "the {language} code",
                     "output": "exact output of the code",
                     "explanation": "Simple 1-2 sentence explanation"
                 }}
@@ -241,7 +251,7 @@ class YouTubeAutomation:
 
                 next_day = {
                     'day': next_day_number,
-                    'title': ai_content.get('title', f'Python Tip #{next_day_number}'),
+                    'title': ai_content.get('title', f'{language_name} Tip #{next_day_number}'),
                     'hook': ai_content.get('hook', 'Check this out!'),
                     'cta': ai_content.get('cta', 'Follow for more!'),
                     'language': language,
@@ -264,33 +274,61 @@ class YouTubeAutomation:
 
         # Fallback: use a real code template (NOT "Coming soon")
         if next_day is None:
-            # Rotate through useful real code snippets
-            fallback_lessons = [
-                {
-                    'title': f'Quick Python Tip #{next_day_number} \U0001f4a1',
-                    'code': "words = 'hello world'.split()\nprint(words)",
-                    'output': "['hello', 'world']",
-                    'explanation': 'The split method breaks a string into a list of words. Super handy for text processing!',
-                },
-                {
-                    'title': f'Python Shortcut #{next_day_number} \u26a1',
-                    'code': "nums = [3, 1, 4, 1, 5]\nprint(max(nums), min(nums))",
-                    'output': '5 1',
-                    'explanation': 'max() and min() instantly find the biggest and smallest values in any collection!',
-                },
-                {
-                    'title': f'Python Trick #{next_day_number} \U0001f525',
-                    'code': "text = 'Python'\nprint(text[::-1])",
-                    'output': 'nohtyP',
-                    'explanation': 'Slicing with [::-1] reverses any string or list instantly. One line magic!',
-                },
-                {
-                    'title': f'Python Hack #{next_day_number} \U0001f680',
-                    'code': "a, b = 5, 10\na, b = b, a\nprint(a, b)",
-                    'output': '10 5',
-                    'explanation': 'Python lets you swap variables in one line. No temp variable needed!',
-                },
-            ]
+            # Rotate through useful real code snippets per language
+            if language == 'javascript':
+                fallback_lessons = [
+                    {
+                        'title': f'Quick JS Tip #{next_day_number} \U0001f4a1',
+                        'code': "const words = 'hello world'.split(' ');\nconsole.log(words);",
+                        'output': "[ 'hello', 'world' ]",
+                        'explanation': 'The split method breaks a string into an array of words. Essential for text processing!',
+                    },
+                    {
+                        'title': f'JavaScript Shortcut #{next_day_number} \u26a1',
+                        'code': "const nums = [3, 1, 4, 1, 5];\nconsole.log(Math.max(...nums), Math.min(...nums));",
+                        'output': '5 1',
+                        'explanation': 'Math.max and Math.min with spread find the biggest and smallest values instantly!',
+                    },
+                    {
+                        'title': f'JS Trick #{next_day_number} \U0001f525',
+                        'code': "const text = 'JavaScript';\nconsole.log(text.split('').reverse().join(''));",
+                        'output': 'tpircSavaJ',
+                        'explanation': 'Split, reverse, join - the classic one-liner to reverse any string in JS!',
+                    },
+                    {
+                        'title': f'JS Hack #{next_day_number} \U0001f680',
+                        'code': "let [a, b] = [5, 10];\n[a, b] = [b, a];\nconsole.log(a, b);",
+                        'output': '10 5',
+                        'explanation': 'Destructuring assignment lets you swap variables in one line. No temp variable needed!',
+                    },
+                ]
+            else:
+                fallback_lessons = [
+                    {
+                        'title': f'Quick Python Tip #{next_day_number} \U0001f4a1',
+                        'code': "words = 'hello world'.split()\nprint(words)",
+                        'output': "['hello', 'world']",
+                        'explanation': 'The split method breaks a string into a list of words. Super handy for text processing!',
+                    },
+                    {
+                        'title': f'Python Shortcut #{next_day_number} \u26a1',
+                        'code': "nums = [3, 1, 4, 1, 5]\nprint(max(nums), min(nums))",
+                        'output': '5 1',
+                        'explanation': 'max() and min() instantly find the biggest and smallest values in any collection!',
+                    },
+                    {
+                        'title': f'Python Trick #{next_day_number} \U0001f525',
+                        'code': "text = 'Python'\nprint(text[::-1])",
+                        'output': 'nohtyP',
+                        'explanation': 'Slicing with [::-1] reverses any string or list instantly. One line magic!',
+                    },
+                    {
+                        'title': f'Python Hack #{next_day_number} \U0001f680',
+                        'code': "a, b = 5, 10\na, b = b, a\nprint(a, b)",
+                        'output': '10 5',
+                        'explanation': 'Python lets you swap variables in one line. No temp variable needed!',
+                    },
+                ]
             fallback = fallback_lessons[next_day_number % len(fallback_lessons)]
             next_day = {
                 'day': next_day_number,
@@ -303,7 +341,7 @@ class YouTubeAutomation:
                 'explanation': fallback['explanation'],
                 'status': 'pending'
             }
-            print(f"📝 Using template fallback for Day {next_day_number}")
+            print(f"📝 Using template fallback for Day {next_day_number} ({language_name})")
 
         days.append(next_day)
         return next_day
@@ -351,6 +389,7 @@ class YouTubeAutomation:
         title = day_data['title']
         explanation = day_data.get('explanation', '')
         language = day_data.get('language', 'python')
+        language_name = self.language_names.get(language, language.capitalize())
         day = day_data['day']
         hook = day_data.get('hook', '')
         cta = day_data.get('cta', '')
@@ -364,8 +403,8 @@ class YouTubeAutomation:
                 Write a 30-45 second spoken script for a YouTube Short.
                 
                 CONTEXT:
-                - Series: Day {day} of 30 Days of Learning.
-                - Topic: {title} ({language})
+                - Series: Day {day} of Learning {language_name}.
+                - Topic: {title} ({language_name})
                 - The content/code and explanation are provided below.
                 
                 SOURCE MATERIAL:
@@ -1219,10 +1258,7 @@ class YouTubeAutomation:
             self.save_content(data, json_path)
             print(f"📝 Added draft Day {day_data['day']} to {json_path}")
 
-        # LAUNCH GUARD: Skip runs on Jan 6th 2026 (User requested start from the 7th)
-        if datetime.now().strftime('%Y-%m-%d') == '2026-01-06':
-             print("🛑 Skipping run (Launch starts Jan 7th).")
-             return
+
         
         print(f"\n{'='*50}")
         print(f"🔥 Processing Day {day_data['day']}: {day_data['title']}")
@@ -1234,7 +1270,8 @@ class YouTubeAutomation:
         print(f"   Theme: {scheme.get('name', 'custom')}")
         
         script = self.generate_script(day_data)
-        audio_path = self.output_folder / f"day_{day_data['day']}_audio.mp3"
+        lang_prefix = day_data.get('language', 'py')[:2]
+        audio_path = self.output_folder / f"{lang_prefix}_day_{day_data['day']}_audio.mp3"
         print("🎙️ Generating Audio...")
         
         if not self.text_to_speech_elevenlabs(script, str(audio_path)):
@@ -1249,12 +1286,12 @@ class YouTubeAutomation:
         print("🎥 Generating Video...")
         time.sleep(1)
         video = self.create_video(day_data, audio_path, scheme)
-        video_path = self.output_folder / f"day_{day_data['day']}_shorts.mp4"
+        video_path = self.output_folder / f"{lang_prefix}_day_{day_data['day']}_shorts.mp4"
         video.write_videofile(str(video_path), fps=self.fps, codec='libx264', audio_codec='aac', preset='medium', bitrate='5000k', audio_fps=44100)
         
         metadata = self.generate_youtube_metadata(day_data)
-        with open(self.output_folder / f"day_{day_data['day']}_metadata.json", 'w') as f:
-            json.dump(metadata, f, indent=2)
+        with open(self.output_folder / f"{lang_prefix}_day_{day_data['day']}_metadata.json", 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, indent=2, ensure_ascii=False)
 
         upload_success = self.upload_to_youtube(video_path, metadata)
         if upload_success:
