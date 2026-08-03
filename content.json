@@ -2079,7 +2079,8 @@
       "code": "class JSONParser:\n    def parse(self): return {'format': 'json'}\nclass XMLParser:\n    def parse(self): return {'format': 'xml'}\ndef get_parser(fmt):\n    parsers = {'json': JSONParser, 'xml': XMLParser}\n    return parsers[fmt]()\nprint(get_parser('json').parse())",
       "output": "{'format': 'json'}",
       "explanation": "The Factory Pattern delegates object instantiation to a dedicated function without exposing concrete classes to the caller.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-03"
     },
     {
       "day": 186,
