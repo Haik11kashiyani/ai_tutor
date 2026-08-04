@@ -2091,7 +2091,8 @@
       "code": "class DatabasePool:\n    _instance = None\n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n        return cls._instance\ndb1, db2 = DatabasePool(), DatabasePool()\nprint(db1 is db2)",
       "output": "True",
       "explanation": "Singletons ensure exactly one instance of a class exists across your entire process, perfect for shared configurations or connection managers.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-04"
     },
     {
       "day": 187,
