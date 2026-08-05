@@ -2103,7 +2103,8 @@
       "code": "class EventEmitter:\n    def __init__(self):\n        self._subscribers = []\n    def subscribe(self, fn):\n        self._subscribers.append(fn)\n    def emit(self, event):\n        return [fn(event) for fn in self._subscribers]\nbus = EventEmitter()\nbus.subscribe(lambda e: f'Logged: {e}')\nprint(bus.emit('USER_LOGIN'))",
       "output": "['Logged: USER_LOGIN']",
       "explanation": "The Observer pattern decouples event producers from consumers, powering pub-sub architectures and scalable background workers.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-05"
     },
     {
       "day": 188,
