@@ -2115,7 +2115,8 @@
       "code": "def card_fee(amt): return amt * 0.029 + 0.30\ndef crypto_fee(amt): return amt * 0.01\ndef calculate_checkout(amt, fee_strategy):\n    return round(fee_strategy(amt), 2)\nprint(calculate_checkout(100, card_fee))\nprint(calculate_checkout(100, crypto_fee))",
       "output": "3.2\n1.0",
       "explanation": "Strategy pattern lets you pass behaviors as first-class functions, allowing your core business logic to remain open for extension without modification.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-07"
     },
     {
       "day": 189,
