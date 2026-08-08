@@ -2127,7 +2127,8 @@
       "code": "class QueryBuilder:\n    def __init__(self, table):\n        self._table = table\n        self._filters = []\n    def where(self, cond):\n        self._filters.append(cond)\n        return self\n    def build(self):\n        return f\"SELECT * FROM {self._table} WHERE {' AND '.join(self._filters)}\"\nprint(QueryBuilder('users').where('age > 18').where('active = 1').build())",
       "output": "SELECT * FROM users WHERE age > 18 AND active = 1",
       "explanation": "Builder pattern provides a fluent chainable interface to construct complex objects incrementally with extreme readability.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-08"
     },
     {
       "day": 190,
