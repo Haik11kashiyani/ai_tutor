@@ -2139,7 +2139,8 @@
       "code": "class CircuitBreaker:\n    def __init__(self, max_fails=2):\n        self.fails, self.max_fails, self.open = 0, max_fails, False\n    def call(self, fn):\n        if self.open: return 'FALLBACK_CACHED_DATA'\n        try: return fn()\n        except Exception:\n            self.fails += 1\n            if self.fails >= self.max_fails: self.open = True\n            return 'FAILOVER'\ncb = CircuitBreaker(1)\ncb.call(lambda: (_ for _ in ()).throw(ValueError))\nprint(cb.call(lambda: 'OK'))",
       "output": "FALLBACK_CACHED_DATA",
       "explanation": "Circuit Breakers trip to OPEN when errors cross a threshold, serving instantaneous fallbacks and protecting overloaded services.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-09"
     },
     {
       "day": 191,
