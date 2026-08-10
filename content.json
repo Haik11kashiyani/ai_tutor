@@ -2151,7 +2151,8 @@
       "code": "def get_retry_delay(attempt, base_delay=1, max_delay=16):\n    delay = min(max_delay, base_delay * (2 ** attempt))\n    return delay\nretry_delays = [get_retry_delay(i) for i in range(4)]\nprint(retry_delays)",
       "output": "[1, 2, 4, 8]",
       "explanation": "Exponential backoff doubles the wait time after each consecutive failure, giving downstream infrastructure time to recover smoothly.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-10"
     },
     {
       "day": 192,
