@@ -2163,7 +2163,8 @@
       "code": "class RateLimiter:\n    def __init__(self, capacity):\n        self.capacity, self.tokens = capacity, capacity\n    def consume(self, count=1):\n        if self.tokens >= count:\n            self.tokens -= count\n            return True\n        return False\nlimiter = RateLimiter(2)\nprint([limiter.consume() for _ in range(3)])",
       "output": "[True, True, False]",
       "explanation": "The Token Bucket algorithm regulates incoming throughput by consuming tokens, rejecting burst traffic once the bucket is depleted.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-11"
     },
     {
       "day": 193,
