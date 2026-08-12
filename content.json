@@ -2175,7 +2175,8 @@
       "code": "class ConnectionPool:\n    def __init__(self, size=2):\n        self.pool = [f'conn_{i}' for i in range(size)]\n    def acquire(self):\n        return self.pool.pop(0) if self.pool else None\n    def release(self, conn):\n        self.pool.append(conn)\np = ConnectionPool(1)\nc = p.acquire()\nprint(f'Acquired: {c}, Empty: {p.acquire() is None}')",
       "output": "Acquired: conn_0, Empty: True",
       "explanation": "Connection pooling recycles heavy networking sockets rather than tearing down and rebuilding TLS handshakes on every request.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-12"
     },
     {
       "day": 194,
