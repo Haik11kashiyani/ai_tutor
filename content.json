@@ -2187,7 +2187,8 @@
       "code": "FEATURES = {'new_ai_checkout': True}\ndef process_cart(user_id):\n    if FEATURES.get('new_ai_checkout', False):\n        return f'AI checkout for {user_id}'\n    return f'Classic checkout for {user_id}'\nprint(process_cart('user_101'))",
       "output": "AI checkout for user_101",
       "explanation": "Feature flags decouple code deployment from feature release, enabling instant rollbacks without redeploying code.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-13"
     },
     {
       "day": 195,
