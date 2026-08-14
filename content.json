@@ -2199,7 +2199,8 @@
       "code": "def read_stream(data):\n    for row in data: yield row\ndef filter_valid(stream):\n    for row in stream:\n        if row > 0: yield row * 2\nraw = [-5, 10, 0, 20]\npipeline = list(filter_valid(read_stream(raw)))\nprint(pipeline)",
       "output": "[20, 40]",
       "explanation": "Chaining Python generators streams data row-by-row on demand, avoiding loading giant datasets into heap memory.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-14"
     },
     {
       "day": 196,
