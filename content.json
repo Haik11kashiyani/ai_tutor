@@ -2211,7 +2211,8 @@
       "code": "def validate_schema(data, schema):\n    for key, expected_type in schema.items():\n        if key not in data or not isinstance(data[key], expected_type):\n            return False\n    return True\nschema = {'id': int, 'email': str}\nprint(validate_schema({'id': 1, 'email': 'a@b.com'}, schema))\nprint(validate_schema({'id': '1', 'email': 'a@b.com'}, schema))",
       "output": "True\nFalse",
       "explanation": "Validating payloads at the ingress boundary keeps corrupt or malformed objects from propagating across downstream microservices.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-15"
     },
     {
       "day": 197,
