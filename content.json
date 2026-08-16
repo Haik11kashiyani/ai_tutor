@@ -2223,7 +2223,8 @@
       "code": "def extract(): return [{'raw_price': '$49.99'}, {'raw_price': '$19.50'}]\ndef transform(records):\n    return [float(r['raw_price'].replace('$', '')) for r in records]\ndef load(prices): return f'Loaded {len(prices)} items, Total: ${sum(prices):.2f}'\nprint(load(transform(extract())))",
       "output": "Loaded 2 items, Total: $69.49",
       "explanation": "The ETL architecture isolates data extraction, type normalization, and destination ingestion into clean testable stages.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-16"
     },
     {
       "day": 198,
