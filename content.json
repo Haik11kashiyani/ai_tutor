@@ -2247,7 +2247,8 @@
       "code": "from collections import defaultdict\ntransactions = [('alice', 100), ('bob', 50), ('alice', 25)]\nsummary = defaultdict(int)\nfor user, amount in transactions:\n    summary[user] += amount\nprint(dict(summary))",
       "output": "{'alice': 125, 'bob': 50}",
       "explanation": "collections.defaultdict avoids expensive key checks, creating grouped aggregations in a single O(N) pass.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-18"
     },
     {
       "day": 200,
