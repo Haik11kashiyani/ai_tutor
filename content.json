@@ -2259,7 +2259,8 @@
       "code": "def auth_middleware(req, next_fn):\n    req['user'] = 'auth_ok'\n    return next_fn(req)\ndef handler(req): return f\"Handled for {req['user']}\"\nrequest = {'path': '/api/data'}\nprint(auth_middleware(request, handler))",
       "output": "Handled for auth_ok",
       "explanation": "Middleware intercepts inbound requests, executing cross-cutting concerns like auth, CORS, and logging before hitting endpoint handlers.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-19"
     },
     {
       "day": 201,
