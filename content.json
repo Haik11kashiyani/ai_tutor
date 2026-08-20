@@ -2271,7 +2271,8 @@
       "code": "def paginate_by_cursor(items, after_id=None, limit=2):\n    start_idx = 0\n    if after_id:\n        start_idx = next(i + 1 for i, it in enumerate(items) if it['id'] == after_id)\n    return items[start_idx:start_idx + limit]\ndata = [{'id': 10}, {'id': 20}, {'id': 30}, {'id': 40}]\nprint([d['id'] for d in paginate_by_cursor(data, after_id=20, limit=2)])",
       "output": "[30, 40]",
       "explanation": "Cursor pagination queries records using deterministic indexed IDs rather than skipping offsets, delivering consistent O(1) performance.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-20"
     },
     {
       "day": 202,
