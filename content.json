@@ -2283,7 +2283,8 @@
       "code": "def build_sql_query(base, **filters):\n    clauses = [f'{k} = ?' for k, v in filters.items() if v is not None]\n    return f\"{base} WHERE {' AND '.join(clauses)}\" if clauses else base\nprint(build_sql_query('SELECT * FROM products', category='electronics', active=True))",
       "output": "SELECT * FROM products WHERE category = ? AND active = ?",
       "explanation": "Dynamic filter builders construct parameterized queries cleanly, keeping endpoints flexible while preventing SQL injection.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-21"
     },
     {
       "day": 203,
