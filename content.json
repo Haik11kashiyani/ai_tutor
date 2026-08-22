@@ -2295,7 +2295,8 @@
       "code": "class APIRouter:\n    def __init__(self):\n        self.routes = {}\n    def register(self, version, endpoint, fn):\n        self.routes[(version, endpoint)] = fn\n    def route(self, ver, path):\n        return self.routes.get((ver, path), lambda: '404')()\napi = APIRouter()\napi.register('v1', '/user', lambda: {'name': 'Alice'})\napi.register('v2', '/user', lambda: {'first_name': 'Alice', 'last_name': 'Smith'})\nprint(api.route('v2', '/user'))",
       "output": "{'first_name': 'Alice', 'last_name': 'Smith'}",
       "explanation": "API version routing decouples backwards compatibility layer handlers, ensuring seamless API evolution.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-22"
     },
     {
       "day": 204,
