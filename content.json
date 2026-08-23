@@ -2307,7 +2307,8 @@
       "code": "import secrets\ndef generate_api_key(prefix='sk_live'):\n    token = secrets.token_hex(8)\n    return f'{prefix}_{token}'\nkey = generate_api_key()\nprint(key.startswith('sk_live_') and len(key) == 24)",
       "output": "True",
       "explanation": "The secrets module accesses OS-level entropy to generate cryptographically secure tokens resilient to brute-force prediction.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-23"
     },
     {
       "day": 205,
