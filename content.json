@@ -2319,7 +2319,8 @@
       "code": "import hmac, hashlib\ndef verify_webhook(payload, signature, secret):\n    expected = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()\n    return hmac.compare_digest(expected, signature)\npayload, secret = '{\"event\": \"charge.success\"}', 'secret_key_123'\nsig = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).hexdigest()\nprint(verify_webhook(payload, sig, secret))",
       "output": "True",
       "explanation": "HMAC-SHA256 signatures with constant-time comparison prevent webhook forgery and protect against timing attack vulnerabilities.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-24"
     },
     {
       "day": 206,
