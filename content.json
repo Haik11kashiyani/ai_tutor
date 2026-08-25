@@ -2331,7 +2331,8 @@
       "code": "import re\ndef sanitize_username(raw):\n    cleaned = re.sub(r'[^a-zA-Z0-9_]', '', raw)\n    return cleaned[:15].lower()\nprint(sanitize_username('Hardik<script>alert(1)</script>_99'))",
       "output": "hardikscriptale",
       "explanation": "Whitelisting permitted characters and enforcing strict bounds mitigates malicious payloads before string interpolation.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-25"
     },
     {
       "day": 207,
