@@ -2343,7 +2343,8 @@
       "code": "def health_check(db_alive=True, redis_alive=True):\n    checks = {'database': db_alive, 'cache': redis_alive}\n    all_healthy = all(checks.values())\n    status_code = 200 if all_healthy else 503\n    return {'status': 'UP' if all_healthy else 'DOWN', 'code': status_code}\nprint(health_check(True, True))",
       "output": "{'status': 'UP', 'code': 200}",
       "explanation": "Structured health check endpoints enable load balancers and Kubernetes to automatically route traffic only to healthy instances.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-26"
     },
     {
       "day": 208,
