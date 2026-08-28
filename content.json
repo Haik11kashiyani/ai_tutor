@@ -2355,7 +2355,8 @@
       "code": "class AppServer:\n    def __init__(self):\n        self.running = True\n        self.active_jobs = ['job_1', 'job_2']\n    def shutdown(self):\n        self.running = False\n        flushed = list(self.active_jobs)\n        self.active_jobs.clear()\n        return f'Flushed {len(flushed)} jobs safely'\nserver = AppServer()\nprint(server.shutdown())",
       "output": "Flushed 2 jobs safely",
       "explanation": "Graceful shutdown drains active task queues and closes sockets on SIGTERM, avoiding dropped customer transactions.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-28"
     },
     {
       "day": 209,
