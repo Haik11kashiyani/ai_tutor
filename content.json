@@ -2367,7 +2367,8 @@
       "code": "class SendEmailCommand:\n    def __init__(self, to, subject):\n        self.to, self.subject = to, subject\n    def execute(self):\n        return f'Email sent to {self.to}'\nqueue = [SendEmailCommand('user@app.com', 'Welcome!')]\nprint([cmd.execute() for cmd in queue])",
       "output": "['Email sent to user@app.com']",
       "explanation": "The Command pattern turns requests into standalone objects, enabling serialization, background job queues, and retry mechanisms.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-29"
     },
     {
       "day": 210,
