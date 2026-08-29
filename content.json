@@ -2379,7 +2379,8 @@
       "code": "class InMemoryUserRepo:\n    def __init__(self):\n        self._store = {1: {'name': 'Alice'}}\n    def get_by_id(self, uid):\n        return self._store.get(uid)\nclass UserService:\n    def __init__(self, repo):\n        self.repo = repo\n    def get_user_name(self, uid):\n        u = self.repo.get_by_id(uid)\n        return u['name'] if u else 'Not Found'\nsvc = UserService(InMemoryUserRepo())\nprint(svc.get_user_name(1))",
       "output": "Alice",
       "explanation": "The Repository pattern abstracts data access behind an interface, decoupling core domain logic from SQL/NoSQL drivers.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-29"
     },
     {
       "day": 211,
