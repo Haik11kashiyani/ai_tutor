@@ -2391,7 +2391,8 @@
       "code": "class DIContainer:\n    def __init__(self):\n        self._services = {}\n    def register(self, key, factory):\n        self._services[key] = factory\n    def resolve(self, key):\n        return self._services[key]()\ncontainer = DIContainer()\ncontainer.register('logger', lambda: lambda msg: f'[LOG] {msg}')\nlogger = container.resolve('logger')\nprint(logger('Server started'))",
       "output": "[LOG] Server started",
       "explanation": "Dependency Injection registers component factories centrally, making swapping mocks for unit tests effortless.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-30"
     },
     {
       "day": 212,
