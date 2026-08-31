@@ -2403,7 +2403,8 @@
       "code": "class PluginManager:\n    def __init__(self):\n        self.plugins = []\n    def register(self, hook):\n        self.plugins.append(hook)\n    def run(self, payload):\n        for p in self.plugins:\n            payload = p(payload)\n        return payload\npm = PluginManager()\npm.register(lambda txt: txt.strip())\npm.register(lambda txt: txt.upper())\nprint(pm.run('  hello world  '))",
       "output": "HELLO WORLD",
       "explanation": "A hook-based plugin manager pipes data through independent extensions, honoring the Open-Closed software principle.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-08-31"
     },
     {
       "day": 213,
