@@ -2415,7 +2415,8 @@
       "code": "import time\nclass SimpleTTLCache:\n    def __init__(self, ttl_seconds=10):\n        self.ttl, self.cache = ttl_seconds, {}\n    def set(self, k, v):\n        self.cache[k] = (v, time.time() + self.ttl)\n    def get(self, k):\n        if k in self.cache and time.time() < self.cache[k][1]:\n            return self.cache[k][0]\n        return None\nc = SimpleTTLCache(60)\nc.set('user_1', 'Alice')\nprint(c.get('user_1'))",
       "output": "Alice",
       "explanation": "TTL (Time-to-Live) caching avoids repetitive database hits by storing short-lived compute results in fast local memory.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-01"
     },
     {
       "day": 214,
