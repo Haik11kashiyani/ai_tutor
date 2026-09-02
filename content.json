@@ -2427,7 +2427,8 @@
       "code": "class PaymentService:\n    def __init__(self):\n        self.processed = {}\n    def charge(self, idempotency_key, amount):\n        if idempotency_key in self.processed:\n            return self.processed[idempotency_key]\n        result = f'Charged ${amount}'\n        self.processed[idempotency_key] = result\n        return result\nps = PaymentService()\nprint(ps.charge('req_abc123', 50))\nprint(ps.charge('req_abc123', 50))",
       "output": "Charged $50\nCharged $50",
       "explanation": "Idempotency keys cache request outcomes by a unique client token, guaranteeing safe automatic retries without duplicate billing.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-02"
     },
     {
       "day": 1,
