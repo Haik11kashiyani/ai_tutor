@@ -2439,7 +2439,8 @@
       "code": "console.log('Hello, JavaScript!');",
       "output": "Hello, JavaScript!",
       "explanation": "console.log prints output directly to your console. It is your best friend when debugging code.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-03"
     },
     {
       "day": 2,
