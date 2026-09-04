@@ -2451,7 +2451,8 @@
       "code": "let username = 'Hardik';\nconsole.log('Welcome ' + username);",
       "output": "Welcome Hardik",
       "explanation": "let allows you to declare mutable variables that you can update anytime during runtime.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-04"
     },
     {
       "day": 3,
