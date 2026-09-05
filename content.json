@@ -2463,7 +2463,8 @@
       "code": "const API_PORT = 3000;\nlet requestCount = 1;\nrequestCount++;\nconsole.log(API_PORT, requestCount);",
       "output": "3000 2",
       "explanation": "Use const by default for values that won't be reassigned, and let only when reassignments are required.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-05"
     },
     {
       "day": 4,
