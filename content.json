@@ -2475,7 +2475,8 @@
       "code": "const name = 'Alice';\nconst score = 95;\nconsole.log(`Player ${name} scored ${score}%!`);",
       "output": "Player Alice scored 95%!",
       "explanation": "Backtick template literals allow direct variable interpolation inside ${} expressions cleanly.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-06"
     },
     {
       "day": 5,
