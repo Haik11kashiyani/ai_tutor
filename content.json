@@ -2487,7 +2487,8 @@
       "code": "const price = 20;\nconst tax = 0.08;\nconst total = price + (price * tax);\nconsole.log(`Total: $${total.toFixed(2)}`);",
       "output": "Total: $21.60",
       "explanation": "JavaScript supports standard arithmetic operators and provides helpers like .toFixed() for currency formatting.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-07"
     },
     {
       "day": 6,
