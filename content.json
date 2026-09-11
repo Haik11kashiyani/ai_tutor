@@ -2511,7 +2511,8 @@
       "code": "console.log(5 === '5');\nconsole.log(5 == '5');",
       "output": "false\ntrue",
       "explanation": "Always use triple equals (===) for strict equality checking without unsafe implicit type coercion.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-11"
     },
     {
       "day": 8,
