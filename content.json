@@ -2523,7 +2523,8 @@
       "code": "const msg = '  learn js  ';\nconsole.log(msg.trim().toUpperCase());",
       "output": "LEARN JS",
       "explanation": "Methods like .trim() and .toUpperCase() return transformed strings while leaving the original immutable.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-12"
     },
     {
       "day": 9,
