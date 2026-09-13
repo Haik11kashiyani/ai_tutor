@@ -2535,7 +2535,8 @@
       "code": "const input = '42.5px';\nconst parsedInt = parseInt(input, 10);\nconst parsedFloat = parseFloat(input);\nconsole.log(parsedInt, parsedFloat);",
       "output": "42 42.5",
       "explanation": "parseInt and parseFloat extract numeric values from strings, ignoring trailing non-numeric characters.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-13"
     },
     {
       "day": 10,
