@@ -2547,7 +2547,8 @@
       "code": "const values = ['', 'hello', 0, 1, null];\nconst truthies = values.filter(Boolean);\nconsole.log(truthies);",
       "output": "[ 'hello', 1 ]",
       "explanation": "Empty strings, 0, null, undefined, and NaN are falsy in JS; everything else evaluates to truthy.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-14"
     },
     {
       "day": 11,
