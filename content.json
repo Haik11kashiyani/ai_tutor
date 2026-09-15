@@ -2559,7 +2559,8 @@
       "code": "const age = 20;\nif (age >= 18) {\n    console.log('Access Granted');\n} else {\n    console.log('Access Denied');\n}",
       "output": "Access Granted",
       "explanation": "Conditional branching routes execution based on boolean condition evaluations.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-15"
     },
     {
       "day": 12,
