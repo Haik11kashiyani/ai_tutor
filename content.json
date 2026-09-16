@@ -2571,7 +2571,8 @@
       "code": "const role = 'admin';\nconst dashboard = role === 'admin' ? 'Admin Panel' : 'User Home';\nconsole.log(dashboard);",
       "output": "Admin Panel",
       "explanation": "The ternary operator condition ? exprIfTrue : exprIfFalse simplifies inline value assignments.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-16"
     },
     {
       "day": 13,
