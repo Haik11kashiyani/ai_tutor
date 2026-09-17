@@ -2583,7 +2583,8 @@
       "code": "const theme = 'dark';\nswitch(theme) {\n    case 'dark': console.log('#121212'); break;\n    case 'light': console.log('#ffffff'); break;\n    default: console.log('#000000');\n}",
       "output": "#121212",
       "explanation": "Switch statements test expressions against discrete case values with jump-table efficiency.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-17"
     },
     {
       "day": 14,
