@@ -2595,7 +2595,8 @@
       "code": "const user = { name: 'Hardik' };\nconst displayName = user.name || 'Anonymous';\nconsole.log(displayName);",
       "output": "Hardik",
       "explanation": "Logical OR (||) returns the first truthy operand, while logical AND (&&) returns the first falsy operand.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-18"
     },
     {
       "day": 15,
