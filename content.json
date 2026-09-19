@@ -2607,7 +2607,8 @@
       "code": "let sum = 0;\nfor (let i = 1; i <= 3; i++) {\n    sum += i;\n}\nconsole.log(`Sum: ${sum}`);",
       "output": "Sum: 6",
       "explanation": "The classic for loop initializes a counter, checks a termination condition, and increments each step.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-19"
     },
     {
       "day": 16,
