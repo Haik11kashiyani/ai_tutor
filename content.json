@@ -2619,7 +2619,8 @@
       "code": "let count = 3;\nwhile (count > 0) {\n    count--;\n}\nconsole.log(`Finished at ${count}`);",
       "output": "Finished at 0",
       "explanation": "A while loop continues executing its block as long as its specified condition remains truthy.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-20"
     },
     {
       "day": 17,
