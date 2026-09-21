@@ -2631,7 +2631,8 @@
       "code": "const colors = ['red', 'green', 'blue'];\nfor (const color of colors) {\n    console.log(color.toUpperCase());\n}",
       "output": "RED\nGREEN\nBLUE",
       "explanation": "The for...of loop extracts values directly from arrays, strings, and sets without manual index bookkeeping.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-21"
     },
     {
       "day": 18,
