@@ -2655,7 +2655,8 @@
       "code": "function calculateTax(subtotal, rate = 0.1) {\n    return subtotal * rate;\n}\nconsole.log(calculateTax(200));",
       "output": "20",
       "explanation": "Function declarations are hoisted and define reusable subroutines with isolated scope.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-23"
     },
     {
       "day": 20,
