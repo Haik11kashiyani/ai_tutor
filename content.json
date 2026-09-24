@@ -2667,7 +2667,8 @@
       "code": "const square = n => n * n;\nconst add = (a, b) => a + b;\nconsole.log(square(5), add(10, 20));",
       "output": "25 30",
       "explanation": "Arrow functions provide concise syntax with implicit returns for single-expression bodies.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-24"
     },
     {
       "day": 21,
