@@ -2679,7 +2679,8 @@
       "code": "function greet(name = 'Guest', title = 'Dev') {\n    return `Hello ${title} ${name}`;\n}\nconsole.log(greet('Alice'));\nconsole.log(greet());",
       "output": "Hello Dev Alice\nHello Dev Guest",
       "explanation": "Default function parameters initialize named parameters with default values if no value is passed.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-25"
     },
     {
       "day": 22,
