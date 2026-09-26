@@ -2691,7 +2691,8 @@
       "code": "const tasks = ['Code', 'Test', 'Deploy'];\nconsole.log(tasks[0], tasks.length);",
       "output": "Code 3",
       "explanation": "JavaScript arrays are zero-indexed, dynamically sized collections with a built-in .length property.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-26"
     },
     {
       "day": 23,
