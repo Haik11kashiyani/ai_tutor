@@ -2703,7 +2703,8 @@
       "code": "const queue = ['B'];\nqueue.push('C');\nqueue.unshift('A');\nconsole.log(queue);",
       "output": "[ 'A', 'B', 'C' ]",
       "explanation": "push/pop mutate items at the tail, while unshift/shift mutate items at the head of the array.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-27"
     },
     {
       "day": 24,
