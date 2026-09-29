@@ -2727,7 +2727,8 @@
       "code": "const tags = ['js', 'python', 'rust'];\nconsole.log(tags.includes('js'));\nconsole.log(tags.indexOf('golang'));",
       "output": "true\n-1",
       "explanation": ".includes() returns a boolean test for existence, while .indexOf() returns the first matching index or -1.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-09-29"
     },
     {
       "day": 26,
