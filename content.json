@@ -2739,7 +2739,8 @@
       "code": "const csv = 'user,admin,guest';\nconst roles = csv.split(',');\nconsole.log(roles.join(' -> '));",
       "output": "user -> admin -> guest",
       "explanation": "split() divides strings by a delimiter into an array; join() concatenates array items into a string.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-01"
     },
     {
       "day": 27,
