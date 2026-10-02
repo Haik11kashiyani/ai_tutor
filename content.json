@@ -2751,7 +2751,8 @@
       "code": "const scores = [40, 100, 1, 5];\nscores.sort((a, b) => a - b);\nconsole.log(scores);",
       "output": "[ 1, 5, 40, 100 ]",
       "explanation": "Always pass a comparator callback (a, b) => a - b to .sort() to ensure correct numeric sorting.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-02"
     },
     {
       "day": 28,
