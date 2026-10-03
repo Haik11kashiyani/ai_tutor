@@ -2763,7 +2763,8 @@
       "code": "const server = {\n    host: 'localhost',\n    port: 8080,\n    online: true\n};\nconsole.log(`${server.host}:${server.port}`);",
       "output": "localhost:8080",
       "explanation": "JavaScript objects store key-value property maps accessible via dot notation or bracket notation.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-03"
     },
     {
       "day": 29,
