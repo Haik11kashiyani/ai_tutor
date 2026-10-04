@@ -2775,7 +2775,8 @@
       "code": "const counter = {\n    val: 0,\n    increment() { return ++this.val; }\n};\nconsole.log(counter.increment(), counter.increment());",
       "output": "1 2",
       "explanation": "Object methods access and mutate encapsulated instance state using the `this` keyword context.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-04"
     },
     {
       "day": 30,
