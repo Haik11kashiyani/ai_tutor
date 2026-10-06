@@ -2799,7 +2799,8 @@
       "code": "const config = { host: 'db.internal', port: 5432, ssl: true };\nconst { host, port } = config;\nconsole.log(host, port);",
       "output": "db.internal 5432",
       "explanation": "Object destructuring unpacks properties from objects into distinct variables concisely.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-06"
     },
     {
       "day": 32,
