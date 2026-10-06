@@ -2787,7 +2787,8 @@
       "code": "const user = { id: 1, role: 'admin', active: true };\nconsole.log(Object.keys(user));\nconsole.log(Object.values(user));",
       "output": "[ 'id', 'role', 'active' ]\n[ 1, 'admin', true ]",
       "explanation": "Object.keys() and Object.values() extract enumerable property names and values into native arrays.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-06"
     },
     {
       "day": 31,
