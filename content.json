@@ -2811,7 +2811,8 @@
       "code": "let a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b);",
       "output": "2 1",
       "explanation": "Array destructuring matches by index position, allowing instantaneous value swapping.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-07"
     },
     {
       "day": 33,
