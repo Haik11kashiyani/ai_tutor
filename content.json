@@ -2823,7 +2823,8 @@
       "code": "const base = { theme: 'dark', font: 'Inter' };\nconst override = { ...base, font: 'Fira Code' };\nconsole.log(override);",
       "output": "{ theme: 'dark', font: 'Fira Code' }",
       "explanation": "Object spread shallow-copies properties, applying right-side overrides immutably.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-08"
     },
     {
       "day": 34,
