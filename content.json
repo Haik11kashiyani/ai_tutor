@@ -2835,7 +2835,8 @@
       "code": "const frontend = ['React', 'Vue'];\nconst fullstack = [...frontend, 'Node.js', 'PostgreSQL'];\nconsole.log(fullstack);",
       "output": "[ 'React', 'Vue', 'Node.js', 'PostgreSQL' ]",
       "explanation": "Array spread expands iterable elements in place, making array composition fast and expressive.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-09"
     },
     {
       "day": 35,
