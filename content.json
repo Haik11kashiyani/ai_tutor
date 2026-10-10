@@ -2847,7 +2847,8 @@
       "code": "function sumAll(...numbers) {\n    return numbers.reduce((acc, n) => acc + n, 0);\n}\nconsole.log(sumAll(10, 20, 30, 40));",
       "output": "100",
       "explanation": "Rest parameters collect all remaining arguments into an array, replacing legacy `arguments` object.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-10"
     },
     {
       "day": 36,
