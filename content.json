@@ -2859,7 +2859,8 @@
       "code": "const prices = [10, 20, 30];\nconst withTax = prices.map(p => p * 1.1);\nconsole.log(withTax);",
       "output": "[ 11, 22, 33 ]",
       "explanation": ".map() creates a new array populated with the results of calling a transform function on every item.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-11"
     },
     {
       "day": 37,
