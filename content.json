@@ -2871,7 +2871,8 @@
       "code": "const users = [{ id: 1, active: true }, { id: 2, active: false }];\nconst activeUsers = users.filter(u => u.active);\nconsole.log(activeUsers.length);",
       "output": "1",
       "explanation": ".filter() evaluates a predicate callback on each item, returning an array of items that returned truthy.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-13"
     },
     {
       "day": 38,
