@@ -2883,7 +2883,8 @@
       "code": "const cart = [{ price: 20 }, { price: 30 }, { price: 50 }];\nconst total = cart.reduce((sum, item) => sum + item.price, 0);\nconsole.log(total);",
       "output": "100",
       "explanation": ".reduce() executes a reducer callback on each element, passing the accumulated result to the next iteration.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-13"
     },
     {
       "day": 39,
