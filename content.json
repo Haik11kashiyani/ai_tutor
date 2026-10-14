@@ -2895,7 +2895,8 @@
       "code": "const accounts = [{ id: 101 }, { id: 202 }, { id: 303 }];\nconst found = accounts.find(a => a.id === 202);\nconsole.log(found);",
       "output": "{ id: 202 }",
       "explanation": ".find() returns the first element satisfying the predicate, or undefined if no matching item exists.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-14"
     },
     {
       "day": 40,
