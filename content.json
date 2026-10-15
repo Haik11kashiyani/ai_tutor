@@ -2907,7 +2907,8 @@
       "code": "const scores = [85, 92, 78, 90];\nconsole.log(scores.every(s => s >= 70));\nconsole.log(scores.some(s => s === 100));",
       "output": "true\nfalse",
       "explanation": ".every() checks if all elements pass a test; .some() checks if at least one element passes.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-15"
     },
     {
       "day": 41,
