@@ -2919,7 +2919,8 @@
       "code": "const tags = [['js', 'node'], ['css', 'html']];\nconsole.log(tags.flat());\nconst sentences = ['hello world', 'good morning'];\nconsole.log(sentences.flatMap(s => s.split(' ')));",
       "output": "[ 'js', 'node', 'css', 'html' ]\n[ 'hello', 'world', 'good', 'morning' ]",
       "explanation": ".flat() removes array nesting levels, and .flatMap() maps then flattens the result by one level.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-16"
     },
     {
       "day": 42,
