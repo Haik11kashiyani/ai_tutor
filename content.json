@@ -2931,7 +2931,8 @@
       "code": "const user = { profile: { address: { city: 'NYC' } } };\nconst zip = user.profile?.address?.zipCode ?? 'N/A';\nconsole.log(user.profile?.address?.city, zip);",
       "output": "NYC N/A",
       "explanation": "Optional chaining (?.) short-circuits to undefined if an intermediate reference is nullish without throwing.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-17"
     },
     {
       "day": 43,
