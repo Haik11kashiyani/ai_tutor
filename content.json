@@ -2943,7 +2943,8 @@
       "code": "const userConfig = { timeout: 0 };\nconst timeout1 = userConfig.timeout || 30;\nconst timeout2 = userConfig.timeout ?? 30;\nconsole.log(timeout1, timeout2);",
       "output": "30 0",
       "explanation": "Nullish coalescing (??) only falls back when the left operand is null or undefined, preserving 0 and false.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-18"
     },
     {
       "day": 44,
