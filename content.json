@@ -2955,7 +2955,8 @@
       "code": "const options = { port: null };\noptions.port ??= 8080;\nconsole.log(options.port);",
       "output": "8080",
       "explanation": "Logical nullish assignment (??=) only assigns the right-hand value if the target is currently null or undefined.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-19"
     },
     {
       "day": 45,
