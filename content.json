@@ -2967,7 +2967,8 @@
       "code": "const duplicates = [1, 2, 2, 3, 4, 4, 5];\nconst unique = [...new Set(duplicates)];\nconsole.log(unique);",
       "output": "[ 1, 2, 3, 4, 5 ]",
       "explanation": "Set stores unique values of any type, automatically discarding duplicates with O(1) membership lookups.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-20"
     },
     {
       "day": 46,
