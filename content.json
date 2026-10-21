@@ -2979,7 +2979,8 @@
       "code": "const cache = new Map();\ncache.set('k1', 'val1');\nconsole.log(cache.get('k1'), cache.has('k1'), cache.size);",
       "output": "val1 true 1",
       "explanation": "Map preserves insertion order, allows any data type as keys, and provides constant-time size checks.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-21"
     },
     {
       "day": 47,
