@@ -2991,7 +2991,8 @@
       "code": "function parseJSONSafe(str) {\n    try { return JSON.parse(str); }\n    catch { return null; }\n}\nconsole.log(parseJSONSafe('{\"ok\": true}'), parseJSONSafe('invalid'));",
       "output": "{ ok: true } null",
       "explanation": "try/catch traps runtime exceptions, allowing safe fallback values and error logging.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-22"
     },
     {
       "day": 48,
