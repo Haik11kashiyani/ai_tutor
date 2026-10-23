@@ -3003,7 +3003,8 @@
       "code": "function authenticate(token) {\n    if (!token) throw new Error('ERR_AUTH_MISSING_TOKEN');\n    return 'Valid';\n}\ntry { authenticate(''); }\ncatch (e) { console.log(e.message); }",
       "output": "ERR_AUTH_MISSING_TOKEN",
       "explanation": "Instantiating custom Error instances captures full stack traces for production debugging.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-23"
     },
     {
       "day": 49,
