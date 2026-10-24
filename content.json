@@ -3015,7 +3015,8 @@
       "code": "class User {\n    constructor(name) { this.name = name; }\n    greet() { return `Hello, ${this.name}!`; }\n}\nconst u = new User('Hardik');\nconsole.log(u.greet());",
       "output": "Hello, Hardik!",
       "explanation": "Classes provide a clean syntactical wrapper over JavaScript's prototype-based inheritance.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-24"
     },
     {
       "day": 50,
