@@ -3027,7 +3027,8 @@
       "code": "class Employee {\n    constructor(name) { this.name = name; }\n}\nclass Developer extends Employee {\n    constructor(name, lang) {\n        super(name);\n        this.lang = lang;\n    }\n}\nconst dev = new Developer('Alice', 'JS');\nconsole.log(dev.name, dev.lang);",
       "output": "Alice JS",
       "explanation": "Subclasses call super() to invoke the parent constructor, inheriting parent methods and attributes.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-25"
     },
     {
       "day": 51,
