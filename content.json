@@ -3039,7 +3039,8 @@
       "code": "class BankAccount {\n    constructor(bal) { this._bal = bal; }\n    get balance() { return `$${this._bal.toFixed(2)}`; }\n    set balance(val) { if (val >= 0) this._bal = val; }\n}\nconst acc = new BankAccount(100);\nacc.balance = 250;\nconsole.log(acc.balance);",
       "output": "$250.00",
       "explanation": "Getters and setters bind object properties to functions, enforcing encapsulation and validation.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-26"
     },
     {
       "day": 52,
