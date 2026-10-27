@@ -3051,7 +3051,8 @@
       "code": "class MathUtils {\n    static clamp(val, min, max) {\n        return Math.min(Math.max(val, min), max);\n    }\n}\nconsole.log(MathUtils.clamp(150, 0, 100));",
       "output": "100",
       "explanation": "Static methods are called directly on the class constructor without instantiating objects.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-27"
     },
     {
       "day": 53,
