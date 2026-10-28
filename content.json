@@ -3063,7 +3063,8 @@
       "code": "function fetchUser(id, cb) {\n    cb({ id, name: 'Alice' });\n}\nfetchUser(1, user => console.log(`Loaded ${user.name}`));",
       "output": "Loaded Alice",
       "explanation": "Callbacks pass functions as arguments to execute upon completion of asynchronous tasks.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-28"
     },
     {
       "day": 54,
