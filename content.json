@@ -3075,7 +3075,8 @@
       "code": "const task = new Promise(resolve => {\n    resolve('Task Success');\n});\ntask.then(res => console.log(res));",
       "output": "Task Success",
       "explanation": "Promises represent the eventual completion or failure of an asynchronous operation.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-29"
     },
     {
       "day": 55,
