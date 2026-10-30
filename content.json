@@ -3087,7 +3087,8 @@
       "code": "Promise.reject(new Error('Network Fail'))\n    .catch(err => `Handled: ${err.message}`)\n    .then(msg => console.log(msg));",
       "output": "Handled: Network Fail",
       "explanation": ".catch() intercepts rejection errors in promise chains, preventing unhandled rejection warnings.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-30"
     },
     {
       "day": 56,
