@@ -3099,7 +3099,8 @@
       "code": "async function getStatus() {\n    const status = await Promise.resolve('System Operational');\n    return status;\n}\ngetStatus().then(console.log);",
       "output": "System Operational",
       "explanation": "async/await pauses execution until the promise settles, writing async code with clean linear syntax.",
-      "status": "pending"
+      "status": "uploaded",
+      "upload_date": "2026-10-31"
     },
     {
       "day": 57,
